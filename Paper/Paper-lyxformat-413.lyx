@@ -1,0 +1,5252 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass IEEEtran
+\begin_preamble
+\usepackage{url}
+\end_preamble
+\use_default_options true
+\begin_modules
+customHeadersFooters
+\end_modules
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Left Header
+
+\size footnotesize
+ENTWICKLUNG EINES RADAR-NIEDERSCHLAGSMESSERS 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+rhead{Seite 
+\backslash
+thepage}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cfoot{}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+Entwicklung eines Radar-Niederschlagsmessers 
+\end_layout
+
+\begin_layout Author
+Autoren: Rebecca Forster (1125296), Vera Albiez (1121867), Felix Körner(1121800)
+\end_layout
+
+\begin_layout Abstract
+Zur Messung von Niederschlag gibt es verschiedene Geräte, die eingesetzt
+ werden, um die Niederschlagsmenge zu erfassen.
+ Die Messgeräte funktionieren mit unterschiedlichen Methoden und es gibt
+ dabei viele potentielle Fehlerquellen, welche die Messungen verfälschen
+ können.
+ Um diese so gut wie möglich auszuschalten, wurden mit der Zeit immer ausgefeilt
+ere Methoden entwickelt.
+ Eine genaue Messung ist vor allem für die Meteorologie wichtig, wenn z.B.
+ eine Aussage über eine Niederschlagsverteilung über einem Gebiet gemacht
+ werden soll.
+ In diesem Artikel wird die Entwicklung eines Radar-Niederschlagsmessers
+ beschrieben, sowie die Arbeitsweise und die Vorteile eines solchen Messgerätes
+ abgehandelt.
+ Das Radar strahlt eine elektromagnetische Welle mit einer vorgegebenen
+ Grundfrequenz aus, welche von den Regentropfen zumindest teilweise zurückgestre
+ut und von der Antenne des Sensors empfangen wird.
+ Die zurückgestreute Frequenz hängt von der Geschwindigkeit des Tropfens
+ ab und wird Dopplerfrequenz genannt.
+ Die Information über die Frequenzen und die Häufigkeit der Tropfen werden
+ mit Matlab ausgewertet und auf eine Niederschlagsmenge, die in 
+\color black
+
+\begin_inset Formula $l$
+\end_inset
+
+/
+\begin_inset Formula $m^{2}$
+\end_inset
+
+ bzw.
+ in 
+\begin_inset Formula $mm$
+\end_inset
+
+ angegeben wird
+\color inherit
+, 
+\color black
+umgerechnet.
+ 
+\end_layout
+
+\begin_layout Keywords
+Niederschlag, Radar, RSM 1700, Matlab, Dopplereffekt, Versuchsauswertung
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+hallo Vera, ich lese mir die Doku nochmal durch und achte besonders auf
+ die Kommasetzung
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Hintergrund
+\end_layout
+
+\begin_layout Standard
+Das Projekt 
+\begin_inset Quotes eld
+\end_inset
+
+Entwicklung eines Radar-Niederschlagsmessers
+\begin_inset Quotes erd
+\end_inset
+
+ wurde im Rahmen des Wahlfaches 
+\begin_inset Quotes eld
+\end_inset
+
+Methoden des wissenschaftlichen Arbeitens
+\begin_inset Quotes erd
+\end_inset
+
+ (kurz MWA), welches im Sommersemester 2012 an der Hochschule Mannheim in
+ der Fakultät Elektrotechnik angeboten wurde, verwirklicht.
+ Teilnehmer des Wahlfaches waren Studierende der Studiengänge Automatisierungs-
+ bzw.
+ Energietechnik vor allem aus dem zweiten Semester, die sich in kleinen
+ Gruppen zu zwei bis drei Personen zusammenfanden und jeweils zusammen ein
+ Projekt bearbeiteten.
+ Das Ziel des Faches war es, die Studierenden in eine wissenschaftliche
+ Arbeitsweise einzuführen, wie sie auch im Berufsleben nach dem Studium
+ praktiziert wird.
+ Dabei war ein hohes Maß an Selbstständigkeit und Eigeninitiative, sowie
+ eine gute Organisation innerhalb des Teams gefragt.
+ Die Projekte wurden größtenteils von Herrn Prof.
+ Dr.
+ C.
+ Hübner vorgestellt und von ihm und Herrn Wagenknecht begleitet.
+ Die Gruppe von drei Teilnehmern, von der auch diese Dokumentation verfasst
+ wurde, beschäftigte sich mit der Planung und Entwicklung eines über Radar
+ funktionierenden Niederschlagsmessers, welcher im Folgenden vorgestellt
+ werden soll.
+ Da ein Radar elektromagnetischen Wellen aussendet und empfängt, die wiederum
+ ein Signal erzeugen, aus dem über Auswertung mit elektronischen Hilfsmitteln
+ Informationen gewonnen werden können, passt ein solches Projekt hervorragend
+ in ein elektrotechnisches Studium.
+ Man gewinnt aber außerdem Einblick in andere Themenbereichen, in diesem
+ Fall vor allem in die Meteorologie.
+ Die folgende Dokumentation ist Teil des Projektes und umfasst den gesamten
+ Entwicklungsprozess.
+ Seine Bewertung und eine abschließende Präsentation des Projektes vor den
+ anderen Teilnehmern des Kurses MWA ergaben die Note für das Wahlmodul.
+\end_layout
+
+\begin_layout Section
+Anforderungen
+\end_layout
+
+\begin_layout Standard
+Die Grundidee des Projektes ist es, einen Niederschlagsmesser zu bauen,
+ der möglichst genau die Niederschlagsmenge misst.
+ Vorausgesetzt war, dazu ein Radar zu benutzen, um das Projekt in Verbindung
+ mit Elektrotechnik zu bringen.
+ Wenn man die Messmethode über Radar mit anderen Methoden der Niederschlagsmessu
+ng vergleicht, findet man wichtige Vorteile, worunter z.B.
+ die Messgenauigkeit und die Unabhängigkeit von Witterung fallen, die eine
+ Messung genauer machen.
+ Daher ist es durchaus sinnvoll, ein Radar zu verwenden.
+ 
+\end_layout
+
+\begin_layout Standard
+Der Prototyp des entwickelten Gerätes soll erkennen, wann es regnet und
+ dann die Tropfen zählen, deren Geschwindigkeit erfassen und daraus die
+ Niederschlagsmenge in verschiedenen Zeitbereichen errechnen.
+ Dem Benutzer soll diese angezeigt, sowie weitere Informationen über Niederschla
+g zur Verfügung gestellt werden.
+ Zur Anschaulichkeit werden Graphiken verwendet.
+ 
+\end_layout
+
+\begin_layout Standard
+Da ein Radar über die Messung der Dopplerfrequenz funktioniert, muss diese
+ Information über verschiedene Beziehungen in die Niederschlagsmenge umgerechnet
+ werden.
+ Dazu gibt es die Möglichkeit, einen Mikrocontroller zu programmieren und
+ in die elektronische Schaltung einzubauen oder das Signal, welches das
+ Radar empfängt über ein Programm am PC auszuwerten.
+ Der Einsatz eines Mikrocontrollers spart Platz und ist kostengünstig.
+ Dagegen hat ein Computer eine größere Rechenleistung und außerdem besteht
+ die Möglichkeit, eine Benutzeroberfläche zu erstellen, auf der die Niederschlag
+smenge als Graphik angezeigt werden kann.
+ Die größeren Vorteile hat also die Auswertung am PC, weshalb sich die Gruppe
+ schließlich für diese Option entschied.
+\end_layout
+
+\begin_layout Standard
+Die elektronische Schaltung, welche das Radarmodul und eine Schaltung zur
+ Verstärkung des schwachen empfangenen Signals beinhaltet, benötigt eine
+ Schnittstelle, um die Auswertung am Computer verwirklichen zu können.
+ Da das Gerät im Freien aufgebaut werden soll, muss die Elektronik vor Umweltein
+flüssen und Verschmutzung geschützt werden.
+ Dafür wird ein Plastikgehäuse verwendet.
+\end_layout
+
+\begin_layout Subsection
+Vergleich mit herkömmlichen Geräten
+\end_layout
+
+\begin_layout Standard
+Zur Messung von Niederschlag gibt es verschiedene Geräte, von denen die
+ einfachsten den Niederschlag in einem Gefäß auffangen und dessen Menge
+ dann anhand einer aufgezeichneten Skala abgelesen werden kann.
+ Etwas weiterentwickelte digitale Messgeräte funktionieren mit einer Kippwaage
+ bzw.
+ Wippe, die jeweils einseitig mit Regen gefüllt wird und bei einem bestimmten
+ Gewicht umkippt.
+ Die Anzahl der Kippungen werden erfasst und damit auf die Niederschlagsmenge
+ geschlossen.
+ Diese Art von Niederschlagsmessung ist jedoch leider mit Fehlern wie Verwirbelu
+ngen durch Wind, Verdunstung, Spritzern von der Umgebung und Wasser, welches
+ an den Gefäßwänden hängen bleibt, behaftet.
+ Es gibt außerdem Methoden, bei denen Ultraschall zur Messung der Anzahl
+ und Größe der Regentropfen verwendet wird und auch ein Produkt der Firma
+ Lufft, welches wie das in diesem Projekt entwickelte Gerät mit Radarsensorik
+ arbeitet.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Vorteile der Messung mit Radar sind
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Messung in Echtzeit:
+\series default
+ Die Niederschlagsmenge kann in beliebig kurzem Zeitraum gemessen werden.
+ Bei Geräten, welche den Regen in Gefäßen auffangen, ist es meist erst nach
+ dem Niederschlagsereignis sinnvoll, die Menge zu bestimmen.
+ In kleinen Zeitabschnitten wäre die Menge zu gering, um abgelesen werden
+ zu können.
+ Da das Radar jeden Tropfen, der auf eine bestimmte Fläche fällt, und dessen
+ Geschwindigkeit erfasst, kann auch schon nach ein paar Minuten eine Niederschla
+gsvolumen pro Fläche bestimmt werden.
+ So kann man sogar den Verlauf der Regenintensität angeben.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Keine Verluste:
+\series default
+ Das Radar erfasst jeden herunterfallenden Tropfen einzeln und bezieht ihn
+ in die Auswertung mit ein.
+ Deshalb macht es nichts aus, was nach der Erfassung mit den Tropfen passiert
+ und ob sie verdunsten.
+ Dies ist ein Problem bei einfachen Regenmessern, weil bei ihnen der Niederschla
+g über einen längeren Zeitraum in einem Gefäß aufgefangen wird und nicht
+ vor Umwelteinflüssen wie Verdunstung geschützt ist.
+ Selbst bei Messgeräten mit Kipplöffeln können Tropfen an der Gefäßwand
+ hängen bleiben und werden nicht erfasst.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Eigenschaften Radar:
+\series default
+ Die elektromagnetischen Wellen mit den Frequenzen, in der sie das Radar
+ aussendet und empfängt, durchstrahlen nichtmetallische Materialien.
+ Dies ist ein großer und wichtiger Vorteil, wenn man ein Radar zur Messung
+ von Regen verwenden will.
+ Durch diese Eigenschaft kann das Radar und seine elektronischen Komponenten
+ durch ein Plastikgehäuse vor Regen geschützt werden.
+ Außerdem ist ein Radarsensor allwettertauglich und unempfindlich gegenüber
+ Umwelteinflüssen, wie vor allem schnelle Temperaturwechsel, welche bei
+ Ultraschallsensorik ebenso wie Geräusche ein Problem darstellen 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Applikation"
+
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Nachteile des Radar-Niederschlagsmessers
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Fehlmessungen:
+\series default
+ Es besteht die Gefahr, dass das Programm, welches die Niederschlagsdaten
+ auswertet, Daten von anderen bewegten Objekten empfängt und als Niederschlag
+ auswertet und somit fehlerhafte Messungen entstehen.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Verlustzeit bei der Auswertung:
+\series default
+ Der hohe Rechenaufwand zur Bestimmung des Volumens eines einzelnen Regentropfen
+s führt zu einer gewissen Verlustzeit bei der Erfassung, welche wiederum
+ von der Leistung des Rechners abhängt.
+ Es kann dadurch passieren, dass einzelne Tropfen nicht erfasst werden.
+ 
+\end_layout
+
+\begin_layout Subsection
+Eigenschaften des Regens 
+\end_layout
+
+\begin_layout Standard
+Um die Niederschlagsmenge bestimmen zu können, müssen die Eigenschaften
+ von Regen beachtet werden.
+ Mit Verwendung eines Radars sind die Frequenzen bekannt, welche ausgesendet
+ und vom bewegten Objekt zurückgestreut werden.
+ Über die Formel für den Dopplereffekt lässt sich dann die Geschwindigkeit
+ des Objekts unabhängig von seiner Größe (und seines Materials) berechnen.
+ Um auf die Größe eines Tropfens zu kommen, greifen nun Informationen über
+ die Fallgeschwindigkeit von Regen.
+ Ein fallender Regentropfen kann nur bis zu einer bestimmten Geschwindigkeit
+ beschleunigt werden.
+ Sobald der Luftwiderstand des Tropfens der Schwerkraft entspricht, fällt
+ er mit konstanter Geschwindigkeit weiter, wobei der durchschnittliche Tropfen-D
+urchmesser zwischen 0,1 bis 4,5 Millimeter variiert 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Fallgeschwindigkeit"
+
+\end_inset
+
+.
+ Die Fallgeschwindigkeit hängt von der Tropfengröße ab und kann von Meteorologen
+ im Laborversuch gemessen werden.
+ Da der Radar-Niederschlagsmesser nahe dem Erdboden misst, kann davon ausgegange
+n werden, dass die Tropfen ihre Endgeschwindigkeit erreicht haben.
+ Regentropfen mit Durchmessern größer als 1 mm sind im freien Fall nicht
+ mehr kugelförmig, sondern deformiert zu abgeflachten Sphäroiden.
+ Diese Form ist aber nicht statisch, sondern die Tropfen oszillieren um
+ eine Gleichgewichtsform (siehe Abb.
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Form-eines-Regentropfens"
+
+\end_inset
+
+) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Stroemungsphysik,Regentropfen"
+
+\end_inset
+
+.
+ Zur Vereinfachung wurde für die Berechnung im Programm jedoch von kugelförmigen
+ Tropfen ausgegangen.
+ Aus den Volumina kann dann die gesamte Menge des Niederschlags berechnet
+ werden.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Regentropfen Form.png
+	width 6cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Form eines Regentropfens 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Tabelleniederschlagsmenge"
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Form-eines-Regentropfens"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section
+Aufgabenverteilung in der Gruppe
+\end_layout
+
+\begin_layout Standard
+Da das Projekt mehrere Aufgaben in unterschiedlichen Bereichen enthielt,
+ war es sinnvoll, diese unter den Projektteilnehmern aufzuteilen.
+ Dadurch wurde Zeit gespart, weil sich so nicht jede Person ausgiebig mit
+ allen Inhalten und Problemen beschäftigen musste.
+ Vielmehr ist es möglich, sich in einen Bereich zu vertiefen und somit ein
+ besseres Ergebnis zu erzielen.
+ 
+\end_layout
+
+\begin_layout Standard
+Das Projekt Regensensor bestand aus folgenden Bereichen:
+\end_layout
+
+\begin_layout Itemize
+Entwurf eines Schaltplans mit Radarsensor und Verstärkerschaltung
+\end_layout
+
+\begin_layout Itemize
+Programmierung in Matlab
+\end_layout
+
+\begin_layout Itemize
+Dokumentation in LyX
+\end_layout
+
+\begin_layout Itemize
+Durchführung von Versuchen zum Test des Verhaltens von Regentropfen, Sensor
+ und Verstärkung, sowie Test des Programms
+\end_layout
+
+\begin_layout Itemize
+Gehäuse
+\end_layout
+
+\begin_layout Standard
+Aus diesen Bereichen ergaben sich die drei wichtigsten Hauptaufgaben A,
+ B und C, die unter den Mitgliedern der Gruppe aufgeteilt wurden.
+ An den Versuchen waren meist alle beteiligt, weil sie die gesamten Bereiche
+ umfassten.
+\end_layout
+
+\begin_layout Subsection
+Entwurf des Schaltplans
+\end_layout
+
+\begin_layout Standard
+Der erste Aufgabenbereich war der Entwurf eines Schaltplans.
+ Dieser umfasst den Radarsensor und die Bauteile der Verstärkerschaltung,
+ die herausgesucht und bestellt werden mussten.
+ Außerdem musste ein Platinenlayout mit Hilfe von Eagle erstellt und dann
+ die Platine bestellt werden.
+ Um das Signal auswerten zu können, wurde von der Gruppe entschieden, es
+ über die Soundkarte eines PCs einzulesen und dort mit einem Programm auszuwerte
+n.
+ Dazu musste auch eine Schnittstelle eingeplant werden.
+ Die Person, die diese Aufgabe übernahm, musste sich also in Eagle einarbeiten
+ und sich Gedanken machen, wie das Signal zu verstärken sei.
+ 
+\end_layout
+
+\begin_layout Subsection
+Programmierung in Matlab
+\end_layout
+
+\begin_layout Standard
+Für das Einlesen des verstärkten Signals und die anschließende Auswertung
+ wurde ein Programm mit Matlab geschrieben.
+ Mit diesem wird aus der eingelesenen Dopplerfrequenz die Geschwindigkeit
+ berechnet, aus der man wiederum auf das Volumen des Regentropfens schließen
+ kann.
+ Mit dieser Information und einer definierten Fläche kann man die Niederschlagsm
+enge berechnen.
+ Hauptschwierigkeit dieses Aufgabenbereichs war es, sich mit Matlab zu beschäfti
+gen und herauszufinden, welche Befehle es gibt.
+ Weiterhin mussten Informationen zu Regen, wie z.B.
+ die Fallgeschwindigkeit in Abhängigkeit von der Tropfengröße, und zu Berechnung
+en, wie Fast Fourier Transformationen gesucht werden.
+ 
+\end_layout
+
+\begin_layout Subsection
+Dokumentation mit LyX
+\end_layout
+
+\begin_layout Standard
+Als abschließende Arbeit des Projekts sollte ein Artikel verfasst werden,
+ welcher dessen Ablauf und Ergebnis dokumentiert.
+ Es stand zur Auswahl, dazu herkömmliche Textverarbeitungsprogramme wie
+ Microsoft Word bzw.
+ Open Office zu verwenden, oder als Alternative die Dokumentation mit LyX,
+ einem Textsatzsystem, zu schreiben.
+ LyX kombiniert die Vorteile und die Flexibilität von TeX/LaTeX und bietet
+ den Vorteil einer grafischen Benutzeroberfläche.
+ TeX/LaTeX ist ein System zum Setzen von Texten, das einer Programmiersprache
+ mit Quellcode ähnelt und eigene Makros benutzt.
+ Vorteil ist hierbei vor allem, dass man sich weniger um die Formatierung
+ kümmern muss, d.h.
+ man kann sich auf den Inhalt konzentrieren.
+ Erst bei der Ausgabe wird der Text vom Programm formatiert und man kann
+ ein PDF-Dokument der Datei erstellen.
+ Die Aufgabe bestand also darin, die Möglichkeiten und Befehle von LyX,
+ wie z.B.
+ das Einfügen von Bilder und Tabellen, herauszufinden und sie bei der Dokumentat
+ion einzusetzen, sowie nicht zuletzt das Schreiben der Dokumentation selbst.
+\end_layout
+
+\begin_layout Subsection
+Versuche
+\end_layout
+
+\begin_layout Standard
+Innerhalb des Verlaufs des ganzen Projektes waren immer wieder Versuche
+ notwendig, um die Funktion des Radarsensors kennen zu lernen, die Richtigkeit
+ des Programmes zu überprüfen und die Verstärkerschaltung zu testen.
+ Der Großteil der Versuche wurde in den Vorlesungsstunden von MWA, in denen
+ wir im hochschuleigenen Labor waren, gemacht, wo technische Hilfsmittel
+ zur Verfügung standen.
+ Einige andere Versuche mussten jedoch auch außerhalb stattfinden, wie z.B.
+ den Sensor auf seine Reaktion von richtigen Regentropfen zu testen und
+ deren Signal für das zu schreibende Programm in Matlab auszuwerten.
+\end_layout
+
+\begin_layout Subsection
+Gehäuse
+\end_layout
+
+\begin_layout Standard
+Um den fertigen Regensensor im Freien einsetzen zu können, musste die Elektronik
+ geschützt und für Regen undurchlässig verpackt werden.
+ Dafür war es nötig, sich zu überlegen, welche Materialien und Formen man
+ verwendet, weil sich kein Regenwasser über dem Radarmodul sammeln darf.
+ Würde dies passieren, könnte der Sensor kein Signal mehr empfangen, weil
+ die Mikrowellen vom Wasser absorbiert werden würden.
+\end_layout
+
+\begin_layout Section
+Konzept Regensensor
+\end_layout
+
+\begin_layout Subsection
+Wie funktioniert ein Radargerät 
+\end_layout
+
+\begin_layout Standard
+Das Wort Radar steht für 
+\series bold
+Ra
+\series default
+dio 
+\series bold
+D
+\series default
+etection 
+\series bold
+A
+\series default
+nd 
+\series bold
+R
+\series default
+anging, was übersetzt 
+\begin_inset Quotes eld
+\end_inset
+
+Zielerfassung und Ortung durch Funk- bzw.
+ elektromagnetische Wellen
+\begin_inset Quotes erd
+\end_inset
+
+ bedeutet 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Applikation"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Ein Radargerät sendet elektromagnetische Wellen gebündelt aus (Primärsignal)
+ und empfängt die von Objekten reflektierten 
+\begin_inset Quotes eld
+\end_inset
+
+Echos
+\begin_inset Quotes erd
+\end_inset
+
+ (Sekundärsignal).
+ Dies funktioniert, weil die Wellen von elektrisch leitenden Körpern reflektiert
+ werden.
+ Wie stark ein Signal zurückgestreut wird, hängt von der Beschaffenheit
+ bzw.
+ vom Material des Objektes ab.
+ Manche Materialien absorbieren, andere reflektieren vollständig, oder nur
+ einen Teil der Strahlung (siehe Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Tabelle-Reflexion-Mikrowellen"
+
+\end_inset
+
+).
+\begin_inset Float table
+wide true
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="10" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Material
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mikrowelle durchstrahlt:
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Metall
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+nicht, volle Reflexion
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wasser
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+nicht, volle Absorption
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Schaumstoff
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+hervorragend, nicht-messbare Dämpfung
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Kleidung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+trocken- gut / nass - Verluste bis 20dB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Regen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+gut - bis 6dB Dämpfung
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Kunststoffe
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+sehr gut - 0,5 bis 3 dB Verlust bei geeigneter Dicke und richtigem Abstand
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Menschen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+nicht, eher Beugung, Absorption und Reflexion
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Holz
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+trocken - gut / nass - Verluste bis 10 dB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Eis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+schlecht - 10 dB Dämpfung
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Tabelle Reflexion Mikrowellen 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Applikation"
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Tabelle-Reflexion-Mikrowellen"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ Die Ausbreitungsgeschwindigkeit von elektromagnetischen Wellen ist konstant
+ und beträgt nahezu Lichtgeschwindigkeit, außerdem breiten sie sich geradlinig
+ aus 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Radartutorial"
+
+\end_inset
+
+.
+ Beachtet man diese physikalischen Grundlagen, können durch Auswertung des
+ Sekundärsignals folgende Informationen gewonnen werden:
+\end_layout
+
+\begin_layout Itemize
+Winkel bzw.
+ die Richtung zum Objekt (durch Bündeln der Wellen in eine bestimmte Richtung
+ mit Hilfe von Antennen)
+\end_layout
+
+\begin_layout Itemize
+Entfernung zum Objekt (aus der Zeitverschiebung zwischen Senden und Empfangen)
+ 
+\end_layout
+
+\begin_layout Itemize
+Geschwindigkeit eines bewegten Objekts (kann durch den Doppler-Effekt berechnet
+ werden) 
+\end_layout
+
+\begin_layout Itemize
+Wegstrecke und Absolutgeschwindigkeit des Objekts (durch Aneinanderreihen
+ einzelner Messungen) 
+\end_layout
+
+\begin_layout Itemize
+Konturen oder Bilder des Objekts bei guter Auflösung des Radars 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Radarwiki"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Bei Radargeräten gibt es zwei große Untergruppen:
+\end_layout
+
+\begin_layout Itemize
+Dauerstrich-Radars (CW) zur Erfassung bewegter Objekte
+\end_layout
+
+\begin_layout Itemize
+Pulsradars zur Erfassung von ruhenden Objekten
+\end_layout
+
+\begin_layout Standard
+Es wird nur auf den CW-Radar eingegangen, welcher für einen Regenmesser
+ relevant ist, da er die Geschwindigkeit der Regentropfen erfassen kann.
+ Für das Projekt wurde ein Radar-Bewegungsmelder verwendet.
+ Dieser arbeitet nach dem Dopplerprinzip.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Der Dopplereffekt
+\end_layout
+
+\begin_layout Standard
+Vom Sender des CW-Radargerätes werden Wellenfronten mit einer bestimmten
+ Frequenz ausgesendet.
+ Diese werden beim Auftreffen auf ein bewegtes Objekt reflektiert und je
+ nach Bewegungsrichtung relativ zum Radar gestaucht oder ausgedünnt.
+ Daraus ergibt sich ein Signal mit veränderter Frequenz.
+ Dieses Signal wird in einem Mischer im Sensor durch Überlagerung mit dem
+ originalen Sendesignal ausgewertet.
+ Die Frequenz des am Mischerausgang entstehenden Signals ist proportional
+ zur Geschwindigkeit: 44 Hz entsprechen ca.
+ 1 km/h.
+ Die Amplitude ergibt sich in Abhängigkeit von Größe des Objekts und seinem
+ Abstand zum Sensor.
+ 
+\begin_inset Formula 
+\[
+f_{D}=2f_{0}*\frac{v}{c_{0}}*cos(\alpha)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $f_{D}$
+\end_inset
+
+: Dopplerfrequenz
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $f_{0}$
+\end_inset
+
+: Sendefrequenz des Radars
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $v$
+\end_inset
+
+: Betrag der Geschwindigkeit vom Objekt
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $c_{0}$
+\end_inset
+
+: Lichtgeschwindigkeit
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $\alpha$
+\end_inset
+
+: Winkel zwischen Bewegungsrichtung und direkter Verbindungslinie Sensor-Objekt
+\end_layout
+
+\begin_layout Subsection
+Weiterverarbeitung des Signals
+\end_layout
+
+\begin_layout Standard
+Die Spannung des Signals, welches am Mischerausgang entsteht ist sehr klein.
+ Sie liegt bei dem für den Regenmesser verwendeten Modul im Bereich von
+ 300µV.
+ Deswegen muss das Signal nachträglich verstärkt werden, bevor eine Auswertung
+ stattfinden kann.
+ Zur Verstärkung wurde eine Schaltung entwickelt, auf die im Punkt 6.1 der
+ Dokumentation noch eingegangen wird.
+ Das verstärkte Signal wird dann über die Soundkarte eines PC's eingelesen
+ und anschließend ausgewertet.
+ Für das Projekt wurde zur Auswertung ein spezielles Programm mit Matlab
+ entworfen.
+ Mit diesem gewinnt man Informationen über Geschwindigkeit der Regentropfen
+ und die Niederschlagsmenge.
+ Das Programm wird unter dem Punkt 7 genauer vorgestellt.
+\end_layout
+
+\begin_layout Subsection
+Verwendung
+\end_layout
+
+\begin_layout Standard
+Bei der Auswahl eines Ortes, wo der Niederschlagsmesser aufgebaut werden
+ soll, muss auf genügend Abstand zu bewegten Objekten geachtet werden, um
+ Störsignale zu vermeiden.
+ Auch sollte das Gerät nicht in der Nähe von Bäumen, Dächern o.ä.
+ aufgestellt werden, von denen Wasser heruntertropfen könnte.
+ Dies würde zu falschen Messungen führen.
+\end_layout
+
+\begin_layout Section
+Versuche im Projektablauf
+\end_layout
+
+\begin_layout Standard
+Am Anfang des Projektes wurden allgemeine Informationen über Radarsensoren
+ eingeholt.
+ Beim Vergleich der Datenblätter einzelner Sensoren war der einzig wichtige
+ Unterschied der Höhen- und Seitenwinkel.
+ Um die Vor- und Nachteile von einem Sensor mit großen bzw.
+ kleinen Abdeckungsbereich festzustellen, wurden die Radarmodule RSM1900
+ mit 360° und RSM1700 mit 70° Höhen- und Seitenwinkel bestellt.
+\end_layout
+
+\begin_layout Subsection
+Erster Versuch: Signalanalyse am Oszilloskop
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Versuchsaufbau und Durchführung
+\end_layout
+
+\begin_layout Standard
+Nachdem die zwei ausgewählten Radarmodule geliefert worden waren, war es
+ für ein weiteres Vorgehen zunächst nötig, die Module zu vergleichen und
+ ihr Verhalten zu testen.
+ Dazu wurde ein erster Versuch aufgebaut und durchgeführt.
+ Er bestand darin, das unverstärkte Ausgangssignal je eines Moduls am Oszillosko
+p anzuschauen, wenn man die Hand oder ein Stück Metall (z.B.
+ Schlüssel) darüber bewegt.
+ Leider waren die erhaltenen Signale sehr schwach und auf dem Oszilloskop
+ war nicht viel zu erkennen.
+ Deshalb wurde für den nächsten Versuch eine Verstärkerschaltung (siehe
+ Abb.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Verstärkerschaltung"
+
+\end_inset
+
+) aufgebaut, wie sie in der Applikationsschrift I von Innosent 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Applikation"
+
+\end_inset
+
+ zu finden ist.
+ Die Bauteile der Schaltung wurden provisorisch auf einer Lochrasterplatine
+ zusammengelötet.
+ Mit der Verstärkerschaltung konnte man nun auf den Oszilloskop deutliche
+ Signale erkennen.
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename IMG_0607.JPG
+	lyxscale 10
+	width 8cm
+
+\end_inset
+
+ 
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Versuchsaufbau 1.1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Als nächstes wurden beide Radarmodule abwechselnd getestet, indem als Simulation
+ für schwachen und starken Regen Wassertropfen auf die Module fallen gelassen
+ wurden und das Ausgangssignal auf dem Oszilloskop angezeigt wurde.
+ Zur Durchführung des Versuchs wurden die Module über ein Steckbrett mit
+ Spannung versorgt und das Ausgangssignal über die Verstärkerschaltung auf
+ das Oszilloskop gegeben.
+ Als Schutz für das Modul diente zunächst eine Plastikabdeckung und zur
+ Erzeugung von Wassertropfen ein durchlöcherter Pappbecher.
+ Später wurde dann stattdessen ein weiterer Becher als Abdeckung für den
+ Radar verwendet.
+ Es zeigte sich, dass dabei der Zwischenraum zwischen dem Sensor und der
+ Schutzabdeckung nicht zu groß sein darf (bis einige cm), wenn er noch ein
+ Signal empfangen können soll.
+ Auf jedes Modul wurden einmal wenige und dann viele Wassertropfen fallen
+ gelassen.
+ Für jeden Teilversuch wurden Bilder mit dem Oszilloskop abgespeichert.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename IMG_0632.JPG
+	lyxscale 13
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Versuchsaufbau 1.2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename IMG_0629.JPG
+	lyxscale 13
+	width 8cm
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Radarmodul RSM1900
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Auswertung des Versuchs
+\end_layout
+
+\begin_layout Standard
+Die mit dem Oszilloskop gespeicherten Bilder sollen im Folgenden verglichen
+ und ausgewertet werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Abbildungen 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Hand-70°"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Hand-360°"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Schlüssel-70°"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Schlüssel-360°"
+
+\end_inset
+
+ zeigen das Ausgangssignal der Module ohne Verstärkung, wenn man seine Hand
+ oder eine Stück Metall (hier Schlüssel) darüber bewegt.
+ Das Signal ist eine Sinusschwingung, wie man auf den Bildern von den unverstärk
+ten Signalen erkennen kann.
+ Das Bild mit der Nummer 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Hand-70°"
+
+\end_inset
+
+ stammt vom RSM1700, der einen Winkel von 70° abdeckt und das Bild 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Hand-360°"
+
+\end_inset
+
+ ist dem RSM1900 mit einem Abdeckungswinkel von 360° zuzuordnen.
+ Die Skala von Spannung über die Zeit wurde dabei auf das Minimum gestellt,
+ was nötig war, um überhaupt ein Signal erkennen zu können.
+ Die so erhaltenen Signale haben keine bestimmte Frequenz und Amplitude,
+ die man auswerten könnte, sondern sollen nur zeigen, dass die Radarmodule
+ allgemein Bewegungen aufzeichnen.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename F0001TEK.JPG
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Versuch 1: Hand, RSM1700 (70°) 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Hand-70°"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename F0003TEK.JPG
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Versuch 1: Hand, RSM1900 (360°) 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Hand-360°"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename F0002TEK.JPG
+	width 8cm
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Versuch 1: Schlüssel, RSM1700 (70°) 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Schlüssel-70°"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename F0004TEK.JPG
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Versuch 1: Schlüssel RSM 1900 (360°) 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Schlüssel-360°"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Man bekommt ohne die Verstärkerschaltung nur ein Signal von ca.
+ 60-90mV Spitze-Spitze-Spannung, wenn man einen Gegenstand sehr schnell
+ von oben auf den Sensor des Moduls zu bewegt und ihm sehr nah kommt.
+ Der RSM1900 erkennt auch Bewegungen seitlich sehr gut, da seine Antenne
+ 360° in Höhen- und Seitenwinkel abdeckt.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename F0002TEK_1.JPG
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Simulation leichter Regen RSM1700 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Simulation-leichter-Regen 70°"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename F0004TEK_1.JPG
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Simulation leichter Regen RSM1900 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Simulation-leichter-Regen 360°"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In den Abbildungen 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Simulation-leichter-Regen 70°"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Simulation-leichter-Regen 360°"
+
+\end_inset
+
+ sieht man die verstärkten Signale, die man bekommt, wenn man leichten Regen
+ auf den Radar tropfen lässt.
+ Mit Verwendung der Verstärkerschaltung bekommt man schon viel stärkere
+ Signale, leider aber nur jeweils die obere Halbwelle der Sinusschwingung.
+ Dies liegt daran, dass die Operationsverstärker nur mit einer positiven
+ Spannung (+5V) versorgt werden und deshalb nur die obere Halbwelle des
+ Signals weitergeben.
+ Das Radar erkennt nun Bewegungen ab ca.
+ 1m Abstand nach oben.
+ Beim 70°-Radar beträgt die maximale Amplitude der Spannung etwas mehr als
+ 2V, im Vergleich zum 360°-Radar mit ca.
+ 1,5V.
+ Auch erkennt man beim RSM1900 mehr Störungen im Bild, was darauf zurückzuführen
+ ist, dass er für 360° ausgerichtet ist und auch seitliche Bewegungen aufzeichne
+t.
+ Der größte Amplitude des Signals stammt vom Aufschlag des Tropfens auf
+ die Abschirmung.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename F0011TEK.JPG
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Simulation starker Regen RSM1700 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Simulation-starker-Regen 70°"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename F0009TEK.JPG
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Simulation starker Regen RSM1900 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Simulation-starker-Regen 360°"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Simulation für stärkeren Regen, in den Abbildungen 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Simulation-starker-Regen 70°"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Simulation-starker-Regen 360°"
+
+\end_inset
+
+ zeigt, dass beide Radarmodule mehr Signale pro Zeit an den Ausgang geben,
+ d.h.
+ sie erkennen mehr Tropfen.
+ Bei leichtem Regen waren 250ms/DIV eingestellt und nun sind es 100ms/DIV.
+ Die Amplitude beträgt beim RSM1700 etwa 1,5V und beim RSM1900 1,3V.
+\end_layout
+
+\begin_layout Standard
+Nach Abschluss der ersten Tests und Auswertung der erhaltenen Ergebnisse
+ wurde von den Mitgliedern der Gruppe entschieden, den RSM1700 mit einem
+ Winkel von 70° für das Projekt zu verwenden, weil er sauberere Signale
+ liefert und weniger Störsignale von den Seiten empfängt.
+\end_layout
+
+\begin_layout Subsection
+Zweiter Versuch: Signalanalyse am Computer
+\end_layout
+
+\begin_layout Standard
+Im zweiten Versuch wurde das Ausgangssignal des Sensors auf eine Soundkarte
+ (E-MU 0202 USB 2.0 Audio-Interface) gegeben und mit Hilfe von Audacity am
+ PC aufgezeichnet.
+ Audacity ist ein virtuelles Tonstudio, mit dem Audiodateien aufgezeichnet
+ und abgespielt werden können.
+ Es ist als Freeware im Internet erhältlich.
+ Da das Signal über die Soundkarte eingelesen wurde, wurde Audacity zum
+ Aufzeichnen und Speichern des Signales verwendet.
+ Der Vorteil war, dass das Signal besser ausgewertet werden konnte.
+ Die Verstärkerschaltung erhielt dieses Mal eine Versorgungsspannung von
+ +/-5V, sodass man auch die negative Halbwelle des Sinus-Signals erhielt.
+ Es wurde der RSM1700 getestet, für den wir uns entschieden hatten, indem
+ mit Hilfe eines rotierenden Motors ein regelmäßiges Signal erzeugt wurde.
+ Der Aufbau war leider nur sehr provisorisch und ergab zwar ein regelmäßiges
+ Signal, aber es klappte besser mit einem Becher mit einem Loch, durch das
+ auch sehr regelmäßig ein Tropfen auf den abgeschirmten Sensor fiel.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename audiacity_ausschnitt_3_tropfen.jpg
+	width 8cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Versuch 2: Aufnahme über Audacity 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:-Audacity 3 Tropfen"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Auswertung des Versuchs
+\end_layout
+
+\begin_layout Standard
+Aus dem aufgezeichneten Signal (siehe Abb.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:-Audacity 3 Tropfen"
+
+\end_inset
+
+) wurde die Frequenz über die Zeit berechnet und mit der Frequenz, welche
+ allgemein von Regen erzeugt wird, verglichen.
+ Dabei kann die bekannte Fallgeschwindigkeit eines durchschnittlich großen
+ Tropfens über die Formel für den Dopplereffekt in seine Rückstreufrequenz
+ umgerechnet werden.
+\end_layout
+
+\begin_layout Subsection
+Dritter Versuch: Spannungsversorgung der Schaltung
+\end_layout
+
+\begin_layout Standard
+Dieser Versuch diente dem Test einer einheitlichen Spannungsversorgung,
+ wie sie dann auf der Platine verwirklicht worden ist.
+ Es werden einmal +5V Versorgungsspannung für das Radarmodul benötigt und
+ +/-5V für die Verstärkerschaltung, um ein vollständiges Signal mit positiver
+ und negativer Halbwelle zu bekommen.
+ Das Signal des Sensors wurde über die Soundkarte mit einem auf Matlab selbstges
+chriebenen Programm eingelesen.
+ Als Versuch wurde eine Schaltung aus 2 Spannungsreglern und einem 2,2kOhm
+ Widerstand, wie sie auf Mikrocontroller.net 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "micrcontroller"
+
+\end_inset
+
+ empfohlen wird, aufgebaut und getestet.
+ Diese wird mit 12V Eingangsspannung versorgt und liefert -5V und +5V bezüglich
+ virtueller Masse.
+ Das Problem lag allerdings darin, dass die Spannungsverteilung nicht mehr
+ in der Mitte lag, sobald das Radarmodul zwischen +5V und virtueller Masse
+ angeschlossen wurde.
+ Allerdings konnten wir die Kabelanzahl durch die genannte Schaltung verringern,
+ welche dennoch funktionierte.
+ Nur wurde das Radarmodul nicht mit den verlangten 5V versorgt, sondern
+ etwas weniger.
+ Als Lösung wurde ein DC/DC Wandler herausgesucht, welcher die Aufgabe der
+ Spannungsregelung übernimmt.
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Foto001.jpg
+	lyxscale 10
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+3.
+ Versuchsaufbau mit Spannungsreglern
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Vierter Versuch: Überprüfung der eingelesenen Frequenz
+\end_layout
+
+\begin_layout Standard
+Bei diesem Versuch wurde das Signal mit Audacity eingelesen.
+ Mit Audacity kann eine Frequenzanalyse gemacht werden.
+ Dazu wurde mit der Hand eine gleichmäßige Bewegung in Richtung Radar erzeugt.
+ Der Anfangsabstand betrug einen Meter und die Zeit der Bewegung 4 Sekunden.
+ Damit sollte man die Dopplerfrequenz von 
+\begin_inset Formula 
+\[
+f{}_{D}=\frac{2*v}{c}f{}_{S}=\frac{2*0.25\frac{m}{s}}{300000000\frac{m}{s}}*24GHz=40Hz
+\]
+
+\end_inset
+
+bekommen, wobei sich die Geschwindigkeit v aus 
+\begin_inset Formula 
+\[
+v=\frac{s}{t}=\frac{1m}{4s}
+\]
+
+\end_inset
+
+ ergibt.
+ Gemessen wurde mit Audacity ca.
+ 35Hz, was an der Ungenauigkeit liegt, die zustande kommt, wenn man nicht
+ ganz genau eine konstante Geschwindigkeit erzeugt, was leider mit der Hand
+ nicht möglich ist.
+ Mit dieser Methode wurde die Berechnung, welche das Matlab-Programm macht,
+ auf seine Richtigkeit im Ergebnis überprüft.
+ 
+\end_layout
+
+\begin_layout Standard
+Außerdem wurden die Ausschläge, welche einzelne Tropfen in der Grund-Sinusschwin
+gung erzeugen, am Oszilloskop überprüft, um festzustellen, wie sich die
+ Amplitude verändert (siehe Abb.
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:3-Tropfen"
+
+\end_inset
+
+).
+ Es ergab sich eine Amplitude von ca.
+ 720mV.
+\end_layout
+
+\begin_layout Standard
+Als nächstes wurden Versuche bei Regen gestartet, um herauszufinden, in
+ welchem Abstand die Tropfen pro Fläche fallen, und wie das Signal aussieht,
+ das mit dem Radarmodul eingelesen wird.
+ Daraus kann man dann abwägen, wie das Programm die Informationen auswerten
+ muss.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Foto004.jpg
+	lyxscale 20
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Versuchsaufbau 4 zur Berechnungsüberprüfung
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename TEK0002.JPG
+	width 8cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+3 Tropfen 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:3-Tropfen"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Fünfter Versuch: Regenmessung in der Natur
+\end_layout
+
+\begin_layout Standard
+Am 30.
+ Mai 2012 wurde um 23:30 Uhr ein Versuch mit dem Testaufbau der Schaltung
+ während eines starken Regenschauers gemacht.
+ Der Test lief ca.
+ 30 Minuten.
+ Das Ausgangssignal wurde über die Soundkarte mit Audacity zur späteren
+ Auswertung aufgenommen.
+ Einen Ausschnitt davon sieht man in der Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Regenmessung-30.05.Audacity"
+
+\end_inset
+
+.
+ Während des Tests wurde in einem separaten Gefäß die Niederschlagsmenge
+ gemessen.
+ In den 30 Minuten des Tests wurden 2cl Wasser aufgefangen.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Audiacity_regenversuch_ausschnitt.jpg
+	width 8cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Regenmessung 30.05.
+ über Audacity 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Regenmessung-30.05.Audacity"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Auswertung 
+\end_layout
+
+\begin_layout Standard
+Beim Auswerten des aufgenommenen Signals wurde folgendermaßen vorgegangen:
+ Im ersten Schritt schaute man sich den Aufprall eines Regentropfens an.
+ Dabei wurde vor allem auf die Peaks geachtet und festgestellt, dass die
+ meisten Peak-Werte über 0,4 liegen.
+ Aus der Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Ausschnitt-Peak Audacity"
+
+\end_inset
+
+ der Aufnahme geht hervor, dass unter dem Wert 0,4 die Signale annähernd
+ sinusförmig sind und über dem Wert 0,4 das Signal sehr in die Höhe steigt.
+ Die Peak-Werte stammen vom Aufschlag eines Regentropfens und wurden als
+ Ausgangspunkt bei der Berechnung genommen.
+ Anhand dieses Wertes wurde die Reichweite des Sensors bestimmt, in der
+ der Sensor auf Regen reagiert.
+ Dies wird im Punkt 5.6 der Dokumentation genauer erläutert.
+\end_layout
+
+\begin_layout Standard
+Im zweiten Schritt wurde das Zeitfenster eines Regentropfenaufpralls ausgewertet.
+ Die Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Zeitfenster-eines-Regentropfens Audacity"
+
+\end_inset
+
+ zeigt, dass der Aufprall eines Regentropfen über die Zeit ein unstetiges
+ Signal liefert.
+ In diesem Bild sind es 30ms, in denen der Aufprall einen Ausschlag des
+ Signals erzeugt.
+ Es wurden alle Aufpralle der Regentropfen ausgewertet, wobei festgestellt
+ wurde, dass ca.
+ in einem Intervall von 130ms immer nur ein Regentropfen aufprallt.
+ Dieser Wert wurde dann auch in Matlab zur Suche der Anzahl der Regentropfen
+ eingesetzt.
+ Ein weiterer Grund dafür, dass 130ms genommen wurden, ist zusätzlich noch,
+ dass zwischen zwei Regentropfen auch eine gewisse Todzeit liegen muss,
+ um das Signal auswerten zu können.
+ Hätte man innerhalb von 10ms zwei Regentropfen, würde dazwischen kein sinusförm
+iges Signal mehr liegen, mit dem man eine Fouriertransformation durchführen
+ kann.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Ausschnitt_peak.jpg
+	width 8cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Ausschnitt Peak 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Ausschnitt-Peak Audacity"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Regentropfen_maximum.jpg
+	width 8cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Zeitfenster eines Regentropfens 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Zeitfenster-eines-Regentropfens Audacity"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Sechster Versuch: Überprüfung auf die Reichweite des Sensors
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+RSM1900
+\end_layout
+
+\begin_layout Standard
+Verwendet wurde der RSM1900 zur Überprüfung auf die Reichweite, da der andere
+ Sensor zur Zeit der Versuchsdurchführung defekt und noch kein neuer der
+ selben Art bestellt worden war.
+ Um die Reichweite zu messen wurde ein Blatt Papier skaliert und die Mitte
+ des Radarmoduls auf den Nullpunkt gelegt.
+ Dann wurden Wassertropfen mit zunehmendem Abstand zum Radar fallen gelassen
+ und der Ausschlag des rückgestreuten Signals über Audacity beobachtet.
+ Hierbei waren Ausschläge, deren Peaks über 0,4 V betrugen, relevant.
+ Es ergab sich ein Abstand von ca.
+ 6 cm zwischen Sensor und aufschlagendem Tropfen.
+ Damit lässt sich die Fläche berechnen, auf der der Regenmesser die Regentropfen
+ erkennt und somit kann auch die Niederschlagsmenge berechnet werden.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+A=\pi*r^{2}=\pi*(6cm)^{2}\thickapprox113,097cm^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\shape slanted
+RSM1700
+\end_layout
+
+\begin_layout Standard
+Der gleiche Versuch wurde dann auch mit dem fertigen Prototyp gemacht.
+ Dabei wurde festgestellt, dass nur die Tropfen einen Ausschlag von über
+ 0,4V verursachen, welche direkt auf das Gehäuse auftreffen.
+ Deshalb wurde die Fläche des Gehäuses bei der Berechnung der Niederschlagsmenge
+ verwendet.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Hardware
+\end_layout
+
+\begin_layout Subsection
+Testaufbau
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Grundlegende Schaltung
+\end_layout
+
+\begin_layout Standard
+Die hier beschriebene Schaltung dient zur Verstärkung des schwachen Ausgangssign
+als von 300µV, welches das Radarmodul liefert.
+ 
+\end_layout
+
+\begin_layout Standard
+Um die Funktionalität des Moduls zu testen und später die Ergebnisse auswerten
+ zu können, musste das Ausgangssignal des Radars verstärkt werden.
+ Der Hersteller Innosent stellt hierzu eine Schaltung zur nachträglichen
+ Verstärkung bereit, die das Signal um 60dB verstärkt (siehe Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Verstärkerschaltung"
+
+\end_inset
+
+).
+ Die Verstärkung berechnet sich aus 
+\begin_inset Formula 
+\[
+V=1+\frac{R_{2}}{R_{1}}
+\]
+
+\end_inset
+
+ Somit ergibt sich mit 
+\begin_inset Formula $R_{1}=3,3kOhm$
+\end_inset
+
+ und 
+\begin_inset Formula $R_{2}=100kOhm$
+\end_inset
+
+ ein Wert von 31,3.
+ Da bei der Verstärkerschaltung zwei nichtinvertierende Verstärker hintereinande
+r geschaltet sind, muss der Verstärkungsfaktor mit zwei multipliziert werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Testschaltung Innosent.png
+	width 8cm
+	clip
+
+\end_inset
+
+ 
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Verstärkerschaltung 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Applikation"
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Verstärkerschaltung"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Bei dieser Verstärkerschaltung kommt ein LM358 zum Einsatz 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LM358"
+
+\end_inset
+
+.
+ Dieser Operationsverstärker enthält insgesamt zwei Verstärkerschaltungen.
+ Diese können ein Eingangsignal von 
+\begin_inset space ~
+\end_inset
+
+-0.3V bis 32V auf eine Ausgangsspannung von +/-16V oder von 32V verstärken.
+ Die restlichen Bauteile sind Kohleschicht-Widerstände und Keramikkondensatoren.
+ Da die Schaltung mit der Soundkarte des PC verbunden werden soll, wurde
+ zusätzlich am Ausgang ein Elektrolyt-Kondensator in Reihe geschaltet.
+ Dieser soll verhindern, dass eine Gleichspannung auf dem Mikrofoneingang
+ anliegt.
+ Aufgebaut wurde die Schaltung auf einer Eurolochraster-Platine.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename IMG_0631.JPG
+	lyxscale 13
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Verstärkerschaltung Lochrasterplatine
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Der Radarsensor wurde auf ein Steckbrett gesteckt, damit man die Möglichkeit
+ hat, die Sensoren für Versuche oder bei einem Defekt schnell austauschen
+ zu können.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Sensor (2).JPG
+	lyxscale 15
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Radarmodul RSM1700
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Spannungsversorgung
+\end_layout
+
+\begin_layout Standard
+Erste Versuche, wie im Punkt 5 der Dokumentation schon beschrieben, wurden
+ mit einer konstanten Gleichspannungsversorgung von +5V durchgeführt.
+ Dazu wurde an den LM358 Pin 8 +5V und an Pin 4 Masse angeschlossen.
+ Allerdings konnten so nur positive Halbwellen verstärkt werden.
+ Bei den nächsten Versuchen wurde dann ein Spannungsbereich von -5V bis
+ +5V angelegt, dies wurde durch ein Netzteil mit 2 unabhängigen Chanels
+ realisiert.
+ Die Schaltung wurde im weiteren Verfahren so abgeändert, dass am LM358
+ an Pin 8 +5V und an Pin 4 -5V anliegen.
+ Die Masseverbindung der restlichen Schaltung wurde auf die gemeinsame Masse
+ der beiden Chanels gelegt.
+ Mit dieser Veränderung konnte nun das gesamte Signal verstärkt werden.
+ Da allerdings die spätere Schaltung nur eine 12V Spannungsversorgung hat,
+ mussten nun nach anderen Spannungsversorgungen gesucht werden.
+ Erste Recherchen führten zu DC/DC Wandlern die 2 Potenziale mit einer gemeinsam
+en Masse erzeugen können.
+ Da DC/DC Wandler allerdings oft sehr kostenintensiv sind, wurde zunächst
+ eine Alternative mit 2 Spannungswandler versucht.
+ Mit Hilfe dieses Aufbaus konnte ein Potential von +/-5V mit einer virtuellen
+ Masse erzeugt werden 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "micrcontroller"
+
+\end_inset
+
+.
+ Allerdings wurde nach wenigen Versuchen klar, dass diese Spannungsversorgung
+ für den Radarsensor nicht geeignet ist.
+ Das Hauptproblem bestand darin, dass an den +5V, an welchen der Radarsensor
+ angeschlossen wurde, eine größere Last anlag als am unteren Chanel.
+ Dies verursachte einen Spannungseinbruch am +5V Ausgang.
+ Die Spannung an diesem fiel dann auf ca.
+ 3 V ab, während die Spannung am -5V Ausgang auf ca.
+ -7 V absank.
+ Behoben werden konnte dies nur durch Verkleinern des Lastwiederstandes
+ am -5V Ausgang, brachte aber keine zufriedenstellende Lösung, wegen ihrer
+ Unflexibilität.
+ Daher wurde beschlossen, einen DC/DC Wandler einzusetzen.
+ Weitere Recherchen führten dann zu den in Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:DC/DC-Wandler"
+
+\end_inset
+
+ aufgeführten DC/DC Wandlern, die alle über 2 Ausgänge mit +5V bzw.
+ -5V und einer gemeinsamen Masse verfügen.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="9" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+DC/DC Wandler
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SMD DC/DC Wandler
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Anbieter
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hersteller
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Strom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Best.Nr.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Preis
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Conrad
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+200mA
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+157165-62
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+21,66 €
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reichelt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+800mA
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+TEN 8-1221
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+27,97 €
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Digikey
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RECOM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100mA
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+R1D-1205-R
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7,3 €
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+DIP DC/DC Wandler
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reichelt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+200mA
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+TMR 1221
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14,99 €
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Digikey
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RECOM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100mA
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+R1D-1205/H
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6,45 €
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+DC/DC Wandler 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:DC/DC-Wandler"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Da aus Platzgründen die Dip-Bauteile nicht verwendbar waren, blieben nur
+ die Angebote von Conrad, Reichelt und Digikey übrig.
+ Da die ersten beiden sehr überdimensioniert in ihrer Stromversorgung und
+ sehr teuer sind, wurde sich für das Produkt von Digikey entschieden.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+DC/DC Wandler R1D-1205-R von RECOM 
+\shape default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DatenblattDCDC"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Technisch-Daten-desR1D"
+
+\end_inset
+
+ zeigt die Technisch Daten des R1D-1205-R.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Artikel Nr.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+R1D-1205-R
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Eingangspannung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3,3,5,12,15,24
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ausgangsspannung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
++/- 5V
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ausgangsstrom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
++/-100mA
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Effizienz
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+72-78%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Max.
+ Kapazitive Ladung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
++/-470µF
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Technisch Daten des R1D-1205-R 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Technisch-Daten-desR1D"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Unbenannt.png
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Pin-Nummerierung DC/DC-Wandler
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Der R1D-1205-R von RECOM ist für die Schaltung perfekt da er ausreichend
+ Ausgangsstrom zur Verfügung stellt, allerdings nicht so überdimensioniert
+ ist wie andere DC/DC Wandler.
+ Außerdem ist er dadurch baulich kompakter als andere Modelle.
+\end_layout
+
+\begin_layout Subsection
+Auswahl der Bauteile
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+RSM1700
+\end_layout
+
+\begin_layout Standard
+Für den Regensensor wird das Radar-Bewegungsmelder-Modul RSM1700 verwendet.
+ Es muss mit einer Betriebsspannung V
+\size footnotesize
+cc
+\size default
+ von 4,75V bis 5,25V versorgt werden, wobei ein Versorgungsstrom von 30
+ bis 40mA fließt.
+ Die Betriebstemperatur des 25,0 x 25,0 x 12,7 mm großen Moduls liegt bei
+ -20 bis +60°C und mit einer Taktlänge von 10µs sendet es ein Signal mit
+ einer Frequenz von 24 bis 24,25GHz und einer Ausgangsleistung 16dBm.
+ Die Antenne hat eine Ausrichtung von 70° in horizontaler (Azimut) und 70°
+ in vertikaler (Elevation) Richtung.
+ Das Modul eignet sich für eine Vielzahl von Anwendungen, in denen Bewegung
+ oder Anwesenheit registriert werden müssen.
+ Dabei ist die Bewegungs- Empfindlichkeit extrem hoch, selbst geringste
+ Bewegungen fast bis zum Stillstand werden erkannt.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Bauteile Verstärkerschaltung
+\end_layout
+
+\begin_layout Standard
+Die Bauteile der Verstärkerschaltung waren durch die Firma Innosent vorgeschrieb
+en.
+ Da der Testaufbau mit diesen Bauteilen erfolgreich war wurden sie weiterhin
+ verwendet.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide true
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="12" columns="5">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Artikel
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Bestell-Nr.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Händler
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Anzahl
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Preis/€
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+DC/DC Wandler
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+R1D-1205/H
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Digikey
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7,14
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LM358
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LM358 SMD
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reichelt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0,18
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SMD 100k
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SMD-0805 100k
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reichelt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0,10
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SMD 3,3k
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SMD-0805 3,3k
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reichelt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0,10
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SMD 100
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SMD-0805 100
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reichelt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0,10
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SMD-Kondensator
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NPO-G0805 10P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reichelt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0,05
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SMD-Kondensator
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NPO-G0805 100P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reichelt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0,05
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Netzgeräte-Einbaukupplung Printmontage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+737992 - 62
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Conrad
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,39
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Klinkeneinbaubuchse, 3,5mm St.,gew.,PCB,SMD
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LUM 1503-02
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reichelt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0,96
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Buchsenleiste 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MA03-1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reichelt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0,10
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Radarsenor
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RSM-1700
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Conrad
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15,34
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Stückzahlliste der Bauteile
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Planung der Platine
+\end_layout
+
+\begin_layout Standard
+Die Planung der Platine wurde mit Eagel realisiert.
+ Da das Package 0805 für die Kondensatoren und Widerstände gewählt wurde,
+ konnte die Standartbibliothek von Eagel verwendet werden, welche alle verwendet
+en Bauteile enthält.
+ Als einziges Bauteil musste nur der DC/DC Wandler neu erstellt werden.
+ Die Grundplatte der Platine wurde an das Gehäuse angepasst, sodass diese
+ später hineingeschraubt werden kann.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename schaltplan.png
+	lyxscale 50
+	width 18cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Schaltplan Eagle
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Top.png
+	lyxscale 50
+	width 8cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Plan Platine top layer 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Bottoom.png
+	lyxscale 50
+	width 8cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Plan Platine bottom layer
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename IMG_0798.JPG
+	lyxscale 10
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Platine top layer
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename IMG_0799.JPG
+	lyxscale 10
+	width 8cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Platine bottom layer
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Subsection
+Planung des Gehäuses
+\end_layout
+
+\begin_layout Standard
+Da die Platine eine Kleinspannungsversorgung benötigt und auch das Ausgangssigna
+l herausgeführt werden muss, war es nötig, das Gehäuse anzupassen.
+ Dazu wurde es an den entsprechende Stellen aufgebohrt.
+ Geplant wurden die mechanischen Arbeiten in Solidworks.
+ Solidworks ist ein CAD Konstruktionsprogramm, mit dem Bauteile verschiedenster
+ Art geplant werden können.
+ Prinzipiell eignet sich als Gehäuse am Besten eine halbkugelförmige Abdeckung,
+ ähnlich einer Schlüssel.
+ So kann sich darauf kein Wasser sammeln, welches die Mikrowellen absorbieren
+ würde.
+ Da allerdings ein rechteckiges Gehäuse vorhanden war, wurde dieses aus
+ Kostengründen verwendet.
+ Weitere Tests zeigten, dass sich nicht viel Wasser auf dem Gehäuse sammeln
+ kann.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement !
+wide true
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename box - Blatt1.pdf
+	scale 60
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Zeichnung Gehäuse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Test mit der fertigen Platine
+\end_layout
+
+\begin_layout Standard
+Ein Test mit der fertigen Platine konnte nicht durchgeführt werden da es
+ Lieferschwierigkeiten bei Digikey gab.
+ Deshalb wurde der Funktionstest mit einem Labornetzteil realisiert.
+ Beim Funktionstest wurde auch ein Fehler in der Schaltung entdeckt: der
+ Anschluss von Pin 8 und Pin 4 des Operationsverstäkers sind vertauscht.
+ Pin 4 und Pin 8 sind die Spannungsversorgung des Operationsverstäkers,
+ die Verpolung zerstörte diesen und er musste ausgetauscht werden.
+ Der Fehler wurde anschließend mit einer provisorische Brücke behoben.
+ Im Schaltplan wurde dieser Fehler ebenfalls verbessert.
+\end_layout
+
+\begin_layout Standard
+Für erste Tests wurde eine externe Soundkarte verwendet, die über USB mit
+ dem PC verbunden war.
+ Allerdings brachte die externe Soundkarte eine zusätzliche Verstärkung
+ von 60dB.
+ Dadurch wurden selbst kleinste Signal extrem hoch verstärkt.
+ Dieser Effekt war aber für die Messung kontraproduktiv.
+ Daher wurde auf den Einsatz der externen Soundkarte verzichtet.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Fehler_behoben.JPG
+	lyxscale 10
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gebrückte Spannungsversorgung des LM358 auf der Platine
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Software
+\end_layout
+
+\begin_layout Subsection
+Einleitung
+\end_layout
+
+\begin_layout Standard
+Der Hintergrund, warum sich die Gruppe für Matlab entschied ist, dass bei
+ der Auswertung der Geschwindigkeit eine Fouriertransformation durchgeführt
+ werden muss.
+ Dafür ist ein großer Rechenaufwand nötig.
+ Matlab hat den Vorteil, dass dort selbst schon Funktionen für die Fouriertransf
+ormation hinterlegt sind und das Programm für große Rechenleistung ausgelegt
+ ist, was bei einem Mikrocontroller nicht der Fall ist.
+\end_layout
+
+\begin_layout Subsection
+Bedieneroberfläche
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Allgemeiner Aufbau (Leiste und Funktionen)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Bedieneroberfläche.jpg
+	width 18cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Bedieneroberfläche 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Bedieneroberfläche"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Niederschlagsmenge.jpg
+	width 8cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Button Definition Niederschlagsmenge 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Tabelleniederschlagsmenge"
+
+\end_inset
+
+
+\lang english
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Button-Definition-Niederschlagsm"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Rechnung_geschwindigkeit.jpg
+	width 8cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Berechnung der Fallgeschwindigkeit
+\lang english
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Berechnung-der-Fallgeschwindigkeit"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Niederschlagsarten.jpg
+	width 8cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Niederschlagsarten 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Tabelleniederschlagsarten"
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "Niederschlagsarten"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Wenn der Bediener in Matlab 
+\begin_inset Quotes eld
+\end_inset
+
+panel_1
+\begin_inset Quotes erd
+\end_inset
+
+ eingibt, bekommt er die Bedieneroberfläche zu sehen, wie sie die Abbildung
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Bedieneroberfläche"
+
+\end_inset
+
+ zeigt.
+ Mit dem Start-Button kann der Bediener das Programm zur Bestimmung der
+ Niederschlagsmenge starten.
+ Weitere Buttons sind: 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Buttons
+\end_layout
+
+\begin_layout Enumerate
+Niederschlagsarten (siehe Abb.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Niederschlagsarten"
+
+\end_inset
+
+)
+\begin_inset Newline newline
+\end_inset
+
+Wenn man den Button 
+\begin_inset Quotes eld
+\end_inset
+
+Niederschlagsarten
+\begin_inset Quotes erd
+\end_inset
+
+ betätigt, taucht eine Tabelle auf.
+ Diese zeigt die verschiedenen Niederschlagsarten in Abhängigkeit ihrer
+ Fallgeschwindigkeit und ihrem Durchmesser.
+\end_layout
+
+\begin_layout Enumerate
+Definition Niederschlagsmenge (siehe Abb.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Button-Definition-Niederschlagsm"
+
+\end_inset
+
+)
+\begin_inset Newline newline
+\end_inset
+
+Bei betätigen des Buttons 
+\begin_inset Quotes eld
+\end_inset
+
+Definition Niederschlagsmenge
+\begin_inset Quotes erd
+\end_inset
+
+ wird eine Tabelle gezeigt, die definiert, wann es sich in Abhängigkeit
+ von der Zeit um einen Regenschauer oder Regen handelt.
+\end_layout
+
+\begin_layout Enumerate
+Berechnung Fallgeschwindigkeit (siehe Abb.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Berechnung-der-Fallgeschwindigkeit"
+
+\end_inset
+
+)
+\begin_inset Newline newline
+\end_inset
+
+Dieser Button erzeugt ein Fenster, indem erklärt wird, wie man mit Hilfe
+ der Dopplerfrequenz auf die Fallgeschwindigkeit eines Regentropfens schließen
+ kann.
+\end_layout
+
+\begin_layout Enumerate
+Grafik
+\begin_inset Newline newline
+\end_inset
+
+In der Bedieneroberfläche sieht man zwei Grafiken.
+ Die linke Grafik zeigt das eingelesen Eingangssignal an.
+ Die rechte Grafik zeigt die aktuell errechnete Niederschlagsmenge an.
+\end_layout
+
+\begin_layout Enumerate
+Bedienerinformationen
+\begin_inset Newline newline
+\end_inset
+
+Der Bediener kann die aktuell errechneten Werte der Dopplerfrequenz, Geschwindig
+keit, Niederschlagsmenge und der Anzahl der Tropfen sehen (siehe Abb.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Bedienerinfomationen"
+
+\end_inset
+
+)
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Bedinerinformation.jpg
+	width 8cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Bedienerinformationen 
+\lang english
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Bedienerinfomationen"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Leiste
+\end_layout
+
+\begin_layout Standard
+Bei der Leiste handelt es sich um eine typische Bedienerleiste.
+ Unter Datei -> Beenden kann die Bedieneroberfläche geschlossen werden.
+ Die Optionen 
+\begin_inset Quotes eld
+\end_inset
+
+Ansicht
+\begin_inset Quotes erd
+\end_inset
+
+ und 
+\begin_inset Quotes eld
+\end_inset
+
+Hilfe
+\begin_inset Quotes erd
+\end_inset
+
+ sind noch nicht ausprogrammiert.
+ 
+\end_layout
+
+\begin_layout Subsection
+Programmablauf
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Zeichnung2.emf
+	lyxscale 80
+	width 16cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Flussdiagramm
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Einlesen des Signals
+\end_layout
+
+\begin_layout Standard
+Das Eingangssignal wird mit der Abtastrate von 44,1 kHz eingelesen.
+ Der Programmcode zum einlesen des Signales sieht folgendermaßen aus:
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+%-Inputsignal einlesen von der Soundkarte 
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+ai = analoginput('winsound'); 
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+addchannel(ai,1); 
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+set(ai,'SampleRate',M) 
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+set(ai,'SamplesPerTrigger',inf) 
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+set(ai,'TriggerType','Immediate') start(ai);
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+%------------------------------------------
+\family default
+\size default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Fouriertransformation
+\end_layout
+
+\begin_layout Standard
+Bei der Fouriertransformation (FFT) handelt es sich um eine Funktion, die
+ aus einem annähernd periodischen Signal die Frequenz bestimmt.
+ Im Programm wurde so vorgegangen, dass aus der Datenmenge N ein Fenster
+ ausgeschnitten wird, um das Signal am Anfang und am Ende etwas abzurunden.
+ Somit liefert die FFT ein genaueres Ergebnis.
+ Nach der FFT wird eine Zeitachse für die Hälfte der Zeit erstellt, da sie
+ in der Mitte gespiegelt wird.
+ Man benötigt daher nur die eine Hälfte des Signales.
+ Danach wird das Maximum auf der Ordinatenachse bestimmt.
+ Da die Frequenz aber auf der Abszissenachse angegeben wird, muss noch der
+ dazugehörige x-Wert bestimmt werden.
+ Der berechnete x-Wert entspricht dann der Dopplerfrequenz.
+\end_layout
+
+\begin_layout Standard
+Quellcode:
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+%------Fouriertransformation----- 
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+data_win=data1.*hann(N); %Erstellen eines Fensters unserer Funktion
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+data_fft=fft(data_win); %Erzeugen der FFT
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+%Erstellen unserer Achse von 0 bis N/2 durch Multiplikation von M/2 wird
+ die Zeitachse erstellt fuer die Haelfte der Zeit
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+f=M/2*linspace(0,1,N/2); %Zeitachse fuer FFT 
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+%--------------------------------
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+%------Frequenzberechnung--------
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+%in der FFT-Berechnung wird die Frequenz auf der x-Achse angegeben 
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+%und hat auf der y-Achse ihren maximalen Wert 
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+[val_fft,ind_fft]=max(abs(data_fft(1:N/2))); %Herausfinden des max wertes
+ auf der y-Achse 
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+frequenz=f(ind_fft); %Finden des x-wertes ueber den bestimmten y-max wertes,
+ welcher die gewuenschte Frequenz ist 
+\family default
+\size default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Bestimmung der Regentropfen
+\end_layout
+
+\begin_layout Standard
+Durch den mit Audacity aufgenommenen Regentest am 30.05.2012 wurde festgestellt,
+ dass in einem Intervall von 130 ms ein Regentropfen auf den Radarsensor
+ fällt (siehe auch Punkt 5.5.1 der Dokumentation).
+ In dem Programm wird mit 139ms gearbeitet, da diese Zahle mit Werten von
+ 
+\begin_inset Formula $2^{x}$
+\end_inset
+
+ berechnet werden kann.
+ Diese Information wurde zur Bestimmung der Regentropfen zu Hilfe genommen.
+\end_layout
+
+\begin_layout Standard
+Im ersten Schritt zur Bestimmung der Regentropfen wird das eingelesen Analogsign
+al auf ein Maximum auf der Ordinatenachse geprüft.
+ Liegt dieses Signal über 0,4 weiß man, dass es regnet.
+ Danach wird das eingegangene Signal in einzelne Schritte von einem Intervall
+ von 139ms aufgeteilt, um in diesem Zeitabschnitt einzelne Maxima über 0,4
+ zu bestimmen.
+ Weiß man die Anzahl der Maxima, kennt man auch die Anzahl der Regentropfen,
+ die in dem aufgenommen Zeitabschnitt heruntergekommen sind.
+ 
+\end_layout
+
+\begin_layout Standard
+Schneidet man das Signal zwischen zwei Maxima heraus, kann man die Frequenz
+ dieses Signales bestimmen und somit die Geschwindigkeit des Tropfens.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Geschwindigkeitsberechnung
+\end_layout
+
+\begin_layout Standard
+Für die Geschwindigkeitsberechnung wurde aus der Applikationsschrift I von
+ Innosent 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Applikation"
+
+\end_inset
+
+ die Formel 
+\begin_inset Formula 
+\[
+f_{d}=f_{0}*\frac{v}{c_{0}}*cos(\alpha)
+\]
+
+\end_inset
+
+verwendet und nach v umgestellt.
+ 
+\begin_inset Formula 
+\[
+v=\frac{f_{d}*c_{0}}{f_{0}*cos(\alpha)}
+\]
+
+\end_inset
+
+ Dabei nimmt 
+\begin_inset Formula $cos(\alpha)$
+\end_inset
+
+ den Wert 1 an, da von einem Winkel von 0° ausgegangen wird.
+ Somit wird nur die Fallgeschwindigkeit in der vertikalen Ebene des Regentropfen
+ gemessen.
+ 
+\begin_inset Formula $f_{d}$
+\end_inset
+
+ ist die Dopplerfrequenz, die mit Hilfe der Fouriertransformation errechnet
+ wurde.
+ 
+\begin_inset Formula $f{}_{0}$
+\end_inset
+
+ ist die Sendefrequenz, die beim Sensor RSM1700 24GHz beträgt 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Datenblatt"
+
+\end_inset
+
+.
+ Bei 
+\begin_inset Formula $c{}_{0}$
+\end_inset
+
+ handelt es sich um die Lichtgeschwindigkeit.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Die Berechnung sieht folgendermaßen aus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $f{}_{0}=24*10^{9}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $c_{0}=294792458$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+v=\frac{frequenz_{d}*c_{0}}{2*frequenz_{0}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Berechnung des Regentropfenradius
+\end_layout
+
+\begin_layout Standard
+Der Radius des Regentropfens kann mit der berechneten Fallgeschwindigkeit
+ ermittelt werden.
+ Mithilfe der Parametrisierung von Beard gilt für den Radius r im Bereich
+ von 50-500µm folgende Formel: 
+\begin_inset Formula 
+\[
+r=119,16\frac{\text{\ensuremath{\mu}}m*s}{m}*v+12,77\text{\ensuremath{\mu}}m
+\]
+
+\end_inset
+
+Dabei entsteht ein verhältnismäßig geringer Fehler mit der Abweichung 
+\begin_inset Formula 
+\[
+r_{Abweichung}=\pm\sqrt{(v*0,35\frac{\text{\ensuremath{\mu}}m*s}{m})^{2}+(0,86*\text{\ensuremath{\mu}}m)^{2}}
+\]
+
+\end_inset
+
+Die Parametrisierung wurde von einem Meteorologie-Studenten der Universität
+ Mainz berechnet und ist höhenunabhänging.
+ Durch die Begrenzung des Radienbereichs gilt diese Formel nur für eine
+ Geschwindigkeit von 0.3124 bis 4,0889m/s.
+ Für größere Radien müsste man die Parametrisierung weiterführen, wobei
+ Meteorologen helfen können.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Berechnung der Niederschlagsmenge
+\end_layout
+
+\begin_layout Standard
+Niederschlagsmenge wird über das Volumen pro Fläche berechnet.
+ Im Programm wurde das so realisiert, dass von jedem Regentropfen einzeln
+ die Fallgeschwindigkeit berechnet wird.
+ Dadurch kann man auf das einzelne Volumen eines Regentropfen schließen.
+ Über eine Schleife wird dann für jeden Tropfen die Niederschlagsmenge berechnet
+ und die davor errechnete Gesamtniederschlagsmenge dazu addiert.
+ Hat es aufgehört zu regnen, wird die Niederschlagsmenge beim nächsten Regenscha
+uer zurück gesetzt.
+\end_layout
+
+\begin_layout Section
+Ausblick
+\end_layout
+
+\begin_layout Standard
+Verbesserungsmöglichkeiten des Produkts sind:
+\end_layout
+
+\begin_layout Itemize
+Verbesserung der Fehlerquote durch schnellere Verarbeitungszeit des Programms
+ (geringere Verzögerung beim Einlesen der Frequenz der Tropfen)
+\end_layout
+
+\begin_layout Itemize
+Da nur die Niederschlagsmenge berechnet wurde, wäre eine Erweiterung die
+ Niederschlagsrate zu berechnen und diese anstatt der Niederschlagsmenge
+ im Diagramm anzeigen zu lassen.
+\end_layout
+
+\begin_layout Itemize
+Erweiterung der Bedieneroberfläche, durch Anzeigen der Stärke des Regens
+\end_layout
+
+\begin_layout Itemize
+Erfassung von mehreren Niederschlagsarten, wie z.B.
+ auch Schnee und Hagel.
+ Dies konnte leider aus Gründen der Jahreszeit und eingeschränkter Verfügung
+ von Zeit nicht getestet werden.
+\end_layout
+
+\begin_layout Itemize
+Speicherung der Daten in einer Exceltabelle, damit über eine längeren Zeitraum
+ Auswertungen über die Regenhäufigkeit geführt werden können.
+\end_layout
+
+\begin_layout Itemize
+Entwicklung eines Gehäuses, welches besser an die Anforderungen angepasst
+ ist.
+\end_layout
+
+\begin_layout Section
+Die Autoren
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Vera.jpg
+	lyxscale 50
+	width 3cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Name: Vera Albiez
+\end_layout
+
+\begin_layout Standard
+Alter: 20
+\end_layout
+
+\begin_layout Standard
+Wohnort: Mannheim
+\end_layout
+
+\begin_layout Standard
+Studiengang: Energietechnik und erneuerbare Energien
+\end_layout
+
+\begin_layout Standard
+Semester: 2
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Rebecca.jpg
+	lyxscale 50
+	width 3cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Name: Rebecca Forster
+\end_layout
+
+\begin_layout Standard
+Alter: 21
+\end_layout
+
+\begin_layout Standard
+Wohnort: Mannheim
+\end_layout
+
+\begin_layout Standard
+Studiengang: Automatisierungstechnik
+\end_layout
+
+\begin_layout Standard
+Semester: 2
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Felix.jpg
+	lyxscale 70
+	width 3cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Name: Felix Körner
+\end_layout
+
+\begin_layout Standard
+Alter: 22
+\end_layout
+
+\begin_layout Standard
+Wohnort: Mannheim
+\end_layout
+
+\begin_layout Standard
+Studiengang: Automatisierungstechnik
+\end_layout
+
+\begin_layout Standard
+Semester: 2
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FloatList figure
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintAll"
+bibfiles "literaturverz"
+options "IEEEtran"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\start_of_appendix
+\align center
+\begin_inset External
+	template PDFPages
+	filename Anhang für die dokumentation/DC_DC_Wandler.pdf
+	extra LaTeX "pages={1-4}"
+
+\end_inset
+
+
+\begin_inset External
+	template PDFPages
+	filename Anhang für die dokumentation/Applikationsschrift_I.pdf
+	extra LaTeX "pages={8,9,15}"
+
+\end_inset
+
+
+\begin_inset External
+	template PDFPages
+	filename Anhang für die dokumentation/LM_358.pdf
+	extra LaTeX "pages={1-4}"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Anhang für die dokumentation/Zeichnung Solidworks.png
+	width 16cm
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset External
+	template PDFPages
+	filename Anhang für die dokumentation/Software_Quelllcode.pdf
+	extra LaTeX "pages={1-8}"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
