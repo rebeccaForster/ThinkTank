@@ -151,7 +151,14 @@ Interview
 
 \begin_layout Standard
 asdfjdslfkjdaskflj
-\begin_inset Newline newline
+\end_layout
+
+\begin_layout Standard
+Hier füge ich die Literatur Cooper ein:
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cooper2007"
+
 \end_inset
 
 
@@ -164,9 +171,8 @@ asdfjdslfkjdaskflj
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-btprint "btPrintAll"
 bibfiles "literaturverz"
-options "IEEEtran"
+options "apacite"
 
 \end_inset
 

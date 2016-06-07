@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html><head>
+		<title>LyX und BibTeX: Anleitung/Tutorial</title>
+		<meta name="description" content="Anleitung zur Erstellung von Literaturverzeichnissen mit BibTeX unter LyX.">
+		<meta name="keywords" content="anleitung, tutorial, erstellung, verzeichnis, literatur, literaturverzeichnis, quelle, quellen, quellenverzeichnis, qeuellenangabe, lyx, bibtex, latex, jabref, bib, bst, stil, literaturverweis, verweis, querverweis">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!--<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>-->
+<link type="text/css" rel="stylesheet" href="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/ghpages-materialize.css" media="screen">
+<link type="text/css" rel="stylesheet" href="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/philipphauer.css" media="screen">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="robots" content="index,follow">
+<link rel="shortcut icon" href="http://www.philipphauer.de/favicon.ico">
+
+<link rel="stylesheet" href="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/highlight-style-color-brewer-mod.css">
+<script src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/analytics.js" async=""></script><script src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-10596131-1', 'auto');
+  ga('set', 'anonymizeIp', true);
+  ga('send', 'pageview');
+
+</script>
+<!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+<script type="text/javascript">
+	window.cookieconsent_options = {
+		"message" : "Für eine optimale Nutzung dieser Webseite werden Cookies eingesetzt.",
+		"dismiss" : "OK",
+		"learnMore" : "Details",
+		"link" : "/home/datenschutz.php",
+		"theme" : "light-bottom"
+	}; 
+</script>
+<script type="text/javascript" src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/cookieconsent.js"></script>
+<!-- End Cookie Consent plugin -->
+
+	<link href="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/light-bottom.css" type="text/css" rel="stylesheet"></head>
+
+	<body id="tut"><div class="cc_banner-wrapper "><div class="cc_banner cc_container cc_container--open"><a href="#null" data-cc-event="click:dismiss" target="_blank" class="cc_btn cc_btn_accept_all">OK</a><p class="cc_message">Für eine optimale Nutzung dieser Webseite werden Cookies eingesetzt. <a data-cc-if="options.link" target="_self" class="cc_more_info" href="http://www.philipphauer.de/home/datenschutz.php">Details</a></p><a class="cc_logo" target="_blank" href="http://silktide.com/cookieconsent">Cookie Consent plugin for the EU cookie law</a></div></div>
+		<header>
+	<nav class="top-nav">
+			<div class="adsense-links">			
+				<script async="" src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/adsbygoogle.js"></script>
+				<!-- Linkblock 120x90 -->
+				<ins class="adsbygoogle" style="display:inline-block;width:120px;height:90px" data-ad-client="ca-pub-8970599184339653" data-ad-slot="6200753626"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</div>
+	</nav>
+	<div class="container">
+		<a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="mdi-navigation-menu"></i></a>
+	</div>
+	<ul style="width: 200px; left: 0px;" id="nav-mobile" class="side-nav fixed">
+		<li class="logo">
+			<a id="logo-container" href="http://www.philipphauer.de/" class="brand-logo">Philipp Hauer</a>
+		</li>
+
+		<li class="no-padding">
+			<ul class="collapsible collapsible-accordion">
+				<li class="bold wissen">
+					<a class="collapsible-header waves-effect waves-blue">Wissen<i class="mdi-navigation-arrow-drop-down right"></i></a><!-- active -->
+					<div style="" class="collapsible-body">
+						<ul>
+							<li class="schule">
+								<a href="http://www.philipphauer.de/info/" class="waves-effect waves-blue">Schule</a>
+							</li>
+							<li class="studium">
+								<a href="http://www.philipphauer.de/study/study.php" class="waves-effect waves-blue">Studium</a>
+							</li>
+							<li class="galerie">
+								<a href="http://www.philipphauer.de/galerie/" class="waves-effect waves-blue">Galerie</a>
+							</li>
+							<li class="woerterlexikon">
+								<a href="http://www.philipphauer.de/woerterlexikon/" class="waves-effect waves-blue">Wörterlexikon</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="bold it active">
+					<a class="collapsible-header  waves-effect waves-blue active">IT<i class="mdi-navigation-arrow-drop-down right"></i></a>
+					<div style="display:block;" class="collapsible-body">
+						<ul>
+							<li class="tut">
+								<a href="http://www.philipphauer.de/tut/" class="waves-effect waves-blue">Tutorials</a>
+							</li>
+							<li class="tools">
+								<a href="http://www.philipphauer.de/tools/" class="waves-effect waves-blue">Tools</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="bold about">
+					<a class="collapsible-header waves-effect waves-blue">About<i class="mdi-navigation-arrow-drop-down right"></i></a>
+					<div style="" class="collapsible-body">
+						<ul>
+							<li class="kontakt">
+								<a href="http://www.philipphauer.de/ueber-mich/kontakt.php" class="waves-effect waves-blue">Kontakt</a>
+							</li>
+							<li class="person">
+								<a href="http://www.philipphauer.de/ueber-mich/person.php" class="waves-effect waves-blue">Über mich</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="bold">
+			<a href="http://blog.philipphauer.de/" class="waves-effect waves-blue">Blog<i class="mdi-communication-call-made right"></i></a>
+		</li>
+	</ul>
+</header>
+<main>
+	<div class="container">
+		<div class="row">
+			<div class="col s12 m10 l10">
+		<h1>LyX und BibTeX <span class="small">Anleitung für mächtige Literaturverzeichnisse</span></h1>
+		<p>
+			Eine Tutorial von Philipp Hauer vom 15. Oktober    2009. Update: 29.06.2012. ©
+		</p>
+
+		<h2>Inhaltsangabe</h2>
+		<ol>
+			<li>
+				<a href="#lyx">Lyx</a>
+			</li>
+			<li>
+				<a href="#literaturverzeichnis">Literaturverzeichnisse</a>
+			</li>
+			<li>
+				<a href="#bibtex">Wie tickt BibTeX?</a>
+			</li>
+			<li>
+				<a href="#bib">Daten-Datei *.bib mit JabRef erstellen</a>
+			</li>
+			<li>
+				<a href="#bst">Stil-Datei *.bst</a>
+			</li>
+			<li>
+				<a href="#bibtex_in_lyx">BibTeX-Verzeichnis in LyX erstellen</a>
+			</li>
+			<li>
+				<a href="#literaturverweise">Arbeiten mit Literaturverweisen</a>
+			</li>
+			<li>
+				<a href="#comments">Kommentare</a>
+			</li>
+		</ol>
+		<h2><a name="lyx" id="lyx"></a>LyX</h2>
+		<p class="left"><img src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/lyx_icon.png" alt="LyX Logo" height="95" width="152">
+		</p>
+		<p>
+			LyX ist genial. Wer LaTeX schon mochte, wird LyX lieben, denn es 
+bietet alle wichtigen Funktionalitäten wie LaTeX, ist  aber um Welten 
+komfortabler. Ich persönlich weiß nicht, wie ich nur meinen ersten 
+Studienbericht mit TextEditor und Kommandozeile erstellen konnte.
+		</p>
+		<p>
+			Andererseits war es gut die Grundlagen von LaTeX kennenzulernen, denn
+ diese sind bei LyX manchmal einfach gut zuwissen, manchmal unabdinglich
+ um jene Dinge in LyX zu realisieren, für die es keine 
+Klick-Klick-Umgebung bietet.
+		</p>
+		<h2><a name="literaturverzeichnisse"></a>Literaturverzeichnisse</h2>
+		<p>
+			Es gibt diverse Möglichkeiten ein Literaturverzeichnis in LyX/LaTeX 
+zu erstellen. Aber wer wirklich mächtige und flexible 
+Quellenverzeichnisse möchte, kommt an BibTeX nicht vorbei. Ich bin 
+jedenfalls von BibTeX begeistert und möchte euch nun daran teilhaben 
+lassen.
+		</p>
+		<h2><a name="bibtex"></a>Wie tickt BibTeX?</h2>
+		<p>
+			Das besondere an BibTeX ist die Trennung zwischen Model und 
+Präsentation. Was nach Programmiererkauderwelsch klingt, bedeutet 
+eigentlich nur dass man zwei Dateien (Datenbasis und Stil) für eine 
+BibTeX-Literteraturverzeichnis benötigt:
+		</p>
+		<ul>
+			<li>
+				<strong>Datenbasis *.bib-Datei</strong>: Die bib-Datei enthält die 
+kahlen Literatureinträge, die später in unserem Dokument landen sollen. 
+Gewissermaßen unsere Datenbasis. Die sieht dann z. B. so aus:
+				<br>
+				<code>
+					@BOOK{SierraBatesSCJP,
+					<br>
+					&nbsp;&nbsp;&nbsp;title = {Sun Certified Programmer for Java 6 Study Guide},
+					<br>
+					&nbsp;&nbsp;&nbsp;publisher = {McGraw-Hill Companie},
+					<br>
+					&nbsp;&nbsp;&nbsp;year = {2008},
+					<br>
+					&nbsp;&nbsp;&nbsp;author = {Kathy Sierra and Bert Bates},
+					<br>
+					&nbsp;&nbsp;&nbsp;edition = {1. Auflage},
+					<br>
+					&nbsp;&nbsp;&nbsp;owner = {phauer},
+					<br>
+					&nbsp;&nbsp;&nbsp;timestamp = {2009.10.14}
+					<br>
+					}
+					<br>
+					...
+					<br>
+				</code>
+				Die bibs können wir auf drei Weisen erstellen:
+				<ul>
+					<li>
+						Manuell mit einem TextEditor
+					</li>
+					<li>
+						Bequem mit JabRef
+					</li>
+					<li>
+						Noch bequemer: auf <a href="http://www.literatur-generator.de/" target="_blank">literatur-generator.de</a> oder <a href="http://books.google.de/" target="_blank">books.google.de</a> suchen und die fertige BibTex-Datei zu einem Buch erhalten.
+					</li>
+				</ul>
+
+			</li>
+			<li>
+				<strong>Stil *.bst-Datei</strong>: Die bst-Datei beschreibt die Art 
+und Weise, wie die Literatureinträge aus dem *.bib-Datei im 
+Literaturverzeichnis dargestellt werden. Er legt nicht nur die 
+Formatierung des Literaturverzeichnisses fest, sondern auch welche 
+Felder der bib-Datei angezeigt werden (z.B. ob/bei welchen 
+Literaturtypen das URL-Feld angezeigt wird) und wie sich das 
+Referenzkürzel zusammensetzt (durchnummeriert [12] oder als Kurzname 
+[Hen08]). Diese BibTeX-Stile wollen wir nicht wirklich selber schreiben.
+ Brauchen wir auch gar nicht, <a href="#bst">weil es genug fertige gibt.</a>
+			</li>
+		</ul>
+		<p>
+			Alles was wir in LyX erledigen müssen, ist diese beiden Dateien zusammenzuführen. Doch dazu später mehr.
+		</p>
+		<h2><a name="bib"></a>Daten-Datei *.bib mit JabRef erstellen</h2>
+		<p>
+			JabRef ist ein Java-Tool und damit für jedes Betriebssystem erhältlich. Es kann kostenlos auf der <a href="http://jabref.sourceforge.net/" target="_blank">JabRef-Homepage</a> heruntergeladen werden.
+		</p>
+		<p>
+			<div class="material-placeholder"><img src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/jabref-g.png" class="responsive-img materialboxed initialized" alt="JabRef ermöglicht es schnell und einfach bib-Dateien zu erstellen"></div>
+			<span class="small">JabRef ermöglicht es schnell und einfach bib-Dateien für das Literaturverzeichnis zu erstellen </span>
+		</p>
+		<p>
+			Nach der Installation und dem Programmstart legen wir sofort los: <q>File &gt; New database</q>.
+ Mit einem Klick auf das kleine Plus-Symbol (New BibTeX entry) oben 
+erstellen wir den ersten Literatureintrag unserer Literaturdatenbasis. 
+Der Rest ist eigentlich ein Kinderspiel und selbsterklärend. Versuchen 
+Sie sich!
+		</p>
+		<p>
+			Umbedingt nötig ist aber der <em>Bibtexkey</em> eines Eintrags. Dieser dient der internen Bezeichnung. Unter diesen Namen erscheint er später in LyX zur Auswahl.
+		</p>
+		<p>
+			Hier noch einige  Tipps:
+		</p>
+		<ul>
+			<li>
+				Mehrere Autoren für einen Eintrag sind mit "and" zu trennen. Wurde 
+ein Buch von Max Mustermann und seiner Freundin Marie Musterfrau 
+geschrieben, so trägt man bei author einfach "Max Mustermann <em>and</em>
+ Marie Musterfrau" ein. Durch diese Syntax weiß später der BibTeX-Stil, 
+dass es sich um zwei Autoren handelt und nicht um einen, der zwei Vor- 
+und Nachnamen hat. ;-)
+			</li>
+			<li>
+				Hat man mal keinen menschlichen Autoren, sondern nur eine 
+Organisation, so möchte man nicht, dass der Organisationsname als 
+Menschenname missverstanden wird und damit von manchen Stilen 
+auseinander gerissen und/oder abgekürzt wird. Man muss den Autor also 
+atomar machen. Wieder fachchinesisch! Es bedeutet einfach den Autor in 
+geschweifte Klammern zu schreiben: Also "{Sun Microsystems}" statt nur 
+"Sun Microsystems". Oder kennen Sie einen Herrn Microsystems?
+			</li>
+			<li>
+				Bezüglich  Internetquellen: Grundsätzlich sollte die URL in das 
+gleichnamige Feld "URL" eingetragen werden. Einige bst-Stile ignorieren 
+jedoch das Feld "URL" und stellen es nicht da. Entweder benutzt man dann
+ einen anderen Stil (z.B. alphadin.bst, siehe <a href="#bst">unten</a>) oder versucht die URL in ein anderes Feld einzutragen (z.B. "Howpublished").
+			</li>
+			<li>
+				Das Abrufdatum trage ich immer als Notiz unter "Note" ein: "Abrufdatum: 23.11.11".
+			</li>
+		</ul>
+		<p>
+			Und noch ein Hinweis:
+		</p>
+		<ul>
+			<li>
+				Fehlermeldung "<strong>Missing $ inserted</strong>". URLs mit 
+Unterstrichen ("_") sind böse. LaTeX denkt hier, dass er es mit einer 
+mathematischen Formel zu tun hat und bricht das Übersetzen hab. Wir 
+müssen LaTex also explizit sagen, dass es sich hierbei um eine URL 
+handelt. Dazu müssen wir im LaTeX-Vorspann "\usepackage{url}"(<q>Dokument &gt; Einstellungen... &gt; LaTeX-Vorspan</q>)
+ eintragen. Damit ist die URL-Umgebung bekannt. Wenn Sie Ihre URL in 
+JabRef unter "URL" eingetragen haben, ist es damit getan. Sollten Sie 
+diese jedoch unter "Howpublished" eingetragen haben, muss die Adresse 
+per Hand in die URL-Umgebung gehüllt werden - ja direkt in JabRef 
+(\url{www.domain.de/doc.html}).
+			</li>
+			<li>
+				Probleme mit Umlauten: Sollte es einmal Probleme mit dem Zeichensatz
+ (Encoding) der bib-Datei geben (Zeichen werden nicht erkannt oder 
+falsch dargestellt), so kann dieser in JabRef unter <q>File &gt; Database Properties</q> umgestellt werden (Cp1252, UTF8, Cp1250).
+			</li>
+		</ul>
+		<ul></ul>
+		<p>
+			Nun die Datei flux gut wegspeichern  - wir werden sie gleich brauchen.
+		</p>
+		<h2><a name="bst"></a>Stil-Datei *.bst</h2>
+		<p>
+			BibTeX-Stile gibt es in allen Geschmacksrichtungen. LyX hat 
+defaultmäßig einige dabei. Allerdings sind diese  für das Amerikanische 
+ausgelegt und nicht besonders hübsch. Ich empfehle, das DIN-Stil-Packet 
+herunterzuladen. Das findet man bei <a href="http://www.ctan.org/" target="_blank">CTAN</a>, genauer hier: <a href="http://www.ctan.org/tex-archive/biblio/bibtex/contrib/german/din1505/" target="_blank">Deutsche DIN-BibTeX-Stile</a>. Einfach das zip herunterladen, entpacken und die darin enthaltenen *.bst-Dateien ebenso gut wegspeichern.
+		</p>
+		<p>
+			Ich persönlich nutze  den Stil <q>alphadin.bst</q> für meine Arbeiten. Es steht dir natürlich frei, die andern auszuprobieren.
+		</p>
+		<h2><a name="bibtex_in_lyx"></a>BibTeX-Verzeichnis in LyX erstellen</h2>
+		<p>
+			Endlich kommt LyX zum Einsatz. Nach einem Klick in das LyX-Dokument, 
+an dem wir das Literaturverzeichnis erstellen wollen, öffnen wir mit <q>Einfügen &gt; Liste/Inhaltsverzeichnis/BibTex-Literaturverzeichnis...</q> eine DialogBox.
+		</p>
+		<p><img src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/bibtex-einfuegen.png" alt="Das Einfügen einer BibTeX-Literaturverzeichnisses ist einfach" height="401" width="378">
+		</p>
+		<p>
+			Die Bedienung ist denkbar einfach:
+		</p>
+		<ol>
+			<li>
+				Mit <q>Hinzufügen...</q>, dann <q>Durchsuchen...</q> und der Angabe unserer  bib-Datei sagen wir, welche Einträge wir einfügen wollen.
+			</li>
+			<li>
+				Unter Stil geben wir mit <q>Durchsuchen...</q> unsere Stil-Datei an (hier alphabin.bst).
+			</li>
+			<li>
+				Hinter Inhalt haben wir die Wahl zwischen zwei Möglichkeiten:
+			</li>
+
+			<ul>
+				<li>
+					"Alle Literatureinträge" fügt alle Einträge aus der bib-Datei ein.
+				</li>
+				<li>
+					"Alle zitierten Literatureinträge" fügt nur jene Einträge ein, die 
+mindestens einmal im Laufe des Dokument mit einem Literaturverweis 
+referenziert wurden. Mehr zur Literaturverweisen später.
+				</li>
+			</ul>
+			<li>
+				<q>OK</q> und ab dafür.
+			</li>
+		</ol>
+		<p><div class="material-placeholder"><img src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/bsp-literaturverzeichnis.png" class="responsive-img materialboxed initialized" alt="Ein BibTeX-Literaturverzeichnis"></div>
+		</p>
+		<p>
+			Voila! Wir haben unser erstes BibTeX-Quellenverzeichnis angelegt:
+		</p>
+		<p>
+			Hinweis: Für das obige Beispiel habe ich zwei zusätzliche Sachen unter <q>Dokument &gt; Einstellungen...</q>
+ angepasst. Zum einen die Sprache auf Deutsch gestellt und zum anderen 
+die Seitenränder auf 3-2-3-2 (oben, außen, unten, innen) geändert.
+		</p>
+		<h2><a name="literaturverweise"></a>Arbeiten mit Literaturverweisen</h2>
+		<p>
+			Zu einer wissenschaftlichen Arbeit gehört nicht nur das simple 
+Aufzählen der verwendeten Quellen, sondern auch das Arbeiten mit diesen <em>im</em>
+ Dokument. Es muss erkenntlich sein, welcher Abschnitt/welches Zitat aus
+ welcher  Literatur kommt. Dazu sind Literaturverweise auf das 
+Literaturverzeichnis möglich. Aber keine Sorge, LyX ist genial darin.
+		</p>
+		<p>
+			Ein Literaturverweis fügen wir mittels <q>Einfügen &gt; Literaturverweis</q> ein. LyX erkennt unsere bib-Datenbasis und bietet uns unsere Einträge zur Auswahl an. Hier kommt der oben angesprochene <em>bibtexkey</em> zum Tragen.
+		</p>
+		<p>
+			<div class="material-placeholder"><img src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/lyx-literaturverweis-g.png" class="responsive-img materialboxed initialized" alt="Literaturverweise erstellen mit LyX"></div>
+		</p>
+		<p>
+			Wieder ein sehr selbsterkärender Dialog. Interessant ist unten die Angabe "Text danach", wo man die Seitenzahl angeben kann.
+		</p>
+		<p><img src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/bsp-literaturverweis.png" alt="Beispiel eines Literaturverweises in LyX" height="39" width="279">
+		</p>
+		<p>
+			Voila#2! Der Literaturverweis ist eingefügt.
+		</p>
+				<div class="adsense adsense-footer">
+			<script async="" src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/adsbygoogle.js"></script>
+			<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-8970599184339653" data-ad-slot="1243507966"></ins>
+			<script>
+				( adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+		</div>
+		
+		<div class="commentarea">
+		<h2><a id="comments"></a>Kommentare</h2>
+<input value="Kommentar hinzufügen" class="buttonShowCommentForm" type="button">
+<div style="display: none;" id="commentformblock">
+  <form action="/interaktiv/commentIt/insert.php" method="post" name="commentIt-form"><input value="/tut/lyx-bibtex-jabref.php" name="originURL" type="hidden">  <table>
+    <tbody><tr>
+      <td>
+      	<div class="input-field">      		
+	      	<label for="author">Name*:</label>
+	      	<input id="author" name="author" type="text">
+      	</div>
+      </td>
+      <td>
+      	<div class="input-field">
+      		<label for="email">E-Mail (wird nicht dargestellt):</label>
+      		<input id="email" name="email" type="text">
+      	</div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+      		<div class="input-field">
+      			<label for="content">Nachricht*:</label>
+      			<textarea name="content" id="content" rows="7" class="materialize-textarea"></textarea>
+      		</div>
+      	</td>
+    </tr>
+    <tr class="url">
+    	<td></td>
+    	<td>
+    		<div class="input-field">
+      			<label for="url">Bitte hier nichts eintragen</label>
+      			<input name="url" id="url" type="text">
+      		</div>
+    		
+    	</td>
+    </tr>
+    <tr>
+      <td>Bitte auswählen:*</td>
+      <td><input name="sp" id="spd" value="dc" checked="checked" type="radio">
+        <label for="spd">Diesen Kommentar nicht einfügen</label>
+        <br>
+        <input name="sp" id="spk" value="kc" type="radio">
+        <label for="spk">Diesen Kommentar einfügen</label></td>
+    </tr>
+    <tr>
+      <td style="color: red;" colspan="2" id="commentIt-status">Bitte beachten Sie folgende Pflichtfelder: Name, Nachricht, Spamschutz</td>
+    </tr>
+    <tr>
+      <td colspan="2"><input disabled="disabled" name="formaction" value="Eintragen" type="submit"></td>
+    </tr>
+  </tbody></table>
+  </form></div>
+<div class="comment">
+<div class="head">
+    <span class="author">Johannes_B</span>
+    <span class="date">2016-02-08 09:01:00</span>
+</div>
+<div class="entry">
+Eine Erweiterung zu BibTeX und Paketen wie natbib bietet das moderne 
+Paket biblatex in Verbindung mit dem Bibliographieprozessor biber. Urls 
+und online-quellen werden direkt unterstützt und man muss keine 
+Verrenkungen machen um diese darzustellen. Nähere Informationen zu 
+Verwendung und Umstieg findet ihr bei goLaTeX und TeXwelt.</div>
+</div>
+
+<div class="comment">
+<div class="head">
+    <span class="author">Katja</span>
+    <span class="date">2014-08-19 18:46:18</span>
+</div>
+<div class="entry">
+Hallo,<br>
+<br>
+das Tutorial ist gut, aber ich hätte mal noch eine Frage. Ich verwende 
+Citavi und erstelle damit meine bibtex datei. Soweit so gut. Ich 
+bräuchte in meiner Arbeit die Zitationsweise "Autor, Jahr". Also suche 
+ich mir in Citavi das entsprechende Beispiel und exportiere alle 
+Literatureinträge auf diese Weise. Wenn ich jetzt aber in den Lyx 
+Einstellungen natbib wähle und via der BibTex-Datei plainnat, bekomme 
+ich eine Fehlermeldung, das ich auf natbib umstellen solle. Jetzt ist 
+die Frage: liegts am lyx, am Citavi, oder wird die natbib nicht richtig 
+erkannt? Wenn ich numerisch in den Einstellungen wähle und plain, 
+funktionierts und ich habe die entsprechenden Zahlen im Text.</div>
+</div>
+
+<div class="comment">
+<div class="head">
+    <span class="author">Johannes</span>
+    <span class="date">2014-06-21 11:34:29</span>
+</div>
+<div class="entry">
+Perfekt! Vielen Dank für die klare Anleitung :)</div>
+</div>
+
+<div class="comment">
+<div class="head">
+    <span class="author">Alex</span>
+    <span class="date">2014-06-03 16:33:19</span>
+</div>
+<div class="entry">
+Bombe! Dein Tutorial hat mir das Leben mega erleichtert! Danke, Philipp!</div>
+</div>
+
+<div class="comment">
+<div class="head">
+    <span class="author">Tom</span>
+    <span class="date">2014-05-05 23:58:27</span>
+</div>
+<div class="entry">
+Problem mit [eckigen Klammern im Literaturverzeichnis]:<br>
+<br>
+Nachdem ich versucht habe in natbib Einstellungen zu treffen um die 
+eckigen Klammern mit Autor und Jahr aus der Verzeichnis vor dem Namen zu
+ löschen, habe ich durch rumspielen erfahren wie es wirklich geht: 
+Anders als über Natbib, was mir vorher logisch erschien, muss man in 
+Dokument-Einstellungen -&gt; Literaturverzeichnis JURABIB einstellen, 
+zugleich den Stil jurabib als Stil im grauen Bibtexfeld. Vola: man 
+bekommt, wie es üblich ist gleich den Autor, ohne die eckige Klammer mit
+ den restlichen Angaben im LV. Als Quelle im Text wählt man wie gewohnt 
+nach dem Harvard-Zitierstil Autor und Jahr und Seite aus.</div>
+</div>
+
+<div class="comment">
+<div class="head">
+    <span class="author">replica bags</span>
+    <span class="date">2014-02-25 22:07:30</span>
+</div>
+<div class="entry">
+LyX und BibTeX: Anleitung/Tutorial replica bags<br>
+ replica bags</div>
+</div>
+
+<div class="comment">
+<div class="head">
+    <span class="author">Floh</span>
+    <span class="date">2014-02-20 06:24:55</span>
+</div>
+<div class="entry">
+Danke vielmals für das perfekte Tutorial. Hatte noch nie etwas mit LyX 
+zu tun bis vor ein paar Stunden und nun kann ich bereits mit 
+Literaturverzeichnissen umgehen! =)<br>
+Und so einfach.<br>
+So muss es sein und macht auch Spass!<br>
+<br>
+Herzlichen Dank!</div>
+</div>
+
+<div class="comment">
+<div class="head">
+    <span class="author">Tom</span>
+    <span class="date">2013-12-13 01:19:21</span>
+</div>
+<div class="entry">
+Verschiedene Literaturverzeichnisse - bspw. Internet- und Literaturquellen:<br>
+<br>
+@philipp zu deiner 3. Frage:<br>
+<br>
+Es ist möglich! Im Handbuch erweiterte Lyx Featur (Hilfe) steht eine 
+Möglichkeit beschrieben in 3.1.2. Jedoch muss da laut Handbuch Bibtex 
+mit einem Latex-Paket BIBTOPIC erweitert werden, wie das geht weiß ich 
+nicht, - mir gelang aber eine davon unabhängige Lösung:<br>
+<br>
+Am Ende des Dokuments (vor dem Anhang, wenn du einen hast), setzt du das
+ Bibtex-Literaturverzeichnis (Einfügen....). Dann klickst du mit Enter 
+soweit, bist du unter das Rechteck des Bibtex-Literaturverzeichnisein 
+trages im Dokument kommst, und wiederholst mit Einfügen/Liste- 
+Inhaltsverzeichnis/Bibtex-Lit.  das ganze, damit - Achtung - du so zwei 
+Bibtex-Literaturverzeichnisse hintereinander ins Dokument gesetzt hast. 
+Diese konfigurierst du: hierzu schreibst du in Jab-Raf zwei 
+.bib-Dateien, die eine kannst du Wissenschaft.bib und die andere 
+Internet.bib nennen, speichest ab etc. Zurück in Lyx: Konfiguriere dann 
+in Lyx den Styl usw. wie gewohnt, für jedes Lit.verzeichnis, und lasse 
+jeweils eins auf Internet.bib und das andere auf Wissenschaft.bib 
+zugreifen<br>
+Nächster evidenter Schritt: In DOKUMENT/EINSTELLUNGEN/LIT.VER ZEICHNIS 
+machst du ein Kreuz in "Abschnittsspezifisches 
+Literaturverzeichnis"...das hat nun zur Folge dass du zwei 
+Bibtex-Lit.verz. benutzen kannst. <br>
+<br>
+Jedoch: dies entfernt auch den Titel des "Literaturverzeichnisses" 
+sowohl im Dokument als auch im Inhaltsverzeichnis dann im PDF. Hierzu 
+musst du von Hand manuell den Titel eingeben: Vor den ersten 
+Bibtex-Lit.v.-Eintrag schreibt du "Quellenverzeichnis" und editierst mit
+ "Abschnitt (Inhaltsverz.) ohne Sternchen" oben links in der Menüleiste.
+ Darunter schreibst du dann "Literaturverzeichnis" (Unterabschnitt*) und
+ über dem zweiten Bibtex-Liter.Verz. schreibst du mit Unterabschnitt* 
+"Internetquellen.<br>
+<br>
+Dies führt dazu, dass "Quellenverzeichnis" im Inhaltsverzeichnis steht, 
+und im Quellenverzeichnis im Dokument getrennt wird nach 
+wissenschaftlichen Quellen und Internetquellen. Ist beliebig anwendbar, 
+und trennbar.</div>
+</div>
+
+<div class="comment">
+<div class="head">
+    <span class="author">hollister uk</span>
+    <span class="date">2013-12-04 01:34:42</span>
+</div>
+<div class="entry">
+Oh! Wow its really a comical and jockey YouTube movie posted at this juncture. thanks for sharing it.<br>
+ hollister uk</div>
+</div>
+
+<div class="comment">
+<div class="head">
+    <span class="author">Woolrich Outlet Store</span>
+    <span class="date">2013-10-18 22:31:18</span>
+</div>
+<div class="entry">
+Hi, this weekend is fastidious in support of me, as this moment i am 
+reading this enormous informative piece of writing here at my house.</div>
+</div>
+
+<div class="comment">
+<div class="head">
+    <span class="author">Moritz</span>
+    <span class="date">2013-05-15 17:03:42</span>
+</div>
+<div class="entry">
+Hallo,<br>
+ich fand das Tutorial auch sehr hilfreich. Habe aber noch Fragen:<br>
+1. meine Literaturliste wird nicht korrekt erstellt, die URLs werden nicht umgebrochen, sondern gehen die Seite hinaus<br>
+2. es wird bei Website-Quellen nicht der Stand angezeigt, sondern die Version. In der BibTex wird aber das \"urldate\" erfasst.<br>
+3. ich benutze das aktuelle LyX, habe das KOMA-Script als \"article\" 
+Typ ausgewählt und als Stil benutze ich die von die empfohlene 
+alphadin.bst.<br>
+<br>
+Kann mir da jemand helfen?<br>
+<br>
+Danke und Gruß,<br>
+Moritz.</div>
+</div>
+
+<div class="comment">
+<div class="head">
+    <span class="author">Christian</span>
+    <span class="date">2013-04-25 14:16:57</span>
+</div>
+<div class="entry">
+Vielen Dank für dieses schöne Tutorial</div>
+</div>
+
+<div class="comment">
+<div class="head">
+    <span class="author">maillot de foot</span>
+    <span class="date">2013-04-20 01:34:39</span>
+</div>
+<div class="entry">
+Very informative article post.Really looking forward to read more. Really Great.  maillot de foot</div>
+</div>
+
+<div class="comment">
+<div class="head">
+    <span class="author">R4 3DS</span>
+    <span class="date">2013-04-13 03:43:23</span>
+</div>
+<div class="entry">
+I\'d like to find out more? I\'d want to find out some additional information.  R4 3DS</div>
+</div>
+
+<div class="comment">
+<div class="head">
+    <span class="author">Marc</span>
+    <span class="date">2012-12-31 12:30:39</span>
+</div>
+<div class="entry">
+Wie hast du das hinbekommen, hab nämlich das gleiche Problem trotz url package ...</div>
+</div>
+
+<p> Seite: 1 -  <a href="http://www.philipphauer.de/tut/lyx-bibtex-jabref.php?pagenr=2#comments">nächste Seite</a></p></div>		</div>
+		
+		<div class="col s12 m2 l2 adsense adsense-right">
+			<div class="adsense-skyscraper">		
+				<script async="" src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/adsbygoogle.js"></script>
+				<!-- skyscraper -->
+				<ins class="adsbygoogle" style="display:inline-block;width:120px;height:600px" data-ad-client="ca-pub-8970599184339653" data-ad-slot="2112202784"></ins>
+				<script>
+					( adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</div>
+			
+			<div class="adsense-unter-skyscraper">	
+				<script async="" src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/adsbygoogle.js"></script>
+				<!-- unter-skyscraper -->
+				<ins class="adsbygoogle" style="display:inline-block;width:120px;height:240px" data-ad-client="ca-pub-8970599184339653" data-ad-slot="1426807969"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</div>
+		</div>
+		
+		
+		
+	</div>	
+	</div>
+</main>
+
+<footer class="page-footer">
+	<div class="container">
+		© by Philipp Hauer since 2005 | Design powered by <a href="http://materializecss.com/">materializecss</a>
+		<br>
+		<a href="http://www.philipphauer.de/home/impressum.php">Impressum</a> | <a href="http://www.philipphauer.de/home/datenschutz.php">Datenschutz</a>
+	</div>
+</footer>
+
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/jquery-2.js"></script>
+<script type="text/javascript" src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/materialize.js"></script>
+<script type="text/javascript" src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/philipphauer.js"></script>
+<script type="text/javascript" src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/scripts.js"></script>
+
+<!-- browser-statistik.de-->
+<img src="LyX%20und%20BibTeX%20%20Anleitung_Tutorial-Dateien/browser.png" style="border: 0px;" alt="" class="browser-statistik lksgnlvhxsdetvyxrtfw" height="1" width="1">
+
+	
+
+<div class="hiddendiv common"></div><div style="left: 0px;" class="drag-target"></div></body></html>
