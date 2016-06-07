@@ -1,2 +1,0 @@
-In diesem Ordner wird das Paper mittels Lyx erstellt und es gibt nur für diesen Ordner den Branch Paper, 
-wo der aktuelle Status hoch gepusht wird. Ebenfalls können wir hier auch das Regelwerk erstellen.
