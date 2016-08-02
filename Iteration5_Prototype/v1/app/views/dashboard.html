@@ -1,76 +1,29 @@
-﻿<div ng-controller="DashboardCtrl" ng-cloak="" class="carddemoBasicUsage">
-        <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
-            <div flex="50" flex-sm="100" flex-xs="100" layout="column">
-                <md-card>
-                    <md-card-title>
-                        <md-card-title-text>
-                            <span class="md-headline">Card with image</span>
-                            <span class="md-subhead">Large</span>
-                        </md-card-title-text>
-                        <md-card-title-media>
-                            <div class="md-media-lg card-media"></div>
-                        </md-card-title-media>
-                    </md-card-title>
-                    <md-card-actions layout="row" layout-align="end center">
-                        <md-button>Action 1</md-button>
-                        <md-button>Action 2</md-button>
-                    </md-card-actions>
-                </md-card>
-                <md-card>
-                    <md-card-title>
-                        <md-card-title-text>
-                            <span class="md-headline">Card with  image</span>
-                            <span class="md-subhead">Extra Large</span>
-                        </md-card-title-text>
-                    </md-card-title>
-                    <md-card-content layout="row" layout-align="space-between">
-                        <div class="md-media-xl card-media"></div>
+<div ng-controller="DashboardCtrl" ng-cloak="" >
+    <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
+        <div flex="33" flex-sm="100" flex-xs="100" layout="column" ng-repeat="user in users">
 
-                        <md-card-actions layout="column">
-                            <md-button class="md-icon-button" aria-label="Favorite">
-                                <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
-                            </md-button>
-                            <md-button class="md-icon-button" aria-label="Settings">
-                                <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
-                            </md-button>
-                            <md-button class="md-icon-button" aria-label="Share">
-                                <md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>
-                            </md-button>
-                        </md-card-actions>
-                    </md-card-content>
-                </md-card>
-            </div>
-            <div flex="50" flex-sm="100" flex-xs="100" layout="column">
-                <md-card>
-                    <md-card-title>
-                        <md-card-title-text>
-                            <span class="md-headline">Card with image</span>
-                            <span class="md-subhead">Small</span>
-                        </md-card-title-text>
-                        <md-card-title-media>
-                            <div class="md-media-sm card-media"></div>
-                        </md-card-title-media>
-                    </md-card-title>
-                    <md-card-actions layout="row" layout-align="end center">
-                        <md-button>Action 1</md-button>
-                        <md-button>Action 2</md-button>
-                    </md-card-actions>
-                </md-card>
-                <md-card>
-                    <md-card-title>
-                        <md-card-title-text>
-                            <span class="md-headline">Card with image</span>
-                            <span class="md-subhead">Medium</span>
-                        </md-card-title-text>
-                        <md-card-title-media>
-                            <div class="md-media-md card-media"></div>
-                        </md-card-title-media>
-                    </md-card-title>
-                    <md-card-actions layout="row" layout-align="end center">
-                        <md-button>Action 1</md-button>
-                        <md-button>Action 2</md-button>
-                    </md-card-actions>
-                </md-card>
-            </div>
-        </md-content>
-    </div>
+            <md-card >
+                <md-card-header>
+                    <md-card-avatar>
+                        <img class="md-user-avatar" src="../img/test.svg" />
+                    </md-card-avatar>
+                    <md-card-header-text>
+                        <span class="md-title">User</span>
+                        <span class="md-subhead">subhead</span>
+                    </md-card-header-text>
+                </md-card-header>
+                <img src="http://placehold.it/150x150" class="md-card-image" alt="user avatar">
+                <md-card-content>
+                    <h2>{{user}}</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                </md-card-content>
+                <div class="md-actions" layout="row" layout-align="end center">
+                    <md-button>Save</md-button>
+                    <md-button>View</md-button>
+                </div>
+            </md-card>
+           
+        </div>
+       
+    </md-content>
+</div>

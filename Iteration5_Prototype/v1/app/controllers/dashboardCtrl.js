@@ -1,4 +1,4 @@
 'use strict';
-app.controller('DashboardCtrl', function($scope) {
-        $scope.imagePath = 'img/washedout.png';
-    });
+app.controller('DashboardCtrl', function ($scope) {
+    $scope.users = ['Fabio', 'Leonardo', 'Thomas', 'Gabriele', 'Fabrizio', 'John', 'Luis', 'Kate', 'Max'];
+});
