@@ -1,6 +1,7 @@
 'use strict';
 
 app.controller('DashboardCtrl', function ($scope, $location) {
+  
     $scope.ideas = [
         {
             author: "Hans Petet 1",
@@ -63,18 +64,18 @@ app.controller('DashboardCtrl', function ($scope, $location) {
     ];
 
     $scope.commentIdea = function (index) {
-       
+
 
     }
     $scope.followIdea = function (index) {
-       
+
 
     }
     $scope.participateIdea = function (index) {
-       
+
 
     }
-    $scope.openWhiteboard = function() {
+    $scope.openWhiteboard = function () {
         $location.url("/whiteboard");
     }
 });
