@@ -10,7 +10,7 @@ app.config(function ($stateProvider,$urlRouterProvider) {
         templateUrl: "app/views/whiteboard.html"
     })
     $stateProvider.state("dashbord", {
-        url: "/dashboard",
+        url: "/",
         controller: "DashboardCtrl",
         templateUrl: "app/views/dashboard.html"
     })
