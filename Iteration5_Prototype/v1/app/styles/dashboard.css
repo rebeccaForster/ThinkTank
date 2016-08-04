@@ -1,20 +1,6 @@
-.grid {
-  /* center */
-  margin: 0 auto;
-}
-
-/* clearfix */
-.grid:after {
-  content: '';
-  display: block;
-  clear: both;
-}
-
-/* ---- grid-item ---- */
-
-.grid-item {
-  width: 400px;
+md-grid-list {
+    width: 100%;
   height: auto;
-  float: left;
 }
+
 
