@@ -1,31 +1,29 @@
-  <md-card column-width="230">
-                <md-card-header>
-                    <md-card-avatar>
-                        <img class="md-user-avatar" src="app/img/test.jpg" />
-                    </md-card-avatar>
-                    <md-card-header-text>
-                        <span class="md-title">{{idea.title}}</span>
-                        <span class="md-subhead">Author: {{idea.author}}</span>
-                    </md-card-header-text>
-                </md-card-header>
-                <img src={{idea.img}} ng-show="{{idea.img.length}} > 0" class="md-card-image" alt="user avatar">
+<md-card-header>
+    <md-card-avatar>
+        <img class="md-user-avatar" src="app/img/test.jpg" />
+    </md-card-avatar>
+    <md-card-header-text>
+        <span class="md-title">{{tile.title}}</span>
+        <span class="md-subhead">Author: {{tile.author}}</span>
+    </md-card-header-text>
+</md-card-header>
+<img src={{tile.img}} ng-show="{{tile.img.length}} > 0" class="md-card-image" alt="user avatar">
 
-                <md-card-content>
-                    <p>{{idea.description}}</p>
-                </md-card-content>
-                <div class="md-card-actions">
-                    <md-button ng-repeat="tag in idea.tags">{{tag}}</md-button>
-                </div>
-                <md-card-actions layout="row" layout-align="end center">
-                    <md-button ng-click="commentIdea($index)" class="md-icon-button" aria-label="Comment">
-                        <ng-md-icon icon="forum"></ng-md-icon>
-                    </md-button>
-                    <md-button ng-click="followIdea($index)" class="md-icon-button" aria-label="Follow">
-                        <ng-md-icon icon="notifications"></ng-md-icon>
-                    </md-button>
-                    <md-button ng-click="participateIdea($index)" class="md-icon-button" aria-label="Participate">
-                        <ng-md-icon icon="linkedin"></ng-md-icon>
-                    </md-button>
+<md-card-content>
+    <p>{{tile.description}}</p>
+</md-card-content>
+<div class="md-card-actions">
+    <md-button ng-repeat="tag in tile.tags">{{tag}}</md-button>
+</div>
+<md-card-actions layout="row" layout-align="end center">
+    <md-button ng-click="commentIdea($index)" class="md-icon-button" aria-label="Comment">
+        <ng-md-icon icon="forum"></ng-md-icon>
+    </md-button>
+    <md-button ng-click="followIdea($index)" class="md-icon-button" aria-label="Follow">
+        <ng-md-icon icon="notifications"></ng-md-icon>
+    </md-button>
+    <md-button ng-click="participateIdea($index)" class="md-icon-button" aria-label="Participate">
+        <ng-md-icon icon="linkedin"></ng-md-icon>
+    </md-button>
 
-                </md-card-actions>
-            </md-card>
+</md-card-actions>
