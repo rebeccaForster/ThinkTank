@@ -44,27 +44,14 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
   ];
 
-
-    $scope.actulItem = 1;
+    $scope.selectedItem = 1;
 
     $scope.go = function (index, path, title) {
         $state.go(path);
         $scope.title = title;
-        $scope.navItemSelect(false, $scope.actulItem);
-        $scope.navItemSelect(true, index);
-        $scope.actulItem = index;
+        $scope.selectedItem = index;
     }
 
-    $scope.navItemSelect = function (addNdelete, index) {
-        var item = angular.element(document.querySelector('#nav-item' + index));
-        if (addNdelete) {
-            item.addClass('nav-item-select');
-
-        } else {
-            item.removeClass('nav-item-select');
-        }
-    }
-    $scope.alert = '';
     $scope.sorting = [
         {
             "id": 0,

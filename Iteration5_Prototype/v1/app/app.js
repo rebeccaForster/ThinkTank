@@ -1,6 +1,6 @@
 var app = angular.module('App', ['ui.router', 'ngMaterial', 'ngMdIcons', 'ngMessages', 'material.svgAssetsCache']);
 
-app.config(function ($stateProvider,$urlRouterProvider) {
+app.config(function ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/dashbord');
 
@@ -39,20 +39,19 @@ app.config(function ($stateProvider,$urlRouterProvider) {
         controller: "LogoutCtrl",
         templateUrl: "app/views/logout.html"
     })
-  
+
 });
 
 app.config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
-    .primaryPalette('indigo', {
-      'default': '500', // by default use shade 400 from the pink palette for primary intentions
-      'hue-1': '700', // use shade 100 for the <code>md-hue-1</code> class
-      'hue-2': '100',
-    })
-    // If you specify less than all of the keys, it will inherit from the
-    // default shades
-    .accentPalette('cyan', {
-      'default': '500' // use shade 200 for default, and keep all other shades the same
-    });
+        .primaryPalette('indigo', {
+            'default': '500', // by default use shade 400 from the pink palette for primary intentions
+            'hue-1': '700', // use shade 100 for the <code>md-hue-1</code> class
+            'hue-2': '100',
+        })
+        // If you specify less than all of the keys, it will inherit from the
+        // default shades
+        .accentPalette('cyan', {
+            'default': '500' // use shade 200 for default, and keep all other shades the same
+        });
 });
-
