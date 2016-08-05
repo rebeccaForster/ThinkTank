@@ -43,6 +43,25 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 });
 
 app.config(function ($mdThemingProvider) {
+    var customBackground = {
+        '50': '#ffffff',
+        '100': '#ffffff',
+        '200': '#ffffff',
+        '300': '#ffffff',
+        '400': '#ffffff',
+        '500': '#F6F6F6',
+        '600': '#e9e9e9',
+        '700': '#dcdcdc',
+        '800': '#d0d0d0',
+        '900': '#c3c3c3',
+        'A100': '#ffffff',
+        'A200': '#ffffff',
+        'A400': '#ffffff',
+        'A700': '#b6b6b6'
+    };
+    $mdThemingProvider
+        .definePalette('customBackground',
+            customBackground);
     $mdThemingProvider.theme('default')
         .primaryPalette('indigo', {
             'default': '500', // by default use shade 400 from the pink palette for primary intentions
@@ -53,5 +72,13 @@ app.config(function ($mdThemingProvider) {
         // default shades
         .accentPalette('cyan', {
             'default': '500' // use shade 200 for default, and keep all other shades the same
-        });
+        })
+        .backgroundPalette('customBackground', {
+            'default': '500' // use shade 200 for default, and keep all other shades the same
+        })
+    $mdThemingProvider.theme('input', 'default')
+        .primaryPalette('grey', {
+            'default': '50', // use shade 200 for default, and keep all other shades the same
+        })
+
 });

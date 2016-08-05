@@ -1,9 +1,10 @@
 md-sidenav {
-  fill: #737373;
+    fill: #737373;
 }
+
 md-sidenav ng-md-icon {
-  position: relative;
-  top: 5px;
+    position: relative;
+    top: 5px;
 }
 
 .nav-item-select {
@@ -11,5 +12,6 @@ md-sidenav ng-md-icon {
     fill: cyan;
 }
 
-
-
+md-input-container {
+    padding: 0 !important
+}
