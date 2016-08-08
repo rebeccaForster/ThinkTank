@@ -57,7 +57,9 @@
     left: 0px;
     color: white;
 }
-
+.messages-icon{
+    float: right;
+}
 .header-btn-followIdea {
     float: right;
     z-index: 10;
@@ -100,4 +102,10 @@ md-dialog-content {
     display: inline-block;
     margin-left: 10px;
     margin-top: 0px;
+}
+
+.content-contributors{
+    display: inline-block;
+    width: auto;
+
 }
