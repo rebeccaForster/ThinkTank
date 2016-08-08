@@ -8,7 +8,7 @@
     </md-card-header-text>
 </md-card-header>
 
-<md-card-content ng-click="showIdea($event)">
+<md-card-content ng-click="showIdea(idea.id, $event)">
     <img src={{idea.img}} ng-show="{{idea.img.length}} > 0" class="md-card-image" alt="user avatar" style="width:100%;height:auto">
 
     <p>{{idea.description}}</p>

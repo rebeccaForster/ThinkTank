@@ -4,6 +4,15 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
 
     $scope.ideas = [
         {
+            id: 0,
+            author: "Hans Petet 0",
+            title: "Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            conributor: ["cont1", "cont2"],
+            description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafkljdöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskf",
+            img: "http://placehold.it/100x50"
+        },
+        {
             id: 1,
             author: "Hans Petet 1",
             title: "Automotiva driving asdfkdasfj",
@@ -163,25 +172,26 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
     $scope.openWhiteboard = function () {
         $location.url("/whiteboard");
     }
-
-    $scope.showIdea = function (ev) {
+    $scope.selectedIndex = 0;
+    $scope.showIdea = function (index, ev) {
+        $scope.selectedIndex = index;
         $mdDialog.show({
-                controller: DialogController,
-                templateUrl: 'app/views/idea-popup.html',
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true,
-                fullscreen: true
-            })
-            .then(function (answer) {
-                $scope.status = 'You said the information was "' + answer + '".';
-            }, function () {
-                $scope.status = 'You cancelled the dialog.';
-            });
+            controller: DialogController,
+            templateUrl: 'app/views/idea-popup.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true,
+            fullscreen: true,
+            locals: {
+                dashboardScope: $scope
+            }
+        })
+
+
     };
 
-   
-    
+
+
 });
 
 app.controller('gridListDemoCtrl', function ($scope) {
@@ -202,7 +212,11 @@ app.controller('gridListDemoCtrl', function ($scope) {
     }
 })
 
-function DialogController($scope, $mdDialog) {
+
+
+
+function DialogController($scope, $mdDialog, dashboardScope) {
+    $scope.selectedIdea = dashboardScope.ideas[dashboardScope.selectedIndex]
     $scope.hide = function () {
         $mdDialog.hide();
     };
