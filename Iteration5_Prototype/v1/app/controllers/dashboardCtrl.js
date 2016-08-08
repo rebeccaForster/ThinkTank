@@ -133,8 +133,8 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
         );
 
     }
-    
-     $scope.showAuthor = function (ev) {
+
+    $scope.showAuthor = function (ev) {
         $mdDialog.show(
             $mdDialog.alert()
             .clickOutsideToClose(true)
@@ -165,30 +165,23 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
     }
 
     $scope.showIdea = function (ev) {
-
-        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
         $mdDialog.show({
                 controller: DialogController,
                 templateUrl: 'app/views/idea-popup.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true,
-                fullscreen: useFullScreen
+                fullscreen: true
             })
             .then(function (answer) {
                 $scope.status = 'You said the information was "' + answer + '".';
             }, function () {
                 $scope.status = 'You cancelled the dialog.';
             });
-        $scope.$watch(function () {
-            return $mdMedia('xs') || $mdMedia('sm');
-        }, function (wantsFullScreen) {
-            $scope.customFullscreen = (wantsFullScreen === true);
-        });
     };
 
-
-
+   
+    
 });
 
 app.controller('gridListDemoCtrl', function ($scope) {
@@ -216,7 +209,5 @@ function DialogController($scope, $mdDialog) {
     $scope.cancel = function () {
         $mdDialog.cancel();
     };
-    $scope.answer = function (answer) {
-        $mdDialog.hide(answer);
-    };
+
 }
