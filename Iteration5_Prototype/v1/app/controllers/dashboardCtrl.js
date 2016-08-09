@@ -686,6 +686,7 @@ app.controller('gridDashboardIdea', function ($scope) {
 function IdeaPopupController($scope, $mdDialog, dashboardScope, ideaIndex) {
     $scope.selectedIdea = dashboardScope.ideas[ideaIndex];
     $scope.users = dashboardScope.users;
+    $scope.showProfile = dashboardScope.showProfile;
 
     $scope.hide = function () {
         $mdDialog.hide();
@@ -701,6 +702,9 @@ function ProfilePopupController($scope, $mdDialog, dashboardScope, profileIndex)
     $scope.maxColumn = 2;
     $scope.users = dashboardScope.users;
     $scope.ideas = dashboardScope.ideas
+    $scope.showProfile = dashboardScope.showProfile;
+    $scope.showIdea = dashboardScope.showIdea;
+    
     $scope.hide = function () {
         $mdDialog.hide();
     };
