@@ -104,7 +104,7 @@ app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $
                     owner: false
                 }
             ],
-            ideas: [1,2]
+            ideas: [1, 2]
         }, {
             id: 6,
             name: "Marius Mülle6",
@@ -569,6 +569,8 @@ app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $
     ];
 
     $scope.maxColumn = 3;
+    $scope.maxProfileColumn = 2;
+
     $scope.commentIdea = function (index, ev) {
         $mdDialog.show(
             $mdDialog.alert()
@@ -609,17 +611,23 @@ app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $
 
     $scope.showProfile = function (index, ev) {
         $mdDialog.show({
-            controller: ProfilePopupController,
-            templateUrl: 'app/views/profile-popup.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: true,
-            fullscreen: true,
-            locals: {
-                dashboardScope: $scope,
-                profileIndex: index
-            }
-        })
+                controller: ProfilePopupController,
+                templateUrl: 'app/views/profile-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {
+                    dashboardScope: $scope,
+                    profileIndex: index
+                }
+            })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
 
 
     };
@@ -644,17 +652,23 @@ app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $
     }
     $scope.showIdea = function (index, ev) {
         $mdDialog.show({
-            controller: IdeaPopupController,
-            templateUrl: 'app/views/idea-popup.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: true,
-            fullscreen: true,
-            locals: {
-                dashboardScope: $scope,
-                ideaIndex: index
-            }
-        })
+                controller: IdeaPopupController,
+                templateUrl: 'app/views/idea-popup.html',
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {
+                    dashboardScope: $scope,
+                    ideaIndex: index
+                }
+            })
+            .then(function () {
+                $scope.status = 'You said the information was .';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
 
 
     };
@@ -684,10 +698,8 @@ app.controller('gridDashboardIdea', function ($scope) {
 
 
 
-function IdeaPopupController($scope, $mdDialog, dashboardScope, ideaIndex) {
-    $scope.selectedIdea = dashboardScope.ideas[ideaIndex];
-    $scope.users = dashboardScope.users;
-    $scope.showProfile = dashboardScope.showProfile;
+function IdeaPopupController($scope, $mdDialog, ideaIndex) {
+    $scope.selectedIdea = $scope.ideas[ideaIndex];
 
     $scope.hide = function () {
         $mdDialog.hide();
@@ -698,26 +710,21 @@ function IdeaPopupController($scope, $mdDialog, dashboardScope, ideaIndex) {
 
 }
 
-function ProfilePopupController($scope, $mdDialog, dashboardScope, profileIndex) {
-    $scope.user = dashboardScope.users[profileIndex];
-    $scope.maxColumn = 2;
-    $scope.users = dashboardScope.users;
-    $scope.ideas = dashboardScope.ideas
-    $scope.showProfile = dashboardScope.showProfile;
-    $scope.showIdea = dashboardScope.showIdea;
-    
+function ProfilePopupController($scope, $mdDialog, profileIndex) {
+    $scope.user = $scope.users[profileIndex];
+
     $scope.hide = function () {
         $mdDialog.hide();
     };
     $scope.cancel = function () {
-        $mdDialog.cancel();
+        $mdDialog.hide();
     };
 
 }
 app.controller('gridProfileIdea', function ($scope) {
-    this.column1 = buildGridModel(0, $scope.maxColumn, $scope.ideas, $scope.user.ideas);
-    this.column2 = buildGridModel(1, $scope.maxColumn, $scope.ideas, $scope.user.ideas);
-    
+    this.column1 = buildGridModel(0, $scope.maxProfileColumn, $scope.ideas, $scope.user.ideas);
+    this.column2 = buildGridModel(1, $scope.maxProfileColumn, $scope.ideas, $scope.user.ideas);
+
     function buildGridModel(start, column, allIdeas, usersIdeas) {
         var it, results = [];
         var j = start;
