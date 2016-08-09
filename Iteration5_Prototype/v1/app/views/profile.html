@@ -1,8 +1,11 @@
 <div ng-controller="DashboardProfileCtrl" ng-cloak="">
-        <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
-            <div flex="50" flex-sm="100" flex-xs="100" layout="column">
-                ProfilCtrl
-            </div>
-          
-        </md-content>
-    </div>
+    <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
+        <div>
+            <h1>{{user.name}}</h1>
+            <h2> <a href={{user.url}}>{{user.url}}</a> </h2>
+        </div>
+        <div  layout="row" ng-include="'app/views/profile-content.html'">
+        </div>
+
+    </md-content>
+</div>

@@ -28,40 +28,8 @@
                 </div>
             </div>
         </div>
-        <md-dialog-content layout="row">
-            <div flex=66 layout="column" class="content">
-                <div ng-controller="gridProfileIdea as vm" class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
-                    <div flex="50" flex-sm="100" flex-xs="100" layout="column">
-                        <md-card ng-repeat="idea in vm.column1" ng-include="'app/views/dashboard-item-idea-card.html'">
-
-                        </md-card>
-                    </div>
-                    <div flex="50" flex-sm="100" flex-xs="100" layout="column">
-                        <md-card ng-repeat="idea in vm.column2" ng-include="'app/views/dashboard-item-idea-card.html'">
-
-                        </md-card>
-                    </div>
-                </div>
-            </div>
-            <div flex=33 layout="column" class="content">
-                <div>
-                    <h3>Groups</h3>
-                    <div layout="column" ng-repeat="group in user.groups">
-                        <div layout="row">
-                            <div flex>{{group.name}}</div>
-                            <div ng-show="{{group.owner}} === true">owner</div>
-
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div>
-                    <h3>Hashtags</h3>
-                    <p style="font-weight:bold;" ng-repeat="tag in user.tags">#{{tag | uppercase}}</p>
-
-                </div>
-
-            </div>
+        <md-dialog-content layout="row" ng-include="'app/views/profile-content.html'">
+           
 
         </md-dialog-content>
 

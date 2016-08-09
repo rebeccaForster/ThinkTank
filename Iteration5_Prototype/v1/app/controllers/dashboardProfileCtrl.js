@@ -625,6 +625,7 @@ app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $
     };
 
 
+    $scope.user = $scope.users[3];
 
     $scope.addSearchTag = function (indexIdea, IndexTag, ev) {
         $mdDialog.show(
