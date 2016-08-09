@@ -44,7 +44,22 @@
                 </div>
             </div>
             <div flex=33 layout="column" class="content">
-                sdakfjdslfkj
+                <div>
+                    <h3>Groups</h3>
+                    <div layout="column" ng-repeat="group in user.groups">
+                        <div layout="row">
+                            <div flex>{{group.name}}</div>
+                            <div ng-show="{{group.owner}} === true">owner</div>
+
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <h3>Hashtags</h3>
+                    <p style="font-weight:bold;" ng-repeat="tag in user.tags">#{{tag | uppercase}}</p>
+
+                </div>
 
             </div>
 
