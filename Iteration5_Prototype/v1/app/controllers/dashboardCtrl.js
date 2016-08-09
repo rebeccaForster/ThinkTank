@@ -5,35 +5,140 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
         {
             id: 0,
             name: "Marius Mülle0",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            idea: [1,7, 3, 2]
+
         }, {
             id: 1,
             name: "Marius Mülle1",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            idea: [1,7, 3, 2]
         }, {
             id: 2,
             name: "Marius Mülle2",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            idea: [1,7, 3, 2]
         }, {
             id: 3,
             name: "Marius Mülle3",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            idea: [1,7, 3, 2]
         }, {
             id: 4,
             name: "Marius Mülle4",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            idea: [1,7, 3, 2]
         }, {
             id: 5,
             name: "Marius Mülle5",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            idea: []
         }, {
             id: 6,
             name: "Marius Mülle6",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            idea: [1,7, 3, 2]
         }, {
             id: 7,
             name: "Marius Mülle7",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            idea: [1,7, 3, 2]
         }
     ]
     $scope.ideas = [
@@ -406,7 +511,7 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
             ]
     }, {
             id: 6,
-            author: "6",
+            author: 6,
             title: "Automotiva driving asdfkdasfj",
             tags: ["tag1", "tag2"],
             contributors: [1, 3, 7],
@@ -502,18 +607,23 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
 
     }
 
-    $scope.showAuthor = function (ev) {
-        $mdDialog.show(
-            $mdDialog.alert()
-            .clickOutsideToClose(true)
-            .title('Show Author')
-            .textContent()
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Got it!')
-            .targetEvent(ev)
-        );
+    $scope.showProfile = function (index, ev) {
+        $mdDialog.show({
+            controller: ProfilePopupController,
+            templateUrl: 'app/views/profile-popup.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true,
+            fullscreen: true,
+            locals: {
+                dashboardScope: $scope,
+                profileIndex: index
+            }
+        })
 
-    }
+
+    };
+
 
 
     $scope.addSearchTag = function (indexIdea, IndexTag, ev) {
@@ -531,18 +641,17 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
     $scope.openWhiteboard = function () {
         $location.url("/whiteboard");
     }
-    $scope.selectedIndex = 0;
     $scope.showIdea = function (index, ev) {
-        $scope.selectedIndex = index;
         $mdDialog.show({
-            controller: DialogController,
+            controller: IdeaPopupController,
             templateUrl: 'app/views/idea-popup.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: true,
             fullscreen: true,
             locals: {
-                dashboardScope: $scope
+                dashboardScope: $scope,
+                ideaIndex: index
             }
         })
 
@@ -574,10 +683,23 @@ app.controller('gridListDemoCtrl', function ($scope) {
 
 
 
-function DialogController($scope, $mdDialog, dashboardScope) {
-    $scope.selectedIdea = dashboardScope.ideas[dashboardScope.selectedIndex];
+function IdeaPopupController($scope, $mdDialog, dashboardScope, ideaIndex) {
+    $scope.selectedIdea = dashboardScope.ideas[ideaIndex];
     $scope.users = dashboardScope.users;
 
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+
+}
+
+function ProfilePopupController($scope, $mdDialog, dashboardScope, profileIndex) {
+    $scope.user = dashboardScope.users[profileIndex];
+    $scope.ideas = dashboardScope.ideas;
+    
     $scope.hide = function () {
         $mdDialog.hide();
     };

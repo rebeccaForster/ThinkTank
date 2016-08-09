@@ -74,12 +74,12 @@
     z-index: 2;
     background-color: white;
     position: fixed;
-    width: 150px;
-    height: 150px;
+    width: 184px;
+    height: 184px;
     border: 0px solid black;
-    border-radius: 75px;
-    top: 120px;
-    margin-left: 20px;
+    border-radius: 92px;
+    top: 112px;
+    margin-left: 12px;
 }
 
 md-dialog-content {
