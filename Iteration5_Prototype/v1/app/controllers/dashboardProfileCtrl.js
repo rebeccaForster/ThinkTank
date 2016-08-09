@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia) {
+app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $mdMedia) {
     $scope.users = [
         {
             id: 0,

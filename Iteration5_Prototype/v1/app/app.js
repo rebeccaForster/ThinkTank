@@ -11,13 +11,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     })
     $stateProvider.state("dashbord", {
         url: "/dashbord",
-        controller: "DashboardCtrl",
+        controller: "DashboardProfileCtrl",
         templateUrl: "app/views/dashboard.html"
     })
-    $stateProvider.state("profil", {
-        url: "/profil",
-        controller: "ProfilCtrl",
-        templateUrl: "app/views/profil.html"
+    $stateProvider.state("profile", {
+        url: "/profile",
+        controller: "DashboardProfileCtrl",
+        templateUrl: "app/views/profile.html"
     })
     $stateProvider.state("messages", {
         url: "/messages",
