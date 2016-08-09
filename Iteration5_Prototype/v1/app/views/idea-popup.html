@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div>
-                    <h3>Tags</h3>
+                    <h3>Hashtags</h3>
                     <p style="font-weight:bold;" ng-repeat="tag in selectedIdea.tags" class="content-tags">#{{tag | uppercase}}</p>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                 <div>
                     <h3>Contributors</h3>
                     <div>
-                        <md-card class="content-contributors">
+                        <md-card class="content-contributors"  ng-click="showProfile(selectedIdea.author, $event)">
                             <md-card-header>
                                 <md-card-avatar>
                                     <img class="md-user-avatar" src={{users[selectedIdea.author].profileImg}} />
@@ -76,7 +76,7 @@
                                 </md-card-header-text>
                             </md-card-header>
                         </md-card>
-                        <md-card ng-repeat="contributor in selectedIdea.contributors" class="content-contributors">
+                        <md-card ng-repeat="contributor in selectedIdea.contributors" class="content-contributors"  ng-click="showProfile(contributor, $event)">
                             <md-card-header>
                                 <md-card-avatar>
                                     <img class="md-user-avatar" src={{users[contributor].profileImg}} />
