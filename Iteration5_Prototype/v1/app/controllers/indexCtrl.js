@@ -4,7 +4,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         $mdSidenav(menuId).toggle();
     };
 
-   
+
     $scope.menu = [
         {
             path: 'whiteboard',
@@ -43,26 +43,29 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     }
 
   ];
-    $scope.title = 'dashbord';
-    $scope.go = function (path, title) {
+
+    $scope.selectedItem = 1;
+
+    $scope.go = function (index, path, title) {
         $state.go(path);
         $scope.title = title;
+        $scope.selectedItem = index;
     }
 
-    $scope.alert = '';
-    $scope.sorting = [{
-        "id": 0,
-        "title": "Latest Ideas"
-  }, {
-        "id": 1,
-        "title": "Most popular"
-  }, {
-        "id": 2,
-        "title": "Friedhof"
-  }, {
-        "id": 3,
-        "title": "Himmel"
-  }];
+    $scope.sorting = [
+        {
+            "id": 0,
+            "title": "Latest Ideas"
+        }, {
+            "id": 1,
+            "title": "Most popular"
+        }, {
+            "id": 2,
+            "title": "Friedhof"
+        }, {
+            "id": 3,
+            "title": "Himmel"
+        }];
 
     //init
     $scope.sortingType = $scope.sorting[0].title;

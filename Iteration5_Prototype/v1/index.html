@@ -8,6 +8,7 @@
     <!-- Local Styles-->
     <link href="site.css" rel="stylesheet" />
     <link href="app/styles/dashboard.css" rel="stylesheet" />
+    <link href="app/styles/idea-popup.css" rel="stylesheet" />
     <link href="app/styles/whiteboard.css" rel="stylesheet" />
     <link href="app/styles/contacts.css" rel="stylesheet" />
     <link href="app/styles/logout.css" rel="stylesheet" />
@@ -30,8 +31,8 @@
             </div>
         </md-toolbar>
         <md-list>
-            <md-item ng-repeat="item in menu" ng-click="go(item.path,item.name);">
-                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+            <md-item ng-repeat="item in menu" ng-click="go($index, item.path,item.name);">
+                <md-item-content ng-class="{'nav-item-select' : $index === selectedItem }" id="nav-item{{$index}}" layout="row" layout-align="start center">
                     <div class="inset">
                         <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
                     </div>
@@ -55,24 +56,23 @@
                 </div>
             </md-toolbar>
             <md-toolbar>
-                <div class="md-toolbar-tools">
-                    <ng-md-icon icon="search"></ng-md-icon>
-
-                    <md-input-container md-no-float flex>
+                <div class="md-toolbar-tools" layout='row'>
+                    <md-input-container md-no-float md-theme="input" flex>
                         <input placeholder="Search">
                     </md-input-container>
+                    <ng-md-icon icon="search" style="fill:white"></ng-md-icon>
 
+                    <div flex=5></div>
                     <md-input-container>
                         <md-select ng-model="sortingType" aria-label="sorting">
                             <md-option ng-value="t.title" data-ng-repeat="t in sorting">{{ t.title }}</md-option>
                         </md-select>
                     </md-input-container>
-
                 </div>
             </md-toolbar>
         </header>
-        <main class="md-padding" layout="row" flex>
-            <md-content flex id="content">
+        <main class="" layout="row" flex>
+            <md-content flex ng-style="{'background-color': slidercolor}">
                 <div class="fade-view" ui-view="">
                 </div>
             </md-content>
@@ -85,6 +85,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-svg-round-progressbar/0.4.4/roundProgress.min.js"></script>
 
     <!-- Angular Material Dependencies -->
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
