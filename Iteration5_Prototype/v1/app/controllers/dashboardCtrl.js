@@ -90,6 +90,36 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
                     newInputStatus: false,
                     troubleStatus: true,
                     other: false
+            }, {
+                    author: 7,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: true,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            },
+                {
+                    author: 1,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: false,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            }, {
+                    author: 7,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: true,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            },
+                {
+                    author: 1,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: false,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
             }
 
             ]
