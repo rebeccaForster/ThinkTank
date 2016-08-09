@@ -115,15 +115,15 @@ angular
 });
 
 app.controller('gridListDemoCtrl', function ($scope) {
-    this.column1 = buildGridModel(0, $scope.maxColumn, $scope.ideas);
-    this.column2 = buildGridModel(1, $scope.maxColumn, $scope.ideas);
-    this.column3 = buildGridModel(2, $scope.maxColumn, $scope.ideas);
+    this.column1 = buildGridModel(0, $scope.maxColumn);
+    this.column2 = buildGridModel(1, $scope.maxColumn);
+    this.column3 = buildGridModel(2, $scope.maxColumn);
 
-    function buildGridModel(start, column, tileTmpl) {
+    function buildGridModel(start, column) {
         var it, results = [];
         var j = start;
-        while (j < tileTmpl.length) {
-            it = angular.extend({}, tileTmpl[j]);
+        while (j < $scope.ideas.length) {
+            it = angular.extend({}, $scope.ideas[j]);
 
             results.push(it);
             j = j + column;
