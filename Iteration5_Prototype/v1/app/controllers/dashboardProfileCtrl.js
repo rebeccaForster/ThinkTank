@@ -619,14 +619,11 @@ app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $
                 clickOutsideToClose: true,
                 fullscreen: true,
                 locals: {
-                    dashboardScope: $scope,
                     profileIndex: index
                 }
             })
             .then(function () {
-                $scope.status = 'You said the information was.';
             }, function () {
-                $scope.status = 'You cancelled the dialog.';
             });
 
 
@@ -660,14 +657,11 @@ app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $
                 clickOutsideToClose: true,
                 fullscreen: true,
                 locals: {
-                    dashboardScope: $scope,
                     ideaIndex: index
                 }
             })
             .then(function () {
-                $scope.status = 'You said the information was .';
             }, function () {
-                $scope.status = 'You cancelled the dialog.';
             });
 
 
