@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Academic Think Application</title>
+
     <!-- Local Styles-->
     <link href="site.css" rel="stylesheet" />
     <link href="app/styles/dashboard.css" rel="stylesheet" />
@@ -15,8 +16,8 @@
     <link href="app/styles/settings.css" rel="stylesheet" />
 
 
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
 
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
 </head>
 
 <body ng-app="App" layout="row" ng-controller="IndexCtrl" ng-cloak>
@@ -29,26 +30,20 @@
             </div>
         </md-toolbar>
         <md-list>
-
             <md-item ng-repeat="item in menu" ng-click="go(item.path,item.name);">
-                <a>
-                    <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                        <div class="inset">
-                            <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
-                        </div>
-                        <div class="inset">{{item.title}}
-                        </div>
-                    </md-item-content>
-                </a>
+                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                    <div class="inset">
+                        <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                    </div>
+                    <div class="inset">{{item.title}}
+                    </div>
+                </md-item-content>
             </md-item>
-
         </md-list>
     </md-sidenav>
     <div layout="column" layout-fill>
         <header>
-            <md-button class="md-fab" style="position:absolute; left:50%; bottom:10px" aria-label="Add">
-                <ng-md-icon icon="add"></ng-md-icon>
-            </md-button>
+
             <md-toolbar class="md-primary md-hue-1">
                 <div class="md-toolbar-tools">
                     <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
@@ -56,43 +51,45 @@
                     </md-button>
                     <h3>
                     Academic Think Tank
-                </h3>
+                    </h3>
                 </div>
             </md-toolbar>
             <md-toolbar>
                 <div class="md-toolbar-tools">
-                    <md-input-container flex>
-                        <label>&nbsp;</label>
-                        <input ng-model="search.who" placeholder="Search">
+                    <ng-md-icon icon="search"></ng-md-icon>
+
+                    <md-input-container md-no-float flex>
+                        <input placeholder="Search">
                     </md-input-container>
-                    <md-button aria-label="Search">
-                        <ng-md-icon icon="search"></ng-md-icon>
-                    </md-button>
+
                     <md-input-container>
-                        <md-select ng-model="sortingType">
+                        <md-select ng-model="sortingType" aria-label="sorting">
                             <md-option ng-value="t.title" data-ng-repeat="t in sorting">{{ t.title }}</md-option>
                         </md-select>
                     </md-input-container>
+
                 </div>
             </md-toolbar>
         </header>
         <main class="md-padding" layout="row" flex>
-            <md-content flex md-scroll-y id="content">
+            <md-content flex id="content">
                 <div class="fade-view" ui-view="">
                 </div>
             </md-content>
         </main>
 
     </div>
-    <!-- Angular Material Dependencies -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-aria.min.js"></script>
-
-    <script src="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js"></script>
-
-    <script src="//cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js"></script>
+    <!-- Angular Dependencies -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+
+    <!-- Angular Material Dependencies -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script>
+    <script src="http://ngmaterial.assets.s3.amazonaws.com/svg-assets-cache.js"></script>
 
     <!-- Load app main script -->
     <script src="app/app.js"></script>

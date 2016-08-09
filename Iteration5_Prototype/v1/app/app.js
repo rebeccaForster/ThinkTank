@@ -1,4 +1,4 @@
-var app = angular.module('App', ['ui.router', 'ngMaterial', 'ngMdIcons']);
+var app = angular.module('App', ['ui.router', 'ngMaterial', 'ngMdIcons', 'ngMessages', 'material.svgAssetsCache']);
 
 app.config(function ($stateProvider,$urlRouterProvider) {
 
@@ -37,7 +37,7 @@ app.config(function ($stateProvider,$urlRouterProvider) {
     $stateProvider.state("logout", {
         url: "/logout",
         controller: "LogoutCtrl",
-        templateUrl: "app/views/dashboard.html"
+        templateUrl: "app/views/logout.html"
     })
   
 });

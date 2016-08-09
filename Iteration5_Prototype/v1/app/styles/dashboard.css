@@ -1,2 +1,6 @@
-﻿.carddemoBasicUsage .card-media {
-  background-color: #999999; }
+md-grid-list {
+    width: 100%;
+  height: auto;
+}
+
+
