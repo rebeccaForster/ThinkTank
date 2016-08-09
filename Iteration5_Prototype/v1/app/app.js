@@ -1,4 +1,4 @@
-var app = angular.module('App', ['ui.router', 'ngMaterial', 'ngMdIcons', 'ngMessages', 'material.svgAssetsCache']);
+var app = angular.module('App', ['ui.router', 'ngMaterial', 'ngMdIcons', 'ngMessages', 'material.svgAssetsCache', 'angular-svg-round-progressbar']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
