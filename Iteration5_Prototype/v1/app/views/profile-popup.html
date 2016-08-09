@@ -23,17 +23,28 @@
                 <img ng-src={{user.profileImg}} class="md-avatar header-background-circle" alt="{{user.name}}">
                 <div class="header-progress">
                     <round-progress max="100" current="100" color="white" bgcolor="white" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
-                        
+
                     </round-progress>
                 </div>
             </div>
         </div>
         <md-dialog-content layout="row">
             <div flex=66 layout="column" class="content">
+                <div ng-controller="gridProfileIdea as vm" class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
+                    <div flex="50" flex-sm="100" flex-xs="100" layout="column">
+                        <md-card ng-repeat="idea in vm.column1" ng-include="'app/views/dashboard-item-idea-card.html'">
 
+                        </md-card>
+                    </div>
+                    <div flex="50" flex-sm="100" flex-xs="100" layout="column">
+                        <md-card ng-repeat="idea in vm.column2" ng-include="'app/views/dashboard-item-idea-card.html'">
+
+                        </md-card>
+                    </div>
+                </div>
             </div>
             <div flex=33 layout="column" class="content">
-
+                sdakfjdslfkj
 
             </div>
 

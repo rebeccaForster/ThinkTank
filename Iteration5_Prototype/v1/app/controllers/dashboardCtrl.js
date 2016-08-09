@@ -18,7 +18,7 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
                     owner: false
                 }
             ],
-            idea: [1,7, 3, 2]
+            ideas: [1, 6, 3, 2]
 
         }, {
             id: 1,
@@ -36,7 +36,7 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
                     owner: false
                 }
             ],
-            idea: [1,7, 3, 2]
+            ideas: [1, 6, 3, 2]
         }, {
             id: 2,
             name: "Marius Mülle2",
@@ -53,7 +53,7 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
                     owner: false
                 }
             ],
-            idea: [1,7, 3, 2]
+            ideas: [1, 4, 3, 2]
         }, {
             id: 3,
             name: "Marius Mülle3",
@@ -70,7 +70,7 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
                     owner: false
                 }
             ],
-            idea: [1,7, 3, 2]
+            ideas: [1, 5, 3, 2]
         }, {
             id: 4,
             name: "Marius Mülle4",
@@ -87,7 +87,7 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
                     owner: false
                 }
             ],
-            idea: [1,7, 3, 2]
+            ideas: [1, 6, 3, 2]
         }, {
             id: 5,
             name: "Marius Mülle5",
@@ -104,7 +104,7 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
                     owner: false
                 }
             ],
-            idea: []
+            ideas: [1,2]
         }, {
             id: 6,
             name: "Marius Mülle6",
@@ -121,7 +121,7 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
                     owner: false
                 }
             ],
-            idea: [1,7, 3, 2]
+            ideas: [1, 5, 3, 2]
         }, {
             id: 7,
             name: "Marius Mülle7",
@@ -138,7 +138,7 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
                     owner: false
                 }
             ],
-            idea: [1,7, 3, 2]
+            ideas: [1, 5, 3, 2]
         }
     ]
     $scope.ideas = [
@@ -662,7 +662,7 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
 
 });
 
-app.controller('gridListDemoCtrl', function ($scope) {
+app.controller('gridDashboardIdea', function ($scope) {
     this.column1 = buildGridModel(0, $scope.maxColumn, $scope.ideas);
     this.column2 = buildGridModel(1, $scope.maxColumn, $scope.ideas);
     this.column3 = buildGridModel(2, $scope.maxColumn, $scope.ideas);
@@ -698,8 +698,9 @@ function IdeaPopupController($scope, $mdDialog, dashboardScope, ideaIndex) {
 
 function ProfilePopupController($scope, $mdDialog, dashboardScope, profileIndex) {
     $scope.user = dashboardScope.users[profileIndex];
-    $scope.ideas = dashboardScope.ideas;
-    
+    $scope.maxColumn = 2;
+    $scope.users = dashboardScope.users;
+    $scope.ideas = dashboardScope.ideas
     $scope.hide = function () {
         $mdDialog.hide();
     };
@@ -708,3 +709,19 @@ function ProfilePopupController($scope, $mdDialog, dashboardScope, profileIndex)
     };
 
 }
+app.controller('gridProfileIdea', function ($scope) {
+    this.column1 = buildGridModel(0, $scope.maxColumn, $scope.ideas, $scope.user.ideas);
+    this.column2 = buildGridModel(1, $scope.maxColumn, $scope.ideas, $scope.user.ideas);
+    
+    function buildGridModel(start, column, allIdeas, usersIdeas) {
+        var it, results = [];
+        var j = start;
+        while (j < usersIdeas.length) {
+            it = angular.extend({}, allIdeas[usersIdeas[j]]);
+
+            results.push(it);
+            j = j + column;
+        }
+        return results;
+    }
+})
