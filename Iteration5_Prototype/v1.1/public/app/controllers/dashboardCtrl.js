@@ -3,8 +3,7 @@ angular
 	.module('App')
 	.controller('DashboardCtrl', function ($scope, dashService) {
 		
-		// this.dashBoard = dashService.loadDashboard();
-		self.dashBoard = null;
+		self.dashBoard = {};
 
 		dashService
 		      .loadDashboard()

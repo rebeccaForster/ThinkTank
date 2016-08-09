@@ -1,0 +1,22 @@
+<md-button class="md-fab" ng-click="openWhiteboard()" style="position:fixed; left:50%; bottom:10px" aria-label="Add">
+    <ng-md-icon icon="add"></ng-md-icon>
+</md-button>
+<div ng-controller="DashboardCtrl" ng-cloak="">
+       <md-content ng-controller="gridListDemoCtrl as vm" class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
+        <div flex="33" flex-sm="100" flex-xs="100" layout="column">
+            <md-card ng-repeat="idea in vm.column1" ng-include="'app/views/dashboard-item-idea-card.html'" >
+            
+            </md-card>
+        </div>
+        <div flex="33" flex-sm="100" flex-xs="100" layout="column">
+            <md-card ng-repeat="idea in vm.column2" ng-include="'app/views/dashboard-item-idea-card.html'" >
+              
+            </md-card>
+        </div>
+        <div  flex="33" flex-sm="100" flex-xs="100" layout="column">
+            <md-card ng-repeat="idea in vm.column3" ng-include="'app/views/dashboard-item-idea-card.html'" >
+                
+            </md-card>
+        </div>
+    </md-content>
+</div>

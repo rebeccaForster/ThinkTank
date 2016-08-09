@@ -1,8 +1,6 @@
 (function(){
   'use strict';
 
-  // angular.module('App')
-  //        .service('dashService', ['$http', '$q', function ($scope, $http, $q) {
 
   angular.module('App')
          .factory('dashService', function ($http, $q) {

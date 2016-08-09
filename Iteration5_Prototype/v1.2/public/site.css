@@ -1,0 +1,17 @@
+md-sidenav {
+    fill: #737373;
+}
+
+md-sidenav ng-md-icon {
+    position: relative;
+    top: 5px;
+}
+
+.nav-item-select {
+    color: cyan;
+    fill: cyan;
+}
+
+md-input-container {
+    padding: 0 !important
+}
