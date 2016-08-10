@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $mdMedia) {
+app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $mdMedia, $timeout) {
     $scope.users = [
         {
             id: 0,
@@ -148,7 +148,7 @@ app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $
             title: "Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj",
             tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
             contributors: [1, 3, 4, 6, 7, 2],
-            description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafkljdöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskf",
+            description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafkljdöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas akfljsdalf daksfjldfkjas dskfj sdafkljdöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskf",
             img: "http://placehold.it/100x50",
             scribble: 'http://placehold.it/150x100',
             milestones: [
@@ -178,6 +178,96 @@ app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $
                     text: "asdfl ldajf dsakfjldomotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dr e alkjdklfjasd ekl re akdsfjl",
                     likeIdeaStatus: true,
                     newInputStatus: true,
+                    troubleStatus: true,
+                    other: false
+            }, {
+                    author: 7,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: true,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            },
+                {
+                    author: 1,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: false,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            }, {
+                    author: 7,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: true,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            },
+                {
+                    author: 1,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: false,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            }, {
+                    author: 7,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: true,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            },
+                {
+                    author: 1,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: false,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            }, {
+                    author: 7,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: true,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            },
+                {
+                    author: 1,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: false,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            }, {
+                    author: 7,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: true,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            },
+                {
+                    author: 1,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: false,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            }, {
+                    author: 7,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: true,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            },
+                {
+                    author: 1,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: false,
+                    newInputStatus: false,
                     troubleStatus: true,
                     other: false
             }, {
@@ -622,9 +712,7 @@ app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $
                     profileIndex: index
                 }
             })
-            .then(function () {
-            }, function () {
-            });
+            .then(function () {}, function () {});
 
 
     };
@@ -645,7 +733,12 @@ app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $
     }
 
     $scope.openWhiteboard = function () {
-        $location.url("/whiteboard");
+        $timeout(function() {
+            var el = document.getElementById('nav-item0');
+            angular.element(el).triggerHandler('click');
+        }, 0);
+        //$location.url("/whiteboard");
+
     }
     $scope.showIdea = function (index, ev) {
         $mdDialog.show({
@@ -660,9 +753,7 @@ app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $
                     ideaIndex: index
                 }
             })
-            .then(function () {
-            }, function () {
-            });
+            .then(function () {}, function () {});
 
 
     };

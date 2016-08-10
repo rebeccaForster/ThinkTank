@@ -23,16 +23,16 @@
 
 <body ng-app="App" layout="row" ng-controller="IndexCtrl" ng-cloak>
     <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-        <md-toolbar class="md-tall md-primary md-hue-2">
+        <md-toolbar class="md-primary md-hue-2" style="min-height:170px">
             <div layout="column" class="md-toolbar-tools-bottom inset">
-                <ng-md-icon icon="account_circle" size="64"></ng-md-icon>
+                <img ng-src="app/img/user.jpg" class="md-avatar nav-img-user" alt="{{user.name}}">
                 <span></span>
                 <div>Firstname Lastname</div>
             </div>
         </md-toolbar>
         <md-list>
-            <md-item ng-repeat="item in menu" ng-click="go($index, item.path,item.name);">
-                <md-item-content ng-class="{'nav-item-select' : $index === selectedItem }" id="nav-item{{$index}}" layout="row" layout-align="start center">
+            <md-item ng-repeat="item in menu" ng-click="go($index, item.path,item.name);" id="nav-item{{$index}}">
+                <md-item-content ng-class="{'nav-item-select' : $index === selectedItem }"  layout="row" layout-align="start center">
                     <div class="inset">
                         <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
                     </div>
@@ -45,7 +45,7 @@
     <div layout="column" layout-fill>
         <header>
 
-            <md-toolbar class="md-primary md-hue-1">
+            <md-toolbar class="md-primary md-hue-1" style="min-height:70px;">
                 <div class="md-toolbar-tools">
                     <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
                         <ng-md-icon icon="menu"></ng-md-icon>
@@ -55,7 +55,7 @@
                     </h3>
                 </div>
             </md-toolbar>
-            <md-toolbar>
+            <md-toolbar style="min-height:100px;">
                 <div class="md-toolbar-tools" layout='row'>
                     <input placeholder="Search" flex>
                     <ng-md-icon icon="search" style="fill:white"></ng-md-icon>
@@ -70,7 +70,7 @@
             </md-toolbar>
         </header>
         <main class="" layout="row" flex>
-            <md-content flex ng-style="{'background-color': slidercolor}">
+            <md-content flex>
                 <div class="fade-view" ui-view="">
                 </div>
             </md-content>

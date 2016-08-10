@@ -57,9 +57,11 @@
     left: 0px;
     color: white;
 }
-.messages-icon{
+
+.messages-icon {
     float: right;
 }
+
 .header-btn-followIdea {
     float: right;
     z-index: 10;
@@ -70,9 +72,20 @@
     z-index: 10;
 }
 
+.popup-size {
+    max-width: 100%;
+    max-height: auto;
+    margin-right: 58px;
+    margin-left: 58px;
+    margin-top: 5%;
+    max-width: 100%;
+    min-height: 90%;
+    border-radius: 0;
+}
+
 .header-background-circle {
     z-index: 2;
-    background-color: white;
+    background-color: #fafafa;
     position: fixed;
     width: 184px;
     height: 184px;
@@ -83,7 +96,7 @@
 }
 
 md-dialog-content {
-    margin-top: 260px;
+    margin-top: 280px;
     margin-bottom: 0px;
 }
 
@@ -104,8 +117,7 @@ md-dialog-content {
     margin-top: 0px;
 }
 
-.content-contributors{
+.content-contributors {
     display: inline-block;
     width: auto;
-
 }

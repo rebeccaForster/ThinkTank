@@ -1,18 +1,18 @@
             <div flex=66 layout="column" class="content">
                 <div class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
-                    <div flex="50" flex-sm="100" flex-xs="100" layout="column">
+                    <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
                         <md-card ng-repeat="indexUserIdea in user.ideas" ng-init="idea = ideas[indexUserIdea]" ng-if="!(($index+2)%2)" ng-include="'app/views/dashboard-item-idea-card.html'">
 
                         </md-card>
                     </div>
-                    <div flex="50" flex-sm="100" flex-xs="100" layout="column">
+                    <div flex="50" flex-sm="100" flex-xs="100" layout="column" layout-margin>
                         <md-card ng-repeat="indexUserIdea in user.ideas" ng-init="idea = ideas[indexUserIdea]" ng-if="!(($index+1)%2)" ng-include="'app/views/dashboard-item-idea-card.html'">
 
                         </md-card>
                     </div>
                 </div>
             </div>
-            <div flex=33 layout="column" class="content">
+            <div flex layout="column" class="content">
                 <div>
                     <h3>Groups</h3>
                     <div layout="column" ng-repeat="group in user.groups">

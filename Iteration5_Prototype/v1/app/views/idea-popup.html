@@ -1,4 +1,4 @@
-<md-dialog aria-label="Idea Popup" md-background style="max-width:100%;max-height:auto;margin-right:58px; margin-left:58px; margin-top:60px; width: 100%;min-height: 90%; border-radius: 0;">
+<md-dialog aria-label="Idea Popup" class="popup-size">
     <form>
         <div class="header">
             <md-button class="md-icon-button header-btn-close" ng-click="cancel()">
@@ -27,7 +27,7 @@
                 <div class="header-background-circle">
                 </div>
                 <div class="header-progress">
-                    <round-progress max="100" current="100" color="white" bgcolor="white" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
+                    <round-progress max="100" current="100" color="#fafafa" bgcolor="#fafafa" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
                         <round-progress max="100" current="selectedIdea.percentage" color="#45ccce" bgcolor="gainsboro" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="true" duration="800" animation="easeOutCubic" offset="inherit" animation-delay="0" on-render="showPreciseCurrent">
 
 
@@ -121,8 +121,8 @@
                         </md-input-container>
                         <md-button class="md-accent" class="messages-icon">Send</md-button>
                     </div>
-                    <md-content>
-                        <md-list>
+                    <md-content >
+                        <md-list style=" max-height:800px;overflow-y:visible">
                             <md-list-item class="md-3-line" ng-repeat="message in selectedIdea.messages" style="margin-top:15px;margin-bottom:15px; heiht:auto;">
                                 <img ng-src={{users[message.author].profileImg}} class="md-avatar" alt="{{users[message.author].name}}">
                                 <div class="md-list-item-text">
