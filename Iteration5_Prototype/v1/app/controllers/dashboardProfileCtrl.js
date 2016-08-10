@@ -783,7 +783,7 @@ function ProfilePopupController($scope, $mdDialog, profileIndex) {
         $mdDialog.hide();
     };
     $scope.cancel = function () {
-        $mdDialog.hide();
+        $mdDialog.cancel();
     };
 
 }
