@@ -37,7 +37,36 @@
             </div>
         </div>
         <md-dialog-content layout="row">
-            <div flex=66 layout="column" class="content">
+            <div flex=50 layout="column" class="content">
+
+                <div>
+                    <h3>Contributors</h3>
+                    <div>
+                        <md-card class="content-contributors" ng-click="showProfile(selectedIdea.author, $event)">
+                            <md-card-header>
+                                <md-card-avatar>
+                                    <img class="md-user-avatar" src={{users[selectedIdea.author].profileImg}} />
+                                </md-card-avatar>
+                                <md-card-header-text>
+                                    <span class="md-title">{{users[selectedIdea.author].name}}</span>
+                                    <span class="md-subhead">owner</span>
+                                </md-card-header-text>
+                            </md-card-header>
+                        </md-card>
+                        <md-card ng-repeat="contributor in selectedIdea.contributors" class="content-contributors" ng-click="showProfile(contributor, $event)">
+                            <md-card-header>
+                                <md-card-avatar>
+                                    <img class="md-user-avatar" src={{users[contributor].profileImg}} />
+                                </md-card-avatar>
+                                <md-card-header-text>
+                                    <span class="md-title">{{users[contributor].name}}</span>
+                                    <span class="md-subhead">contributor</span>
+                                </md-card-header-text>
+                            </md-card-header>
+                        </md-card>
+                    </div>
+                    <md-button class="md-accent">I want to contribute</md-button>
+                </div>
                 <img src='app/img/MindMap.png' class="content-image">
                 <div>
                     <h3>Descirption</h3>
@@ -61,35 +90,7 @@
                     <p style="font-weight:bold;" ng-repeat="tag in selectedIdea.tags" class="content-tags">#{{tag | uppercase}}</p>
                 </div>
             </div>
-            <div flex=33 layout="column" class="content">
-                <div>
-                    <h3>Contributors</h3>
-                    <div>
-                        <md-card class="content-contributors"  ng-click="showProfile(selectedIdea.author, $event)">
-                            <md-card-header>
-                                <md-card-avatar>
-                                    <img class="md-user-avatar" src={{users[selectedIdea.author].profileImg}} />
-                                </md-card-avatar>
-                                <md-card-header-text>
-                                    <span class="md-title">{{users[selectedIdea.author].name}}</span>
-                                    <span class="md-subhead">owner</span>
-                                </md-card-header-text>
-                            </md-card-header>
-                        </md-card>
-                        <md-card ng-repeat="contributor in selectedIdea.contributors" class="content-contributors"  ng-click="showProfile(contributor, $event)">
-                            <md-card-header>
-                                <md-card-avatar>
-                                    <img class="md-user-avatar" src={{users[contributor].profileImg}} />
-                                </md-card-avatar>
-                                <md-card-header-text>
-                                    <span class="md-title">{{users[contributor].name}}</span>
-                                    <span class="md-subhead">contributor</span>
-                                </md-card-header-text>
-                            </md-card-header>
-                        </md-card>
-                    </div>
-                    <md-button class="md-accent">I want to contribute</md-button>
-                </div>
+            <div flex=50 layout="column" class="content">
                 <div>
                     <h3>Comments/React on Idea</h3>
                     <div layout="row">
@@ -132,7 +133,7 @@
                                     <h3>{{users[message.author].name}}</h3>
 
 
-                                    <p >{{message.text}}</p>
+                                    <p>{{message.text}}</p>
                                 </div>
                                 <md-divider md-inset ng-if="!$last"></md-divider>
                             </md-list-item>
