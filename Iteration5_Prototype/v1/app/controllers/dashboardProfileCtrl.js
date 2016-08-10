@@ -671,25 +671,6 @@ app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $
 
 });
 
-app.controller('gridDashboardIdea', function ($scope) {
-    this.column1 = buildGridModel(0, $scope.maxColumn, $scope.ideas);
-    this.column2 = buildGridModel(1, $scope.maxColumn, $scope.ideas);
-    this.column3 = buildGridModel(2, $scope.maxColumn, $scope.ideas);
-
-    function buildGridModel(start, column, tileTmpl) {
-        var it, results = [];
-        var j = start;
-        while (j < tileTmpl.length) {
-            it = angular.extend({}, tileTmpl[j]);
-
-            results.push(it);
-            j = j + column;
-        }
-        return results;
-    }
-})
-
-
 
 
 function IdeaPopupController($scope, $mdDialog, ideaIndex) {
@@ -715,19 +696,3 @@ function ProfilePopupController($scope, $mdDialog, profileIndex) {
     };
 
 }
-app.controller('gridProfileIdea', function ($scope) {
-    this.column1 = buildGridModel(0, $scope.maxProfileColumn, $scope.ideas, $scope.user.ideas);
-    this.column2 = buildGridModel(1, $scope.maxProfileColumn, $scope.ideas, $scope.user.ideas);
-
-    function buildGridModel(start, column, allIdeas, usersIdeas) {
-        var it, results = [];
-        var j = start;
-        while (j < usersIdeas.length) {
-            it = angular.extend({}, allIdeas[usersIdeas[j]]);
-
-            results.push(it);
-            j = j + column;
-        }
-        return results;
-    }
-})
