@@ -124,7 +124,7 @@
                     <md-content >
                         <md-list style=" max-height:800px;overflow-y:visible">
                             <md-list-item class="md-3-line" ng-repeat="message in selectedIdea.messages" style="margin-top:15px;margin-bottom:15px; heiht:auto;">
-                                <img ng-src={{users[message.author].profileImg}} class="md-avatar" alt="{{users[message.author].name}}">
+                                <img ng-src={{users[message.author].profileImg}} class="md-avatar" alt="{{users[message.author].name}}" ng-click="showProfile(message.author, $event)">
                                 <div class="md-list-item-text">
                                     <ng-md-icon ng-show="message.likeIdeaStatus" icon="thumb_up" style="fill: #737373" class="messages-icon"></ng-md-icon>
                                     <ng-md-icon ng-show="message.newInputStatus" icon="touch_app" style="fill: #737373" class="messages-icon"></ng-md-icon>
