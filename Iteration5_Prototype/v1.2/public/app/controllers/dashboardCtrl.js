@@ -9,13 +9,9 @@ angular
 		dashService
 		      .loadDashboard()
 		      .then( function( res ) {
-                  setTimeout(function() {
-                    $scope.$apply(function() {
-                        $scope.ideas = res;
-                        console.log($scope.ideas[4].title)
-                  });
-                  }, 3000);
-                  
+
+                $scope.ideas = res;
+                console.log($scope.ideas[4].title)
 		      });
 
 		dashService
