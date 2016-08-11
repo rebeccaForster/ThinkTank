@@ -17,8 +17,8 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             icon: 'send'
     },
         {
-            path: 'profil',
-            title: 'Profil',
+            path: 'profile',
+            title: 'Profile',
             icon: 'person'
     },
         {

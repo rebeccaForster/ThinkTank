@@ -1,39 +1,144 @@
 'use strict';
 
-app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia) {
+app.controller('DashboardProfileCtrl', function ($scope, $location, $mdDialog, $mdMedia, $timeout) {
     $scope.users = [
         {
             id: 0,
             name: "Marius Mülle0",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            ideas: [1, 6, 3, 2]
+
         }, {
             id: 1,
             name: "Marius Mülle1",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            ideas: [1, 6, 3, 2]
         }, {
             id: 2,
             name: "Marius Mülle2",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            ideas: [1, 4, 3, 2]
         }, {
             id: 3,
             name: "Marius Mülle3",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            ideas: [1, 5, 3, 2]
         }, {
             id: 4,
             name: "Marius Mülle4",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            ideas: [1, 6, 3, 2]
         }, {
             id: 5,
             name: "Marius Mülle5",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            ideas: [1, 2]
         }, {
             id: 6,
             name: "Marius Mülle6",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            ideas: [1, 5, 3, 2]
         }, {
             id: 7,
             name: "Marius Mülle7",
-            profileImg: "app/img/user.jpg"
+            profileImg: "app/img/user.jpg",
+            url: "https://www.lfe.mw.tum.de/author/bengler/",
+            tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+            groups: [
+                {
+                    name: "ergonomics",
+                    owner: true
+                },
+                {
+                    name: "automotive driving",
+                    owner: false
+                }
+            ],
+            ideas: [1, 5, 3, 2]
         }
     ]
     $scope.ideas = [
@@ -43,7 +148,7 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
             title: "Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj",
             tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
             contributors: [1, 3, 4, 6, 7, 2],
-            description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafkljdöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskf",
+            description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafkljdöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas akfljsdalf daksfjldfkjas dskfj sdafkljdöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskf",
             img: "http://placehold.it/100x50",
             scribble: 'http://placehold.it/150x100',
             milestones: [
@@ -73,6 +178,96 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
                     text: "asdfl ldajf dsakfjldomotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dr e alkjdklfjasd ekl re akdsfjl",
                     likeIdeaStatus: true,
                     newInputStatus: true,
+                    troubleStatus: true,
+                    other: false
+            }, {
+                    author: 7,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: true,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            },
+                {
+                    author: 1,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: false,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            }, {
+                    author: 7,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: true,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            },
+                {
+                    author: 1,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: false,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            }, {
+                    author: 7,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: true,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            },
+                {
+                    author: 1,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: false,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            }, {
+                    author: 7,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: true,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            },
+                {
+                    author: 1,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: false,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            }, {
+                    author: 7,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: true,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            },
+                {
+                    author: 1,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: false,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            }, {
+                    author: 7,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: true,
+                    newInputStatus: false,
+                    troubleStatus: true,
+                    other: false
+            },
+                {
+                    author: 1,
+                    text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                    likeIdeaStatus: false,
+                    newInputStatus: false,
                     troubleStatus: true,
                     other: false
             }, {
@@ -406,7 +601,7 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
             ]
     }, {
             id: 6,
-            author: "6",
+            author: 6,
             title: "Automotiva driving asdfkdasfj",
             tags: ["tag1", "tag2"],
             contributors: [1, 3, 7],
@@ -464,6 +659,8 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
     ];
 
     $scope.maxColumn = 3;
+    $scope.maxProfileColumn = 2;
+
     $scope.commentIdea = function (index, ev) {
         $mdDialog.show(
             $mdDialog.alert()
@@ -502,19 +699,26 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
 
     }
 
-    $scope.showAuthor = function (ev) {
-        $mdDialog.show(
-            $mdDialog.alert()
-            .clickOutsideToClose(true)
-            .title('Show Author')
-            .textContent()
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Got it!')
-            .targetEvent(ev)
-        );
+    $scope.showProfile = function (index, ev) {
+        $mdDialog.show({
+                controller: ProfilePopupController,
+                templateUrl: 'app/views/profile-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {
+                    profileIndex: index
+                }
+            })
+            .then(function () {}, function () {});
 
-    }
 
+    };
+
+
+    $scope.user = $scope.users[3];
 
     $scope.addSearchTag = function (indexIdea, IndexTag, ev) {
         $mdDialog.show(
@@ -529,22 +733,27 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
     }
 
     $scope.openWhiteboard = function () {
-        $location.url("/whiteboard");
+        $timeout(function() {
+            var el = document.getElementById('nav-item0');
+            angular.element(el).triggerHandler('click');
+        }, 0);
+        //$location.url("/whiteboard");
+
     }
-    $scope.selectedIndex = 0;
     $scope.showIdea = function (index, ev) {
-        $scope.selectedIndex = index;
         $mdDialog.show({
-            controller: DialogController,
-            templateUrl: 'app/views/idea-popup.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: true,
-            fullscreen: true,
-            locals: {
-                dashboardScope: $scope
-            }
-        })
+                controller: IdeaPopupController,
+                templateUrl: 'app/views/idea-popup.html',
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {
+                    ideaIndex: index
+                }
+            })
+            .then(function () {}, function () {});
 
 
     };
@@ -553,30 +762,22 @@ app.controller('DashboardCtrl', function ($scope, $location, $mdDialog, $mdMedia
 
 });
 
-app.controller('gridListDemoCtrl', function ($scope) {
-    this.column1 = buildGridModel(0, $scope.maxColumn, $scope.ideas);
-    this.column2 = buildGridModel(1, $scope.maxColumn, $scope.ideas);
-    this.column3 = buildGridModel(2, $scope.maxColumn, $scope.ideas);
-
-    function buildGridModel(start, column, tileTmpl) {
-        var it, results = [];
-        var j = start;
-        while (j < tileTmpl.length) {
-            it = angular.extend({}, tileTmpl[j]);
-
-            results.push(it);
-            j = j + column;
-        }
-        return results;
-    }
-})
 
 
+function IdeaPopupController($scope, $mdDialog, ideaIndex) {
+    $scope.selectedIdea = $scope.ideas[ideaIndex];
 
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
 
-function DialogController($scope, $mdDialog, dashboardScope) {
-    $scope.selectedIdea = dashboardScope.ideas[dashboardScope.selectedIndex];
-    $scope.users = dashboardScope.users;
+}
+
+function ProfilePopupController($scope, $mdDialog, profileIndex) {
+    $scope.user = $scope.users[profileIndex];
 
     $scope.hide = function () {
         $mdDialog.hide();
