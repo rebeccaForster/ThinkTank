@@ -4,7 +4,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Comment = require('../models/comment.js');
 var Idea = require('../models/idea.js');
-var Person = require('../models/person.js');
+var Person = require('../models/users.js');
 var Scibble = require('../models/scibble.js');
 var Dash = []; 
 

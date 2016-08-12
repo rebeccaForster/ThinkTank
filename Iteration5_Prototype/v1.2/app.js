@@ -4,19 +4,27 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+
+// [SH] Bring in the data model
+require('./models/db');
+// [SH] Bring in the Passport config after model is defined
+require('./config/passport');
 
 var routes = require('./routes/index');
 var dashRout = require('./routes/dash');
 
 var app = express();
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/attDB', function(err) {
-    if(err) {
-        console.log('connection error', err);
-    } else {
-        console.log('connection successful');
-    }
-});
+
+// [FW] already defined in models/db
+// var mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost/attDB', function(err) {
+//     if(err) {
+//         console.log('connection error', err);
+//     } else {
+//         console.log('connection successful');
+//     }
+// });
 
 
 // view engine setup
@@ -31,8 +39,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/dashboardData', dashRout);
+app.use(passport.initialize());
+
+app.use('/api', routes);
+app.use('/api/dashboardData', dashRout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -42,6 +52,14 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
+// [SH] Catch unauthorised errors
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401);
+    res.json({"message" : err.name + ": " + err.message});
+  }
+});
+
 
 // development error handler
 // will print stacktrace

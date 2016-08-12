@@ -1,11 +1,32 @@
 'use strict';
-app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state) {
+// navigationCtrl.$inject = ['$location','authentication'];
+
+app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, $mdDialog, $mdMedia, login) {
+    
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
     };
 
+    $scope.menuNonAuth = [
+        {
+            path: 'whiteboard',
+            title: 'Whiteboard',
+            icon: 'brush'
+    },
+        {
+            path: 'dashbord',
+            title: 'Dashbord',
+            icon: 'send'
+    },
+        {
+            path: '#',
+            title: 'Log In',
+            icon: 'account_box'
+    }
 
-    $scope.menu = [
+  ];
+
+    $scope.menuAuth = [
         {
             path: 'whiteboard',
             title: 'Whiteboard',
@@ -44,6 +65,21 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
   ];
 
+    $scope.currentTestUser = {
+        firstname: "Frederic", 
+        name: "Wollinger"
+    };
+
+    console.log(authentication.isLoggedIn());
+    console.log("test");
+
+    if(authentication.isLoggedIn()) {
+        $scope.menu = $scope.menuAuth;
+    }
+    else {
+        $scope.menu = $scope.menuNonAuth;
+    }
+
     $scope.selectedItem = 1;
 
     $scope.go = function (index, path, title) {
@@ -69,6 +105,43 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     //init
     $scope.sortingType = $scope.sorting[0].title;
+
+    $scope.isLoggedIn = authentication.isLoggedIn();
+    $scope.currentUser = authentication.currentUser();
+
+    // [SM]
+    // vm.isLoggedIn = authentication.isLoggedIn();
+    // vm.currentUser = authentication.currentUser();
+
+    $scope.showAdvanced = function() {
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+
+        console.log("login button pressed");
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: '../views/login.view.html',
+          parent: angular.element(document.body),
+          targetEvent: login.onSubmit,
+          clickOutsideToClose:true,
+          fullscreen: useFullScreen
+        });
+  }
+
+  function DialogController($scope, $mdDialog) {
+      $scope.hide = function() {
+        $mdDialog.hide();
+      };
+
+      $scope.cancel = function() {
+        $mdDialog.cancel();
+      };
+
+      $scope.answer = function(answer) {
+        $mdDialog.hide(answer);
+      };
+    }  
+
+
 
 
 });
