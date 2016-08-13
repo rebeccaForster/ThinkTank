@@ -84,7 +84,14 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     $scope.go = function (index, path, title) {
         $state.go(path);
         $scope.title = title;
+
+        if ($scope.selectedItem != index) {
+            // clear hashtag, if a new item in the menu is clicked
+            $scope.selectedHashtags = [];
+        }
+
         $scope.selectedItem = index;
+
     }
 
     $scope.searchHashtag = function (ev) {
@@ -141,15 +148,15 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         case 2:
             size = "16px"
             break;
-                case 3:
+        case 3:
             size = "18px"
             break;
-                case 4:
+        case 4:
             size = "20px"
             break;
-                
+
         default:
-        size = "12px"
+            size = "12px"
         }
         return {
             "font-size": size
@@ -197,16 +204,16 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     $scope.hashtags = [
         {
             id: 0,
-            name: 'Reis',
+            name: 'aReis',
             priority: 0
         }, {
             id: 1,
-            name: 'Pepperoni',
+            name: 'wPepperoni',
             priority: 2
         },
         {
             id: 2,
-            name: 'Sausage',
+            name: 'eSausage',
             priority: 4
         },
         {
@@ -216,11 +223,90 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         },
         {
             id: 4,
-            name: 'Green Peppers',
+            name: 'rGreen Peppers',
+            priority: 3
+        },
+        {
+            id: 5,
+            name: 'gSausage',
+            priority: 4
+        },
+        {
+            id: 6,
+            name: 'kBlack Olives',
+            priority: 1
+        },
+        {
+            id: 7,
+            name: 'uGreen Peppers',
+            priority: 3
+        },
+        {
+            id: 8,
+            name: 'dBlack Olives',
+            priority: 1
+        },
+        {
+            id: 9,
+            name: 'hGreen Peppers',
+            priority: 3
+        }, {
+            id: 10,
+            name: 'kReis',
+            priority: 0
+        }, {
+            id: 11,
+            name: 'mvPepperoni',
+            priority: 2
+        },
+        {
+            id: 12,
+            name: 'Sausage',
+            priority: 4
+        },
+        {
+            id: 13,
+            name: 'vBlack Olives',
+            priority: 1
+        },
+        {
+            id: 14,
+            name: 'dGreen Peppers',
+            priority: 3
+        }, {
+            id: 15,
+            name: 'rPepperoni',
+            priority: 2
+        },
+        {
+            id: 16,
+            name: 'daBlack Olives',
+            priority: 1
+        },
+        {
+            id: 17,
+            name: 'fGreen Peppers',
+            priority: 3
+        },
+        {
+            id: 18,
+            name: 'nBlack Olives',
+            priority: 1
+        },
+        {
+            id: 19,
+            name: 'gGreen Peppers',
             priority: 3
         }
   ];
-
+    $scope.hashtagSelected = function (id) {
+        for (var i in $scope.selectedHashtags) {
+            if ($scope.selectedHashtags[i] == id) {
+                return true;
+            }
+        }
+        return false;
+    }
     $scope.selectedHashtags = [];
     $scope.setHashtags = function (id, status) {
         if (!status) {
@@ -230,8 +316,15 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
         }
     }
+    $scope.changeSortingType = function(index){
+        $scope.sortingType= index;
+        $scope.updateDashboard();
+    
+    }
     $scope.updateDashboard = function () {
         // ToDo: es wurden neue Tags hinzugefügt bzw. entfernt und hier müsstest du mithilfe der Tags & des auswählten Sorting die Liste erneuern
+        // $scope.sortingType gibt den Namen der Sortierung zurück
+        // $scope.selectedHashtags  gibt alle Tags IDs an, nach denen man suchen soll
     }
 
 });
