@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <title>Academic Think Application</title>
 
+	 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" type='text/css'>
     <!-- Local Styles-->
     <link href="site.css" rel="stylesheet" />
-    <link href="app/styles/dashboard.css" rel="stylesheet" />
-    <link href="app/styles/idea-popup.css" rel="stylesheet" />
+    <link href="app/styles/dashboard-profile.css" rel="stylesheet" />
+    <link href="app/styles/idea-profile-popup.css" rel="stylesheet" />
     <link href="app/styles/whiteboard.css" rel="stylesheet" />
     <link href="app/styles/contacts.css" rel="stylesheet" />
     <link href="app/styles/logout.css" rel="stylesheet" />
     <link href="app/styles/messages.css" rel="stylesheet" />
-    <link href="app/styles/profil.css" rel="stylesheet" />
     <link href="app/styles/settings.css" rel="stylesheet" />
 
 
@@ -33,8 +33,8 @@
             </div>
         </md-toolbar>
         <md-list>
-            <md-item ng-repeat="item in menu" ng-click="go($index, item.path,item.name);">
-                <md-item-content ng-class="{'nav-item-select' : $index === selectedItem }" id="nav-item{{$index}}" layout="row" layout-align="start center">
+            <md-item ng-repeat="item in menu" ng-click="go($index, item.path,item.name);" id="nav-item{{$index}}">
+                <md-item-content ng-class="{'nav-item-select' : $index === selectedItem }"  layout="row" layout-align="start center">
                     <div class="inset">
                         <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
                     </div>
@@ -103,15 +103,13 @@
     <script src="app/services/login.service.js"></script>
     <!-- Load controllers -->
     <script src="app/controllers/indexCtrl.js"></script>
-    <script src="app/controllers/dashboardCtrl.js"></script>
+    <script src="app/controllers/dashboardProfileCtrl.js"></script>
     <script src="app/controllers/contactsCtrl.js"></script>
     <script src="app/controllers/logoutCtrl.js"></script>
     <script src="app/controllers/messagesCtrl.js"></script>
-    <script src="app/controllers/profilCtrl.js"></script>
     <script src="app/controllers/settingsCtrl.js"></script>
     <script src="app/controllers/whiteboardCtrl.js"></script>
     <script src="app/controllers/login.controller.js"></script>
-    <script src="app/controllers/register.controller.js"></script>
 
     <!-- Load custom filters -->
     <!-- Load custom directives -->
