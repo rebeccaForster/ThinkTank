@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <title>Academic Think Application</title>
 
-	 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" type='text/css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" type='text/css'>
     <!-- Local Styles-->
     <link href="site.css" rel="stylesheet" />
     <link href="app/styles/dashboard-profile.css" rel="stylesheet" />
     <link href="app/styles/idea-profile-popup.css" rel="stylesheet" />
+    <link href="app/styles/hashtag-popup.css" rel="stylesheet" />
     <link href="app/styles/whiteboard.css" rel="stylesheet" />
     <link href="app/styles/contacts.css" rel="stylesheet" />
     <link href="app/styles/logout.css" rel="stylesheet" />
@@ -34,7 +35,7 @@
         </md-toolbar>
         <md-list>
             <md-item ng-repeat="item in menu" ng-click="go($index, item.path,item.name);" id="nav-item{{$index}}">
-                <md-item-content ng-class="{'nav-item-select' : $index === selectedItem }"  layout="row" layout-align="start center">
+                <md-item-content ng-class="{'nav-item-select' : $index === selectedItem }" layout="row" layout-align="start center">
                     <div class="inset">
                         <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
                     </div>
@@ -59,10 +60,14 @@
             </md-toolbar>
             <md-toolbar>
                 <div class="md-toolbar-tools" layout='row'>
-                    <md-input-container md-no-float md-theme="input" flex>
-                        <input placeholder="Search">
-                    </md-input-container>
-                    <ng-md-icon icon="search" style="fill:white"></ng-md-icon>
+                    <div flex>
+                        <md-button  class="md-raised" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(hashtags[selectedHashtag].id, true);updateDashboard();" style="font-size:24px">#{{hashtags[selectedHashtag].name}}
+                            <ng-md-icon icon="close"  ></ng-md-icon>
+                        </md-button>
+                    </div>
+                    <md-button ng-click="searchHashtag($event)" aria-label="Search">
+                        <ng-md-icon icon="search" style="fill:white;"></ng-md-icon>
+                    </md-button>
 
                     <div flex=5></div>
                     <md-input-container>

@@ -1,0 +1,21 @@
+<md-dialog aria-label="Search Hashtag Popup" class="popup-size">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Hashtags</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content class="content">
+            <div class="masonry-layout">
+                <div layout="row" ng-repeat="hashtag in hashtags | orderBy:'name'" data-ng-click="toggle = !toggle" data-ng-init="toggle = getStatusHashtag(hashtag.id)" class="item">
+                    <md-button data-ng-class="{'md-primary' : toggle}" ng-click="setHashtags(hashtag.id, toggle)" ng-style="getHashtagStyle(hashtag.priority)">#{{ hashtag.name }}</md-button>
+                </div>
+
+        </md-dialog-content>
+
+    </form>
+</md-dialog>

@@ -122,7 +122,7 @@ angular
 
     };
 
-
+    
 
 });
 
@@ -149,5 +149,6 @@ function ProfilePopupController($scope, $mdDialog, profileIndex) {
     $scope.cancel = function () {
         $mdDialog.cancel();
     };
+    
 
 }

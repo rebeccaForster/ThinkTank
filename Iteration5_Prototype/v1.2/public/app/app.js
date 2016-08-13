@@ -59,9 +59,6 @@ app.config(function ($mdThemingProvider) {
             'default': '500' // use shade 200 for default, and keep all other shades the same
         })
         .backgroundPalette('background');
-    $mdThemingProvider.theme('input', 'default')
-        .primaryPalette('grey', {
-            'default': '50', // use shade 200 for default, and keep all other shades the same
-        })
+   
 
 });
