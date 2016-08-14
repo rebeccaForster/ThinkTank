@@ -55,7 +55,7 @@
           saveToken(data.token);
         })
         .then(function() {
-          $location.reload();
+          location.reload();
         });
     };
 

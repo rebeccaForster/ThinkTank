@@ -15,7 +15,7 @@
     };
 
     vm.onSubmit = function () {
-      console.log('Submitting registration');
+
       authentication
         .register(vm.credentials)
         .error(function(err){

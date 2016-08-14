@@ -16,7 +16,7 @@
     vm.emailAdress = "";
 
     vm.onSubmit = function () {
-      console.log(vm.credentials.email);
+
       authentication
         .login(vm.credentials)
         .error(function(err){

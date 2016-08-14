@@ -114,12 +114,9 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     // vm.currentUser = authentication.currentUser();
 
     $scope.logout = function() {
-        authentication
-            .logout()
-            .then(function(){
-                console.log("reload");
-              location.reload();
-            });
+        authentication.logout();
+        location.reload();
+
     }
 
     $scope.showLoginBox = function(ev) {
