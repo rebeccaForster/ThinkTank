@@ -1,6 +1,6 @@
 <md-dialog aria-label="Search Hashtag Popup" class="popup-size">
     <form>
-        <md-toolbar>
+        <md-toolbar class="md-tall">
             <div class="md-toolbar-tools">
                 <h2>Search:</h2>
                 <md-button  class="md-raised" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(hashtags[selectedHashtag].id, true);updateDashboard();" style="font-size:24px">#{{hashtags[selectedHashtag].name}}
