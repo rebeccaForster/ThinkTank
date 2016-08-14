@@ -113,6 +113,15 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     // vm.isLoggedIn = authentication.isLoggedIn();
     // vm.currentUser = authentication.currentUser();
 
+    $scope.logout = function() {
+        authentication
+            .logout()
+            .then(function(){
+                console.log("reload");
+              location.reload();
+            });
+    }
+
     $scope.showLoginBox = function(ev) {
     
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;

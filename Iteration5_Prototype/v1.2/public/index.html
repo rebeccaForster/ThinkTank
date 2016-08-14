@@ -31,6 +31,7 @@
                 <div ng-show="isLoggedIn">>Hello {{ currentTestUser.firstname }} {{ currentTestUser.name }}</div>
                 <md-button class="md-raised" ng-hide="isLoggedIn" ng-click="showLoginBox()">Login</md-button>
                 <md-button class="md-raised" ng-hide="isLoggedIn" ng-click="showRegisterBox()">Register</md-button>
+                <md-button class="md-raised" ng-show="isLoggedIn" ng-click="logout()">Logout</md-button>
             </div>
         </md-toolbar>
         <md-list>
