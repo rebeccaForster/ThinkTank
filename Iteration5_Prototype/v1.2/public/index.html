@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <title>Academic Think Application</title>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" type='text/css'>
     <!-- Local Styles-->
     <link href="site.css" rel="stylesheet" />
-    <link href="app/styles/dashboard.css" rel="stylesheet" />
-    <link href="app/styles/idea-popup.css" rel="stylesheet" />
+    <link href="app/styles/dashboard-profile.css" rel="stylesheet" />
+    <link href="app/styles/idea-profile-popup.css" rel="stylesheet" />
+    <link href="app/styles/hashtag-popup.css" rel="stylesheet" />
     <link href="app/styles/whiteboard.css" rel="stylesheet" />
     <link href="app/styles/contacts.css" rel="stylesheet" />
     <link href="app/styles/logout.css" rel="stylesheet" />
     <link href="app/styles/messages.css" rel="stylesheet" />
-    <link href="app/styles/profil.css" rel="stylesheet" />
     <link href="app/styles/settings.css" rel="stylesheet" />
 
 
@@ -35,8 +36,8 @@
             </div>
         </md-toolbar>
         <md-list>
-            <md-item ng-repeat="item in menu" ng-click="go($index, item.path,item.name);">
-                <md-item-content ng-class="{'nav-item-select' : $index === selectedItem }" id="nav-item{{$index}}" layout="row" layout-align="start center">
+            <md-item ng-repeat="item in menu" ng-click="go($index, item.path,item.name);" id="nav-item{{$index}}">
+                <md-item-content ng-class="{'nav-item-select' : $index === selectedItem }" layout="row" layout-align="start center">
                     <div class="inset">
                         <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
                     </div>
@@ -61,14 +62,18 @@
             </md-toolbar>
             <md-toolbar>
                 <div class="md-toolbar-tools" layout='row'>
-                    <md-input-container md-no-float md-theme="input" flex>
-                        <input placeholder="Search">
-                    </md-input-container>
-                    <ng-md-icon icon="search" style="fill:white"></ng-md-icon>
+                    <div flex>
+                        <md-button  class="md-raised" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(hashtags[selectedHashtag].id, true);updateDashboard();" style="font-size:24px">#{{hashtags[selectedHashtag].name}}
+                            <ng-md-icon icon="close"  ></ng-md-icon>
+                        </md-button>
+                    </div>
+                    <md-button ng-click="searchHashtag($event)" aria-label="Search">
+                        <ng-md-icon icon="search" style="fill:white;"></ng-md-icon>
+                    </md-button>
 
                     <div flex=5></div>
                     <md-input-container>
-                        <md-select ng-model="sortingType" aria-label="sorting">
+                        <md-select ng-model="sortingType" aria-label="sorting" ng-change="changeSortingType(sortingType)" >
                             <md-option ng-value="t.title" data-ng-repeat="t in sorting">{{ t.title }}</md-option>
                         </md-select>
                     </md-input-container>
@@ -104,11 +109,10 @@
     <script src="app/services/data.service.js"></script>
     <!-- Load controllers -->
     <script src="app/controllers/indexCtrl.js"></script>
-    <script src="app/controllers/dashboardCtrl.js"></script>
+    <script src="app/controllers/dashboardProfileCtrl.js"></script>
     <script src="app/controllers/contactsCtrl.js"></script>
     <script src="app/controllers/logoutCtrl.js"></script>
     <script src="app/controllers/messagesCtrl.js"></script>
-    <script src="app/controllers/profilCtrl.js"></script>
     <script src="app/controllers/settingsCtrl.js"></script>
     <script src="app/controllers/whiteboardCtrl.js"></script>
     <script src="app/controllers/login.controller.js"></script>
@@ -128,7 +132,7 @@
                   <label for="password">Password</label>
                   <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password">
                 </div>
-                <md-button type="submit" ">Sign in!</md-button>
+                <md-button type="submit">Sign in!</md-button>
               </form>
               </div>
             </md-dialog-content>
@@ -153,7 +157,7 @@
                   <label for="password">Password</label>
                   <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password">
                 </div>
-                <md-button type="submit" ">Register!</md-button>
+                <md-button type="submit">Register!</md-button>
               </form>
               </div>
             </md-dialog-content>

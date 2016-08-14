@@ -1,0 +1,37 @@
+<md-dialog aria-label="Profile Popup" class="popup-size">
+    <form>
+        <div class="header">
+            <md-button class="md-icon-button header-btn-close" ng-click="cancel()">
+                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog" style="fill:white"></md-icon>
+            </md-button>
+            <div class="header-top" layout="column">
+                <div flex>
+                    <div class="header-background">
+                    </div>
+                    <div class="header-title">
+                        <h1>{{user.name}}</h1>
+                        <h2> <a href={{user.url}}>{{user.url}}</a> </h2>
+                    </div>
+                </div>
+                <div layout="row">
+                    <div flex></div>
+                    <md-button class="md-accent">Follow user</md-button>
+                </div>
+            </div>
+
+            <div class="container">
+                <img ng-src={{user.profileImg}} class="md-avatar header-background-circle" alt="{{user.name}}">
+                <div class="header-progress">
+                    <round-progress max="100" current="100" color="#fafafa" bgcolor="#fafafa" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
+
+                    </round-progress>
+                </div>
+            </div>
+        </div>
+        <md-dialog-content class="idea-profile-content" layout="row" ng-include="'app/views/profile-content.html'">
+           
+
+        </md-dialog-content>
+
+    </form>
+</md-dialog>

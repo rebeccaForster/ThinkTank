@@ -1,5 +1,5 @@
 <md-card-header>
-    <md-card-avatar ng-click="showAuthor($event)">
+    <md-card-avatar ng-click="showProfile(idea.author, $event)">
         <img class="md-user-avatar" src={{users[idea.author].profileImg}} />
     </md-card-avatar>
     <md-card-header-text>
@@ -11,7 +11,7 @@
 <md-card-content ng-click="showIdea(idea.id, $event)">
     <img src={{idea.img}} ng-show="{{idea.img.length}} > 0" class="md-card-image" alt="user avatar" style="width:100%;height:auto">
 
-    <p>{{idea.description}}</p>
+    <div style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;">{{idea.description}}</div>
 </md-card-content>
 <md-card-actions>
     <md-button ng-repeat="tag in idea.tags" ng-click="addSearchTag(idea.id, $index, $event)">#{{tag}}</md-button>
