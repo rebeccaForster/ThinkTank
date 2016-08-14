@@ -1,7 +1,7 @@
 'use strict';
 // navigationCtrl.$inject = ['$location','authentication'];
 
-app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, $mdDialog, $mdMedia, login) {
+app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, $mdDialog, $mdMedia) {
 
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
@@ -173,19 +173,35 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     // vm.isLoggedIn = authentication.isLoggedIn();
     // vm.currentUser = authentication.currentUser();
 
-    $scope.showAdvanced = function () {
+    $scope.showLoginBox = function(ev) {
+    
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
 
         console.log("login button pressed");
         $mdDialog.show({
             controller: DialogController,
-            templateUrl: '../views/login.view.html',
+          templateUrl: 'login.tmpl.html',
             parent: angular.element(document.body),
-            targetEvent: login.onSubmit,
+          targetEvent: ev,
             clickOutsideToClose: true,
             fullscreen: useFullScreen
         });
-    }
+    };
+
+    $scope.showRegisterBox = function(ev) {
+    
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+
+        console.log("register button pressed");
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: 'resgister.tmpl.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          fullscreen: useFullScreen
+        });
+    };
 
     function DialogController($scope, $mdDialog) {
         $scope.hide = function () {

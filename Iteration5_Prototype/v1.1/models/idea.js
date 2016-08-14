@@ -20,7 +20,8 @@ var IdeaSchema = new mongoose.Schema({
 		livetime: Number,  //seconds of total live time. 
 		scribbles: [String] // list of scribble object IDs
 	}, 
-    	{ collection : 'ideascollection' });
+    { collection : 'ideas' }
+);
 
 module.exports = mongoose.model('Idea', IdeaSchema);
 

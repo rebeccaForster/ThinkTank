@@ -7,7 +7,9 @@ var CommentSchema = new mongoose.Schema({
 	text: String,
 	commentator: mongoose.Schema.Types.ObjectId,// person ID 
 	idea: mongoose.Schema.Types.ObjectId // idea ID 
-});
+	}, 
+    { collection : 'comments' }
+);
 
 module.exports = mongoose.model('Comment', CommentSchema);
 

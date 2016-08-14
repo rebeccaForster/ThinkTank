@@ -6,7 +6,9 @@ var ScribbleSchema = new mongoose.Schema({
 	lastchanged: { type: Date, default: Date.now }, 
 	del: Boolean, 
 	path: String //Pfad zur svg 
-});
+	}, 
+    { collection : 'scribbles' }
+);
 
 module.exports = mongoose.model('Scirbble', ScribbleSchema);
 
