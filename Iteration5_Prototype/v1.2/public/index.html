@@ -29,7 +29,8 @@
                 <span></span>
                 <!-- <div >{{ currentUser.firstname }} {{ currentUser.name }}</div> -->
                 <div ng-show="isLoggedIn">>Hello {{ currentTestUser.firstname }} {{ currentTestUser.name }}</div>
-                <md-button class="md-raised" ng-hide="isLoggedIn" ng-click="showAdvanced($event)">Login</md-button>
+                <md-button class="md-raised" ng-hide="isLoggedIn" ng-click="showLoginBox()">Login</md-button>
+                <md-button class="md-raised" ng-hide="isLoggedIn" ng-click="showRegisterBox()">Register</md-button>
             </div>
         </md-toolbar>
         <md-list>
@@ -100,7 +101,6 @@
     <script src="app/services/dashboard.service.js"></script>
     <script src="app/services/authentication.service.js"></script>
     <script src="app/services/data.service.js"></script>
-    <script src="app/services/login.service.js"></script>
     <!-- Load controllers -->
     <script src="app/controllers/indexCtrl.js"></script>
     <script src="app/controllers/dashboardCtrl.js"></script>
@@ -112,6 +112,52 @@
     <script src="app/controllers/whiteboardCtrl.js"></script>
     <script src="app/controllers/login.controller.js"></script>
     <script src="app/controllers/register.controller.js"></script>
+
+    <script type="text/ng-template" id="login.tmpl.html" >
+        <md-dialog aria-label="Mango (Fruit)" ng-controller="loginCtrl as vm" ng-cloak>
+            <md-dialog-content>
+              <div class="md-dialog-content">
+                <h2>Sign in</h2>
+                <form ng-submit="vm.onSubmit()">
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input type="text" class="form-control" id="email" placeholder="Enter email" ng-model="vm.credentials.email">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password">
+                </div>
+                <md-button type="submit" ">Sign in!</md-button>
+              </form>
+              </div>
+            </md-dialog-content>
+        </md-dialog>
+    </script>
+
+    <script type="text/ng-template" id="resgister.tmpl.html" >
+        <md-dialog aria-label="Mango (Fruit)" ng-controller="registerCtrl as vm" ng-cloak>
+            <md-dialog-content>
+              <div class="md-dialog-content">
+                <h2>Register</h2>
+                <form ng-submit="vm.onSubmit()">
+                <div class="form-group">
+                  <label for="name">Full name</label>
+                  <input type="text" class="form-control" id="name" placeholder="Enter your name" ng-model="vm.credentials.name">
+                </div>
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="vm.credentials.email">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password">
+                </div>
+                <md-button type="submit" ">Register!</md-button>
+              </form>
+              </div>
+            </md-dialog-content>
+        </md-dialog>
+    </script>
 
     <!-- Load custom filters -->
     <!-- Load custom directives -->

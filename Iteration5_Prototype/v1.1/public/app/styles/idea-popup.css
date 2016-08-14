@@ -1,0 +1,111 @@
+.header-progress {
+    position: fixed;
+    top: 100px;
+    z-index: 20;
+}
+
+.progress {
+    position: fixed;
+    color: #bbb;
+    font-size: 40px;
+    top: 180px;
+    font-weight: 100;
+    line-height: 1;
+    margin-left: 50px;
+    z-index: 20;
+}
+
+.container {
+    position: fixed;
+    margin-left: -100px;
+    left: 50%;
+    width: 100%;
+}
+
+.header-image {
+    z-index: 2;
+    height: 200px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    margin: 0;
+}
+
+.header-background {
+    position: fixed;
+    z-index: 1;
+    height: 200px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    margin: 0;
+    background-color: #3f51b5;
+}
+
+.header-top {
+    position: fixed;
+    width: 100%;
+    height: 260px;
+}
+
+.header-title {
+    position: fixed;
+    margin-right: 29px;
+    margin-left: 29px;
+    z-index: 20;
+    top: 0px;
+    left: 0px;
+    color: white;
+}
+.messages-icon{
+    float: right;
+}
+.header-btn-followIdea {
+    float: right;
+    z-index: 10;
+}
+
+.header-btn-close {
+    float: right;
+    z-index: 10;
+}
+
+.header-background-circle {
+    z-index: 2;
+    background-color: white;
+    position: fixed;
+    width: 150px;
+    height: 150px;
+    border: 0px solid black;
+    border-radius: 75px;
+    top: 120px;
+    margin-left: 20px;
+}
+
+md-dialog-content {
+    margin-top: 260px;
+    margin-bottom: 0px;
+}
+
+.content {
+    max-width: 100%;
+    margin-left: 29px;
+    margin-right: 29px;
+}
+
+.content-image {
+    width: 100%;
+    height: auto;
+}
+
+.content-tags {
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 0px;
+}
+
+.content-contributors{
+    display: inline-block;
+    width: auto;
+
+}

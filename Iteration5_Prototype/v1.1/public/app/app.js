@@ -1,4 +1,4 @@
-var app = angular.module('App', ['ui.router', 'ngMaterial', 'ngMdIcons']);
+var app = angular.module('App', ['ui.router', 'ngMaterial', 'ngMdIcons', 'ngMessages', 'material.svgAssetsCache']);
 
 app.config(function ($stateProvider,$urlRouterProvider) {
 
