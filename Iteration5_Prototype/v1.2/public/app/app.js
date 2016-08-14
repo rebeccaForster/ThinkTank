@@ -2,15 +2,15 @@ var app = angular.module('App', ['ui.router', 'ngMaterial', 'ngMdIcons', 'ngMess
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/dashbord');
+    $urlRouterProvider.otherwise('/dashboard');
 
     $stateProvider.state("whiteboard", {
         url: "/whiteboard",
         controller: "WhiteboardCtrl",
         templateUrl: "app/views/whiteboard.html"
     })
-    $stateProvider.state("dashbord", {
-        url: "/dashbord",
+    $stateProvider.state("dashboard", {
+        url: "/dashboard",
         controller: "DashboardProfileCtrl",
         templateUrl: "app/views/dashboard.html"
     })

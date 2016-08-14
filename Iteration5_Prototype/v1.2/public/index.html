@@ -115,6 +115,7 @@
     <script src="app/controllers/settingsCtrl.js"></script>
     <script src="app/controllers/whiteboardCtrl.js"></script>
     <script src="app/controllers/login.controller.js"></script>
+    <script src="app/controllers/register.controller.js"></script>
 
     <script type="text/ng-template" id="login.tmpl.html" >
         <md-dialog aria-label="Mango (Fruit)" ng-controller="loginCtrl as vm" ng-cloak>
@@ -130,7 +131,7 @@
                   <label for="password">Password</label>
                   <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password">
                 </div>
-                <md-button type="submit" ">Sign in!</md-button>
+                <md-button type="submit">Sign in!</md-button>
               </form>
               </div>
             </md-dialog-content>
@@ -155,7 +156,7 @@
                   <label for="password">Password</label>
                   <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password">
                 </div>
-                <md-button type="submit" ">Register!</md-button>
+                <md-button type="submit">Register!</md-button>
               </form>
               </div>
             </md-dialog-content>

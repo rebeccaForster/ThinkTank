@@ -14,8 +14,8 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             icon: 'brush'
     },
         {
-            path: 'dashbord',
-            title: 'Dashbord',
+            path: 'dashboard',
+            title: 'Dashboard',
             icon: 'send'
     },
         {
@@ -33,8 +33,8 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             icon: 'brush'
     },
         {
-            path: 'dashbord',
-            title: 'Dashbord',
+            path: 'dashboard',
+            title: 'Dashboard',
             icon: 'send'
     },
         {
