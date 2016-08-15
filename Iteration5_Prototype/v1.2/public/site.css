@@ -34,3 +34,17 @@ md-card{
     top: 112px;
     margin-left: 12px;
 }
+
+.toolbar-settings {
+    min-height: 223px !important;
+}
+
+.toolbar-settings-top{
+    min-height: 74px !important;
+
+}
+
+.toolbar-settings-bottom{
+    min-height: 149px !important;
+
+}

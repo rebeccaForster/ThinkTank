@@ -23,13 +23,13 @@
 </head>
 
 <body ng-app="App" layout="row" ng-controller="IndexCtrl" ng-cloak>
-    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-        <md-toolbar class="md-tall md-primary md-hue-2">
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-24dp" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+        <md-toolbar class="toolbar-settings md-primary md-hue-2">
             <div layout="column" class="md-toolbar-tools-bottom inset">
                 <ng-md-icon icon="account_circle" size="64"></ng-md-icon>
                 <span></span>
                 <!-- <div >{{ currentUser.firstname }} {{ currentUser.name }}</div> -->
-                <div ng-show="isLoggedIn">>Hello {{ currentTestUser.firstname }} {{ currentTestUser.name }}</div>
+                <div ng-show="isLoggedIn" class="md-headline" style="font-weight:bold;">>Hello {{ currentTestUser.firstname }} {{ currentTestUser.name }}</div>
                 <md-button class="md-raised" ng-hide="isLoggedIn" ng-click="showLoginBox()">Login</md-button>
                 <md-button class="md-raised" ng-hide="isLoggedIn" ng-click="showRegisterBox()">Register</md-button>
                 <md-button class="md-raised" ng-show="isLoggedIn" ng-click="logout()">Logout</md-button>
@@ -41,51 +41,14 @@
                     <div class="inset">
                         <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
                     </div>
-                    <div class="inset">{{item.title}}
+                    <div class="inset md-headline" style="font-weight:bold;">{{item.title}}
                     </div>
                 </md-item-content>
             </md-item>
         </md-list>
     </md-sidenav>
-    <div layout="column" layout-fill>
-        <header>
-
-            <md-toolbar class="md-primary md-hue-1">
-                <div class="md-toolbar-tools">
-                    <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
-                        <ng-md-icon icon="menu"></ng-md-icon>
-                    </md-button>
-                    <h3>
-                    Academic Think Tank
-                    </h3>
-                </div>
-            </md-toolbar>
-            <md-toolbar>
-                <div class="md-toolbar-tools" layout='row'>
-                    <div flex>
-                        <md-button  class="md-raised" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(hashtags[selectedHashtag].id, true);updateDashboard();" style="font-size:24px">#{{hashtags[selectedHashtag].name}}
-                            <ng-md-icon icon="close"  ></ng-md-icon>
-                        </md-button>
-                    </div>
-                    <md-button ng-click="searchHashtag($event)" aria-label="Search">
-                        <ng-md-icon icon="search" style="fill:white;"></ng-md-icon>
-                    </md-button>
-
-                    <div flex=5></div>
-                    <md-input-container>
-                        <md-select ng-model="sortingType" aria-label="sorting" ng-change="changeSortingType(sortingType)" >
-                            <md-option ng-value="t.title" data-ng-repeat="t in sorting">{{ t.title }}</md-option>
-                        </md-select>
-                    </md-input-container>
-                </div>
-            </md-toolbar>
-        </header>
-        <main class="" layout="row" flex>
-            <md-content flex ng-style="{'background-color': slidercolor}">
-                <div class="fade-view" ui-view="">
-                </div>
-            </md-content>
-        </main>
+    <div layout="column" layout-fill ui-view="">
+      
 
     </div>
     <!-- Angular Dependencies -->
@@ -118,48 +81,48 @@
     <script src="app/controllers/login.controller.js"></script>
     <script src="app/controllers/register.controller.js"></script>
 
-    <script type="text/ng-template" id="login.tmpl.html" >
+    <script type="text/ng-template" id="login.tmpl.html">
         <md-dialog aria-label="Mango (Fruit)" ng-controller="loginCtrl as vm" ng-cloak>
             <md-dialog-content>
-              <div class="md-dialog-content">
-                <h2>Sign in</h2>
-                <form ng-submit="vm.onSubmit()">
-                <div class="form-group">
-                  <label for="email">Email address</label>
-                  <input type="text" class="form-control" id="email" placeholder="Enter email" ng-model="vm.credentials.email">
+                <div class="md-dialog-content">
+                    <h2>Sign in</h2>
+                    <form ng-submit="vm.onSubmit()">
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="text" class="form-control" id="email" placeholder="Enter email" ng-model="vm.credentials.email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password">
+                        </div>
+                        <md-button type="submit">Sign in!</md-button>
+                    </form>
                 </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password">
-                </div>
-                <md-button type="submit">Sign in!</md-button>
-              </form>
-              </div>
             </md-dialog-content>
         </md-dialog>
     </script>
 
-    <script type="text/ng-template" id="resgister.tmpl.html" >
+    <script type="text/ng-template" id="resgister.tmpl.html">
         <md-dialog aria-label="Mango (Fruit)" ng-controller="registerCtrl as vm" ng-cloak>
             <md-dialog-content>
-              <div class="md-dialog-content">
-                <h2>Register</h2>
-                <form ng-submit="vm.onSubmit()">
-                <div class="form-group">
-                  <label for="name">Full name</label>
-                  <input type="text" class="form-control" id="name" placeholder="Enter your name" ng-model="vm.credentials.name">
+                <div class="md-dialog-content">
+                    <h2>Register</h2>
+                    <form ng-submit="vm.onSubmit()">
+                        <div class="form-group">
+                            <label for="name">Full name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter your name" ng-model="vm.credentials.name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="vm.credentials.email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password">
+                        </div>
+                        <md-button type="submit">Register!</md-button>
+                    </form>
                 </div>
-                <div class="form-group">
-                  <label for="email">Email address</label>
-                  <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="vm.credentials.email">
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password">
-                </div>
-                <md-button type="submit">Register!</md-button>
-              </form>
-              </div>
             </md-dialog-content>
         </md-dialog>
     </script>

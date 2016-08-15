@@ -29,7 +29,7 @@ var ideas = [
         id: 0,
         author: 6,
         title: "Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+        tags: [0, 6, 7],
         contributors: [1, 3, 4, 6, 7, 2],
         description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafkljdöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskf",
         img: 'https://placekitten.com/600/300',
@@ -52,8 +52,8 @@ var ideas = [
                 status: true
                 }
             ],
-        percentage: 25,
-        dayLeft: "100",
+        dayMax: 100,
+        dayLeft: 25,
         messages: [
 
             {
@@ -115,7 +115,7 @@ var ideas = [
         id: 1,
         author: 2,
         title: "Automotiva driving asdfkdasfj",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+        tags: [0, 6, 7],
         contributors: [1, 3, 6],
         description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafkljdöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskf",
         img: "https://placekitten.com/600/300",
@@ -138,8 +138,8 @@ var ideas = [
                 status: true
                 }
             ],
-        percentage: 50,
-        dayLeft: "7",
+        dayMax: 330,
+        dayLeft: 10,
         messages: [
 
             {
@@ -171,7 +171,7 @@ var ideas = [
         id: 2,
         author: 0,
         title: "Automotiva driving asdfkdasfj",
-        tags: ["tag12", "tag22"],
+        tags: [0, 6, 7],
         contributors: [1, 4, 6],
         description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafklj",
         img: "",
@@ -194,8 +194,8 @@ var ideas = [
                 status: true
                 }
             ],
-        percentage: 60,
-        dayLeft: "8",
+        dayMax: 300,
+        dayLeft: 100,
         messages: [
 
             {
@@ -227,7 +227,7 @@ var ideas = [
         id: 3,
         author: 3,
         title: "Automotiva driving asdfkdasfj",
-        tags: ["tag1", "tag2"],
+        tags: [0, 6, 7],
         contributors: ["cont1", "cont2"],
         description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafklj",
         img: "https://placekitten.com/600/300",
@@ -250,8 +250,8 @@ var ideas = [
                 status: true
                 }
             ],
-        percentage: 70,
-        dayLeft: "9",
+        dayMax: 300,
+        dayLeft: 100,
         messages: [
 
             {
@@ -284,7 +284,7 @@ var ideas = [
         id: 4,
         author: 6,
         title: "Idee 5 Automotiva driving asdfkdasfj",
-        tags: ["tag1", "tag2"],
+        tags: [0, 6, 7],
         contributors: [4, 3, 6],
         description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjasdöfjsdafljdsakfljsdalf daksfjldfkjasj",
         img: "https://placekitten.com/600/300",
@@ -307,8 +307,8 @@ var ideas = [
                 status: true
                 }
             ],
-        percentage: 80,
-        dayLeft: "10",
+        dayMax: 300,
+        dayLeft: 100,
         messages: [
 
             {
@@ -340,7 +340,7 @@ var ideas = [
         id: 5,
         author: 7,
         title: " Idee 6 Automotiva driving asdfkdasfj",
-        tags: ["tag1", "tag2"],
+        tags: [0, 6, 7],
         contributors: [1, 2, 6],
         description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafklj",
         img: "https://placekitten.com/600/300",
@@ -363,8 +363,8 @@ var ideas = [
                 status: true
                 }
             ],
-        percentage: 90,
-        dayLeft: "11",
+        dayMax: 300,
+        dayLeft: 100,
         messages: [
 
             {
@@ -396,7 +396,7 @@ var ideas = [
         id: 6,
         author: "6",
         title: "Automotiva driving asdfkdasfj",
-        tags: ["tag1", "tag2"],
+        tags: [0, 6, 7],
         contributors: [1, 3, 7],
         description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjadöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskfs dskfj sdafklj",
         img: "https://placekitten.com/600/300",
@@ -419,8 +419,8 @@ var ideas = [
                 status: true
                 }
             ],
-        percentage: 100,
-        dayLeft: "123",
+        dayMax: 300,
+        dayLeft: 100,
         messages: [
 
             {
@@ -457,7 +457,7 @@ var users = [
         name: "Marius Mülle0",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+        tags: [0, 6, 7],
         groups: [
             {
                 name: "ergonomics",
@@ -475,7 +475,7 @@ var users = [
         name: "Marius Mülle1",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+        tags: [0, 6, 7],
         groups: [
             {
                 name: "ergonomics",
@@ -492,7 +492,7 @@ var users = [
         name: "Marius Mülle2",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+        tags: [0, 6, 7],
         groups: [
             {
                 name: "ergonomics",
@@ -509,7 +509,7 @@ var users = [
         name: "Marius Mülle3",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+        tags: [0, 6, 7],
         groups: [
             {
                 name: "ergonomics",
@@ -526,7 +526,7 @@ var users = [
         name: "Marius Mülle4",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+        tags: [0, 6, 7],
         groups: [
             {
                 name: "ergonomics",
@@ -543,7 +543,7 @@ var users = [
         name: "Marius Mülle5",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+        tags: [0, 6, 7],
         groups: [
             {
                 name: "ergonomics",
@@ -560,7 +560,7 @@ var users = [
         name: "Marius Mülle6",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+        tags: [0, 6, 7],
         groups: [
             {
                 name: "ergonomics",
@@ -577,7 +577,7 @@ var users = [
         name: "Marius Mülle7",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+        tags: [0, 6, 7],
         groups: [
             {
                 name: "ergonomics",

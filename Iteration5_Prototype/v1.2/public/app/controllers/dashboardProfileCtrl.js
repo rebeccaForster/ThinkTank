@@ -84,17 +84,7 @@ angular
 
     $scope.user = $scope.users[3];
 
-    $scope.addSearchTag = function (indexIdea, IndexTag, ev) {
-        $mdDialog.show(
-            $mdDialog.alert()
-            .clickOutsideToClose(true)
-            .title('Add Hashtag')
-            .textContent('Index Idea: ' + indexIdea + '  Index Tag: ' + IndexTag)
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Got it!')
-            .targetEvent(ev)
-        );
-    }
+   
 
     $scope.openWhiteboard = function () {
         $timeout(function() {
