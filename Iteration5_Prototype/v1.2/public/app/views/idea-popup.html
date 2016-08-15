@@ -1,13 +1,15 @@
 <md-dialog aria-label="Idea Popup" class="popup-size">
     <form>
-        <md-toolbar class="md-tall header-picture" style="background-image:url({{selectedIdea.img}})">
-            <div class="md-toolbar-tools">
+        <md-toolbar class="toolbar-settings header-picture" style="background-image:url({{selectedIdea.img}});">
+            <div layout="row" layout-padding>
                 <div>
-                    <h1>{{selectedIdea.title}}</h1>
-                    <h2>Author: {{users[selectedIdea.author].name}}</h2>
+                    <div>
+                        <span class="md-display-3">{{selectedIdea.title}}</span>
+                    </div>
+                    <div>
+                        <span class="md-display-2">Author: {{users[selectedIdea.author].name}}</span>
+                    </div>
                 </div>
-
-
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
@@ -17,32 +19,35 @@
 
         </md-toolbar>
 
-            <div class="container">
-                <span class="progress">{{selectedIdea.dayLeft}}d/100d
-            </span>
-                <div class="header-background-circle">
-                </div>
-                <div class="header-progress">
-                    <round-progress max="100" current="100" color="#fafafa" bgcolor="#fafafa" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
-                        <round-progress max="100" current="selectedIdea.percentage" color="#45ccce" bgcolor="gainsboro" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="true" duration="800" animation="easeOutCubic" offset="inherit" animation-delay="0" on-render="showPreciseCurrent">
-
-
-                        </round-progress>
-                    </round-progress>
-                </div>
+        <div class="container">
+            <div class="header-background-circle md-display-1" layout="column">
+                <div flex></div>
+                <div>{{selectedIdea.dayLeft}}d</div>
+                <div>/</div>
+                <div>{{selectedIdea.dayMax}}d</div>
+                <div flex></div>
             </div>
+            <div class="header-progress">
+                <round-progress max="100" current="100" color="#fafafa" bgcolor="#fafafa" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
+                    <round-progress max="selectedIdea.dayMax" current="selectedIdea.dayLeft" color="#45ccce" bgcolor="gainsboro" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="true" duration="800" animation="easeOutCubic" offset="inherit" animation-delay="0" on-render="showPreciseCurrent">
+
+
+                    </round-progress>
+                </round-progress>
+            </div>
+        </div>
         <div layout="row" style="margin-bottom:110px;">
             <div flex></div>
-            <md-button class="md-accent">Follow idea</md-button>
+            <md-button class="md-accent" style="font-weight:bold; font-size:45px;">Follow idea</md-button>
         </div>
 
-        <md-dialog-content layout="row" layout-padding>
+        <md-dialog-content layout="row">
             <div flex=50 layout="column" layout-padding>
 
                 <div>
-                    <h3>Contributors</h3>
+                    <div class="md-display-1" style="font-weight:bold;">Contributors</div>
                     <div>
-                        <md-card class="content-contributors" ng-click="showProfile(selectedIdea.author, $event)">
+                        <md-card class="content-contributors  md-whiteframe-4dp" ng-click="showProfile(selectedIdea.author, $event)">
                             <md-card-header>
                                 <md-card-avatar>
                                     <img class="md-user-avatar" src={{users[selectedIdea.author].profileImg}} />
@@ -53,7 +58,7 @@
                                 </md-card-header-text>
                             </md-card-header>
                         </md-card>
-                        <md-card ng-repeat="contributor in selectedIdea.contributors" class="content-contributors" ng-click="showProfile(contributor, $event)">
+                        <md-card class="content-contributors  ng-repeat="contributor in selectedIdea.contributors" class="content-contributors" ng-click="showProfile(contributor, $event)">
                             <md-card-header>
                                 <md-card-avatar>
                                     <img class="md-user-avatar" src={{users[contributor].profileImg}} />
@@ -65,59 +70,59 @@
                             </md-card-header>
                         </md-card>
                     </div>
-                    <md-button class="md-accent">I want to contribute</md-button>
+                    <md-button class="md-accent" style="font-weight:bold; font-size:24px;">I want to contribute</md-button>
                 </div>
                 <img src='app/img/MindMap.png' class="content-image">
                 <div>
-                    <h3>Descirption</h3>
-                    <p>{{selectedIdea.description}}</p>
+                    <div class="md-display-1" style="font-weight:bold;">Descirption</div>
+                    <p class="md-headline">{{selectedIdea.description}}</p>
                 </div>
                 <div>
-                    <h3>Sribbles</h3>
+                    <div class="md-display-1" style="font-weight:bold;">Sribbles</div>
                     <img src={{selectedIdea.scribble}} ng-show="{{selectedIdea.scribble.length}} > 0" class="content-image">
-                    <div ng-show="{{selectedIdea.scribble.length}} <= 0">No Scribble available!</div>
+                    <div class="md-headline" ng-show="{{selectedIdea.scribble.length}} <= 0">No Scribble available!</div>
                 </div>
                 <div>
-                    <h3>Milsteonstes</h3>
+                    <div class="md-display-1" style="font-weight:bold;">Milsteonstes</div>
                     <div>
-                        <md-checkbox ng-repeat="milestone in selectedIdea.milestones" ng-model="milestone.status" aria-label="milestone.name" ng-disabled="true">
+                        <md-checkbox class="md-display-1" ng-repeat="milestone in selectedIdea.milestones" ng-model="milestone.status" aria-label="milestone.name" ng-disabled="true">
                             {{milestone.name}}
                         </md-checkbox>
                     </div>
                 </div>
                 <div>
-                    <h3>Hashtags</h3>
-                    <p style="font-weight:bold;" ng-repeat="tag in selectedIdea.tags" class="content-tags">#{{tag | uppercase}}</p>
+                    <div class="md-display-1" style="font-weight:bold;">Hashtags</div>
+                    <p class="md-headline" ng-repeat="tag in selectedIdea.tags" style="padding:0px 10px 0px 10px; margin:0px;display:inline-block">#{{tag | uppercase}}</p>
                 </div>
             </div>
             <div flex=50 layout="column" layout-padding>
                 <div>
-                    <h3>Comments/React on Idea</h3>
+                    <div class="md-display-1" style="font-weight:bold;" >Comments/React on Idea</div>
                     <div layout="row">
                         <div layout="column" flex layout-align="center center">
                             <ng-md-icon icon="thumb_up" style="fill: #737373;" size="56"></ng-md-icon>
                             <br>
-                            <div>I like idea</div>
+                            <div class="md-subhead">I like idea</div>
                         </div>
                         <div layout="column" flex layout-align="center center">
                             <ng-md-icon icon="touch_app" style="fill: #737373;" size="56"></ng-md-icon>
                             <br>
-                            <div>new input</div>
+                            <div class="md-subhead">new input</div>
                         </div>
                         <div layout="column" flex layout-align="center center">
                             <ng-md-icon icon="flash_on" style="fill: #737373;" size="56"></ng-md-icon>
                             <br>
-                            <div>see trouble</div>
+                            <div class="md-subhead">see trouble</div>
                         </div>
                         <div layout="column" flex layout-align="center center">
                             <ng-md-icon icon="more_horiz" style="fill: #737373;" size="56"></ng-md-icon>
                             <br>
-                            <div>other commit</div>
+                            <div class="md-subhead">other commit</div>
                         </div>
                     </div>
                     <div>
-                        <md-input-container md-no-float style="width:100%;" flex>
-                            <input placeholder="Wher do you see Problems">
+                        <md-input-container class="md-headline" md-no-float style="width:100%;" flex>
+                            <input placeholder="Where do you see Problems">
                         </md-input-container>
                         <md-button class="md-accent" class="messages-icon">Send</md-button>
                     </div>
@@ -130,10 +135,10 @@
                                     <ng-md-icon ng-show="message.newInputStatus" icon="touch_app" style="fill: #737373" class="messages-icon"></ng-md-icon>
                                     <ng-md-icon ng-show="message.troubleStatus" icon="flash_on" style="fill: #737373" class="messages-icon"></ng-md-icon>
                                     <ng-md-icon ng-show="message.other" icon="more_horiz" style="fill: #737373" class="messages-icon"></ng-md-icon>
-                                    <h3>{{users[message.author].name}}</h3>
+                                    <div class="md-display-1">{{users[message.author].name}}</div>
 
 
-                                    <p>{{message.text}}</p>
+                                    <p class="md-headline">{{message.text}}</p>
                                 </div>
                                 <md-divider md-inset ng-if="!$last"></md-divider>
                             </md-list-item>

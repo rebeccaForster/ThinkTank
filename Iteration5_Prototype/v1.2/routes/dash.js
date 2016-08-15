@@ -52,8 +52,8 @@ var ideas = [
                 status: true
                 }
             ],
-        percentage: 25,
-        dayLeft: "100",
+        dayMax: 100,
+        dayLeft: 25,
         messages: [
 
             {
@@ -138,8 +138,8 @@ var ideas = [
                 status: true
                 }
             ],
-        percentage: 50,
-        dayLeft: "7",
+        dayMax: 330,
+        dayLeft: 10,
         messages: [
 
             {
@@ -194,8 +194,8 @@ var ideas = [
                 status: true
                 }
             ],
-        percentage: 60,
-        dayLeft: "8",
+        dayMax: 300,
+        dayLeft: 100,
         messages: [
 
             {
@@ -250,8 +250,8 @@ var ideas = [
                 status: true
                 }
             ],
-        percentage: 70,
-        dayLeft: "9",
+        dayMax: 300,
+        dayLeft: 100,
         messages: [
 
             {
@@ -307,8 +307,8 @@ var ideas = [
                 status: true
                 }
             ],
-        percentage: 80,
-        dayLeft: "10",
+        dayMax: 300,
+        dayLeft: 100,
         messages: [
 
             {
@@ -363,8 +363,8 @@ var ideas = [
                 status: true
                 }
             ],
-        percentage: 90,
-        dayLeft: "11",
+        dayMax: 300,
+        dayLeft: 100,
         messages: [
 
             {
@@ -419,8 +419,8 @@ var ideas = [
                 status: true
                 }
             ],
-        percentage: 100,
-        dayLeft: "123",
+        dayMax: 300,
+        dayLeft: 100,
         messages: [
 
             {

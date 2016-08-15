@@ -34,3 +34,7 @@ md-card{
     top: 112px;
     margin-left: 12px;
 }
+
+.toolbar-settings {
+    min-height: 223px !important;
+}
