@@ -32,7 +32,7 @@ var ideas = [
         tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
         contributors: [1, 3, 4, 6, 7, 2],
         description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafkljdöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskf",
-        img: "https://placekitten.com/600/300",
+        img: 'https://placekitten.com/600/300',
         scribble: 'https://placekitten.com/600/300',
         milestones: [
             {
@@ -52,8 +52,8 @@ var ideas = [
                 status: true
                 }
             ],
-        percentage: 40,
-        dayLeft: "6",
+        percentage: 25,
+        dayLeft: "100",
         messages: [
 
             {

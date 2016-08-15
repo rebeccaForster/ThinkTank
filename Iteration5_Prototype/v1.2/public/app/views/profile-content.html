@@ -1,4 +1,4 @@
-            <div flex=66 layout="column" class="content">
+            <div flex=66 layout="column" layout-padding>
                 <div class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
                     <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
                         <md-card ng-repeat="indexUserIdea in user.ideas" ng-init="idea = ideas[indexUserIdea]" ng-if="!(($index+2)%2)" ng-include="'app/views/dashboard-item-idea-card.html'">
@@ -12,7 +12,7 @@
                     </div>
                 </div>
             </div>
-            <div flex layout="column" class="content">
+            <div flex layout="column" layout-padding>
                 <div>
                     <h3>Groups</h3>
                     <div layout="column" ng-repeat="group in user.groups">

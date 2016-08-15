@@ -1,43 +1,50 @@
 <md-dialog aria-label="Idea Popup" class="popup-size">
     <form>
-        <div class="header">
-            <md-button class="md-icon-button header-btn-close" ng-click="cancel()">
-                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog" style="fill:white"></md-icon>
-            </md-button>
-            <div class="header-top" layout="column">
-                <div flex>
-                    <img src={{selectedIdea.img}} ng-show="{{selectedIdea.img.length}} > 0" class="header-image">
-                    <div class="header-background" ng-show="{{selectedIdea.img.length}} <= 0">
-                    </div>
-                    <div class="header-title">
-                        <h1>{{selectedIdea.title}}</h1>
-                        <h2>Author: {{users[selectedIdea.author].name}}</h2>
-                    </div>
+        <md-toolbar class="md-tall header-picture" style="background-image:url({{selectedIdea.img}})" >
+            <div class="md-toolbar-tools">
+                <div>
+                    <h1>{{selectedIdea.title}}</h1>
+                    <h2>Author: {{users[selectedIdea.author].name}}</h2>
                 </div>
-                <div layout="row">
-                    <div flex></div>
-                    <md-button class="md-accent">Follow idea</md-button>
-                </div>
+
+
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+
             </div>
 
-            <div class="container">
-                <div class="progress">{{selectedIdea.dayLeft}}d
-                    <p style="font-size:24px;float: right;">left</p>
-                </div>
-                <div class="header-background-circle">
-                </div>
-                <div class="header-progress">
-                    <round-progress max="100" current="100" color="#fafafa" bgcolor="#fafafa" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
-                        <round-progress max="100" current="selectedIdea.percentage" color="#45ccce" bgcolor="gainsboro" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="true" duration="800" animation="easeOutCubic" offset="inherit" animation-delay="0" on-render="showPreciseCurrent">
+        </md-toolbar>
 
 
-                        </round-progress>
+        <div class="container">
+            <span class="progress">{{selectedIdea.dayLeft}}d/100d
+            </span>
+            <div class="header-background-circle">
+            </div>
+            <div class="header-progress">
+                <round-progress max="100" current="100" color="#fafafa" bgcolor="#fafafa" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
+                    <round-progress max="100" current="selectedIdea.percentage" color="#45ccce" bgcolor="gainsboro" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="true" duration="800" animation="easeOutCubic" offset="inherit" animation-delay="0" on-render="showPreciseCurrent">
+
+
                     </round-progress>
-                </div>
+                </round-progress>
             </div>
         </div>
-        <md-dialog-content layout="row" class="idea-profile-content">
-            <div flex=50 layout="column" class="content">
+
+        <div layout="row">
+            <div flex></div>
+            <md-button class="md-accent">Follow idea</md-button>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <md-dialog-content layout="row" layout-padding>
+            <div flex=50 layout="column" layout-padding>
 
                 <div>
                     <h3>Contributors</h3>
@@ -90,7 +97,7 @@
                     <p style="font-weight:bold;" ng-repeat="tag in selectedIdea.tags" class="content-tags">#{{tag | uppercase}}</p>
                 </div>
             </div>
-            <div flex=50 layout="column" class="content">
+            <div flex=50 layout="column" layout-padding>
                 <div>
                     <h3>Comments/React on Idea</h3>
                     <div layout="row">
@@ -116,12 +123,12 @@
                         </div>
                     </div>
                     <div>
-                        <md-input-container md-no-float style="width:100%;" md-theme="input" flex>
+                        <md-input-container md-no-float style="width:100%;"  flex>
                             <input placeholder="Wher do you see Problems">
                         </md-input-container>
                         <md-button class="md-accent" class="messages-icon">Send</md-button>
                     </div>
-                    <md-content >
+                    <md-content>
                         <md-list style=" max-height:800px;overflow-y:visible">
                             <md-list-item class="md-3-line" ng-repeat="message in selectedIdea.messages" style="margin-top:15px;margin-bottom:15px; heiht:auto;">
                                 <img ng-src={{users[message.author].profileImg}} class="md-avatar" alt="{{users[message.author].name}}" ng-click="showProfile(message.author, $event)">
