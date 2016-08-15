@@ -13,7 +13,6 @@
     <link href="app/styles/hashtag-popup.css" rel="stylesheet" />
     <link href="app/styles/whiteboard.css" rel="stylesheet" />
     <link href="app/styles/contacts.css" rel="stylesheet" />
-    <link href="app/styles/logout.css" rel="stylesheet" />
     <link href="app/styles/messages.css" rel="stylesheet" />
     <link href="app/styles/settings.css" rel="stylesheet" />
 
@@ -30,9 +29,7 @@
                 <span></span>
                 <!-- <div >{{ currentUser.firstname }} {{ currentUser.name }}</div> -->
                 <div ng-show="isLoggedIn" class="md-headline" style="font-weight:bold;">>Hello {{ currentTestUser.firstname }} {{ currentTestUser.name }}</div>
-                <md-button class="md-raised" ng-hide="isLoggedIn" ng-click="showLoginBox()">Login</md-button>
                 <md-button class="md-raised" ng-hide="isLoggedIn" ng-click="showRegisterBox()">Register</md-button>
-                <md-button class="md-raised" ng-show="isLoggedIn" ng-click="logout()">Logout</md-button>
             </div>
         </md-toolbar>
         <md-list>
@@ -41,14 +38,32 @@
                     <div class="inset">
                         <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
                     </div>
-                    <div class="inset md-headline" style="font-weight:bold;">{{item.title}}
+                    <div class="inset md-headline" style="font-weight:bold;">
+                        {{item.title}}
                     </div>
                 </md-item-content>
             </md-item>
         </md-list>
+        <div flex></div>
+        <div layout="row" layout-align="start center" ng-hide="isLoggedIn" ng-click="showLoginBox()">
+            <div class="inset">
+                <ng-md-icon icon="login"></ng-md-icon>
+            </div>
+            <div class="inset md-headline" style="font-weight:bold;">
+                Sign In
+            </div>
+        </div>
+        <div layout="row" layout-align="start center" ng-show="isLoggedIn" ng-click="logout()">
+            <div class="inset">
+                <ng-md-icon icon="logout"></ng-md-icon>
+            </div>
+            <div class="inset md-headline" style="font-weight:bold;">
+                Sign Out
+            </div>
+        </div>
     </md-sidenav>
     <div layout="column" layout-fill ui-view="">
-      
+
 
     </div>
     <!-- Angular Dependencies -->
@@ -74,33 +89,10 @@
     <script src="app/controllers/indexCtrl.js"></script>
     <script src="app/controllers/dashboardProfileCtrl.js"></script>
     <script src="app/controllers/contactsCtrl.js"></script>
-    <script src="app/controllers/logoutCtrl.js"></script>
     <script src="app/controllers/messagesCtrl.js"></script>
     <script src="app/controllers/settingsCtrl.js"></script>
     <script src="app/controllers/whiteboardCtrl.js"></script>
-    <script src="app/controllers/login.controller.js"></script>
     <script src="app/controllers/register.controller.js"></script>
-
-    <script type="text/ng-template" id="login.tmpl.html">
-        <md-dialog aria-label="Mango (Fruit)" ng-controller="loginCtrl as vm" ng-cloak>
-            <md-dialog-content>
-                <div class="md-dialog-content">
-                    <h2>Sign in</h2>
-                    <form ng-submit="vm.onSubmit()">
-                        <div class="form-group">
-                            <label for="email">Email address</label>
-                            <input type="text" class="form-control" id="email" placeholder="Enter email" ng-model="vm.credentials.email">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password">
-                        </div>
-                        <md-button type="submit">Sign in!</md-button>
-                    </form>
-                </div>
-            </md-dialog-content>
-        </md-dialog>
-    </script>
 
     <script type="text/ng-template" id="resgister.tmpl.html">
         <md-dialog aria-label="Mango (Fruit)" ng-controller="registerCtrl as vm" ng-cloak>

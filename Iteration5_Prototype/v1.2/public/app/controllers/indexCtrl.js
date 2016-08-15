@@ -1,6 +1,4 @@
 'use strict';
-// navigationCtrl.$inject = ['$location','authentication'];
-
 app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, $mdDialog, $mdMedia) {
 
     $scope.toggleSidenav = function (menuId) {
@@ -17,11 +15,6 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             path: 'dashboard',
             title: 'Dashboard',
             icon: 'send'
-    },
-        {
-            path: '#',
-            title: 'Log In',
-            icon: 'account_box'
     }
 
   ];
@@ -56,11 +49,6 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             path: 'settings',
             title: 'Settings',
             icon: 'settings'
-    },
-        {
-            path: 'logout',
-            title: 'Log Out',
-            icon: 'exit_to_app'
     }
 
   ];
@@ -173,39 +161,64 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     // vm.isLoggedIn = authentication.isLoggedIn();
     // vm.currentUser = authentication.currentUser();
 
-    $scope.logout = function() {
+    $scope.logout = function () {
         authentication.logout();
         location.reload();
 
     }
 
-    $scope.showLoginBox = function(ev) {
-    
-        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
-
-        console.log("login button pressed");
+    $scope.showProfile = function (index, ev) {
         $mdDialog.show({
-            controller: DialogController,
-          templateUrl: 'login.tmpl.html',
-            parent: angular.element(document.body),
-          targetEvent: ev,
+                controller: ProfilePopupController,
+                templateUrl: 'app/views/profile-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {
+                    profileIndex: index
+                }
+            })
+            .then(function () {}, function () {});
+
+
+    };
+    $scope.showLoginBox = function (ev) {
+        $mdDialog.show({
+            controller: LoginDialogController,
+            templateUrl: 'app/views/login-popup.html',
+            targetEvent: ev,
+            scope: $scope, // use parent scope in template
+            preserveScope: true,
             clickOutsideToClose: true,
-            fullscreen: useFullScreen
-        });
+            fullscreen: true,
+            locals: {
+                authentication: authentication
+            }
+
+        })
+
+
+
+
     };
 
-    $scope.showRegisterBox = function(ev) {
-    
-        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+
+
+
+    $scope.showRegisterBox = function (ev) {
+
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
 
         console.log("register button pressed");
         $mdDialog.show({
-          controller: DialogController,
-          templateUrl: 'resgister.tmpl.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose:true,
-          fullscreen: useFullScreen
+            controller: DialogController,
+            templateUrl: 'resgister.tmpl.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true,
+            fullscreen: useFullScreen
         });
     };
 
@@ -338,10 +351,10 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
         }
     }
-    $scope.changeSortingType = function(index){
-        $scope.sortingType= index;
+    $scope.changeSortingType = function (index) {
+        $scope.sortingType = index;
         $scope.updateDashboard();
-    
+
     }
     $scope.updateDashboard = function () {
         // ToDo: es wurden neue Tags hinzugefügt bzw. entfernt und hier müsstest du mithilfe der Tags & des auswählten Sorting die Liste erneuern
@@ -360,4 +373,30 @@ function HashtagPopupController($scope, $mdDialog) {
         $mdDialog.cancel();
     };
 
+}
+
+function LoginDialogController($scope, $mdDialog, authentication) {
+    $scope.credentials = {
+        email: "",
+        password: ""
+    };
+    $scope.test = "";
+
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+    $scope.login = function () {
+        authentication
+            .login($scope.credentials)
+            .then(function () {
+                $mdDialog.hide();
+            }, function () {
+                $scope.test = "error";
+            });
+
+
+    };
 }

@@ -34,12 +34,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         controller: "SettingsCtrl",
         templateUrl: "app/views/settings.html"
     })
-    $stateProvider.state("logout", {
-        url: "/logout",
-        controller: "LogoutCtrl",
-        templateUrl: "app/views/logout.html"
-    })
-
+    
 });
 
 app.config(function ($mdThemingProvider) {
