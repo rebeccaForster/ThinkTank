@@ -57,6 +57,10 @@
     border-radius: 0;
 }
 
+.messages-icon{
+        float: right;
+}
+
 .content-image {
     max-width: 100%;
     height: auto;

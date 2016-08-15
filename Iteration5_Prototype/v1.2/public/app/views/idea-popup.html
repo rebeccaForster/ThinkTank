@@ -1,6 +1,6 @@
 <md-dialog aria-label="Idea Popup" class="popup-size">
     <form>
-        <md-toolbar class="md-tall header-picture" style="background-image:url({{selectedIdea.img}})" >
+        <md-toolbar class="md-tall header-picture" style="background-image:url({{selectedIdea.img}})">
             <div class="md-toolbar-tools">
                 <div>
                     <h1>{{selectedIdea.title}}</h1>
@@ -17,32 +17,25 @@
 
         </md-toolbar>
 
-
-        <div class="container">
-            <span class="progress">{{selectedIdea.dayLeft}}d/100d
+            <div class="container">
+                <span class="progress">{{selectedIdea.dayLeft}}d/100d
             </span>
-            <div class="header-background-circle">
-            </div>
-            <div class="header-progress">
-                <round-progress max="100" current="100" color="#fafafa" bgcolor="#fafafa" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
-                    <round-progress max="100" current="selectedIdea.percentage" color="#45ccce" bgcolor="gainsboro" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="true" duration="800" animation="easeOutCubic" offset="inherit" animation-delay="0" on-render="showPreciseCurrent">
+                <div class="header-background-circle">
+                </div>
+                <div class="header-progress">
+                    <round-progress max="100" current="100" color="#fafafa" bgcolor="#fafafa" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
+                        <round-progress max="100" current="selectedIdea.percentage" color="#45ccce" bgcolor="gainsboro" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="true" duration="800" animation="easeOutCubic" offset="inherit" animation-delay="0" on-render="showPreciseCurrent">
 
 
+                        </round-progress>
                     </round-progress>
-                </round-progress>
+                </div>
             </div>
-        </div>
-
-        <div layout="row">
+        <div layout="row" style="margin-bottom:110px;">
             <div flex></div>
             <md-button class="md-accent">Follow idea</md-button>
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+
         <md-dialog-content layout="row" layout-padding>
             <div flex=50 layout="column" layout-padding>
 
@@ -123,7 +116,7 @@
                         </div>
                     </div>
                     <div>
-                        <md-input-container md-no-float style="width:100%;"  flex>
+                        <md-input-container md-no-float style="width:100%;" flex>
                             <input placeholder="Wher do you see Problems">
                         </md-input-container>
                         <md-button class="md-accent" class="messages-icon">Send</md-button>

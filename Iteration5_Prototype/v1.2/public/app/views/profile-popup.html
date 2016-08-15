@@ -17,7 +17,6 @@
 
         </md-toolbar>
 
-        <div>
             <div class="container">
                 <img ng-src={{user.profileImg}} class="md-avatar header-background-circle" alt="{{user.name}}">
                 <div class="header-progress">
@@ -26,13 +25,12 @@
                     </round-progress>
                 </div>
             </div>
-        </div>
-        <div layout="row" >
+        <div layout="row" style="margin-bottom:110px;" >
             <div flex></div>
             <md-button class="md-accent">Follow user</md-button>
         </div>
 
-        <md-dialog-content class="idea-profile-content" layout="row" ng-include="'app/views/profile-content.html'" layout-padding>
+        <md-dialog-content layout="row" ng-include="'app/views/profile-content.html'" >
 
 
         </md-dialog-content>
