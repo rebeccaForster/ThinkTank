@@ -18,7 +18,7 @@
     <div class="md-title" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;">{{idea.description}}</div>
 </md-card-content>
 <md-card-content>
-    <p class="md-headline" ng-repeat="tag in idea.tags" style="padding:0px 10px 0px 10px; margin:0px;display:inline-block" ng-click="addSearchTag(idea.id, $index, $event)">#{{tag | uppercase}}</p>
+    <md-button ng-repeat="tag in idea.tags" style="font-size:34px; font-weight:bold;" data-ng-class="{'md-primary' : hashtagSelected(hashtags[tag].id)}" ng-click="setHashtags(hashtags[tag].id, hashtagSelected(hashtags[tag].id));updateDashboard();">#{{hashtags[tag].name | uppercase}}</md-button>
 </md-card-content>
 <md-card-actions layout="row" layout-align="end center">
     <md-button ng-click="commentIdea(idea.id, $event)" class="md-icon-button" aria-label="Comment">

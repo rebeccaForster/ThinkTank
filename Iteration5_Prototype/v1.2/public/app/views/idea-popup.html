@@ -58,7 +58,7 @@
                                 </md-card-header-text>
                             </md-card-header>
                         </md-card>
-                        <md-card class="content-contributors  ng-repeat="contributor in selectedIdea.contributors" class="content-contributors" ng-click="showProfile(contributor, $event)">
+                        <md-card class="content-contributors" ng-repeat="contributor in selectedIdea.contributors" class="content-contributors" ng-click="showProfile(contributor, $event)">
                             <md-card-header>
                                 <md-card-avatar>
                                     <img class="md-user-avatar" src={{users[contributor].profileImg}} />
@@ -92,7 +92,7 @@
                 </div>
                 <div>
                     <div class="md-display-1" style="font-weight:bold;">Hashtags</div>
-                    <p class="md-headline" ng-repeat="tag in selectedIdea.tags" style="padding:0px 10px 0px 10px; margin:0px;display:inline-block">#{{tag | uppercase}}</p>
+                    <p class="md-headline" ng-repeat="tag in selectedIdea.tags" style="padding:0px 10px 0px 10px; margin:0px;display:inline-block">#{{hashtags[tag].name | uppercase}}</p>
                 </div>
             </div>
             <div flex=50 layout="column" layout-padding>

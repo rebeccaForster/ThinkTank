@@ -47,45 +47,8 @@
             </md-item>
         </md-list>
     </md-sidenav>
-    <div layout="column" layout-fill>
-        <header>
-
-            <md-toolbar class="md-primary md-hue-1">
-                <div class="md-toolbar-tools">
-                    <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
-                        <ng-md-icon icon="menu" style="fill:white;"></ng-md-icon>
-                    </md-button>
-                    <div class="md-display-1">
-                        Academic Think Tank
-                    </div>
-                </div>
-            </md-toolbar>
-            <md-toolbar>
-                <div class="md-toolbar-tools" layout='row'>
-                    <div flex>
-                        <md-button class="md-raised" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(hashtags[selectedHashtag].id, true);updateDashboard();" style="font-size:24px">#{{hashtags[selectedHashtag].name}}
-                            <ng-md-icon icon="close"></ng-md-icon>
-                        </md-button>
-                    </div>
-                    <md-button ng-click="searchHashtag($event)" aria-label="Search">
-                        <ng-md-icon icon="search" style="fill:white;"></ng-md-icon>
-                    </md-button>
-
-                    <div flex=5></div>
-                    <md-input-container>
-                        <md-select ng-model="sortingType" aria-label="sorting" ng-change="changeSortingType(sortingType)">
-                            <md-option ng-value="t.title" data-ng-repeat="t in sorting">{{ t.title }}</md-option>
-                        </md-select>
-                    </md-input-container>
-                </div>
-            </md-toolbar>
-        </header>
-        <main class="" layout="row" flex>
-            <md-content flex ng-style="{'background-color': slidercolor}">
-                <div class="fade-view" ui-view="">
-                </div>
-            </md-content>
-        </main>
+    <div layout="column" layout-fill ui-view="">
+      
 
     </div>
     <!-- Angular Dependencies -->

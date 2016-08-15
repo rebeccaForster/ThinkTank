@@ -1,4 +1,25 @@
-<div ng-controller="WhiteboardCtrl" ng-cloak="">
+
+
+<header>
+
+    <md-toolbar class="md-primary md-hue-1 toolbar-settings-top">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
+                <ng-md-icon icon="menu" style="fill:white;"></ng-md-icon>
+            </md-button>
+            <div class="md-display-1">
+                Academic Think Tank
+            </div>
+        </div>
+    </md-toolbar>
+    
+</header>
+<md-button class="md-fab md-fab-bottom-right" ng-click="openWhiteboard()" style="position:fixed; min-height:128px !important;  min-width:128px !important;" aria-label="Add">
+    <ng-md-icon icon="add" size="34"></ng-md-icon>
+</md-button>
+<main class="" layout="row" flex>
+    <md-content flex>
+       <div ng-controller="WhiteboardCtrl" ng-cloak="">
         <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
             <div flex="50" flex-sm="100" flex-xs="100" layout="column">
                 WhiteboardCtrl
@@ -6,3 +27,5 @@
           
         </md-content>
     </div>
+    </md-content>
+</main>

@@ -26,7 +26,7 @@
     <br>
     <div>
         <div class="md-display-1" style="font-weight:bold;">Hashtags</div>
-        <p class="md-headline" ng-repeat="tag in selectedIdea.tags">#{{tag | uppercase}}</p>
+        <p class="md-headline" ng-repeat="tag in selectedIdea.tags">#{{hashtags[tag].name | uppercase}}</p>
     </div>
 
 </div>
