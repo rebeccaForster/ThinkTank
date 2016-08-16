@@ -1,5 +1,5 @@
 <md-dialog aria-label="Idea Popup" class="popup-size">
-    <form>
+    <form name="ideaForm">
         <md-toolbar class="toolbar-settings header-picture" style="background-image:url({{selectedIdea.img}});">
             <div layout="row" layout-padding>
                 <div>
@@ -97,34 +97,45 @@
             </div>
             <div flex=50 layout="column" layout-padding>
                 <div>
-                    <div class="md-display-1" style="font-weight:bold;" >Comments/React on Idea</div>
+                    <div class="md-display-1" style="font-weight:bold;">Comments/React on Idea</div>
                     <div layout="row">
-                        <div layout="column" flex layout-align="center center">
-                            <ng-md-icon icon="thumb_up" style="fill: #737373;" size="56"></ng-md-icon>
+                        <div layout="column" flex layout-align="center center" ng-class="{'item-select' : saveComment.likeIdeaStatus}" ng-click="setLikeIdeaStatus();">
+                            <ng-md-icon icon="thumb_up" size="56"></ng-md-icon>
                             <br>
                             <div class="md-subhead">I like idea</div>
                         </div>
-                        <div layout="column" flex layout-align="center center">
-                            <ng-md-icon icon="touch_app" style="fill: #737373;" size="56"></ng-md-icon>
+                        <div layout="column" flex layout-align="center center" ng-class="{'item-select' : saveComment.newInputStatus}" ng-click="setNewInputStatus();">
+                            <ng-md-icon icon="touch_app" size="56"></ng-md-icon>
                             <br>
                             <div class="md-subhead">new input</div>
                         </div>
-                        <div layout="column" flex layout-align="center center">
-                            <ng-md-icon icon="flash_on" style="fill: #737373;" size="56"></ng-md-icon>
+                        <div layout="column" flex layout-align="center center" ng-class="{'item-select' : saveComment.troubleStatus}" ng-click="setTroubleStatus();">
+                            <ng-md-icon icon="flash_on" size="56"></ng-md-icon>
                             <br>
                             <div class="md-subhead">see trouble</div>
                         </div>
-                        <div layout="column" flex layout-align="center center">
-                            <ng-md-icon icon="more_horiz" style="fill: #737373;" size="56"></ng-md-icon>
+                        <div layout="column" flex layout-align="center center" ng-class="{'item-select' : saveComment.other}" ng-click="setOtherComment();">
+                            <ng-md-icon icon="more_horiz" size="56"></ng-md-icon>
                             <br>
-                            <div class="md-subhead">other commit</div>
+                            <div class="md-subhead">other comments</div>
                         </div>
                     </div>
-                    <div>
-                        <md-input-container class="md-headline" md-no-float style="width:100%;" flex>
-                            <input placeholder="Where do you see Problems">
-                        </md-input-container>
-                        <md-button class="md-accent" class="messages-icon">Send</md-button>
+                    <div ng-show="saveComment.other || saveComment.troubleStatus || saveComment.newInputStatus || saveComment.likeIdeaStatus">
+                            <md-input-container class="md-block">
+                                <label>{{newInputText}} {{likeIdeaText}} {{troubleText}} {{otherText}}</label>
+                                <textarea name="commentArea" type="text" ng-model="saveComment.text" md-autofocus required></textarea>
+                                <div ng-messages="ideaForm.commentArea.$error" ng-show="ideaForm.commentArea.$dirty">
+                                    <div ng-message="required">You have to input a comment!</div>
+                                </div>
+
+                                <md-button ng-disabled="ideaForm.commentArea.$invalid" class="md-accent messages-icon" ng-click="sendComment()" style="font-weight:bold; font-size:24px;">Send</md-button>
+                                <md-button ng-disabled="true" class="md-icon-button messages-icon" aria-label="Record Audio">
+                                    <ng-md-icon icon="keyboard_voice" style="fill: #737373;" size="24"></ng-md-icon>
+                                </md-button>
+                                <md-button ng-disabled="true" class="md-icon-button messages-icon" aria-label="Record Video">
+                                    <ng-md-icon icon="videocam" style="fill: #737373;" size="24"></ng-md-icon>
+                                </md-button>
+                            </md-input-container>
                     </div>
                     <md-content>
                         <md-list style=" max-height:800px;overflow-y:visible">
@@ -145,7 +156,6 @@
                         </md-list>
                     </md-content>
                 </div>
-
             </div>
 
         </md-dialog-content>

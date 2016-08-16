@@ -11,9 +11,9 @@ md-sidenav ng-md-icon {
     top: 5px;
 }
 
-.nav-item-select {
-    color: cyan;
-    fill: cyan;
+.item-select {
+    color: #00bcd4;
+    fill: #00bcd4 !important;
 }
 
 md-input-container {

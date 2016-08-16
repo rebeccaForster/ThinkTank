@@ -1,4 +1,4 @@
-<header >
+<header>
 
     <md-toolbar class="md-primary md-hue-1 toolbar-settings-top">
         <div class="md-toolbar-tools">
@@ -12,15 +12,20 @@
     </md-toolbar>
     <md-toolbar>
         <div class="md-toolbar-tools toolbar-settings-bottom" layout='row'>
-            
-            <div flex>
-                <md-button class="md-raised" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(hashtags[selectedHashtag].id, true);updateDashboard();" style="font-size:24px; margin-bottom:5px;">#{{hashtags[selectedHashtag].name}}
-                    <ng-md-icon icon="close"></ng-md-icon>
+
+            <div style="border-bottom: 2px solid white;"  flex>
+                <div layout="row">
+                    <div flex>
+                        <md-button class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(hashtags[selectedHashtag].id, true);updateDashboard();" style="font-size:24px; margin-bottom:5px;">#{{hashtags[selectedHashtag].name}}
+                            <ng-md-icon icon="close"></ng-md-icon>
+                        </md-button>
+                    </div>
+                    <md-button aria-label="Search" ng-click="searchHashtag($event)">
+                        <ng-md-icon icon="search" size="64" style="fill:white;"></ng-md-icon>
+                </div>
                 </md-button>
             </div>
-            <md-button ng-click="searchHashtag($event)" aria-label="Search">
-                <ng-md-icon icon="search" size="64" style="fill:white;"></ng-md-icon>
-            </md-button>
+
 
             <div flex=5></div>
             <md-input-container>
