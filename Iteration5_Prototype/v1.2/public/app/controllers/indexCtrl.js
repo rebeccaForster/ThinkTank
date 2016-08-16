@@ -198,6 +198,9 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             }
 
         })
+            .then(function () {
+            $mdDialog.show();
+        }, function () {});
 
 
 
@@ -208,18 +211,21 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
 
     $scope.showRegisterBox = function (ev) {
-
-        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
-
-        console.log("register button pressed");
-        $mdDialog.show({
-            controller: DialogController,
-            templateUrl: 'resgister.tmpl.html',
-            parent: angular.element(document.body),
+ $mdDialog.show({
+            controller: RegisterDialogController,
+            templateUrl: 'app/views/register-popup.html',
             targetEvent: ev,
+            scope: $scope, // use parent scope in template
+            preserveScope: true,
             clickOutsideToClose: true,
-            fullscreen: useFullScreen
-        });
+            fullscreen: true,
+            locals: {
+                authentication: authentication
+            }
+
+        })
+            .then(function () {
+        }, function () {});
     };
 
     function DialogController($scope, $mdDialog) {
@@ -391,6 +397,33 @@ function LoginDialogController($scope, $mdDialog, authentication) {
     $scope.login = function () {
         authentication
             .login($scope.credentials)
+            .then(function () {
+                $mdDialog.hide();
+            }, function () {
+                $scope.test = "error";
+            });
+
+
+    };
+}
+
+
+function RegisterDialogController($scope, $mdDialog, authentication) {
+    $scope.credentials = {
+        email: "",
+        name: "",
+        password: ""
+    };
+
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+    $scope.register = function () {
+        authentication
+            .register($scope.credentials)
             .then(function () {
                 $mdDialog.hide();
             }, function () {

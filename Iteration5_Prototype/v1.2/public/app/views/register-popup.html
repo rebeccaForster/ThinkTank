@@ -1,5 +1,5 @@
-<md-dialog id="login-dialog" aria-label="Login" ng-cloak style="max-width: 90%;width: 500px;">
-    <form name="loginForm" ng-submit="login()">
+<md-dialog id="register-dialog" aria-label="Login" ng-cloak style="max-width: 90%;width: 500px;">
+    <form name="registerForm" ng-submit="register()">
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>Log In</h2>
@@ -13,8 +13,12 @@
         <md-dialog-content>
             <div class="md-dialog-content">
                 <md-input-container class="md-block">
+                    <label>Name</label>
+                    <input name="Name" ng-model="credentials.name" md-autofocus required />
+                </md-input-container>
+                <md-input-container class="md-block">
                     <label>Email</label>
-                    <input name="Email" ng-model="credentials.username" md-autofocus required />
+                    <input name="Email" ng-model="credentials.email" required />
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Password</label>
@@ -25,10 +29,8 @@
         </md-dialog-content>
 
         <md-dialog-actions layout="row">
-            <a href="" class="md-primary">Forgot Password?</a>
-            <md-button class="md-raised" ng-click="showRegisterBox()">Register</md-button>
             <span flex></span>
-            <md-button type="submit" ng-disabled="loginForm.$invalid" class="md-raised md-primary">Login</md-button>
+            <md-button type="submit" ng-disabled="loginForm.$invalid" class="md-raised md-primary">Register</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>
