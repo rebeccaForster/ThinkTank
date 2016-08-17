@@ -1,21 +1,23 @@
 <md-dialog aria-label="Search Hashtag Popup" class="popup-size">
     <form>
-        <md-toolbar class="md-tall">
-            <div class="md-toolbar-tools">
+        <md-toolbar class="md-tall" layout="row" layout-padding>
                 <h2>Search:</h2>
-                <md-button  class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(hashtags[selectedHashtag].id, true);updateDashboard();" style="font-size:24px">#{{hashtags[selectedHashtag].name}}
-                            <ng-md-icon icon="close"  ></ng-md-icon>
-                        </md-button>
+                <div>
+                    <md-button class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(selectedHashtag, true);" style="font-size:24px; margin-bottom:5px;">#{{selectedHashtag}}
+                        <ng-md-icon icon="close"></ng-md-icon>
+                    </md-button>
+                </div>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
                 </md-button>
-            </div>
+
+
         </md-toolbar>
         <md-dialog-content class="content">
             <div class="masonry-layout">
                 <div layout="row" ng-repeat="hashtag in hashtags | orderBy:'name'" class="item">
-                    <md-button data-ng-class="{'md-accent' : hashtagSelected(hashtag.id)}" ng-click="setHashtags(hashtag.id, hashtagSelected(hashtag.id))" ng-style="getHashtagStyle(hashtag.priority)">#{{ hashtag.name }}</md-button>
+                    <md-button data-ng-class="{'md-accent' : hashtagSelected(hashtag.name)}" ng-click="setHashtags(hashtag.name, hashtagSelected(hashtag.name))" ng-style="getHashtagStyle(hashtag.priority)">#{{ hashtag.name }}</md-button>
                 </div>
 
         </md-dialog-content>

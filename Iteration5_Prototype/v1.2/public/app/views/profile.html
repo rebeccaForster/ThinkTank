@@ -17,7 +17,7 @@
             <div style="border-bottom: 2px solid white;"  flex>
                 <div layout="row">
                     <div flex>
-                        <md-button class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(hashtags[selectedHashtag].id, true);updateDashboard();" style="font-size:24px; margin-bottom:5px;">#{{hashtags[selectedHashtag].name}}
+                        <md-button class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(selectedHashtag, true);updateDashboard();" style="font-size:24px; margin-bottom:5px;">#{{selectedHashtags}}
                             <ng-md-icon icon="close"></ng-md-icon>
                         </md-button>
                     </div>

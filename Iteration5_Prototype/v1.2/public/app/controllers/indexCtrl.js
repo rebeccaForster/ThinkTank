@@ -1,6 +1,6 @@
 'use strict';
 app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, $mdDialog, $mdMedia) {
-    
+
     $scope.menuNonAuth = [
         {
             path: 'whiteboard',
@@ -49,10 +49,10 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
   ];
 
-    $scope.navbarShort = function(){
+    $scope.navbarShort = function () {
         return (0 == $scope.selectedItem) || !$mdMedia('gt-md');
     }
-    
+
     $scope.currentTestUser = {
         firstname: "Frederic",
         name: "Wollinger"
@@ -61,10 +61,13 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     console.log(authentication.isLoggedIn());
     console.log("test");
     $scope.getSignInStatus = function () {
-        if (authentication.isLoggedIn()) {
+        $scope.isLoggedIn = !authentication.isLoggedIn();
+        if (!$scope.isLoggedIn) {
             $scope.menu = $scope.menuAuth;
+
         } else {
             $scope.menu = $scope.menuNonAuth;
+
         }
     }
     $scope.selectedItem = 1;
@@ -98,15 +101,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             });
     }
 
-    $scope.getStatusHashtag = function (id) {
 
-        for (var i in $scope.selectedHashtags) {
-            if ($scope.selectedHashtags[i] == id) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     $scope.sorting = [
         {
@@ -230,116 +225,96 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     $scope.hashtags = [
         {
-            id: 0,
             name: 'aReis',
             priority: 0
         }, {
-            id: 1,
             name: 'wPepperoni',
             priority: 2
         },
         {
-            id: 2,
             name: 'eSausage',
             priority: 4
         },
         {
-            id: 3,
             name: 'Black Olives',
             priority: 1
         },
         {
-            id: 4,
             name: 'rGreen Peppers',
             priority: 3
         },
         {
-            id: 5,
             name: 'gSausage',
             priority: 4
         },
         {
-            id: 6,
             name: 'kBlack Olives',
             priority: 1
         },
         {
-            id: 7,
             name: 'uGreen Peppers',
             priority: 3
         },
         {
-            id: 8,
             name: 'dBlack Olives',
             priority: 1
         },
         {
-            id: 9,
             name: 'hGreen Peppers',
             priority: 3
         }, {
-            id: 10,
             name: 'kReis',
             priority: 0
         }, {
-            id: 11,
             name: 'mvPepperoni',
             priority: 2
         },
         {
-            id: 12,
             name: 'Sausage',
             priority: 4
         },
         {
-            id: 13,
             name: 'vBlack Olives',
             priority: 1
         },
         {
-            id: 14,
             name: 'dGreen Peppers',
             priority: 3
         }, {
-            id: 15,
             name: 'rPepperoni',
             priority: 2
         },
         {
-            id: 16,
             name: 'daBlack Olives',
             priority: 1
         },
         {
-            id: 17,
             name: 'fGreen Peppers',
             priority: 3
         },
         {
-            id: 18,
             name: 'nBlack Olives',
             priority: 1
         },
         {
-            id: 19,
             name: 'gGreen Peppers',
             priority: 3
         }
   ];
-    $scope.hashtagSelected = function (id) {
+    $scope.hashtagSelected = function (name) {
         for (var i in $scope.selectedHashtags) {
-            if ($scope.selectedHashtags[i] == id) {
+            if ($scope.selectedHashtags[i] == name) {
                 return true;
             }
         }
         return false;
     }
     $scope.selectedHashtags = [];
-    $scope.setHashtags = function (id, status) {
+    $scope.setHashtags = function (name, status) {
         if (!status) {
-            $scope.selectedHashtags.push(id);
+            $scope.selectedHashtags.push(name);
         } else {
-            $scope.selectedHashtags.splice($scope.selectedHashtags.indexOf(id), 1);
+            $scope.selectedHashtags.splice($scope.selectedHashtags.indexOf(name), 1);
 
         }
     }
