@@ -53,10 +53,10 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         return (0 == $scope.selectedItem) || !$mdMedia('gt-md');
     }
 
-    $scope.currentTestUser = {
-        firstname: "Frederic",
-        name: "Wollinger"
-    };
+    $scope.userTum = {
+        name: "TUM LfE",
+        profileImg: "app/img/user.jpg",
+           };
     $scope.menu = $scope.menuNonAuth;
     console.log(authentication.isLoggedIn());
     console.log("test");
@@ -71,8 +71,8 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
         }
     }
-    
-            
+
+
 
     $scope.selectedItem = 1;
 
@@ -170,6 +170,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     $scope.logout = function () {
         authentication.logout();
         $scope.setSignInStatus();
+        $scope.user = $scope.userTum;
     }
 
     $scope.showProfile = function (index, ev) {
