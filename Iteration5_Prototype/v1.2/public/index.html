@@ -22,24 +22,21 @@
 </head>
 
 <body ng-app="App" layout="row" ng-controller="IndexCtrl" ng-cloak>
-    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-24dp" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+    <md-sidenav layout="column" ng-class="{'nav-width-short': navbarShort()}"   class="md-sidenav-left md-whiteframe-24dp" md-component-id="left" md-is-locked-open="$mdMedia('(min-width: 0px)')">
         <md-toolbar class="toolbar-settings md-primary md-hue-2">
             <div layout="column" class="md-toolbar-tools-bottom inset">
                 <ng-md-icon icon="account_circle" size="64"></ng-md-icon>
                 <span></span>
-                <!-- <div >{{ currentUser.firstname }} {{ currentUser.name }}</div> -->
-                <div ng-show="isLoggedIn" class="md-headline" style="font-weight:bold;">>Hello {{ currentTestUser.firstname }} {{ currentTestUser.name }}</div>
-                
+                           
             </div>
         </md-toolbar>
         <md-list>
             <md-item ng-repeat="item in menu" ng-click="go($index, item.path,item.name);" id="nav-item{{$index}}">
                 <md-item-content ng-class="{'item-select' : $index === selectedItem }" layout="row" layout-align="start center">
                     <div class="inset">
-                        <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                        <ng-md-icon icon="{{item.icon}}" size="34"></ng-md-icon>
                     </div>
-                    <div class="inset md-headline" style="font-weight:bold;">
-                        {{item.title}}
+                    <div ng-hide="navbarShort()" class="inset md-headline" style="font-weight:bold;">{{item.title}}
                     </div>
                 </md-item-content>
             </md-item>
@@ -47,22 +44,23 @@
         <div flex></div>
         <div layout="row" layout-align="start center" ng-show="menu == menuNonAuth" ng-click="showLoginBox($event)">
             <div class="inset">
-                <ng-md-icon icon="login"></ng-md-icon>
+                <ng-md-icon icon="login" size="34"></ng-md-icon>
             </div>
-            <div class="inset md-headline" style="font-weight:bold;">
+            <div  ng-hide="navbarShort()"  class="inset md-headline" style="font-weight:bold;">
                 Sign In
             </div>
         </div>
-     
+
         <div layout="row" layout-align="start center" ng-show="menu == menuAuth" ng-click="logout()">
             <div class="inset">
-                <ng-md-icon icon="logout"></ng-md-icon>
+                <ng-md-icon icon="logout" size="34"></ng-md-icon>
             </div>
-            <div class="inset md-headline" style="font-weight:bold;">
+            <div  ng-hide="navbarShort()"  class="inset md-headline" style="font-weight:bold;">
                 Sign Out
             </div>
         </div>
     </md-sidenav>
+   
     <div layout="column" layout-fill ui-view="">
 
 
@@ -94,7 +92,7 @@
     <script src="app/controllers/settingsCtrl.js"></script>
     <script src="app/controllers/whiteboardCtrl.js"></script>
 
- 
+
 
     <!-- Load custom filters -->
     <!-- Load custom directives -->

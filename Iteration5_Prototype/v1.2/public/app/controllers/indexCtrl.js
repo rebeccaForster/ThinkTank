@@ -1,10 +1,6 @@
 'use strict';
 app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, $mdDialog, $mdMedia) {
-
-    $scope.toggleSidenav = function (menuId) {
-        $mdSidenav(menuId).toggle();
-    };
-
+    
     $scope.menuNonAuth = [
         {
             path: 'whiteboard',
@@ -31,8 +27,8 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             icon: 'send'
     },
         {
-            path: 'profil',
-            title: 'Profil',
+            path: 'profile',
+            title: 'Profile',
             icon: 'person'
     },
         {
@@ -53,6 +49,10 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
   ];
 
+    $scope.navbarShort = function(){
+        return (0 == $scope.selectedItem) || !$mdMedia('gt-md');
+    }
+    
     $scope.currentTestUser = {
         firstname: "Frederic",
         name: "Wollinger"

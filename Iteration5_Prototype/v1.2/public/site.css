@@ -25,6 +25,10 @@ md-card{
 
 }
 
+.nav-width-short{
+    width: 100px !important;
+}
+
 .nav-img-user {
     z-index: 2;
     width: 72px;

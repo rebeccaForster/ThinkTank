@@ -1,7 +1,48 @@
-<md-button class="md-fab md-fab-bottom-right" style="position:fixed;"  aria-label="Edit" >
+
+
+
+<header>
+
+    <md-toolbar class="md-primary md-hue-1 toolbar-settings-top">
+        <div class="md-toolbar-tools">
+           
+            <div class="md-display-1">
+                Academic Think Tank
+            </div>
+        </div>
+    </md-toolbar>
+    <md-toolbar>
+        <div class="md-toolbar-tools toolbar-settings-bottom" layout='row'>
+
+            <div style="border-bottom: 2px solid white;"  flex>
+                <div layout="row">
+                    <div flex>
+                        <md-button class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(hashtags[selectedHashtag].id, true);updateDashboard();" style="font-size:24px; margin-bottom:5px;">#{{hashtags[selectedHashtag].name}}
+                            <ng-md-icon icon="close"></ng-md-icon>
+                        </md-button>
+                    </div>
+                    <md-button aria-label="Search" ng-click="searchHashtag($event)">
+                        <ng-md-icon icon="search" size="64" style="fill:white;"></ng-md-icon>
+                </div>
+                </md-button>
+            </div>
+
+
+            <div flex=5></div>
+            <md-input-container>
+                <md-select ng-model="sortingType" aria-label="sorting" ng-change="changeSortingType(sortingType)">
+                    <md-option ng-value="t.title" data-ng-repeat="t in sorting">{{ t.title }}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </md-toolbar>
+</header>
+<md-button class="md-fab md-fab-bottom-right" style="position:fixed; min-height:128px !important;  min-width:128px !important;"   aria-label="Edit" >
     <ng-md-icon icon="edit"></ng-md-icon>
 </md-button>
-<div ng-controller="DashboardProfileCtrl" ng-cloak="">
+<main class="" layout="row" flex>
+    <md-content flex>
+        <div ng-controller="DashboardProfileCtrl" ng-cloak="">
     <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
         <div>
             <h1>{{user.name}}</h1>
@@ -12,3 +53,5 @@
 
     </md-content>
 </div>
+    </md-content>
+</main>
