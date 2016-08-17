@@ -45,7 +45,7 @@
             </md-item>
         </md-list>
         <div flex></div>
-        <div layout="row" layout-align="start center" ng-hide="isLoggedIn" ng-click="showLoginBox()">
+        <div layout="row" layout-align="start center" ng-show="menu == menuNonAuth" ng-click="showLoginBox($event)">
             <div class="inset">
                 <ng-md-icon icon="login"></ng-md-icon>
             </div>
@@ -53,7 +53,8 @@
                 Sign In
             </div>
         </div>
-        <div layout="row" layout-align="start center" ng-show="isLoggedIn" ng-click="logout()">
+     
+        <div layout="row" layout-align="start center" ng-show="menu == menuAuth" ng-click="logout()">
             <div class="inset">
                 <ng-md-icon icon="logout"></ng-md-icon>
             </div>

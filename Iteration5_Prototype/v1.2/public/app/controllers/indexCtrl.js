@@ -57,16 +57,16 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         firstname: "Frederic",
         name: "Wollinger"
     };
-
+    $scope.menu = $scope.menuNonAuth;
     console.log(authentication.isLoggedIn());
     console.log("test");
-
-    if (authentication.isLoggedIn()) {
-        $scope.menu = $scope.menuAuth;
-    } else {
-        $scope.menu = $scope.menuNonAuth;
+    $scope.getSignInStatus = function () {
+        if (authentication.isLoggedIn()) {
+            $scope.menu = $scope.menuAuth;
+        } else {
+            $scope.menu = $scope.menuNonAuth;
+        }
     }
-
     $scope.selectedItem = 1;
 
     $scope.go = function (index, path, title) {
@@ -163,8 +163,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     $scope.logout = function () {
         authentication.logout();
-        location.reload();
-
+        $scope.getSignInStatus();
     }
 
     $scope.showProfile = function (index, ev) {
@@ -186,21 +185,21 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     };
     $scope.showLoginBox = function (ev) {
         $mdDialog.show({
-            controller: LoginDialogController,
-            templateUrl: 'app/views/login-popup.html',
-            targetEvent: ev,
-            scope: $scope, // use parent scope in template
-            preserveScope: true,
-            clickOutsideToClose: true,
-            fullscreen: true,
-            locals: {
-                authentication: authentication
-            }
+                controller: LoginDialogController,
+                templateUrl: 'app/views/login-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {
+                    authentication: authentication
+                }
 
-        })
+            })
             .then(function () {
-            $mdDialog.show();
-        }, function () {});
+                $mdDialog.show();
+            }, function () {});
 
 
 
@@ -211,36 +210,23 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
 
     $scope.showRegisterBox = function (ev) {
- $mdDialog.show({
-            controller: RegisterDialogController,
-            templateUrl: 'app/views/register-popup.html',
-            targetEvent: ev,
-            scope: $scope, // use parent scope in template
-            preserveScope: true,
-            clickOutsideToClose: true,
-            fullscreen: true,
-            locals: {
-                authentication: authentication
-            }
+        $mdDialog.show({
+                controller: RegisterDialogController,
+                templateUrl: 'app/views/register-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {
+                    authentication: authentication
+                }
 
-        })
-            .then(function () {
-        }, function () {});
+            })
+            .then(function () {}, function () {});
     };
 
-    function DialogController($scope, $mdDialog) {
-        $scope.hide = function () {
-            $mdDialog.hide();
-        };
 
-        $scope.cancel = function () {
-            $mdDialog.cancel();
-        };
-
-        $scope.answer = function (answer) {
-            $mdDialog.hide(answer);
-        };
-    }
 
     $scope.hashtags = [
         {
@@ -398,9 +384,9 @@ function LoginDialogController($scope, $mdDialog, authentication) {
         authentication
             .login($scope.credentials)
             .then(function () {
-                $mdDialog.hide();
-            }, function () {
-                $scope.test = "error";
+                $scope.cancel();
+                $scope.getSignInStatus();
+
             });
 
 
@@ -425,11 +411,9 @@ function RegisterDialogController($scope, $mdDialog, authentication) {
         authentication
             .register($scope.credentials)
             .then(function () {
-                $mdDialog.hide();
-            }, function () {
-                $scope.test = "error";
+                $scope.cancel();
+                $scope.showLoginBox();
             });
-
 
     };
 }
