@@ -28,7 +28,7 @@
             <div flex=5></div>
             <md-input-container>
                 <md-select ng-model="sortingType" aria-label="sorting" ng-change="changeSortingType(sortingType)">
-                    <md-option ng-value="t.title" data-ng-repeat="t in sorting">{{ t.title }}</md-option>
+                    <md-option ng-value="t" data-ng-repeat="t in sorting">{{ t }}</md-option>
                 </md-select>
             </md-input-container>
         </div>

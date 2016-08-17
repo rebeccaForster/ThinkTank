@@ -82,7 +82,6 @@ angular
         };
 
 
-        $scope.user = $scope.users[3];
 
 
 
@@ -131,6 +130,10 @@ angular
 
 
         };
+    
+    
+    
+    
         $scope.saveComment = {
             author: -1,
             text: '',

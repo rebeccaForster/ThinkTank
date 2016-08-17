@@ -1,29 +1,37 @@
-
-
 <header>
 
     <md-toolbar class="md-primary md-hue-1 toolbar-settings-top">
         <div class="md-toolbar-tools">
-           
+
             <div class="md-display-1">
                 Academic Think Tank
             </div>
         </div>
     </md-toolbar>
-    
+   <md-toolbar>
+        <div class="md-toolbar-tools toolbar-settings-bottom" layout='row'>
+                <div flex></div>
+                <div class="md-display-2">Details</div>
+                <ng-md-icon icon="arrow_drop_down" size="56" style="fill:white"></ng-md-icon>
+
+                
+                <div flex></div>
+        </div>
+    </md-toolbar>
+
 </header>
 <md-button class="md-fab md-fab-bottom-right" ng-click="openWhiteboard()" style="position:fixed; min-height:128px !important;  min-width:128px !important;" aria-label="Add">
     <ng-md-icon icon="add" size="34"></ng-md-icon>
 </md-button>
 <main class="" layout="row" flex>
     <md-content flex>
-       <div ng-controller="WhiteboardCtrl" ng-cloak="">
-        <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
-            <div flex="50" flex-sm="100" flex-xs="100" layout="column">
-                WhiteboardCtrl
-            </div>
-          
-        </md-content>
-    </div>
+        <div ng-controller="WhiteboardCtrl" ng-cloak="">
+            <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
+                <div flex="50" flex-sm="100" flex-xs="100" layout="column">
+                    WhiteboardCtrl
+                </div>
+
+            </md-content>
+        </div>
     </md-content>
 </main>

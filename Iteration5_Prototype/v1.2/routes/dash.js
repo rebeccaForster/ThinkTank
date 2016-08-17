@@ -29,7 +29,7 @@ var ideas = [
         id: 0,
         author: 6,
         title: "Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj",
-        tags: [0, 6, 7],
+        tags: [ "ergonomics", "test", "hashtag"],
         contributors: [1, 3, 4, 6, 7, 2],
         description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafkljdöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskf",
         img: 'https://placekitten.com/600/300',
@@ -115,7 +115,7 @@ var ideas = [
         id: 1,
         author: 2,
         title: "Automotiva driving asdfkdasfj",
-        tags: [0, 6, 7],
+        tags: [ "ergonomics", "test", "hashtag"],
         contributors: [1, 3, 6],
         description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafkljdöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskf",
         img: "https://placekitten.com/600/300",
@@ -171,7 +171,7 @@ var ideas = [
         id: 2,
         author: 0,
         title: "Automotiva driving asdfkdasfj",
-        tags: [0, 6, 7],
+        tags: [ "ergonomics", "test", "hashtag"],
         contributors: [1, 4, 6],
         description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafklj",
         img: "",
@@ -227,7 +227,7 @@ var ideas = [
         id: 3,
         author: 3,
         title: "Automotiva driving asdfkdasfj",
-        tags: [0, 6, 7],
+        tags: [ "ergonomics", "test", "hashtag"],
         contributors: ["cont1", "cont2"],
         description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafklj",
         img: "https://placekitten.com/600/300",
@@ -284,7 +284,7 @@ var ideas = [
         id: 4,
         author: 6,
         title: "Idee 5 Automotiva driving asdfkdasfj",
-        tags: [0, 6, 7],
+        tags: [ "ergonomics", "test", "hashtag"],
         contributors: [4, 3, 6],
         description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjasdöfjsdafljdsakfljsdalf daksfjldfkjasj",
         img: "https://placekitten.com/600/300",
@@ -340,7 +340,7 @@ var ideas = [
         id: 5,
         author: 7,
         title: " Idee 6 Automotiva driving asdfkdasfj",
-        tags: [0, 6, 7],
+        tags: [ "ergonomics", "test", "hashtag"],
         contributors: [1, 2, 6],
         description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafklj",
         img: "https://placekitten.com/600/300",
@@ -396,7 +396,7 @@ var ideas = [
         id: 6,
         author: "6",
         title: "Automotiva driving asdfkdasfj",
-        tags: [0, 6, 7],
+        tags: [ "ergonomics", "test", "hashtag"],
         contributors: [1, 3, 7],
         description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjadöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskfs dskfj sdafklj",
         img: "https://placekitten.com/600/300",
@@ -457,7 +457,7 @@ var users = [
         name: "Marius Mülle0",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: [0, 6, 7],
+        tags: [ "ergonomics", "test", "hashtag"],
         groups: [
             {
                 name: "ergonomics",
@@ -475,7 +475,7 @@ var users = [
         name: "Marius Mülle1",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: [0, 6, 7],
+        tags: [ "ergonomics", "test", "hashtag"],
         groups: [
             {
                 name: "ergonomics",
@@ -492,7 +492,7 @@ var users = [
         name: "Marius Mülle2",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: [0, 6, 7],
+        tags: [ "ergonomics", "test", "hashtag"],
         groups: [
             {
                 name: "ergonomics",
@@ -509,7 +509,7 @@ var users = [
         name: "Marius Mülle3",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: [0, 6, 7],
+        tags: [ "ergonomics", "test", "hashtag"],
         groups: [
             {
                 name: "ergonomics",
@@ -526,7 +526,7 @@ var users = [
         name: "Marius Mülle4",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: [0, 6, 7],
+        tags: [ "ergonomics", "test", "hashtag"],
         groups: [
             {
                 name: "ergonomics",
@@ -543,7 +543,7 @@ var users = [
         name: "Marius Mülle5",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: [0, 6, 7],
+        tags: [ "ergonomics", "test", "hashtag"],
         groups: [
             {
                 name: "ergonomics",
@@ -560,7 +560,7 @@ var users = [
         name: "Marius Mülle6",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: [0, 6, 7],
+        tags: [ "ergonomics", "test", "hashtag"],
         groups: [
             {
                 name: "ergonomics",
@@ -571,13 +571,13 @@ var users = [
                 owner: false
                 }
             ],
-        ideas: [1, 5, 3, 2]
+        ideas: [3, 2]
         }, {
         id: 7,
         name: "Marius Mülle7",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: [0, 6, 7],
+        tags: [ "ergonomics", "test", "hashtag"],
         groups: [
             {
                 name: "ergonomics",

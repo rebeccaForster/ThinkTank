@@ -60,19 +60,43 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     $scope.menu = $scope.menuNonAuth;
     console.log(authentication.isLoggedIn());
     console.log("test");
-    $scope.getSignInStatus = function () {
+    $scope.setSignInStatus = function () {
         $scope.isLoggedIn = !authentication.isLoggedIn();
         if (!$scope.isLoggedIn) {
             $scope.menu = $scope.menuAuth;
+            $scope.user = authentication.currentUser();
 
         } else {
             $scope.menu = $scope.menuNonAuth;
 
         }
     }
+    
+            
+
     $scope.selectedItem = 1;
 
     $scope.go = function (index, path, title) {
+        switch (index) {
+        case 1:
+            $scope.sorting = $scope.sortingDashboardProfile;
+            $scope.sortingType = $scope.sorting[0];
+
+            break;
+        case 2:
+
+            break;
+        case 3:
+            $scope.sorting = $scope.sortingMessages;
+            $scope.sortingType = $scope.sorting[0];
+
+            break;
+        case 4:
+
+            break;
+
+        default:
+        }
         $state.go(path);
         $scope.title = title;
 
@@ -102,21 +126,10 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     }
 
 
-
-    $scope.sorting = [
-        {
-            "id": 0,
-            "title": "Latest Ideas"
-        }, {
-            "id": 1,
-            "title": "Most popular"
-        }, {
-            "id": 2,
-            "title": "Friedhof"
-        }, {
-            "id": 3,
-            "title": "Himmel"
-        }];
+    $scope.sortingDashboardProfile = ["Latest Ideas", "Most popular", "Friedhof", "Himmel"];
+    $scope.sortingMessages = ["Date up", "Date down", "Name up", "Name down"];
+    $scope.sorting = $scope.sortingDashboardProfile;
+    $scope.sortingType = $scope.sorting[0];
 
     $scope.getHashtagStyle = function (priority) {
 
@@ -146,11 +159,9 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         }
     }
 
-    //init
-    $scope.sortingType = $scope.sorting[0].title;
 
     $scope.isLoggedIn = authentication.isLoggedIn();
-    $scope.currentUser = authentication.currentUser();
+    $scope.user = authentication.currentUser();
 
     // [SM]
     // vm.isLoggedIn = authentication.isLoggedIn();
@@ -158,7 +169,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     $scope.logout = function () {
         authentication.logout();
-        $scope.getSignInStatus();
+        $scope.setSignInStatus();
     }
 
     $scope.showProfile = function (index, ev) {
@@ -360,7 +371,7 @@ function LoginDialogController($scope, $mdDialog, authentication) {
             .login($scope.credentials)
             .then(function () {
                 $scope.cancel();
-                $scope.getSignInStatus();
+                $scope.setSignInStatus();
 
             });
 

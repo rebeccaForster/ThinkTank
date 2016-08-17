@@ -22,12 +22,14 @@
 </head>
 
 <body ng-app="App" layout="row" ng-controller="IndexCtrl" ng-cloak>
-    <md-sidenav layout="column" ng-class="{'nav-width-short': navbarShort()}"   class="md-sidenav-left md-whiteframe-24dp" md-component-id="left" md-is-locked-open="$mdMedia('(min-width: 0px)')">
+    <md-sidenav layout="column" ng-class="{'nav-width-short': navbarShort()}" class="md-sidenav-left md-whiteframe-24dp" md-component-id="left" md-is-locked-open="$mdMedia('(min-width: 0px)')">
         <md-toolbar class="toolbar-settings md-primary md-hue-2">
-            <div layout="column" class="md-toolbar-tools-bottom inset">
-                <ng-md-icon icon="account_circle" size="64"></ng-md-icon>
-                <span></span>
-                           
+            <div ng-hide="2 == selectedItem" style="text-align:center">
+                <div style="margin-top:30px;"></div>
+
+                <img ng-src={{user.profileImg}} class="md-avatar" id="nav-img-profile" alt="{{user.name}}">
+                <div style="margin-top:30px;"></div>
+                <span ng-hide="navbarShort()"  class="md-headline" style="front-weight=bold;">{{user.name}}</span>
             </div>
         </md-toolbar>
         <md-list>
@@ -46,7 +48,7 @@
             <div class="inset">
                 <ng-md-icon icon="login" size="34"></ng-md-icon>
             </div>
-            <div  ng-hide="navbarShort()"  class="inset md-headline" style="font-weight:bold;">
+            <div ng-hide="navbarShort()" class="inset md-headline" style="font-weight:bold;">
                 Sign In
             </div>
         </div>
@@ -55,12 +57,12 @@
             <div class="inset">
                 <ng-md-icon icon="logout" size="34"></ng-md-icon>
             </div>
-            <div  ng-hide="navbarShort()"  class="inset md-headline" style="font-weight:bold;">
+            <div ng-hide="navbarShort()" class="inset md-headline" style="font-weight:bold;">
                 Sign Out
             </div>
         </div>
     </md-sidenav>
-   
+
     <div layout="column" layout-fill ui-view="">
 
 
