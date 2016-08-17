@@ -3,7 +3,7 @@
         <md-toolbar class="md-tall">
             <div class="md-toolbar-tools">
                 <h2>Search:</h2>
-                <md-button  class="md-raised" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(hashtags[selectedHashtag].id, true);updateDashboard();" style="font-size:24px">#{{hashtags[selectedHashtag].name}}
+                <md-button  class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(hashtags[selectedHashtag].id, true);updateDashboard();" style="font-size:24px">#{{hashtags[selectedHashtag].name}}
                             <ng-md-icon icon="close"  ></ng-md-icon>
                         </md-button>
                 <span flex></span>
@@ -15,7 +15,7 @@
         <md-dialog-content class="content">
             <div class="masonry-layout">
                 <div layout="row" ng-repeat="hashtag in hashtags | orderBy:'name'" class="item">
-                    <md-button data-ng-class="{'md-primary' : hashtagSelected(hashtag.id)}" ng-click="setHashtags(hashtag.id, hashtagSelected(hashtag.id))" ng-style="getHashtagStyle(hashtag.priority)">#{{ hashtag.name }}</md-button>
+                    <md-button data-ng-class="{'md-accent' : hashtagSelected(hashtag.id)}" ng-click="setHashtags(hashtag.id, hashtagSelected(hashtag.id))" ng-style="getHashtagStyle(hashtag.priority)">#{{ hashtag.name }}</md-button>
                 </div>
 
         </md-dialog-content>
