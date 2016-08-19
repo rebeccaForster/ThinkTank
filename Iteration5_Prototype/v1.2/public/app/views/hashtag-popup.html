@@ -1,4 +1,4 @@
-<md-dialog aria-label="Search Hashtag Popup" class="popup-size">
+<md-dialog aria-label="Search Hashtag Popup" class="popup-hashtag-size">
     <form>
         <md-toolbar class="md-tall" layout="row" layout-padding>
                 <h2>Search:</h2>
@@ -8,10 +8,9 @@
                     </md-button>
                 </div>
                 <span flex></span>
-                <md-button class="md-icon-button" ng-click="cancel()">
-                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+               <md-button class="md-icon-button" style="width:64px; height:64px;">
+                    <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
                 </md-button>
-
 
         </md-toolbar>
         <md-dialog-content class="content">

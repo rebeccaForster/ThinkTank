@@ -1,10 +1,10 @@
 <md-card-header>
-    <md-card-avatar ng-click="showProfile(idea.author, $event)">
+    <md-card-avatar ng-click="showProfile(idea.author, $event);$event.stopPropagation();">
         <img class="md-user-avatar" src={{users[idea.author].profileImg}} />
     </md-card-avatar>
-    <md-card-header-text>
-        <div>
-            <span class="md-headline" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;">{{idea.title}}</span>
+    <md-card-header-text >
+        <div >
+            <span class="md-display-1" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical; font-weight:bold;">{{idea.title}}</span>
         </div>
         <div>
             <span class="md-title">Author: {{users[idea.author].name}}</span>
@@ -13,12 +13,12 @@
 
 </md-card-header>
 
-<md-card-content ng-click="showIdea(idea.id, $event)">
+<md-card-content >
     <img src={{idea.img}} ng-show="{{idea.img.length}} > 0" class="md-card-image" alt="user avatar" style="width:100%;height:auto;margin-bottom:10px;">
     <div class="md-title" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;">{{idea.description}}</div>
 </md-card-content>
 <md-card-content>
-    <md-button ng-repeat="tag in idea.tags" style="font-size:34px; font-weight:bold;" data-ng-class="{'md-accent' : hashtagSelected(tag)}" ng-click="setHashtags(tag, hashtagSelected(tag));updateDashboard();">#{{tag | uppercase}}</md-button>
+    <md-button ng-repeat="tag in idea.tags" class="hashtag-style" data-ng-class="{'md-accent' : hashtagSelected(tag)}" ng-click="setHashtags(tag, hashtagSelected(tag));updateDashboard(); ;$event.stopPropagation();">#{{tag | uppercase}}</md-button>
 </md-card-content>
 <!--
 <md-card-actions layout="row" layout-align="end center">

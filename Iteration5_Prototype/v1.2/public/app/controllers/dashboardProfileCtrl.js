@@ -107,34 +107,19 @@ angular
                     }
                 })
                 .then(function () {
-                    $scope.saveComment = {
-                        author: -1,
-                        text: '',
-                        likeIdeaStatus: false,
-                        newInputStatus: false,
-                        troubleStatus: false,
-                        other: false
-                    };
+                    $scope.saveComment = defaultCommentText;
 
                 }, function () {
-                    $scope.saveComment = {
-                        author: -1,
-                        text: '',
-                        likeIdeaStatus: false,
-                        newInputStatus: false,
-                        troubleStatus: false,
-                        other: false
-                    };
+                    $scope.saveComment = defaultCommentText;
 
                 });
 
 
         };
-    
-    
-    
-    
-        $scope.saveComment = {
+
+
+
+        var defaultCommentText = {
             author: -1,
             text: '',
             likeIdeaStatus: false,
@@ -142,6 +127,8 @@ angular
             troubleStatus: false,
             other: false
         };
+        $scope.saveComment = defaultCommentText;
+
         $scope.newInputText = '';
         $scope.likeIdeaText = '';
         $scope.troubleText = '';
@@ -150,7 +137,7 @@ angular
         $scope.setNewInputStatus = function () {
             $scope.saveComment.newInputStatus = !$scope.saveComment.newInputStatus;
             if ($scope.saveComment.newInputStatus) {
-                $scope.newInputText = 'Give some input.';
+                $scope.newInputText = 'Explain your brilliant idea!';
             } else {
                 $scope.newInputText = '';
             }
@@ -158,7 +145,7 @@ angular
         $scope.setLikeIdeaStatus = function () {
             $scope.saveComment.likeIdeaStatus = !$scope.saveComment.likeIdeaStatus;
             if ($scope.saveComment.likeIdeaStatus) {
-                $scope.likeIdeaText = 'Why do you like the idea?';
+                $scope.likeIdeaText = 'What do you like about the idea?';
             } else {
                 $scope.likeIdeaText = '';
             }
@@ -166,7 +153,7 @@ angular
         $scope.setTroubleStatus = function () {
             $scope.saveComment.troubleStatus = !$scope.saveComment.troubleStatus;
             if ($scope.saveComment.troubleStatus) {
-                $scope.troubleText = 'Why do you see some trouble?';
+                $scope.troubleText = 'Where do you see problems?';
             } else {
                 $scope.troubleText = '';
             }
@@ -174,14 +161,21 @@ angular
         $scope.setOtherComment = function () {
             $scope.saveComment.other = !$scope.saveComment.other;
             if ($scope.saveComment.other) {
-                $scope.otherText = 'Give some general comment.';
+                $scope.otherText = 'Something else.';
             } else {
                 $scope.otherText = '';
             }
 
         };
 
-        $scope.sendComment = function () {};
+        $scope.sendComment = function () {
+            if(!$scope.isLoggedIn){
+                var test= false;   
+                 test = $scope.showLoginBox();
+                
+            }
+        
+        };
 
     });
 

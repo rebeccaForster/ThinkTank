@@ -20,12 +20,11 @@ md-input-container {
     padding: 0 !important
 }
 
-md-card{
+md-card {
     background-color: white;
-
 }
 
-.nav-width-short{
+.nav-width-short {
     width: 100px !important;
 }
 
@@ -36,8 +35,9 @@ md-card{
     border-radius: 36px;
     margin-left: 12px;
 }
-}
 
+
+}
 .nav-img-user {
     z-index: 2;
     width: 72px;
@@ -47,17 +47,16 @@ md-card{
     top: 112px;
     margin-left: 12px;
 }
-
 .toolbar-settings {
     min-height: 223px !important;
 }
-
-.toolbar-settings-top{
-    min-height: 74px !important;
-
+.hashtag-style {
+    font-size: 24px  !important;
+    font-weight: bold !important;
 }
-
-.toolbar-settings-bottom{
+.toolbar-settings-top {
+    min-height: 74px !important;
+}
+.toolbar-settings-bottom {
     min-height: 149px !important;
-
 }

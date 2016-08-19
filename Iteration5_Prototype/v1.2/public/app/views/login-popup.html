@@ -2,9 +2,9 @@
     <form name="loginForm" ng-submit="login()">
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>Log In</h2>
+                <h2>Sign In</h2>
                 <span flex></span>
-                <md-button class="md-icon-button" ng-click="dialog.close()">
+                <md-button class="md-icon-button" ng-click="cancel()">
                     <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
                 </md-button>
             </div>
@@ -25,10 +25,12 @@
         </md-dialog-content>
 
         <md-dialog-actions layout="row">
-            <a href="" class="md-primary">Forgot Password?</a>
             <md-button class="md-raised" ng-click="showRegisterBox($event)">Sign up</md-button>
             <span flex></span>
-            <md-button type="submit" ng-disabled="loginForm.$invalid" class="md-raised md-primary">Login</md-button>
+
+            <a href=""  class=" md-primary">Forgot Password?</a>
+            <span flex></span>
+            <md-button type="submit" ng-disabled="loginForm.$invalid" class=" md-raised md-primary">Login</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>

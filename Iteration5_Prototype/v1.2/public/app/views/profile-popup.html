@@ -1,7 +1,11 @@
 <md-dialog aria-label="Profile Popup" class="popup-size">
     <form>
-       <md-toolbar class="toolbar-settings">
+       <md-toolbar class="toolbar-settings  md-primary md-hue-2">
             <div layout="row" layout-padding>
+                <md-button class="md-icon-button" style="width:64px; height:64px; ">
+                    <ng-md-icon icon="arrow_back" size="64"></ng-md-icon>
+                </md-button>
+                <div flex></div>
                 <div>
                     <div>
                         <span class="md-display-3">{{user.name}}</span>
@@ -11,10 +15,9 @@
                     </div>
                 </div>
                 <span flex></span>
-                <md-button class="md-icon-button" ng-click="cancel()">
-                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+               <md-button class="md-icon-button" style="width:64px; height:64px;">
+                    <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
                 </md-button>
-
             </div>
 
         </md-toolbar>

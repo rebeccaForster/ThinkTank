@@ -1,8 +1,20 @@
 .masonry-layout {
-  column-count: 6;
+  column-count: 4;
   column-gap: 0;
 }
 .item { /* Masonry bricks or child elements */
     display: inline-block;
+    margin: 10px;
     width: 100%;
+}
+
+.popup-hashtag-size {
+    max-width: 100%;
+    max-height: auto;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 223px;
+    min-height: 70%;
+    min-width: 90%;
+    border-radius: 0;
 }

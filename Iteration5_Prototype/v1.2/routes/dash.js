@@ -458,17 +458,7 @@ var users = [
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
         tags: [ "ergonomics", "test", "hashtag"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 6, 3, 2]
+       ideas: [1, 6, 3, 2]
 
         }, {
         id: 1,
@@ -476,17 +466,7 @@ var users = [
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
         tags: [ "ergonomics", "test", "hashtag"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 6, 3, 2]
+      ideas: [1, 6, 3, 2]
         }, {
         id: 2,
         name: "Marius Mülle2",
@@ -510,84 +490,34 @@ var users = [
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
         tags: [ "ergonomics", "test", "hashtag"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 5, 3, 2]
+       ideas: [1, 5, 3, 2]
         }, {
         id: 4,
         name: "Marius Mülle4",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
         tags: [ "ergonomics", "test", "hashtag"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 6, 3, 2]
+       ideas: [1, 6, 3, 2]
         }, {
         id: 5,
         name: "Marius Mülle5",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
         tags: [ "ergonomics", "test", "hashtag"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 2]
+       ideas: [1, 2]
         }, {
         id: 6,
         name: "Marius Mülle6",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
         tags: [ "ergonomics", "test", "hashtag"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [3, 2]
+       ideas: [3, 2]
         }, {
         id: 7,
         name: "Marius Mülle7",
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
         tags: [ "ergonomics", "test", "hashtag"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
         ideas: [1, 5, 3, 2]
         }
     ];

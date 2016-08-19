@@ -10,7 +10,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         {
             path: 'dashboard',
             title: 'Dashboard',
-            icon: 'send'
+            icon: 'dashboard'
     }
 
   ];
@@ -24,7 +24,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         {
             path: 'dashboard',
             title: 'Dashboard',
-            icon: 'send'
+            icon: 'dashboard'
     },
         {
             path: 'profile',
@@ -56,10 +56,14 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     $scope.userTum = {
         name: "TUM LfE",
         profileImg: "app/img/user.jpg",
-           };
+    };
     $scope.menu = $scope.menuNonAuth;
     console.log(authentication.isLoggedIn());
     console.log("test");
+
+
+    $scope.isLoggedIn = !authentication.isLoggedIn();
+    $scope.user = $scope.userTum;
     $scope.setSignInStatus = function () {
         $scope.isLoggedIn = !authentication.isLoggedIn();
         if (!$scope.isLoggedIn) {
@@ -68,7 +72,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
         } else {
             $scope.menu = $scope.menuNonAuth;
-
+            $scope.user = $scope.userTum;
         }
     }
 
@@ -136,19 +140,19 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         var size = "0px";
         switch (priority) {
         case 0:
-            size = "12px"
-            break;
-        case 1:
-            size = "14px"
-            break;
-        case 2:
-            size = "16px"
-            break;
-        case 3:
             size = "18px"
             break;
+        case 1:
+            size = "22px"
+            break;
+        case 2:
+            size = "26px"
+            break;
+        case 3:
+            size = "30px"
+            break;
         case 4:
-            size = "20px"
+            size = "34px"
             break;
 
         default:
@@ -160,8 +164,6 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     }
 
 
-    $scope.isLoggedIn = authentication.isLoggedIn();
-    $scope.user = authentication.currentUser();
 
     // [SM]
     // vm.isLoggedIn = authentication.isLoggedIn();
@@ -170,7 +172,6 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     $scope.logout = function () {
         authentication.logout();
         $scope.setSignInStatus();
-        $scope.user = $scope.userTum;
     }
 
     $scope.showProfile = function (index, ev) {
@@ -205,8 +206,10 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
             })
             .then(function () {
-                $mdDialog.show();
-            }, function () {});
+                return true;
+            }, function () {
+                return true;
+            });
 
 
 
