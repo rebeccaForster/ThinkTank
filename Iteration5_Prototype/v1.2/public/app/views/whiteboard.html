@@ -13,9 +13,11 @@
 </header>
 
 <main class="" layout="row" flex>
+
     <md-content flex>
         <div ng-controller="WhiteboardCtrl" ng-cloak="">
-            <div>
+            <div layout="row" layout-padding>
+                <div flex></div>
                 <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" aria-label="Contributors">
                     <ng-md-icon icon="person_add" class="icon-white" size="34"></ng-md-icon>
                 </md-button>
@@ -26,6 +28,7 @@
                     <ng-md-icon icon="add_location" class="icon-white" size="34"></ng-md-icon>
                 </md-button>
                 <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" aria-label="Hashtags">#</md-button>
+                <div flex></div>
                 <md-button class="md-icon-button  icon-whiteboard-small" aria-label="lock">
                     <ng-md-icon icon="lock" class="icon-gray" size="34"></ng-md-icon>
                 </md-button>
@@ -41,7 +44,15 @@
 
 
             </md-content>
-            <div>
+            <div layout="row" style="bottom:0px; left:50%; position:absolute;" padding-layout>
+                <div flex></div>
+
+                <md-button class="md-icon-button icon-whiteboard-small" aria-label="undo">
+                    <ng-md-icon icon="undo" class="icon-gray" size="34"></ng-md-icon>
+                </md-button>
+                <md-button class="md-icon-button icon-whiteboard-small" aria-label="redo">
+                    <ng-md-icon icon="redo" class="icon-gray" size="34"></ng-md-icon>
+                </md-button>
                 <input id='check' type='checkbox'>
                 <label class='main' for='check'>
                     <div class='title'>Tools</div>
@@ -63,27 +74,21 @@
                         <ng-md-icon icon="attach_file" class="icon-white" size="34"></ng-md-icon>
                     </md-button>
                 </div>
-
-                
-
-
                 <md-button class="md-icon-button icon-whiteboard-small" aria-label="delete">
                     <ng-md-icon icon="delete" class="icon-gray" size="34"></ng-md-icon>
                 </md-button>
-                <md-button class="md-icon-button icon-whiteboard-small" aria-label="undo">
-                    <ng-md-icon icon="undo" class="icon-gray" size="34"></ng-md-icon>
-                </md-button>
-                <md-button class="md-icon-button icon-whiteboard-small" aria-label="redo">
-                    <ng-md-icon icon="redo" class="icon-gray" size="34"></ng-md-icon>
-                </md-button>
 
 
 
 
+
+
+                <div flex></div>
 
 
 
             </div>
+
         </div>
     </md-content>
 </main>

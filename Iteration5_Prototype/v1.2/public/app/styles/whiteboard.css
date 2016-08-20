@@ -13,9 +13,9 @@
 .container {
   margin: auto;
   position: absolute;
-  top: 0;
+  top: 0px;
   right: 0;
-  bottom: 0;
+  bottom: 100px;
   left: 0;
   width: 80px;
   height: 80px;
@@ -30,10 +30,9 @@
 
 
 .main .title {
-  position: absolute;
-  top: 0;
+  top: 0px;
   right: 0;
-  bottom: 0;
+  bottom: 0px;
   left: 0;
  
     text-align: center;
