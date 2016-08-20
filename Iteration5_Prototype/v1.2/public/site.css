@@ -47,6 +47,16 @@ md-card {
     top: 112px;
     margin-left: 12px;
 }
+.icon-white{
+    fill:white;
+}
+
+.icon-gray{
+    fill:#737373;
+}
+.icon-background-gray{
+    background-color: #737373 !important;
+}
 .toolbar-settings {
     min-height: 223px !important;
 }

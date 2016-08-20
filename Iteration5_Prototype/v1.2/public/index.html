@@ -15,13 +15,13 @@
     <link href="app/styles/contacts.css" rel="stylesheet" />
     <link href="app/styles/messages.css" rel="stylesheet" />
     <link href="app/styles/settings.css" rel="stylesheet" />
-
-
+    
 
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+
 </head>
 
-<body ng-app="App" layout="row" ng-controller="IndexCtrl"  ng-cloak >
+<body ng-app="App" layout="row" ng-controller="IndexCtrl" ng-cloak>
     <md-sidenav layout="column" ng-class="{'nav-width-short': navbarShort()}" class="md-sidenav-left md-whiteframe-24dp" md-component-id="left" md-is-locked-open="$mdMedia('(min-width: 0px)')">
         <md-toolbar class="toolbar-settings md-primary md-hue-2">
             <div ng-hide="2 == selectedItem" style="text-align:center">
@@ -29,7 +29,7 @@
 
                 <img ng-src={{user.profileImg}} class="md-avatar" id="nav-img-profile" alt="{{user.name}}">
                 <div style="margin-top:30px;"></div>
-                <span ng-hide="navbarShort()"  class="md-headline" style="front-weight=bold;">{{user.name}}</span>
+                <span ng-hide="navbarShort()" class="md-headline" style="front-weight=bold;">{{user.name}}</span>
             </div>
         </md-toolbar>
         <md-list>
@@ -75,6 +75,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-svg-round-progressbar/0.4.4/roundProgress.min.js"></script>
 
+    
     <!-- Angular Material Dependencies -->
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script>
@@ -83,9 +84,9 @@
     <!-- Load app main script -->
     <script src="app/app.js"></script>
     <!-- Load services -->
+    <script src="app/services/data.service.js"></script>
     <script src="app/services/dashboard.service.js"></script>
     <script src="app/services/authentication.service.js"></script>
-    <script src="app/services/data.service.js"></script>
     <!-- Load controllers -->
     <script src="app/controllers/indexCtrl.js"></script>
     <script src="app/controllers/dashboardProfileCtrl.js"></script>
@@ -93,8 +94,6 @@
     <script src="app/controllers/messagesCtrl.js"></script>
     <script src="app/controllers/settingsCtrl.js"></script>
     <script src="app/controllers/whiteboardCtrl.js"></script>
-
-
 
     <!-- Load custom filters -->
     <!-- Load custom directives -->

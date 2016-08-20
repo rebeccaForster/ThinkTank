@@ -138,10 +138,10 @@
 
                             <md-button ng-disabled="ideaForm.commentArea.$invalid" class="md-accent messages-icon" ng-click="sendComment()" style="font-weight:bold; font-size:24px;">Send</md-button>
                             <md-button ng-disabled="true" class="md-icon-button messages-icon" aria-label="Record Audio">
-                                <ng-md-icon icon="keyboard_voice" style="fill: #737373;" size="24"></ng-md-icon>
+                                <ng-md-icon icon="keyboard_voice" class="icon-gray" size="24"></ng-md-icon>
                             </md-button>
                             <md-button ng-disabled="true" class="md-icon-button messages-icon" aria-label="Record Video">
-                                <ng-md-icon icon="videocam" style="fill: #737373;" size="24"></ng-md-icon>
+                                <ng-md-icon icon="videocam" class="icon-gray" size="24"></ng-md-icon>
                             </md-button>
                         </md-input-container>
                     </div>
@@ -153,10 +153,10 @@
                                     <!-- ToDO: Hier muss noch das gespeicherte Datum von der Nachricht eingefügt werden-->
                                     <div class="md-subhead messages-icon" style="margin-left:10px;">12.02.2016</div>
 
-                                    <ng-md-icon ng-show="message.likeIdeaStatus" icon="thumb_up" style="fill: #737373" class="messages-icon"></ng-md-icon>
-                                    <ng-md-icon ng-show="message.newInputStatus" icon="touch_app" style="fill: #737373" class="messages-icon"></ng-md-icon>
-                                    <ng-md-icon ng-show="message.troubleStatus" icon="flash_on" style="fill: #737373" class="messages-icon"></ng-md-icon>
-                                    <ng-md-icon ng-show="message.other" icon="more_horiz" style="fill: #737373" class="messages-icon"></ng-md-icon>
+                                    <ng-md-icon ng-show="message.likeIdeaStatus" icon="thumb_up" class="icon-gray" class="messages-icon"></ng-md-icon>
+                                    <ng-md-icon ng-show="message.newInputStatus" icon="touch_app" class="icon-gray" class="messages-icon"></ng-md-icon>
+                                    <ng-md-icon ng-show="message.troubleStatus" icon="flash_on" class="icon-gray" class="messages-icon"></ng-md-icon>
+                                    <ng-md-icon ng-show="message.other" icon="more_horiz" class="icon-gray" class="messages-icon"></ng-md-icon>
                                     <div class="md-headline">{{users[message.author].name}}</div>
 
 
