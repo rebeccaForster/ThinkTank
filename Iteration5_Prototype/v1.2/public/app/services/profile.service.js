@@ -2,10 +2,10 @@
 
   angular
     .module('App')
-    .service('meanData', meanData);
+    .service('profileService', ProfileService);
 
-  meanData.$inject = ['$http', 'authentication'];
-  function meanData ($http, authentication) {
+
+  function ProfileService ($http, authentication) {
 
     var getProfile = function () {
       return $http.get('/api/profile', {

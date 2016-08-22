@@ -9,56 +9,29 @@
         var users = [];
 
           return {
-            loadDashboard : function() {
-                $http.get("/api/dashboardData/ideas").then(function (response) {
+            loadAllIdeas : function() {
+                $http.get("/api/dashboardData/allideas").then(function (response) {
                   ideas = response.data;
                 });
                 return $q.when(ideas);
-             },
+             }, 
 
-            loadUsers : function() {
-             $http.get("/api/dashboardData/users").then(function (response) {
-                  users = response.data;
+             searchIdeasByTag : function(tags) {
+                $http.get("/api/dashboardData/bytags", {params: {"tags": tags.join(", ")}})
+                  .then(function (response) {
+                      ideas = response.data;
                 });
-                return $q.when(users);
-            }
+                  return $q.when(ideas);
+             }, 
+
+             searchIdeasByQuery : function(query) {
+              $http.get("/api/dashboardData/byquery", {params: {"tags": query}})
+                  .then(function (response) {
+                      ideas = response.data;
+                });
+                  return $q.when(ideas);
+             }
           };
   }
 );
 })();
-
-
-  // angular.module('App')
-  //        .factory('dashService', function ($http, $q) {
-
-  //         var dash = null; 
-
-  //         return {
-  //           loadDashboard : function() {
-  //             $http.get("/dashboardData").then(function (response) {
-  //                 dash = response.data;
-  //             });
-
-  //             return $q.when(dash);
-  //             }
-  //         };
-  // }
-  // );
-
-
-      // loadDashboardbySearch : function(query, sort) {
-      //   $http.get("/dashboard/:query/:sort").then(function (response) {
-      //       $scope.dash = response.data;
-      //   });
-
-      //   return $q.when(dash);
-      // }
-
-      // loadFollowedDashboard: function(userid, sort) {
-      //     $http.get("/dashboard/follow/:userid/:sort").then(function (response) {
-      //       $scope.dash = response.data;
-      //   });
-
-      //   return $q.when(dash);
-      // }
-

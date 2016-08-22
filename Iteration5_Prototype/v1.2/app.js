@@ -12,7 +12,12 @@ require('./models/db');
 require('./config/passport');
 
 var routes = require('./routes/index');
-var dashRout = require('./routes/dash');
+var dashRout = require('./routes/dashboard.route');
+var indexRout = require('./routes/indexData.route');
+var userRout = require('./routes/user.route');
+var ideaRout = require('./routes/idea.route');
+var settingsRout = require('./routes/settings.route');
+var messagesRout = require('./routes/messages.route');
 
 var app = express();
 
@@ -42,7 +47,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 
 app.use('/api', routes);
+app.use('/api/indexData', indexRout);
 app.use('/api/dashboardData', dashRout);
+app.use('/api/userData', userRout);
+app.use('/api/ideaData', ideaRout);
+app.use('/api/settingData', settingsRout);
+app.use('/api/messagesData', messagesRout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

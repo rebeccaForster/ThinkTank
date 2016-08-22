@@ -1,28 +1,28 @@
 'use strict';
 angular
 	.module('App')
-	.controller('DashboardProfileCtrl', function ($scope, dashService, $location, $mdDialog, $mdMedia, $timeout) {
+	.controller('DashboardProfileCtrl', function ($scope, dashService, indexData, $location, $mdDialog, $mdMedia, $timeout) {
 		
 		$scope.ideas = {};
 		$scope.users = [];
 
 		dashService
-		      .loadDashboard()
+		      .loadAllIdeas()
 		      .then( function( res ) {
 
                 $scope.ideas = res;
                 console.log($scope.ideas[4].title)
 		      });
 
-		dashService
-		      .loadUsers()
+		indexData
+		      .loadAllUsers()
 		      .then( function( res ) {
 		        
                 $scope.users = res;
                 console.log($scope.users[1].name)
 		      });
 
-	 $scope.maxColumn = 3;
+	$scope.maxColumn = 3;
     $scope.maxProfileColumn = 2;
 
     $scope.commentIdea = function (index, ev) {
@@ -118,12 +118,7 @@ angular
                 }
             })
             .then(function () {}, function () {});
-
-
     };
-
-    
-
 });
 
 

@@ -28,8 +28,7 @@
             <div layout="column" class="md-toolbar-tools-bottom inset">
                 <ng-md-icon icon="account_circle" size="64"></ng-md-icon>
                 <span></span>
-                <!-- <div >{{ currentUser.firstname }} {{ currentUser.name }}</div> -->
-                <div ng-show="isLoggedIn">>Hello {{ currentTestUser.firstname }} {{ currentTestUser.name }}</div>
+                <div ng-show="isLoggedIn">{{ currentUser.firstname }} {{ currentUser.name }}</div>
                 <md-button class="md-raised" ng-hide="isLoggedIn" ng-click="showLoginBox()">Login</md-button>
                 <md-button class="md-raised" ng-hide="isLoggedIn" ng-click="showRegisterBox()">Register</md-button>
                 <md-button class="md-raised" ng-show="isLoggedIn" ng-click="logout()">Logout</md-button>
@@ -106,7 +105,12 @@
     <!-- Load services -->
     <script src="app/services/dashboard.service.js"></script>
     <script src="app/services/authentication.service.js"></script>
-    <script src="app/services/data.service.js"></script>
+    <script src="app/services/indexData.service.js"></script>
+    <script src="app/services/profile.service.js"></script>
+    <script src="app/services/idea.service.js"></script>
+    <script src="app/services/messages.service.js"></script>
+    <script src="app/services/whiteboard.service.js"></script>
+    <script src="app/services/settings.service.js"></script>
     <!-- Load controllers -->
     <script src="app/controllers/indexCtrl.js"></script>
     <script src="app/controllers/dashboardProfileCtrl.js"></script>

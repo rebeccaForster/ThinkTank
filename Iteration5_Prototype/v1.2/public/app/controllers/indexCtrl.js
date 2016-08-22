@@ -1,227 +1,19 @@
 'use strict';
 // navigationCtrl.$inject = ['$location','authentication'];
 
-app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, $mdDialog, $mdMedia) {
+app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, indexData, $mdDialog, $mdMedia) {
 
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
     };
 
-    $scope.menuNonAuth = [
-        {
-            path: 'whiteboard',
-            title: 'Whiteboard',
-            icon: 'brush'
-    },
-        {
-            path: 'dashboard',
-            title: 'Dashboard',
-            icon: 'send'
-    },
-        {
-            path: '#',
-            title: 'Log In',
-            icon: 'account_box'
-    }
+    $scope.hashtags = [];
 
-  ];
-
-    $scope.menuAuth = [
-        {
-            path: 'whiteboard',
-            title: 'Whiteboard',
-            icon: 'brush'
-    },
-        {
-            path: 'dashboard',
-            title: 'Dashboard',
-            icon: 'send'
-    },
-        {
-            path: 'profil',
-            title: 'Profil',
-            icon: 'person'
-    },
-        {
-            path: 'messages',
-            title: 'Messages & Requests',
-            icon: 'email'
-    },
-        {
-            path: 'contacts',
-            title: 'Contacts',
-            icon: 'group'
-    },
-        {
-            path: 'settings',
-            title: 'Settings',
-            icon: 'settings'
-    },
-        {
-            path: 'logout',
-            title: 'Log Out',
-            icon: 'exit_to_app'
-    }
-
-  ];
-
-    $scope.currentTestUser = {
-        firstname: "Frederic",
-        name: "Wollinger"
-    };
-
-    console.log(authentication.isLoggedIn());
-    console.log("test");
-
-    if (authentication.isLoggedIn()) {
-        $scope.menu = $scope.menuAuth;
-    } else {
-        $scope.menu = $scope.menuNonAuth;
-    }
-
-    $scope.selectedItem = 1;
-
-    $scope.go = function (index, path, title) {
-        $state.go(path);
-        $scope.title = title;
-
-        if ($scope.selectedItem != index) {
-            // clear hashtag, if a new item in the menu is clicked
-            $scope.selectedHashtags = [];
-        }
-
-        $scope.selectedItem = index;
-
-    }
-
-    $scope.searchHashtag = function (ev) {
-        $mdDialog.show({
-                controller: HashtagPopupController,
-                templateUrl: 'app/views/hashtag-popup.html',
-                targetEvent: ev,
-                scope: $scope, // use parent scope in template
-                preserveScope: true,
-                clickOutsideToClose: true,
-                fullscreen: true,
-                locals: {}
-            })
-            .then(function () {}, function () {
-                $scope.updateDashboard();
-            });
-    }
-
-    $scope.getStatusHashtag = function (id) {
-
-        for (var i in $scope.selectedHashtags) {
-            if ($scope.selectedHashtags[i] == id) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    $scope.sorting = [
-        {
-            "id": 0,
-            "title": "Latest Ideas"
-        }, {
-            "id": 1,
-            "title": "Most popular"
-        }, {
-            "id": 2,
-            "title": "Friedhof"
-        }, {
-            "id": 3,
-            "title": "Himmel"
-        }];
-
-    $scope.getHashtagStyle = function (priority) {
-
-        var size = "0px";
-        switch (priority) {
-        case 0:
-            size = "12px"
-            break;
-        case 1:
-            size = "14px"
-            break;
-        case 2:
-            size = "16px"
-            break;
-        case 3:
-            size = "18px"
-            break;
-        case 4:
-            size = "20px"
-            break;
-
-        default:
-            size = "12px"
-        }
-        return {
-            "font-size": size
-        }
-    }
-
-    //init
-    $scope.sortingType = $scope.sorting[0].title;
-
-    $scope.isLoggedIn = authentication.isLoggedIn();
-    $scope.currentUser = authentication.currentUser();
-
-    // [SM]
-    // vm.isLoggedIn = authentication.isLoggedIn();
-    // vm.currentUser = authentication.currentUser();
-
-    $scope.logout = function() {
-        authentication.logout();
-        location.reload();
-
-    }
-
-    $scope.showLoginBox = function(ev) {
-    
-        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
-
-        console.log("login button pressed");
-        $mdDialog.show({
-            controller: DialogController,
-          templateUrl: 'login.tmpl.html',
-            parent: angular.element(document.body),
-          targetEvent: ev,
-            clickOutsideToClose: true,
-            fullscreen: useFullScreen
-        });
-    };
-
-    $scope.showRegisterBox = function(ev) {
-    
-        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
-
-        console.log("register button pressed");
-        $mdDialog.show({
-          controller: DialogController,
-          templateUrl: 'resgister.tmpl.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose:true,
-          fullscreen: useFullScreen
-        });
-    };
-
-    function DialogController($scope, $mdDialog) {
-        $scope.hide = function () {
-            $mdDialog.hide();
-        };
-
-        $scope.cancel = function () {
-            $mdDialog.cancel();
-        };
-
-        $scope.answer = function (answer) {
-            $mdDialog.hide(answer);
-        };
-    }
+    indexData
+              .getAllTags()
+              .then( function( res ) {
+                $scope.hashtags = res;
+              });
 
     $scope.hashtags = [
         {
@@ -321,6 +113,212 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             priority: 3
         }
   ];
+
+    $scope.menuNonAuth = [
+        {
+            path: 'whiteboard',
+            title: 'Whiteboard',
+            icon: 'brush'
+    },
+        {
+            path: 'dashboard',
+            title: 'Dashboard',
+            icon: 'send'
+    },
+        {
+            path: '#',
+            title: 'Log In',
+            icon: 'account_box'
+    }
+
+  ];
+
+    $scope.menuAuth = [
+        {
+            path: 'whiteboard',
+            title: 'Whiteboard',
+            icon: 'brush'
+    },
+        {
+            path: 'dashboard',
+            title: 'Dashboard',
+            icon: 'send'
+    },
+        {
+            path: 'profil',
+            title: 'Profil',
+            icon: 'person'
+    },
+        {
+            path: 'messages',
+            title: 'Messages & Requests',
+            icon: 'email'
+    },
+        {
+            path: 'contacts',
+            title: 'Contacts',
+            icon: 'group'
+    },
+        {
+            path: 'settings',
+            title: 'Settings',
+            icon: 'settings'
+    },
+        {
+            path: 'logout',
+            title: 'Log Out',
+            icon: 'exit_to_app'
+    }
+
+  ];
+
+    console.log(authentication.isLoggedIn());
+    console.log("test");
+
+    if (authentication.isLoggedIn()) {
+        $scope.menu = $scope.menuAuth;
+    } else {
+        $scope.menu = $scope.menuNonAuth;
+    }
+
+    $scope.selectedItem = 1;
+
+    $scope.go = function (index, path, title) {
+        $state.go(path);
+        $scope.title = title;
+
+        if ($scope.selectedItem != index) {
+            // clear hashtag, if a new item in the menu is clicked
+            $scope.selectedHashtags = [];
+        }
+
+        $scope.selectedItem = index;
+
+    }
+
+    $scope.searchHashtag = function (ev) {
+        $mdDialog.show({
+                controller: HashtagPopupController,
+                templateUrl: 'app/views/hashtag-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {}
+            })
+            .then(function () {}, function () {
+                $scope.updateDashboard();
+            });
+    }
+
+    $scope.getStatusHashtag = function (id) {
+
+        for (var i in $scope.selectedHashtags) {
+            if ($scope.selectedHashtags[i] == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    $scope.sorting = [
+        {
+            "id": 0,
+            "title": "Latest Ideas"
+        }, {
+            "id": 1,
+            "title": "Most popular"
+        }, {
+            "id": 2,
+            "title": "Friedhof"
+        }, {
+            "id": 3,
+            "title": "Himmel"
+        }];
+
+    $scope.getHashtagStyle = function (priority) {
+
+        var size = "0px";
+        switch (priority) {
+        case 0:
+            size = "12px"
+            break;
+        case 1:
+            size = "14px"
+            break;
+        case 2:
+            size = "16px"
+            break;
+        case 3:
+            size = "18px"
+            break;
+        case 4:
+            size = "20px"
+            break;
+
+        default:
+            size = "12px"
+        }
+        return {
+            "font-size": size
+        }
+    }
+
+    $scope.sortingType = $scope.sorting[0].title;
+
+    $scope.isLoggedIn = authentication.isLoggedIn();
+    $scope.currentUser = authentication.currentUser();
+
+    $scope.logout = function() {
+        authentication.logout();
+        location.reload();
+    }
+
+    $scope.showLoginBox = function(ev) {
+    
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
+
+        console.log("login button pressed");
+        $mdDialog.show({
+            controller: DialogController,
+          templateUrl: 'login.tmpl.html',
+            parent: angular.element(document.body),
+          targetEvent: ev,
+            clickOutsideToClose: true,
+            fullscreen: useFullScreen
+        });
+    };
+
+    $scope.showRegisterBox = function(ev) {
+    
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+
+        console.log("register button pressed");
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: 'resgister.tmpl.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          fullscreen: useFullScreen
+        });
+    };
+
+    function DialogController($scope, $mdDialog) {
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+
+        $scope.answer = function (answer) {
+            $mdDialog.hide(answer);
+        };
+    };
+        
     $scope.hashtagSelected = function (id) {
         for (var i in $scope.selectedHashtags) {
             if ($scope.selectedHashtags[i] == id) {
@@ -329,6 +327,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         }
         return false;
     }
+
     $scope.selectedHashtags = [];
     $scope.setHashtags = function (id, status) {
         if (!status) {

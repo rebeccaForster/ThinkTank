@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
-var Comment = require('../models/comment.js');
-var Idea = require('../models/idea.js');
-var Person = require('../models/users.js');
-var Scibble = require('../models/scibble.js');
+var Comment = require('../models/comment.model.js');
+var Idea = require('../models/idea.model.js');
+var Person = require('../models/users.model.js');
+var Scibble = require('../models/scibble.model.js');
 var Dash = [];
 
 //Test for connection: 
@@ -451,171 +451,27 @@ var ideas = [
     }
     ];
 
-var users = [
-    {
-        id: 0,
-        name: "Marius Mülle0",
-        profileImg: "app/img/user.jpg",
-        url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 6, 3, 2]
 
-        }, {
-        id: 1,
-        name: "Marius Mülle1",
-        profileImg: "app/img/user.jpg",
-        url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 6, 3, 2]
-        }, {
-        id: 2,
-        name: "Marius Mülle2",
-        profileImg: "app/img/user.jpg",
-        url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 4, 3, 2]
-        }, {
-        id: 3,
-        name: "Marius Mülle3",
-        profileImg: "app/img/user.jpg",
-        url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 5, 3, 2]
-        }, {
-        id: 4,
-        name: "Marius Mülle4",
-        profileImg: "app/img/user.jpg",
-        url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 6, 3, 2]
-        }, {
-        id: 5,
-        name: "Marius Mülle5",
-        profileImg: "app/img/user.jpg",
-        url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 2]
-        }, {
-        id: 6,
-        name: "Marius Mülle6",
-        profileImg: "app/img/user.jpg",
-        url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 5, 3, 2]
-        }, {
-        id: 7,
-        name: "Marius Mülle7",
-        profileImg: "app/img/user.jpg",
-        url: "https://www.lfe.mw.tum.de/author/bengler/",
-        tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 5, 3, 2]
-        }
-    ];
+router.get('/allideas', function (req, res, next) {
+    //$scope.ideas = Idea.find();
 
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   Idea.find(function (err, todos) {
-//     if (err) return next(err);
-//     res.json(todos);
-//   });
-
-// });
-
-router.get('/ideas', function (req, res, next) {
     res.json(ideas);
 });
 
-router.get('/users', function (req, res, next) {
-    res.json(users);
+router.get('/bytags/:tags', function (req, res, next) {
+    var tagsList = req.params.tags.split(',');
+    //$scope.ideas = Idea.find( { tags: { $in: tagsList } });
+
+    res.json(ideas);
 });
 
-// router.get('/dashboardData/:query/:sort', function(req, res, next) {
-//   Dash.push(findById(req.params.query, function (err, post) {
-//     if (err) return next(err);
+router.get('/byquery/:query', function (req, res, next) {
+    var query = req.params.query;
+    //$scope.ideas = Idea.find( { });
+
+    res.json(ideas);
+});
 
 
-//     res.json(post);
-//   }));
-// });
 
 module.exports = router;
