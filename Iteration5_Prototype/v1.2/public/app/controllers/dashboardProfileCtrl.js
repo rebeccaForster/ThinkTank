@@ -119,7 +119,6 @@ angular
             })
             .then(function () {}, function () {});
     };
-});
 
         $scope.maxColumn = 3;
         $scope.maxProfileColumn = 2;
@@ -277,8 +276,6 @@ angular
         };
 
     });
->>>>>>> 04b2a76da00dae5523f1c56470b415734ae7828f
-
 
 
 function IdeaPopupController($scope, $mdDialog, ideaIndex) {
