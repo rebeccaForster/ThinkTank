@@ -1,75 +1,36 @@
 .header-progress {
-    position: fixed;
-    top: 100px;
-    z-index: 20;
-}
-
-.progress {
-    position: fixed;
-    color: #bbb;
-    font-size: 40px;
-    top: 180px;
-    font-weight: 100;
-    line-height: 1;
-    margin-left: 50px;
-    z-index: 20;
+    position: absolute;
+    z-index: 70;
 }
 
 .container {
-    position: fixed;
+    position: absolute;
+    top: 130px;
     margin-left: -100px;
     left: 50%;
+}
+
+.header-background-circle {
+    z-index: 60;
+    background-color: #fafafa;
+    position: absolute;
+    width: 184px;
+    color: #bbb;
+    text-align: center;
+    height: 184px;
+    border: 0px solid black;
+    border-radius: 92px;
+    margin-left: 12px;
+}
+
+.header-picture {
+     position: relative;
+    left: 0;
+    top: 0;
     width: 100%;
-}
-
-.header-image {
-    z-index: 2;
-    height: 200px;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    margin: 0;
-}
-
-.header-background {
-    position: fixed;
-    z-index: 1;
-    height: 200px;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    margin: 0;
-    background-color: #3f51b5;
-}
-
-.header-top {
-    position: fixed;
-    width: 100%;
-    height: 260px;
-}
-
-.header-title {
-    position: fixed;
-    margin-right: 29px;
-    margin-left: 29px;
-    z-index: 20;
-    top: 0px;
-    left: 0px;
-    color: white;
-}
-
-.messages-icon {
-    float: right;
-}
-
-.header-btn-followIdea {
-    float: right;
-    z-index: 10;
-}
-
-.header-btn-close {
-    float: right;
-    z-index: 10;
+    height: 223px !important;
+    opacity: 0.5;
+   position: 50% 50%;
 }
 
 .popup-size {
@@ -84,31 +45,12 @@
     border-radius: 0;
 }
 
-.header-background-circle {
-    z-index: 2;
-    background-color: #fafafa;
-    position: fixed;
-    width: 184px;
-    height: 184px;
-    border: 0px solid black;
-    border-radius: 92px;
-    top: 112px;
-    margin-left: 12px;
-}
-
-.idea-profile-content{
-    margin-top: 280px;
-    margin-bottom: 0px;
-}
-
-.content {
-    max-width: 100%;
-    margin-left: 29px;
-    margin-right: 29px;
+.messages-icon {
+    float: right;
 }
 
 .content-image {
-    width: 100%;
+    max-width: 100%;
     height: auto;
 }
 

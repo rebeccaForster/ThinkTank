@@ -123,12 +123,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         {
             path: 'dashboard',
             title: 'Dashboard',
-            icon: 'send'
-    },
-        {
-            path: '#',
-            title: 'Log In',
-            icon: 'account_box'
+            icon: 'dashboard'
     }
 
   ];
@@ -142,11 +137,11 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         {
             path: 'dashboard',
             title: 'Dashboard',
-            icon: 'send'
+            icon: 'dashboard'
     },
         {
-            path: 'profil',
-            title: 'Profil',
+            path: 'profile',
+            title: 'Profile',
             icon: 'person'
     },
         {
@@ -163,27 +158,60 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             path: 'settings',
             title: 'Settings',
             icon: 'settings'
-    },
-        {
-            path: 'logout',
-            title: 'Log Out',
-            icon: 'exit_to_app'
     }
 
   ];
 
-    console.log(authentication.isLoggedIn());
-    console.log("test");
 
-    if (authentication.isLoggedIn()) {
-        $scope.menu = $scope.menuAuth;
-    } else {
-        $scope.menu = $scope.menuNonAuth;
+    $scope.navbarShort = function () {
+        return (0 == $scope.selectedItem) || !$mdMedia('gt-md');
     }
+
+    $scope.userTum = {
+        name: "TUM LfE",
+        profileImg: "app/img/user.jpg",
+    };
+    $scope.menu = $scope.menuNonAuth;
+
+    $scope.isLoggedIn = !authentication.isLoggedIn();
+    $scope.user = $scope.userTum;
+    $scope.setSignInStatus = function () {
+        $scope.isLoggedIn = !authentication.isLoggedIn();
+        if (!$scope.isLoggedIn) {
+            $scope.menu = $scope.menuAuth;
+            $scope.user = authentication.currentUser();
+
+        } else {
+            $scope.menu = $scope.menuNonAuth;
+            $scope.user = $scope.userTum;
+        }
+    }
+
+
 
     $scope.selectedItem = 1;
 
     $scope.go = function (index, path, title) {
+        switch (index) {
+        case 1:
+            $scope.sorting = $scope.sortingDashboardProfile;
+            $scope.sortingType = $scope.sorting[0];
+
+            break;
+        case 2:
+
+            break;
+        case 3:
+            $scope.sorting = $scope.sortingMessages;
+            $scope.sortingType = $scope.sorting[0];
+
+            break;
+        case 4:
+
+            break;
+
+        default:
+        }
         $state.go(path);
         $scope.title = title;
 
@@ -212,49 +240,30 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             });
     }
 
-    $scope.getStatusHashtag = function (id) {
 
-        for (var i in $scope.selectedHashtags) {
-            if ($scope.selectedHashtags[i] == id) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    $scope.sorting = [
-        {
-            "id": 0,
-            "title": "Latest Ideas"
-        }, {
-            "id": 1,
-            "title": "Most popular"
-        }, {
-            "id": 2,
-            "title": "Friedhof"
-        }, {
-            "id": 3,
-            "title": "Himmel"
-        }];
+    $scope.sortingDashboardProfile = ["Latest Ideas", "Most popular", "Friedhof", "Himmel"];
+    $scope.sortingMessages = ["Date up", "Date down", "Name up", "Name down"];
+    $scope.sorting = $scope.sortingDashboardProfile;
+    $scope.sortingType = $scope.sorting[0];
 
     $scope.getHashtagStyle = function (priority) {
 
         var size = "0px";
         switch (priority) {
         case 0:
-            size = "12px"
-            break;
-        case 1:
-            size = "14px"
-            break;
-        case 2:
-            size = "16px"
-            break;
-        case 3:
             size = "18px"
             break;
+        case 1:
+            size = "22px"
+            break;
+        case 2:
+            size = "26px"
+            break;
+        case 3:
+            size = "30px"
+            break;
         case 4:
-            size = "20px"
+            size = "34px"
             break;
 
         default:
@@ -267,61 +276,82 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     $scope.sortingType = $scope.sorting[0].title;
 
-    $scope.isLoggedIn = authentication.isLoggedIn();
-    $scope.currentUser = authentication.currentUser();
-
-    $scope.logout = function() {
+    $scope.logout = function () {
         authentication.logout();
-        location.reload();
+        $scope.setSignInStatus();
     }
 
-    $scope.showLoginBox = function(ev) {
-    
-        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
-
-        console.log("login button pressed");
+    $scope.showProfile = function (index, ev) {
         $mdDialog.show({
-            controller: DialogController,
-          templateUrl: 'login.tmpl.html',
-            parent: angular.element(document.body),
-          targetEvent: ev,
-            clickOutsideToClose: true,
-            fullscreen: useFullScreen
-        });
+                controller: ProfilePopupController,
+                templateUrl: 'app/views/profile-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {
+                    profileIndex: index
+                }
+            })
+            .then(function () {}, function () {});
+
+
+    };
+    $scope.showLoginBox = function (ev) {
+        $mdDialog.show({
+                controller: LoginDialogController,
+                templateUrl: 'app/views/login-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {
+                    authentication: authentication
+                }
+
+            })
+            .then(function () {
+                return true;
+            }, function () {
+                return true;
+            });
+
+
+
+
     };
 
-    $scope.showRegisterBox = function(ev) {
-    
-        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
 
-        console.log("register button pressed");
+
+
+    $scope.showRegisterBox = function (ev) {
         $mdDialog.show({
-          controller: DialogController,
-          templateUrl: 'resgister.tmpl.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose:true,
-          fullscreen: useFullScreen
-        });
+                controller: RegisterDialogController,
+                templateUrl: 'app/views/register-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {
+                    authentication: authentication
+                }
+
+            })
+            .then(function () {}, function () {});
     };
 
-    function DialogController($scope, $mdDialog) {
-        $scope.hide = function () {
-            $mdDialog.hide();
-        };
-
-        $scope.cancel = function () {
-            $mdDialog.cancel();
-        };
 
         $scope.answer = function (answer) {
             $mdDialog.hide(answer);
         };
-    };
         
-    $scope.hashtagSelected = function (id) {
+    $scope.hashtagSelected = function (name) {
+
         for (var i in $scope.selectedHashtags) {
-            if ($scope.selectedHashtags[i] == id) {
+            if ($scope.selectedHashtags[i] == name) {
                 return true;
             }
         }
@@ -329,18 +359,18 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     }
 
     $scope.selectedHashtags = [];
-    $scope.setHashtags = function (id, status) {
+    $scope.setHashtags = function (name, status) {
         if (!status) {
-            $scope.selectedHashtags.push(id);
+            $scope.selectedHashtags.push(name);
         } else {
-            $scope.selectedHashtags.splice($scope.selectedHashtags.indexOf(id), 1);
+            $scope.selectedHashtags.splice($scope.selectedHashtags.indexOf(name), 1);
 
         }
     }
-    $scope.changeSortingType = function(index){
-        $scope.sortingType= index;
+    $scope.changeSortingType = function (index) {
+        $scope.sortingType = index;
         $scope.updateDashboard();
-    
+
     }
     $scope.updateDashboard = function () {
         // ToDo: es wurden neue Tags hinzugefügt bzw. entfernt und hier müsstest du mithilfe der Tags & des auswählten Sorting die Liste erneuern
@@ -359,4 +389,55 @@ function HashtagPopupController($scope, $mdDialog) {
         $mdDialog.cancel();
     };
 
+}
+
+function LoginDialogController($scope, $mdDialog, authentication) {
+    $scope.credentials = {
+        email: "",
+        password: ""
+    };
+    $scope.test = "";
+
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+    $scope.login = function () {
+        authentication
+            .login($scope.credentials)
+            .then(function () {
+                $scope.cancel();
+                $scope.setSignInStatus();
+
+            });
+
+
+    };
+}
+
+
+function RegisterDialogController($scope, $mdDialog, authentication) {
+    $scope.credentials = {
+        email: "",
+        name: "",
+        password: ""
+    };
+
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+    $scope.register = function () {
+        authentication
+            .register($scope.credentials)
+            .then(function () {
+                $scope.cancel();
+                $scope.showLoginBox();
+            });
+
+    };
 }

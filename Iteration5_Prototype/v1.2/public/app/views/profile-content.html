@@ -1,35 +1,21 @@
-            <div flex=66 layout="column" class="content">
-                <div class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
-                    <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
-                        <md-card ng-repeat="indexUserIdea in user.ideas" ng-init="idea = ideas[indexUserIdea]" ng-if="!(($index+2)%2)" ng-include="'app/views/dashboard-item-idea-card.html'">
+<div flex=66 layout="column" layout-padding>
+    <div class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
+        <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
+            <md-card class="md-whiteframe-4dp" ng-repeat="indexUserIdea in user.ideas" ng-init="idea = ideas[indexUserIdea]" ng-if="!(($index+2)%2)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea.id, $event)">
 
-                        </md-card>
-                    </div>
-                    <div flex="50" flex-sm="100" flex-xs="100" layout="column" layout-margin>
-                        <md-card ng-repeat="indexUserIdea in user.ideas" ng-init="idea = ideas[indexUserIdea]" ng-if="!(($index+1)%2)" ng-include="'app/views/dashboard-item-idea-card.html'">
+            </md-card>
+        </div>
+        <div flex="50" flex-sm="100" flex-xs="100" layout="column" layout-margin>
+            <md-card  class="md-whiteframe-4dp" ng-repeat="indexUserIdea in user.ideas" ng-init="idea = ideas[indexUserIdea]" ng-if="!(($index+1)%2)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea.id, $event)">
 
-                        </md-card>
-                    </div>
-                </div>
-            </div>
-            <div flex layout="column" class="content">
-                <div>
-                    <h3>Groups</h3>
-                    <div layout="column" ng-repeat="group in user.groups">
-                        <div layout="row">
-                            <div flex>{{group.name}}</div>
-                            <div ng-show="{{group.owner}} === true">owner</div>
+            </md-card>
+        </div>
+    </div>
+</div>
+<div flex layout="column">
+    <div>
+        <div class="md-display-1" style="font-weight:bold;">Hashtags</div>
+        <p class="md-headline" ng-repeat="tag in selectedIdea.tags">#{{tag | uppercase}}</p>
+    </div>
 
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div>
-                    <h3>Hashtags</h3>
-                    <p style="font-weight:bold;" ng-repeat="tag in user.tags">#{{tag | uppercase}}</p>
-
-                </div>
-
-            </div>
-
-        
+</div>

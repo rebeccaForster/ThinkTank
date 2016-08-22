@@ -11,20 +11,33 @@ md-sidenav ng-md-icon {
     top: 5px;
 }
 
-.nav-item-select {
-    color: cyan;
-    fill: cyan;
+.item-select {
+    color: #00bcd4;
+    fill: #00bcd4 !important;
 }
 
 md-input-container {
     padding: 0 !important
 }
 
-md-card{
+md-card {
     background-color: white;
-
 }
 
+.nav-width-short {
+    width: 100px !important;
+}
+
+#nav-img-profile {
+    width: 72px;
+    height: 72px;
+    border: 0px solid black;
+    border-radius: 36px;
+    margin-left: 12px;
+}
+
+
+}
 .nav-img-user {
     z-index: 2;
     width: 72px;
@@ -34,7 +47,26 @@ md-card{
     top: 112px;
     margin-left: 12px;
 }
+.icon-white{
+    fill:white;
+}
 
-md-tall{
-    height: 223px; !important
+.icon-gray{
+    fill:#737373;
+}
+.icon-background-gray{
+    background-color: #737373 !important;
+}
+.toolbar-settings {
+    min-height: 223px !important;
+}
+.hashtag-style {
+    font-size: 24px  !important;
+    font-weight: bold !important;
+}
+.toolbar-settings-top {
+    min-height: 74px !important;
+}
+.toolbar-settings-bottom {
+    min-height: 149px !important;
 }

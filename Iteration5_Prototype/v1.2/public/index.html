@@ -13,16 +13,16 @@
     <link href="app/styles/hashtag-popup.css" rel="stylesheet" />
     <link href="app/styles/whiteboard.css" rel="stylesheet" />
     <link href="app/styles/contacts.css" rel="stylesheet" />
-    <link href="app/styles/logout.css" rel="stylesheet" />
     <link href="app/styles/messages.css" rel="stylesheet" />
     <link href="app/styles/settings.css" rel="stylesheet" />
-
-
+    
 
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+
 </head>
 
 <body ng-app="App" layout="row" ng-controller="IndexCtrl" ng-cloak>
+
     <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
         <md-toolbar class="md-tall md-primary md-hue-2">
             <div layout="column" class="md-toolbar-tools-bottom inset">
@@ -32,59 +32,50 @@
                 <md-button class="md-raised" ng-hide="isLoggedIn" ng-click="showLoginBox()">Login</md-button>
                 <md-button class="md-raised" ng-hide="isLoggedIn" ng-click="showRegisterBox()">Register</md-button>
                 <md-button class="md-raised" ng-show="isLoggedIn" ng-click="logout()">Logout</md-button>
+
+    <md-sidenav layout="column" ng-class="{'nav-width-short': navbarShort()}" class="md-sidenav-left md-whiteframe-24dp" md-component-id="left" md-is-locked-open="$mdMedia('(min-width: 0px)')">
+        <md-toolbar class="toolbar-settings md-primary md-hue-2">
+            <div ng-hide="2 == selectedItem" style="text-align:center">
+                <div style="margin-top:30px;"></div>
+
+                <img ng-src={{user.profileImg}} class="md-avatar" id="nav-img-profile" alt="{{user.name}}">
+                <div style="margin-top:30px;"></div>
+                <span ng-hide="navbarShort()" class="md-headline" style="front-weight=bold;">{{user.name}}</span>
             </div>
         </md-toolbar>
         <md-list>
             <md-item ng-repeat="item in menu" ng-click="go($index, item.path,item.name);" id="nav-item{{$index}}">
-                <md-item-content ng-class="{'nav-item-select' : $index === selectedItem }" layout="row" layout-align="start center">
+                <md-item-content ng-class="{'item-select' : $index === selectedItem }" layout="row" layout-align="start center">
                     <div class="inset">
-                        <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                        <ng-md-icon icon="{{item.icon}}" size="34"></ng-md-icon>
                     </div>
-                    <div class="inset">{{item.title}}
+                    <div ng-hide="navbarShort()" class="inset md-headline" style="font-weight:bold;">{{item.title}}
                     </div>
                 </md-item-content>
             </md-item>
         </md-list>
+        <div flex></div>
+        <div layout="row" layout-align="start center" ng-show="isLoggedIn" ng-click="showLoginBox($event)">
+            <div class="inset">
+                <ng-md-icon icon="login" size="34"></ng-md-icon>
+            </div>
+            <div ng-hide="navbarShort()" class="inset md-headline" style="font-weight:bold;">
+                Sign In
+            </div>
+        </div>
+
+        <div layout="row" layout-align="start center" ng-hide="isLoggedIn" ng-click="logout()">
+            <div class="inset">
+                <ng-md-icon icon="logout" size="34"></ng-md-icon>
+            </div>
+            <div ng-hide="navbarShort()" class="inset md-headline" style="font-weight:bold;">
+                Sign Out
+            </div>
+        </div>
     </md-sidenav>
-    <div layout="column" layout-fill>
-        <header>
 
-            <md-toolbar class="md-primary md-hue-1">
-                <div class="md-toolbar-tools">
-                    <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
-                        <ng-md-icon icon="menu"></ng-md-icon>
-                    </md-button>
-                    <h3>
-                    Academic Think Tank
-                    </h3>
-                </div>
-            </md-toolbar>
-            <md-toolbar>
-                <div class="md-toolbar-tools" layout='row'>
-                    <div flex>
-                        <md-button  class="md-raised" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(hashtags[selectedHashtag].id, true);updateDashboard();" style="font-size:24px">#{{hashtags[selectedHashtag].name}}
-                            <ng-md-icon icon="close"  ></ng-md-icon>
-                        </md-button>
-                    </div>
-                    <md-button ng-click="searchHashtag($event)" aria-label="Search">
-                        <ng-md-icon icon="search" style="fill:white;"></ng-md-icon>
-                    </md-button>
+    <div layout="column" layout-fill ui-view="">
 
-                    <div flex=5></div>
-                    <md-input-container>
-                        <md-select ng-model="sortingType" aria-label="sorting" ng-change="changeSortingType(sortingType)" >
-                            <md-option ng-value="t.title" data-ng-repeat="t in sorting">{{ t.title }}</md-option>
-                        </md-select>
-                    </md-input-container>
-                </div>
-            </md-toolbar>
-        </header>
-        <main class="" layout="row" flex>
-            <md-content flex ng-style="{'background-color': slidercolor}">
-                <div class="fade-view" ui-view="">
-                </div>
-            </md-content>
-        </main>
 
     </div>
     <!-- Angular Dependencies -->
@@ -95,6 +86,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-svg-round-progressbar/0.4.4/roundProgress.min.js"></script>
 
+    
     <!-- Angular Material Dependencies -->
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script>
@@ -115,58 +107,9 @@
     <script src="app/controllers/indexCtrl.js"></script>
     <script src="app/controllers/dashboardProfileCtrl.js"></script>
     <script src="app/controllers/contactsCtrl.js"></script>
-    <script src="app/controllers/logoutCtrl.js"></script>
     <script src="app/controllers/messagesCtrl.js"></script>
     <script src="app/controllers/settingsCtrl.js"></script>
     <script src="app/controllers/whiteboardCtrl.js"></script>
-    <script src="app/controllers/login.controller.js"></script>
-    <script src="app/controllers/register.controller.js"></script>
-
-    <script type="text/ng-template" id="login.tmpl.html" >
-        <md-dialog aria-label="Mango (Fruit)" ng-controller="loginCtrl as vm" ng-cloak>
-            <md-dialog-content>
-              <div class="md-dialog-content">
-                <h2>Sign in</h2>
-                <form ng-submit="vm.onSubmit()">
-                <div class="form-group">
-                  <label for="email">Email address</label>
-                  <input type="text" class="form-control" id="email" placeholder="Enter email" ng-model="vm.credentials.email">
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password">
-                </div>
-                <md-button type="submit">Sign in!</md-button>
-              </form>
-              </div>
-            </md-dialog-content>
-        </md-dialog>
-    </script>
-
-    <script type="text/ng-template" id="resgister.tmpl.html" >
-        <md-dialog aria-label="Mango (Fruit)" ng-controller="registerCtrl as vm" ng-cloak>
-            <md-dialog-content>
-              <div class="md-dialog-content">
-                <h2>Register</h2>
-                <form ng-submit="vm.onSubmit()">
-                <div class="form-group">
-                  <label for="name">Full name</label>
-                  <input type="text" class="form-control" id="name" placeholder="Enter your name" ng-model="vm.credentials.name">
-                </div>
-                <div class="form-group">
-                  <label for="email">Email address</label>
-                  <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="vm.credentials.email">
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password">
-                </div>
-                <md-button type="submit">Register!</md-button>
-              </form>
-              </div>
-            </md-dialog-content>
-        </md-dialog>
-    </script>
 
     <!-- Load custom filters -->
     <!-- Load custom directives -->
