@@ -22,17 +22,6 @@
 </head>
 
 <body ng-app="App" layout="row" ng-controller="IndexCtrl" ng-cloak>
-
-    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-        <md-toolbar class="md-tall md-primary md-hue-2">
-            <div layout="column" class="md-toolbar-tools-bottom inset">
-                <ng-md-icon icon="account_circle" size="64"></ng-md-icon>
-                <span></span>
-                <div ng-show="isLoggedIn">{{ currentUser.firstname }} {{ currentUser.name }}</div>
-                <md-button class="md-raised" ng-hide="isLoggedIn" ng-click="showLoginBox()">Login</md-button>
-                <md-button class="md-raised" ng-hide="isLoggedIn" ng-click="showRegisterBox()">Register</md-button>
-                <md-button class="md-raised" ng-show="isLoggedIn" ng-click="logout()">Logout</md-button>
-
     <md-sidenav layout="column" ng-class="{'nav-width-short': navbarShort()}" class="md-sidenav-left md-whiteframe-24dp" md-component-id="left" md-is-locked-open="$mdMedia('(min-width: 0px)')">
         <md-toolbar class="toolbar-settings md-primary md-hue-2">
             <div ng-hide="2 == selectedItem" style="text-align:center">
