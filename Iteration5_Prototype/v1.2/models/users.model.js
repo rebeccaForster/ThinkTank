@@ -17,14 +17,14 @@ var userSchema = new mongoose.Schema({
 	hash: String,
 	salt: String, 
 	title: String,  
-	photo: String, 
+	profileImg: String, 
 	vita: String, 
 	interests: String, 
 	publications: String, 
-	link: String, 
-	followedideas: mongoose.Schema.Types.ObjectId,
-	followedpersons: mongoose.Schema.Types.ObjectId, 
-	contacs: mongoose.Schema.Types.ObjectId
+	url: String, 
+	followedideas: [ mongoose.Schema.Types.ObjectId ],
+	followedpersons: [ mongoose.Schema.Types.ObjectId ], 
+	contacs: [ mongoose.Schema.Types.ObjectId ]
 	}, 
 	{ collection : 'users' }
 );

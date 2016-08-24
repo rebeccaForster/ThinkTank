@@ -175,11 +175,13 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     $scope.isLoggedIn = !authentication.isLoggedIn();
     $scope.user = $scope.userTum;
+    
     $scope.setSignInStatus = function () {
         $scope.isLoggedIn = !authentication.isLoggedIn();
         if (!$scope.isLoggedIn) {
             $scope.menu = $scope.menuAuth;
             $scope.user = authentication.currentUser();
+            console.log($scope.user);
 
         } else {
             $scope.menu = $scope.menuNonAuth;
@@ -187,7 +189,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         }
     }
 
-
+    $scope.setSignInStatus();
 
     $scope.selectedItem = 1;
 
@@ -422,6 +424,10 @@ function RegisterDialogController($scope, $mdDialog, authentication) {
     $scope.credentials = {
         email: "",
         name: "",
+        title: "",
+        firstname: "",
+        url: "",
+        profileImg: "",
         password: ""
     };
 

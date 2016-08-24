@@ -32,29 +32,39 @@
         };
 
         var currentUser = function () {
+            //TODO: 
+            //Userinformation wir hier aus dem Token geholt, dieses wird mit den user daten vom server gebildet
+            //jedoch kommt es von passport und beinhaltet nur id, name, mail und auth. 
+            //hier also eine extra funktion bauen die alle infos über den nutzer holt anhand siener id aus dem token 
+            // und einer überprüfung der rechte anhand seines tokens/auths 
+
+
             if (isLoggedIn()) {
                 var token = getToken();
                 var payload = token.split('.')[1];
                 payload = $window.atob(payload);
                 payload = JSON.parse(payload);
+                console.log(payload);
                 return {
                     email: payload.email,
                     name: payload.name,
-                    id: 6,
-                    profileImg: "app/img/user.jpg",
-                    url: "https://www.lfe.mw.tum.de/author/bengler/",
-                    tags: ["ergonomics", "test", "hashtag"],
-                    groups: [
-                        {
-                            name: "ergonomics",
-                            owner: true
-                },
-                        {
-                            name: "automotive driving",
-                            owner: false
-                }
-            ],
-                    ideas: [1, 5, 3, 2]
+                    firstname: payload.firstname,
+                    id: payload._id,
+                    title: payload.title,
+                    profileImg: payload.profileImg, //"app/img/user.jpg",
+                    url: payload.url //,
+                    // tags: ["ergonomics", "test", "hashtag"],
+                    // groups: [
+                    //     {
+                    //         name: "ergonomics",
+                    //         owner: true
+                    //     },
+                    //     {
+                    //         name: "automotive driving",
+                    //         owner: false
+                    //     }
+                    // ],
+                    // ideas: [1, 5, 3, 2]
                 };
             }
         };

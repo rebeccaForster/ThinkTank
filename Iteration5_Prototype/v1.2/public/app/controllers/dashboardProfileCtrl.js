@@ -11,7 +11,6 @@ angular
 		      .then( function( res ) {
 
                 $scope.ideas = res;
-                console.log($scope.ideas[4].title)
             });
 
 		indexData
@@ -19,7 +18,6 @@ angular
 		      .then( function( res ) {
 		        
                 $scope.users = res;
-                console.log($scope.users[1].name)
 		      });
 
 	$scope.maxColumn = 3;

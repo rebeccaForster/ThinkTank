@@ -13,13 +13,30 @@
         <md-dialog-content>
             <div class="md-dialog-content">
                 <md-input-container class="md-block">
+                    <label>Title</label>
+                    <input name="Title" ng-model="credentials.title" md-autofocus/>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Firstname</label>
+                    <input name="Firstname" ng-model="credentials.firstname" required />
+                </md-input-container>
+                <md-input-container class="md-block">
                     <label>Name</label>
-                    <input name="Name" ng-model="credentials.name" md-autofocus required />
+                    <input name="Name" ng-model="credentials.name" required />
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Email</label>
                     <input name="Email" ng-model="credentials.email" required />
                 </md-input-container>
+                <md-input-container class="md-block">
+                    <label>profileImg to LfE Profile</label>
+                    <input name="url" ng-model="credentials.url" />
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Path to your Picture</label>
+                    <input name="profileImg" ng-model="credentials.profileImg" />
+                </md-input-container>
+
                 <md-input-container class="md-block">
                     <label>Password</label>
                     <input type="password" name="password" ng-model="credentials.password" required />
