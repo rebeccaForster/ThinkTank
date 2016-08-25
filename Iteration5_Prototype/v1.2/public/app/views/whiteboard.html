@@ -39,8 +39,26 @@
             </div>
 
             <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column" >
-                <div id="wbCanvas" class="wbCanvas" whiteboard></div>
-            </md-content>
+                <div id="wbCanvas" class="wbCanvas" whiteboard>
+  
+                <button ng-click="clear()">clear</button><br>
+                
+                <button ng-click="undo()">undo</button>
+                <button ng-click="redo()">redo</button>
+                <button ng-click="clearHistory()">clearHistory</button><br>
+                
+                <button ng-click="getDataURL()">getIMG</button><br>
+                
+                Line Width: <input type='number' ng-model='lineWidth'><br>
+                Erase Color: <input type='color' ng-model='eraseColor'><br>
+                Draw Color: <input type='color' ng-model='drawColor'><br>
+                Background Color: <input type='color' ng-model='backgroundColor'><br>
+                <select ng-options="item for item in drawingModes" ng-model="drawingMode"></select> Mode: {{drawingMode}}<br>
+                
+                <ng-drawingboard remote="drawingboardRemote" drawingMode="drawingMode" eraseColor="eraseColor" drawColor="drawColor" lineWidth="lineWidth" webStorage="webStorage" backgroundColor="backgroundColor" canvasWidth="canvasWidth" canvasHeight="canvasHeight" ></ng-drawingboard>
+                            
+                </div>
+            </md-constent>
 
 
             <div layout="row" style="bottom:0px; left:50%; position:absolute;" padding-layout>
