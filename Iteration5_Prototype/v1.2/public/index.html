@@ -22,7 +22,7 @@
 </head>
 
 <body ng-app="App" layout="row" ng-controller="IndexCtrl" ng-cloak>
-    <md-sidenav layout="column" ng-class="{'nav-width-short': navbarShort()}" class="md-sidenav-left md-whiteframe-24dp" md-component-id="left" md-is-locked-open="$mdMedia('(min-width: 0px)')">
+    <md-sidenav layout="column" ng-class="{'nav-width-short': navbarShort()}"  class="md-sidenav-left md-whiteframe-24dp" md-component-id="left" md-is-locked-open="$mdMedia('(min-width: 0px)')">
         <md-toolbar class="toolbar-settings md-primary md-hue-2">
             <div ng-hide="2 == selectedItem" style="text-align:center">
                 <div style="margin-top:30px;"></div>
@@ -85,7 +85,8 @@
     <!-- Whiteboard Dependencies -->    
     <script src="app/static/ngStorage.js"></script>
     <script src="app/static/angular-drawingboard.js"></script>
-
+    
+    
     <!-- Load app main script -->
     <script src="app/app.js"></script>
     <!-- Load services -->

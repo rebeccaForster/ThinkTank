@@ -1,4 +1,4 @@
-<header>
+<header >
 
     <md-toolbar class="md-primary md-hue-1 toolbar-settings-top">
         <div class="md-toolbar-tools">
@@ -12,11 +12,11 @@
 
 </header>
 
-<main class="" layout="row" flex>
+<main class="" layout="row" flex id="whiteboard-main">
 
-    <md-content flex>
-        <div ng-controller="WhiteboardCtrl" ng-cloak="">
-            <div layout="row" layout-padding>
+    <md-content noFlex>
+        <div ng-controller="WhiteboardCtrl" ng-cloak=""  >
+            <div layout="column" layout-padding class="toolbar-settings-bottom" style="top:74px; right:0px; position:fixed; width:90px; z-index:20;">
                 <div flex></div>
                 <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" aria-label="Contributors">
                     <ng-md-icon icon="person_add" class="icon-white" size="34"></ng-md-icon>
@@ -38,36 +38,35 @@
 
             </div>
 
-            <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column" >
-                <div id="wbCanvas" class="wbCanvas" whiteboard>
-  
-                <button ng-click="clear()">clear</button><br>
+            <div layout-wrap="" layout-align="center start" ng-style="setCanvasStyle()" flex>
                 
-                <button ng-click="undo()">undo</button>
-                <button ng-click="redo()">redo</button>
-                <button ng-click="clearHistory()">clearHistory</button><br>
-                
-                <button ng-click="getDataURL()">getIMG</button><br>
-                
-                Line Width: <input type='number' ng-model='lineWidth'><br>
-                Erase Color: <input type='color' ng-model='eraseColor'><br>
-                Draw Color: <input type='color' ng-model='drawColor'><br>
-                Background Color: <input type='color' ng-model='backgroundColor'><br>
-                <select ng-options="item for item in drawingModes" ng-model="drawingMode"></select> Mode: {{drawingMode}}<br>
-                
-                <ng-drawingboard remote="drawingboardRemote" drawingMode="drawingMode" eraseColor="eraseColor" drawColor="drawColor" lineWidth="lineWidth" webStorage="webStorage" backgroundColor="backgroundColor" canvasWidth="canvasWidth" canvasHeight="canvasHeight" ></ng-drawingboard>
-                            
+
+
+
+                    <ng-drawingboard remote="drawingboardRemote" drawingMode="drawingMode" eraseColor="eraseColor" drawColor="drawColor" lineWidth="lineWidth" webStorage="webStorage" backgroundColor="backgroundColor" canvasWidth="canvasWidth" canvasHeight="canvasHeight"></ng-drawingboard>
+
+            </div>
+
+
+            <div layout="row" style="bottom:0px; left:50%; position:fixed;" padding-layout>
+                <div layout="column">
+                    <button ng-click="getDataURL()">getIMG</button>
+                    <br> Line Width:
+                    <input type='number' ng-model='lineWidth'>
+                    <br> Erase Color:
+                    <input type='color' ng-model='eraseColor'>
+                    <br> Draw Color:
+                    <input type='color' ng-model='drawColor'>
+                    <br> Background Color:
+                    <input type='color' ng-model='backgroundColor'>
+                    <br>
+                    <select ng-options="item for item in drawingModes" ng-model="drawingMode"></select> Mode: {{drawingMode}}
+                    <br>
                 </div>
-            </md-constent>
-
-
-            <div layout="row" style="bottom:0px; left:50%; position:absolute;" padding-layout>
-                <div flex></div>
-
-                <md-button class="md-icon-button icon-whiteboard-small" aria-label="undo">
+                <md-button class="md-icon-button icon-whiteboard-small" aria-label="undo" ng-click="undo()">
                     <ng-md-icon icon="undo" class="icon-gray" size="34"></ng-md-icon>
                 </md-button>
-                <md-button class="md-icon-button icon-whiteboard-small" aria-label="redo">
+                <md-button class="md-icon-button icon-whiteboard-small" aria-label="redo" ng-click="redo()">
                     <ng-md-icon icon="redo" class="icon-gray" size="34"></ng-md-icon>
                 </md-button>
                 <input id='check' type='checkbox'>
@@ -91,11 +90,10 @@
                         <ng-md-icon icon="attach_file" class="icon-white" size="34"></ng-md-icon>
                     </md-button>
                 </div>
-                <md-button class="md-icon-button icon-whiteboard-small" aria-label="delete">
+                <md-button class="md-icon-button icon-whiteboard-small" aria-label="delete" ng-click="clear();clearHistory();">
                     <ng-md-icon icon="delete" class="icon-gray" size="34"></ng-md-icon>
                 </md-button>
 
-                <div flex></div>
 
             </div>
 

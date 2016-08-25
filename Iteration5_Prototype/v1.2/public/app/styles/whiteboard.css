@@ -1,16 +1,8 @@
 #wbCanvas {
-  border: 10px solid gray;
-  position: relative;
-  width: 1400px;
-  height: 800px;
+    
 }
 
-#canvas_buffer, .tmp {
-  position: absolute;
-  left: 0px; right: 0;
-  bottom: 0; top: 0;
-  cursor: crosshair;
-}
+
 
 .icon-whiteboard-small {
     height: 68px !important;
@@ -20,15 +12,8 @@
 
 }
 
-/*#canvas {
-  height: 100%;
-  width: 100%
-}
 
-#canvas_buffer {
-  height: 100%;
-  width: 100%
-}*/
+
 
 #check { display: none; }
 
