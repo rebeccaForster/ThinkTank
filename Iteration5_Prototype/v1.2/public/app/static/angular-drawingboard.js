@@ -217,7 +217,7 @@
                         y = e.pageY;
                     }
                     return {
-                        // Rebecca: habe den offset hard angepasst, sollte noch geändert werden
+                        // todo Rebecca: habe den offset hard angepasst, sollte noch geändert werden
                         //x: x - context.canvas.offsetLeft,
                         //y: y - context.canvas.offsetTop
                         x: x - 74,

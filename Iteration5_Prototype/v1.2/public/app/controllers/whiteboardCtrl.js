@@ -38,6 +38,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
     $scope.drawColor = '#222';
     $scope.lineWidth = 4;
     $scope.backgroundColor = '#EEE';
+    // todo anpassen der höhe an die größen der einzelnen verwendeten Klassen
  $scope.canvasWidth = $window.innerWidth - 90 -100;
         $scope.canvasHeight =  $window.innerHeight - 90 -74;
     $scope.setDrawingMode = function (mode) {
@@ -116,7 +117,11 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
                     icon: 'fa fa-pencil',
                     click: function () {
                         $scope.setDrawingMode('draw');
-                    },
+                    }
+                },
+                    
+                {
+                    title: 'Strichstärke',
                     hideAfterClick: true,
                     menus: [
                         {
@@ -192,26 +197,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
                                                     },
                 {
                     icon: 'fa fa-eraser',
-                    hideAfterClick: true,
-
-                    menus: [
-                        {
-                            title: 'dünn',
-                            click: function () {
-                                $scope.setLineWidth(4);
-                            }
-                                    }, {
-                            title: 'normal',
-                            click: function () {
-                                $scope.setLineWidth(6);
-                            }
-                                    }, {
-                            title: 'dick',
-                            click: function () {
-                                $scope.setLineWidth(10);
-                            }
-                                    }
-                                ],
                     click: function () {
                         $scope.setDrawingMode('eraser');
                     }
