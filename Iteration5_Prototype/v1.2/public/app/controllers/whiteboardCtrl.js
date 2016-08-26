@@ -1,73 +1,7 @@
 'use strict';
 app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $window) {
 
-    $scope.options = {
-        content: 'tools',
-        isOpen: false,
-        toggleOnClick: true,
-        background: '#737373',
-        color: 'white',
-        size: 'big',
-        items: [
-            {
-                icon: 'text_format',
 
-                onclick: function () {
-                    console.log('Function text input');
-                }
-                    },
-            {
-                icon: 'create',
-
-                onclick: $scope.setDrawingModeDraw
-                        },
-            {
-                content: 'line dicke',
-
-                onclick: function () {
-                    console.log('Function line dicke');
-                }
-                        },
-            {
-                content: 'color',
-
-                onclick: function () {
-                    console.log('Function color');
-                }
-                        },
-            {
-                content: 'fill',
-
-                onclick: $scope.setDrawingModeFill
-                        },
-            {
-                content: 'eraser',
-
-                onclick: $scope.setDrawingModeErase
-                        },
-            {
-                icon: 'keyboard_voice',
-
-                onclick: function () {
-                    console.log('Function keyboard_voice');
-                }
-                        },
-            {
-                icon: 'videocam',
-
-                onclick: function () {
-                    console.log('Function videocam');
-                }
-                        },
-            {
-                icon: 'attach_file',
-
-                onclick: function () {
-                    console.log('Function attach_file');
-                }
-                        }
-                        ]
-    };
 
     $scope.saveScribble = function (ev) {
         $mdDialog.show({
@@ -103,74 +37,238 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
     $scope.webStorage = 'session';
     $scope.drawingMode = 'draw';
     $scope.drawColor = '#222';
-    $scope.lineWidth = 3;
+    $scope.lineWidth = 4;
     $scope.backgroundColor = '#EEE';
-    $scope.setDrawingModeDraw = function () {
-        $scope.drawingMode = 'draw';
+    
+    $scope.setDrawingMode = function (mode) {
+        $scope.drawingboardRemote.setDrawingMode(mode);
     }
-    $scope.setDrawingModeFill = function () {
-        $scope.drawingMode = 'fill';
-    }
-    $scope.setDrawingModeEraser = function () {
-        $scope.drawingMode = 'eraser';
+    $scope.setDrawColor = function (color) {
+        $scope.drawingboardRemote.setDrawColor(color);
+
     }
     $scope.setCanvasStyle = function () {
         var height = document.getElementById('whiteboard-main').offsetHeight - 90;
         var width = document.getElementById('whiteboard-main').offsetWidth - 90;
         $scope.canvasWidth = width;
         $scope.canvasHeight = height;
+         $scope.clear();
         return {
             "height": height + 'px',
             "width": width + 'px'
         }
     }
 
-    $scope.drawingboardRemote = {
-        'startDraw': function (event) {
-            console.log('start drawing', event);
-        },
-        'endDraw': function (event) {
-            console.log('end drawing', event);
-        },
-        'drawing': function (event) {
-            //console.log('drawing', event);
-        },
-        'startErase': function (event) {
-            console.log('start erase', event);
-        },
-        'endErase': function (event) {
-            console.log('end erase', event);
-        },
-        'erasing': function (event) {
-            //console.log('erasing', event);
-        },
-        'fill': function (event) {
-            console.log('filled', event);
-        }
-    };
+   
 
     $scope.getDataURL = function () {
         console.log($scope.drawingboardRemote.toDataURL('image/png'));
     };
 
     $scope.clear = function () {
-        console.log($scope.drawingboardRemote.clear());
+        $scope.drawingboardRemote.clear();
     };
 
     $scope.undo = function () {
-        console.log($scope.drawingboardRemote.undo());
+        $scope.drawingboardRemote.undo();
     };
 
     $scope.redo = function () {
-        console.log($scope.drawingboardRemote.redo());
+        $scope.drawingboardRemote.redo();
     };
 
     $scope.clearHistory = function () {
-        console.log($scope.drawingboardRemote.clearStorage());
+        $scope.drawingboardRemote.clearStorage();
     };
+  
+
+
+
+    var cmenu = CMenu('#circle-menu1')
+        .config({
+            totalAngle: 360, //deg,
+            spaceDeg: 2, //deg
+            start: 0,
+            background: "#323232",
+            backgroundHover: '#00bcd4',
+            pageBackground: "#283593",
+            percent: 0.32, //%
+            diameter: 300, //px
+            position: 'top',
+            horizontal: true,
+            //start: -45,//deg
+            animation: "into",
+            hideAfterClick: false,
+            menus: [
+                {
+                    title: 'text',
+                    icon: 'fa fa-font',
+                    click: function () {
+                        console.log('Function text input');
+                    },
+                    hideAfterClick: true,
+
+                    menus: [
+                        {
+                            title: 'text-italic',
+                            icon: 'fa fa-italic',
+                            disabled: true
+                                    }, {
+                            title: 'text-bold',
+                            icon: 'fa fa-bold',
+                            disabled: true
+                                    }, {
+                            title: 'text-height',
+                            icon: 'fa fa-text-height',
+                            disabled: true
+                                    }
+                                ]
+                            },
+                {
+                    title: 'Pencil',
+                    icon: 'fa fa-pencil',
+                    click: function () {
+                        $scope.setDrawingMode('draw');
+                    },
+                    hideAfterClick: true,
+                    menus: [
+                        {
+                            title: 'dünn',
+                            click: function () {
+                                $scope.setLineWidth(4);
+                            }
+                                    }, {
+                            title: 'normal',
+                            click: function () {
+                                $scope.setLineWidth(6);
+                            }
+                                    }, {
+                            title: 'dick',
+                            click: function () {
+                                $scope.setLineWidth(10);
+                            }
+                                    }
+                                ]
+                            },
+                {
+                    title: 'color',
+                    hideAfterClick: true,
+
+                    menus: [
+                        {
+                            icon: 'circle-icon red',
+                            click: function () {
+                                $scope.setDrawColor('red');
+                            }
+                                    }, {
+                            icon: 'circle-icon black',
+                            click: function () {
+                                $scope.setDrawColor('black');
+                            }
+                                    },
+                        {
+                            icon: 'circle-icon blue',
+                            click: function () {
+                                $scope.setDrawColor('blue');
+                            }
+                                            },
+                        {
+                            icon: 'circle-icon orange',
+                            click: function () {
+                                $scope.setDrawColor('orange');
+                            }
+                                                },
+                        {
+                            icon: 'circle-icon yellow',
+                            click: function () {
+                                $scope.setDrawColor('yellow');
+                            }
+                                                    },
+                        {
+                            icon: 'circle-icon white',
+                            click: function () {
+                                $scope.setDrawColor('white');
+                            }
+                                                        }
+                                                            ]
+
+
+                                                    },
+                {
+                    title: 'fill',
+
+                    click: function () {
+                        $scope.setDrawingMode('fill');
+                    }
+
+
+                                                    },
+                {
+                    title: 'eraser',
+                    icon: 'fa fa-eraser',
+                    hideAfterClick: true,
+
+                    menus: [
+                        {
+                            title: 'dünn',
+                            click: function () {
+                                $scope.setLineWidth(4);
+                            }
+                                    }, {
+                            title: 'normal',
+                            click: function () {
+                                $scope.setLineWidth(6);
+                            }
+                                    }, {
+                            title: 'dick',
+                            click: function () {
+                                $scope.setLineWidth(10);
+                            }
+                                    }
+                                ],
+                    click: function () {
+                        $scope.setDrawingMode('eraser');
+                    }
+                },
+
+
+                {
+                    title: 'keyboard_voice',
+                    icon: 'fa fa-microphone',
+                    click: function () {
+                        console.log('Function keyboard_voice');
+                    }
+                            },
+                {
+                    title: 'record',
+                    icon: 'fa fa-video-camera',
+                    click: function () {
+                        console.log('Function record');
+                    }
+                                },
+                {
+                    title: 'attach file',
+                    icon: 'fa fa-paperclip',
+                    click: function () {
+                        console.log('Function attach file');
+                    }
+                                }
+                                ]
+        });
+
+    setTimeout(function () {
+        cmenu
+            .styles({
+                top: '600px',
+                left: '600px'
+            })
+            .show();
+    }, 1000);
+    $scope.setLineWidth = function (size) {
+        $scope.drawingboardRemote.setLineWidth(size);
+    }
 
 });
-
 
 function SaveDialogController($scope, $mdDialog, authentication) {
     $scope.credentials = {

@@ -35,6 +35,7 @@
                 <md-button class="md-icon-button  icon-whiteboard-small" ng-click="saveScribble($event)" aria-label="save">
                     <ng-md-icon icon="save" class="icon-gray" size="34"></ng-md-icon>
                 </md-button>
+                <div  id="circle-menu1" class="cn-menu1"></div>
 
             </div>
 
@@ -49,26 +50,13 @@
 
 
             <div layout="row" style="bottom:0px; left:50%; position:fixed;" padding-layout>
-                <circular
-    options="options">
-  </circular>
-                <div layout="column">
-                    <br> Line Width:
-                    <input type='number' ng-model='lineWidth'>
-                    <br> Draw Color:
-                    <input type='color' ng-model='drawColor'>
-                                        <br>
-                </div>
                 <md-button class="md-icon-button icon-whiteboard-small" aria-label="undo" ng-click="undo()">
                     <ng-md-icon icon="undo" class="icon-gray" size="34"></ng-md-icon>
                 </md-button>
                 <md-button class="md-icon-button icon-whiteboard-small" aria-label="redo" ng-click="redo()">
                     <ng-md-icon icon="redo" class="icon-gray" size="34"></ng-md-icon>
                 </md-button>
-                <input id='check' type='checkbox'>
-                <label class='main' for='check'>
-                    <div class='title'>Tools</div>
-                </label>
+                
                
                 <md-button class="md-icon-button icon-whiteboard-small" aria-label="delete" ng-click="clear();clearHistory();">
                     <ng-md-icon icon="delete" class="icon-gray" size="34"></ng-md-icon>

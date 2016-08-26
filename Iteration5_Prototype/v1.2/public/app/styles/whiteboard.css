@@ -1,15 +1,46 @@
-#wbCanvas {
-    
-}
-
-
+#wbCanvas {}
 
 .icon-whiteboard-small {
     height: 68px !important;
     width: 68px !important;
     font-size: 34px!important;
-        color: white !important;
+    color: white !important;
+}
+
+.circle-icon {
+    display: inline-block !important;
+    border-radius: 50%;
+}
+.red {
+    background: red;
+
+}
+.black {
+    background: black;
 
 }
 
+.blue {
+    background: blue;
+
+}
+
+.orange {
+    background: orange;
+
+}
+
+.white {
+    background: white;
+
+}
+.yellow {
+    background: yellow;
+
+}
+
+
+.my-icon {
+    background: url("../img/test.jpg");
+}
 
