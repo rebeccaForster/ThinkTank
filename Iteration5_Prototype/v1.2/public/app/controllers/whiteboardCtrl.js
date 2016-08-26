@@ -1,5 +1,74 @@
 'use strict';
 app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $window) {
+
+    $scope.options = {
+        content: 'tools',
+        isOpen: false,
+        toggleOnClick: true,
+        background: '#737373',
+        color: 'white',
+        size: 'big',
+        items: [
+            {
+                icon: 'text_format',
+
+                onclick: function () {
+                    console.log('Function text input');
+                }
+                    },
+            {
+                icon: 'create',
+
+                onclick: $scope.setDrawingModeDraw
+                        },
+            {
+                content: 'line dicke',
+
+                onclick: function () {
+                    console.log('Function line dicke');
+                }
+                        },
+            {
+                content: 'color',
+
+                onclick: function () {
+                    console.log('Function color');
+                }
+                        },
+            {
+                content: 'fill',
+
+                onclick: $scope.setDrawingModeFill
+                        },
+            {
+                content: 'eraser',
+
+                onclick: $scope.setDrawingModeErase
+                        },
+            {
+                icon: 'keyboard_voice',
+
+                onclick: function () {
+                    console.log('Function keyboard_voice');
+                }
+                        },
+            {
+                icon: 'videocam',
+
+                onclick: function () {
+                    console.log('Function videocam');
+                }
+                        },
+            {
+                icon: 'attach_file',
+
+                onclick: function () {
+                    console.log('Function attach_file');
+                }
+                        }
+                        ]
+    };
+
     $scope.saveScribble = function (ev) {
         $mdDialog.show({
                 controller: SaveDialogController,
@@ -31,24 +100,28 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
     //DrawingBoard
     // $localStorage.$reset();
 
-    $scope.drawingModes = ['draw', 'eraser', 'fill'];
     $scope.webStorage = 'session';
     $scope.drawingMode = 'draw';
     $scope.drawColor = '#222';
-    $scope.eraseColor = '#EEE';
     $scope.lineWidth = 3;
     $scope.backgroundColor = '#EEE';
-
+    $scope.setDrawingModeDraw = function () {
+        $scope.drawingMode = 'draw';
+    }
+    $scope.setDrawingModeFill = function () {
+        $scope.drawingMode = 'fill';
+    }
+    $scope.setDrawingModeEraser = function () {
+        $scope.drawingMode = 'eraser';
+    }
     $scope.setCanvasStyle = function () {
-        var height = document.getElementById('whiteboard-main').offsetHeight -5;
-        console.log(height);
-        var width = document.getElementById('whiteboard-main').offsetWidth -90;
-         $scope.canvasWidth =  width;
-    $scope.canvasHeight = height;
-         $scope.clear();
+        var height = document.getElementById('whiteboard-main').offsetHeight - 90;
+        var width = document.getElementById('whiteboard-main').offsetWidth - 90;
+        $scope.canvasWidth = width;
+        $scope.canvasHeight = height;
         return {
             "height": height + 'px',
-            "width": width+ 'px'
+            "width": width + 'px'
         }
     }
 

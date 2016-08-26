@@ -39,29 +39,25 @@
             </div>
 
             <div layout-wrap="" layout-align="center start" ng-style="setCanvasStyle()" flex>
-                
+   
 
 
 
-                    <ng-drawingboard remote="drawingboardRemote" drawingMode="drawingMode" eraseColor="eraseColor" drawColor="drawColor" lineWidth="lineWidth" webStorage="webStorage" backgroundColor="backgroundColor" canvasWidth="canvasWidth" canvasHeight="canvasHeight"></ng-drawingboard>
+                    <ng-drawingboard remote="drawingboardRemote" drawingMode="drawingMode" eraseColor="backgroundColor" drawColor="drawColor" lineWidth="lineWidth" webStorage="webStorage" backgroundColor="backgroundColor" canvasWidth="canvasWidth" canvasHeight="canvasHeight"></ng-drawingboard>
 
             </div>
 
 
             <div layout="row" style="bottom:0px; left:50%; position:fixed;" padding-layout>
+                <circular
+    options="options">
+  </circular>
                 <div layout="column">
-                    <button ng-click="getDataURL()">getIMG</button>
                     <br> Line Width:
                     <input type='number' ng-model='lineWidth'>
-                    <br> Erase Color:
-                    <input type='color' ng-model='eraseColor'>
                     <br> Draw Color:
                     <input type='color' ng-model='drawColor'>
-                    <br> Background Color:
-                    <input type='color' ng-model='backgroundColor'>
-                    <br>
-                    <select ng-options="item for item in drawingModes" ng-model="drawingMode"></select> Mode: {{drawingMode}}
-                    <br>
+                                        <br>
                 </div>
                 <md-button class="md-icon-button icon-whiteboard-small" aria-label="undo" ng-click="undo()">
                     <ng-md-icon icon="undo" class="icon-gray" size="34"></ng-md-icon>
@@ -73,23 +69,7 @@
                 <label class='main' for='check'>
                     <div class='title'>Tools</div>
                 </label>
-                <div class="container">
-                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small plate" aria-label="text">
-                        <ng-md-icon icon="text_format" class="icon-white" size="34"></ng-md-icon>
-                    </md-button>
-                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small plate" aria-label="create">
-                        <ng-md-icon icon="create" class="icon-white" size="34"></ng-md-icon>
-                    </md-button>
-                    <md-button class="md-icon-button icon-background-gray  icon-whiteboard-small plate" aria-label="keyboard_voice">
-                        <ng-md-icon icon="keyboard_voice" class="icon-white" size="34"></ng-md-icon>
-                    </md-button>
-                    <md-button class="md-icon-button icon-background-gray  icon-whiteboard-small plate" aria-label="videocam">
-                        <ng-md-icon icon="videocam" class="icon-white" size="34"></ng-md-icon>
-                    </md-button>
-                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small plate" aria-label="attach_file">
-                        <ng-md-icon icon="attach_file" class="icon-white" size="34"></ng-md-icon>
-                    </md-button>
-                </div>
+               
                 <md-button class="md-icon-button icon-whiteboard-small" aria-label="delete" ng-click="clear();clearHistory();">
                     <ng-md-icon icon="delete" class="icon-gray" size="34"></ng-md-icon>
                 </md-button>
