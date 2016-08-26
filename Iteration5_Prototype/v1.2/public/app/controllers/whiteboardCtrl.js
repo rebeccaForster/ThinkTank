@@ -1,8 +1,4 @@
 'use strict';
-app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $window) {
-
-
-
 app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
     $scope.saveScribble = function (ev) {
         $mdDialog.show({
