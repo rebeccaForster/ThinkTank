@@ -3,6 +3,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
 
 
 
+app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
     $scope.saveScribble = function (ev) {
         $mdDialog.show({
                 controller: SaveDialogController,
@@ -32,6 +33,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
 
 
     //DrawingBoard
+    // $localStorage.$reset(); 
+
     // $localStorage.$reset();
 
     $scope.webStorage = 'session';
