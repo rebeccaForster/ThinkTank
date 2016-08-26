@@ -29,8 +29,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
 
 
     //DrawingBoard
-    // $localStorage.$reset();
-    
+    // $localStorage.$reset(); 
+
       $scope.drawingModes = ['draw', 'eraser', 'fill'];
       $scope.webStorage = 'session';
       $scope.drawingMode = 'draw';

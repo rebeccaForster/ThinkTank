@@ -39,12 +39,8 @@
             </div>
 
             <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column" >
-                <div id="wbCanvas" class="wbCanvas" whiteboard>
-  
-                <button ng-click="clear()">clear</button><br>
-                
-                <button ng-click="undo()">undo</button>
-                <button ng-click="redo()">redo</button>
+                <div id="wbCanvas" class="wbCanvas" >
+
                 <button ng-click="clearHistory()">clearHistory</button><br>
                 
                 <button ng-click="getDataURL()">getIMG</button><br>
@@ -65,10 +61,10 @@
                 <div flex></div>
 
                 <md-button class="md-icon-button icon-whiteboard-small" aria-label="undo">
-                    <ng-md-icon icon="undo" class="icon-gray" size="34"></ng-md-icon>
+                    <ng-md-icon icon="undo" class="icon-gray" size="34" ng-click="undo()"></ng-md-icon>
                 </md-button>
                 <md-button class="md-icon-button icon-whiteboard-small" aria-label="redo">
-                    <ng-md-icon icon="redo" class="icon-gray" size="34"></ng-md-icon>
+                    <ng-md-icon icon="redo" class="icon-gray" size="34" ng-click="redo()"></ng-md-icon>
                 </md-button>
                 <input id='check' type='checkbox'>
                 <label class='main' for='check'>
@@ -92,7 +88,7 @@
                     </md-button>
                 </div>
                 <md-button class="md-icon-button icon-whiteboard-small" aria-label="delete">
-                    <ng-md-icon icon="delete" class="icon-gray" size="34"></ng-md-icon>
+                    <ng-md-icon icon="delete" class="icon-gray" size="34"  ng-click="clear()"></ng-md-icon>
                 </md-button>
 
                 <div flex></div>

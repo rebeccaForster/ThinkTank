@@ -18,6 +18,18 @@
     // return {
     //   getProfile : getProfile
     // };
+    var saveWhiteboard = function(whiteboard, user) {
+        var data = {
+            'whiteboard': whiteboard,
+            'user': user
+        }
+        
+        return $http.post('/api/whiteboard/save', whiteboard)
+                .success(function (data) {
+                    console.log(data)
+                });
+    };
+
   }
 
 })();
