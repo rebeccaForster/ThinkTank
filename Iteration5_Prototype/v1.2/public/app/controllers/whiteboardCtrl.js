@@ -1,5 +1,5 @@
 'use strict';
-app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
+app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $window) {
     $scope.saveScribble = function (ev) {
         $mdDialog.show({
                 controller: SaveDialogController,
@@ -38,7 +38,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
     $scope.drawColor = '#222';
     $scope.lineWidth = 4;
     $scope.backgroundColor = '#EEE';
-
+ $scope.canvasWidth = $window.innerWidth - 90 -100;
+        $scope.canvasHeight =  $window.innerHeight - 90 -74;
     $scope.setDrawingMode = function (mode) {
         $scope.drawingboardRemote.setDrawingMode(mode);
     }
@@ -47,14 +48,10 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
 
     }
     $scope.setCanvasStyle = function () {
-        var height = document.getElementById('whiteboard-main').offsetHeight - 90;
-        var width = document.getElementById('whiteboard-main').offsetWidth - 90;
-        $scope.canvasWidth = width;
-        $scope.canvasHeight = height;
-        $scope.clear();
+        
         return {
-            "height": height + 'px',
-            "width": width + 'px'
+            "height":  $scope.canvasHeight + 'px',
+            "width": $scope.canvasWidth + 'px'
         }
     }
 
@@ -81,7 +78,15 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
     };
 
 
-
+  var draggable = document.getElementById('circle-menu1');
+  draggable.addEventListener('touchmove', function(event) {
+    var touch = event.targetTouches[0];
+    
+    // Place element where the finger is
+    draggable.style.left = touch.pageX + 'px';
+    draggable.style.top = touch.pageY + 'px';
+    event.preventDefault();
+  }, false);
 
     var cmenu = CMenu('#circle-menu1')
         .config({

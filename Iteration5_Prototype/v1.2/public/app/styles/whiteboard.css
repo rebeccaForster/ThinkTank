@@ -1,12 +1,14 @@
-#circle-menu1{
-   bottom: 10px; 
+#circle-menu1 {
+    bottom: 10px;
 }
+
 .icon-whiteboard-small {
     height: 68px !important;
     width: 68px !important;
     font-size: 34px!important;
     color: white !important;
 }
+
 .icon-whiteboard-large {
     height: 85px !important;
     width: 85px !important;
@@ -14,45 +16,45 @@
     color: white !important;
     border-radius: 50%!important;
 }
+
 .btn-tools-active {
     background-color: #00bcd4 !important;
 }
-
 
 .circle-icon {
     display: inline-block !important;
     border-radius: 50%;
 }
+
 .red {
     background: red;
-
 }
+
 .black {
     background: black;
-
 }
 
 .blue {
     background: blue;
-
 }
 
 .orange {
     background: orange;
-
 }
 
 .white {
     background: white;
-
 }
+
 .yellow {
     background: yellow;
-
 }
 
+#circle-menu1 {
+   
+    z-index: 20;
+}
 
 .my-icon {
     background: url("../img/test.jpg");
 }
-
