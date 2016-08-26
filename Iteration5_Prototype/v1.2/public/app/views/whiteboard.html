@@ -1,4 +1,4 @@
-<header >
+<header>
 
     <md-toolbar class="md-primary md-hue-1 toolbar-settings-top">
         <div class="md-toolbar-tools">
@@ -15,56 +15,69 @@
 <main class="" layout="row" flex id="whiteboard-main">
 
     <md-content noFlex>
-        <div ng-controller="WhiteboardCtrl" ng-cloak=""  >
-            <div layout="column" layout-padding class="toolbar-settings-bottom" style="top:74px; right:0px; position:fixed; width:90px; z-index:20;">
-                <div flex></div>
-                <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" aria-label="Contributors">
-                    <ng-md-icon icon="person_add" class="icon-white" size="34"></ng-md-icon>
-                </md-button>
-                <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" aria-label="Descirption">
-                    <ng-md-icon icon="description" class="icon-white" size="34"></ng-md-icon>
-                </md-button>
-                <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" aria-label="Milestones">
-                    <ng-md-icon icon="add_location" class="icon-white" size="34"></ng-md-icon>
-                </md-button>
-                <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" aria-label="Hashtags">#</md-button>
-                <div flex></div>
-                <md-button class="md-icon-button  icon-whiteboard-small" aria-label="lock">
-                    <ng-md-icon icon="lock" class="icon-gray" size="34"></ng-md-icon>
-                </md-button>
-                <md-button class="md-icon-button  icon-whiteboard-small" ng-click="saveScribble($event)" aria-label="save">
-                    <ng-md-icon icon="save" class="icon-gray" size="34"></ng-md-icon>
-                </md-button>
-                <div  id="circle-menu1" class="cn-menu1"></div>
+        <div ng-controller="WhiteboardCtrl" ng-cloak="">
+            <div style="top:74px; right:0px; position:fixed; width:90px; heigt:100%;">
+                <div layout="column" layout-padding>
+                    <div flex=38></div>
+                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" aria-label="Contributors">
+                        <ng-md-icon icon="person_add" class="icon-white" size="34"></ng-md-icon>
+                    </md-button>
+                    <div flex=8></div>
 
+                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" aria-label="Descirption">
+                        <ng-md-icon icon="description" class="icon-white" size="34"></ng-md-icon>
+                    </md-button>
+                    <div flex=8></div>
+
+                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" aria-label="Milestones">
+                        <ng-md-icon icon="add_location" class="icon-white" size="34"></ng-md-icon>
+                    </md-button>
+                    <div flex=8></div>
+
+                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" aria-label="Hashtags">#</md-button>
+                    <div flex=38></div>
+
+                </div>
             </div>
 
             <div layout-wrap="" layout-align="center start" ng-style="setCanvasStyle()" flex>
-   
 
 
 
-                    <ng-drawingboard remote="drawingboardRemote" drawingMode="drawingMode" eraseColor="backgroundColor" drawColor="drawColor" lineWidth="lineWidth" webStorage="webStorage" backgroundColor="backgroundColor" canvasWidth="canvasWidth" canvasHeight="canvasHeight"></ng-drawingboard>
+
+                <ng-drawingboard remote="drawingboardRemote" drawingMode="drawingMode" eraseColor="backgroundColor" drawColor="drawColor" lineWidth="lineWidth" webStorage="webStorage" backgroundColor="backgroundColor" canvasWidth="canvasWidth" canvasHeight="canvasHeight"></ng-drawingboard>
 
             </div>
 
 
-            <div layout="row" style="bottom:0px; left:50%; position:fixed;" padding-layout>
+            <div layout="row" style="bottom:0px; left:0px; position:fixed; width:100%;" padding-layout>
                 <md-button class="md-icon-button icon-whiteboard-small" aria-label="undo" ng-click="undo()">
                     <ng-md-icon icon="undo" class="icon-gray" size="34" ng-click="undo()"></ng-md-icon>
                 </md-button>
                 <md-button class="md-icon-button icon-whiteboard-small" aria-label="redo" ng-click="redo()">
                     <ng-md-icon icon="redo" class="icon-gray" size="34" ng-click="redo()"></ng-md-icon>
                 </md-button>
-                
-               
-                <md-button class="md-icon-button icon-whiteboard-small" aria-label="delete" ng-click="clear();clearHistory();">
-                    <ng-md-icon icon="delete" class="icon-gray" size="34"  ng-click="clear()"></ng-md-icon>
-                </md-button>
+                <div id="container-tools-menu">
+                    <md-button class="icon-background-gray icon-whiteboard-large" id="btn-tools-menu" ng-click="openTools()">
+                        Tools
+                    </md-button>
+                    <div id="circle-menu1" class="cn-menu1"></div>
 
+                </div>
+                <md-button class="md-icon-button icon-whiteboard-small" aria-label="delete" ng-click="clear();clearHistory();">
+                    <ng-md-icon icon="delete" class="icon-gray" size="34" ng-click="clear()"></ng-md-icon>
+                </md-button>
 
             </div>
 
+            <div style="bottom:0px; right:0px; position:fixed;">
+                <md-button class="md-icon-button  icon-whiteboard-small" aria-label="lock">
+                    <ng-md-icon icon="lock" class="icon-gray" size="34"></ng-md-icon>
+                </md-button>
+                <md-button class="md-icon-button  icon-whiteboard-small" ng-click="saveScribble($event)" aria-label="save">
+                    <ng-md-icon icon="save" class="icon-gray" size="34"></ng-md-icon>
+                </md-button>
+            </div>
         </div>
     </md-content>
 </main>

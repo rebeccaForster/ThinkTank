@@ -38,7 +38,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
     $scope.drawColor = '#222';
     $scope.lineWidth = 4;
     $scope.backgroundColor = '#EEE';
-    
+
     $scope.setDrawingMode = function (mode) {
         $scope.drawingboardRemote.setDrawingMode(mode);
     }
@@ -51,14 +51,14 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
         var width = document.getElementById('whiteboard-main').offsetWidth - 90;
         $scope.canvasWidth = width;
         $scope.canvasHeight = height;
-         $scope.clear();
+        $scope.clear();
         return {
             "height": height + 'px',
             "width": width + 'px'
         }
     }
 
-   
+
 
     $scope.getDataURL = function () {
         console.log($scope.drawingboardRemote.toDataURL('image/png'));
@@ -79,52 +79,33 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
     $scope.clearHistory = function () {
         $scope.drawingboardRemote.clearStorage();
     };
-  
+
 
 
 
     var cmenu = CMenu('#circle-menu1')
         .config({
-            totalAngle: 360, //deg,
-            spaceDeg: 2, //deg
-            start: 0,
+            totalAngle: 270, //deg,
+            spaceDeg: 3, //deg
+            start: 315,
             background: "#323232",
             backgroundHover: '#00bcd4',
-            pageBackground: "#283593",
-            percent: 0.32, //%
-            diameter: 300, //px
-            position: 'top',
+            percent: 0.4, //%
+            diameter: 250, //px
             horizontal: true,
             //start: -45,//deg
             animation: "into",
             hideAfterClick: false,
             menus: [
                 {
-                    title: 'text',
                     icon: 'fa fa-font',
                     click: function () {
                         console.log('Function text input');
                     },
                     hideAfterClick: true,
-
-                    menus: [
-                        {
-                            title: 'text-italic',
-                            icon: 'fa fa-italic',
-                            disabled: true
-                                    }, {
-                            title: 'text-bold',
-                            icon: 'fa fa-bold',
-                            disabled: true
-                                    }, {
-                            title: 'text-height',
-                            icon: 'fa fa-text-height',
-                            disabled: true
-                                    }
-                                ]
+                    disabled: true
                             },
                 {
-                    title: 'Pencil',
                     icon: 'fa fa-pencil',
                     click: function () {
                         $scope.setDrawingMode('draw');
@@ -203,7 +184,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
 
                                                     },
                 {
-                    title: 'eraser',
                     icon: 'fa fa-eraser',
                     hideAfterClick: true,
 
@@ -232,37 +212,40 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
 
 
                 {
-                    title: 'keyboard_voice',
                     icon: 'fa fa-microphone',
                     click: function () {
                         console.log('Function keyboard_voice');
-                    }
+                    },
+                    disabled: true
                             },
                 {
-                    title: 'record',
                     icon: 'fa fa-video-camera',
                     click: function () {
                         console.log('Function record');
-                    }
+                    },
+                    disabled: true
                                 },
                 {
-                    title: 'attach file',
                     icon: 'fa fa-paperclip',
                     click: function () {
                         console.log('Function attach file');
-                    }
+                    },
+                    disabled: true
+
                                 }
                                 ]
         });
-
-    setTimeout(function () {
-        cmenu
-            .styles({
-                top: '600px',
-                left: '600px'
-            })
-            .show();
-    }, 1000);
+    var isToolsOpen = false;
+    $scope.openTools = function(){
+        if(!isToolsOpen){
+            cmenu.show();
+        }
+        else{
+            cmenu.hide();
+        }
+        isToolsOpen = !isToolsOpen;
+        
+    }
     $scope.setLineWidth = function (size) {
         $scope.drawingboardRemote.setLineWidth(size);
     }
