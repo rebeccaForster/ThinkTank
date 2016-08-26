@@ -164,7 +164,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
 
     $scope.navbarShort = function () {
-        return (0 == $scope.selectedItem) || !$mdMedia('gt-md');
+        return (0 == $scope.selectedItem) || !$mdMedia('gt-md') ;
     }
 
     $scope.userTum = {

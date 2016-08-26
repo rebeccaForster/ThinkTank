@@ -16,23 +16,33 @@
 }
 #btn-tools-menu{
     z-index: 20!important;
-    
+    top: 65px;
     position: relative;
 
     
 }
-
+#container-tools-menu-right{
+     width: 100%;
+position: absolute;
+    left: 65%;
+    bottom: 0px;
+}
+#container-tools-menu-left{
+     width: 100%;
+position: absolute;
+    left: 32%;
+    bottom: 0px;
+}
 #container-tools-menu{
     display: inline-block !important;
+    width: 100%;
 position: absolute;
     left: 50%;
-    bottom: 25px;
-    text-align: center;
+    bottom: -15px;
 }
 #circle-menu1{
-    z-index: 1;
  position: relative;
-    left: 45px;
+    left: 60px;
     top: 10px;
 
 }

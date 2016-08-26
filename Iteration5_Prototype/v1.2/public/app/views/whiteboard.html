@@ -51,12 +51,16 @@
 
 
             <div layout="row" style="bottom:0px; left:0px; position:fixed; width:100%;" padding-layout>
-                <md-button class="md-icon-button icon-whiteboard-small" aria-label="undo" ng-click="undo()">
-                    <ng-md-icon icon="undo" class="icon-gray" size="34" ng-click="undo()"></ng-md-icon>
-                </md-button>
-                <md-button class="md-icon-button icon-whiteboard-small" aria-label="redo" ng-click="redo()">
-                    <ng-md-icon icon="redo" class="icon-gray" size="34" ng-click="redo()"></ng-md-icon>
-                </md-button>
+                <div id="container-tools-menu-left">
+
+                    <md-button class="md-icon-button icon-whiteboard-small" aria-label="undo" ng-click="undo()">
+                        <ng-md-icon icon="undo" class="icon-gray" size="34" ng-click="undo()"></ng-md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button icon-whiteboard-small" aria-label="redo" ng-click="redo()">
+                        <ng-md-icon icon="redo" class="icon-gray" size="34" ng-click="redo()"></ng-md-icon>
+                    </md-button>
+                </div>
+
                 <div id="container-tools-menu">
                     <md-button class="icon-background-gray icon-whiteboard-large" id="btn-tools-menu" ng-click="openTools()">
                         Tools
@@ -64,19 +68,21 @@
                     <div id="circle-menu1" class="cn-menu1"></div>
 
                 </div>
-                <md-button class="md-icon-button icon-whiteboard-small" aria-label="delete" ng-click="clear();clearHistory();">
-                    <ng-md-icon icon="delete" class="icon-gray" size="34" ng-click="clear()"></ng-md-icon>
-                </md-button>
 
-            </div>
+                <div id="container-tools-menu-right">
+                    <md-button class="md-icon-button icon-whiteboard-small" aria-label="delete" ng-click="clear();clearHistory();">
+                        <ng-md-icon icon="delete" class="icon-gray" size="34" ng-click="clear()"></ng-md-icon>
+                    </md-button>
+                </div>
 
-            <div style="bottom:0px; right:0px; position:fixed;">
-                <md-button class="md-icon-button  icon-whiteboard-small" aria-label="lock">
-                    <ng-md-icon icon="lock" class="icon-gray" size="34"></ng-md-icon>
-                </md-button>
-                <md-button class="md-icon-button  icon-whiteboard-small" ng-click="saveScribble($event)" aria-label="save">
-                    <ng-md-icon icon="save" class="icon-gray" size="34"></ng-md-icon>
-                </md-button>
+                <div style="bottom:0px; right:0px; position:fixed;">
+                    <md-button class="md-icon-button  icon-whiteboard-small" aria-label="lock">
+                        <ng-md-icon icon="lock" class="icon-gray" size="34"></ng-md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button  icon-whiteboard-small" ng-click="saveScribble($event)" aria-label="save">
+                        <ng-md-icon icon="save" class="icon-gray" size="34"></ng-md-icon>
+                    </md-button>
+                </div>
             </div>
         </div>
     </md-content>

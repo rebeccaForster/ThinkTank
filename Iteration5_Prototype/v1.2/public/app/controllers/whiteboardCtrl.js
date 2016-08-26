@@ -88,7 +88,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
             totalAngle: 270, //deg,
             spaceDeg: 3, //deg
             start: 315,
-            background: "#323232",
+            background: "#737373",
             backgroundHover: '#00bcd4',
             percent: 0.4, //%
             diameter: 250, //px
@@ -234,7 +234,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
 
                                 }
                                 ]
-        });
+        }).show();
     var isToolsOpen = false;
     $scope.openTools = function(){
         if(!isToolsOpen){
