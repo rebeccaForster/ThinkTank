@@ -85,14 +85,16 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
 
     var cmenu = CMenu('#circle-menu1')
         .config({
-            totalAngle: 270, //deg,
+            totalAngle: 360, //deg,
             spaceDeg: 3, //deg
-            start: 315,
+            start: 0,
             background: "#737373",
             backgroundHover: '#00bcd4',
-            percent: 0.4, //%
+            pageBackground: "#283593",
+            percent: 0.32, //%
             diameter: 250, //px
             horizontal: true,
+            position: 'bottom',
             //start: -45,//deg
             animation: "into",
             hideAfterClick: false,
@@ -234,17 +236,23 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog) {
 
                                 }
                                 ]
-        }).show();
-    var isToolsOpen = false;
-    $scope.openTools = function(){
-        if(!isToolsOpen){
-            cmenu.show();
-        }
-        else{
-            cmenu.hide();
-        }
-        isToolsOpen = !isToolsOpen;
-        
+        });
+  
+    $scope.isToolsOpen = false;
+    $scope.openTools = function () {
+           if(!$scope.isToolsOpen){
+                cmenu
+            .styles({
+                top: '50%',
+                left: '50%'
+            })
+            .show();
+           }
+           else{
+               cmenu.hide();
+           }
+           $scope.isToolsOpen = !$scope.isToolsOpen;
+
     }
     $scope.setLineWidth = function (size) {
         $scope.drawingboardRemote.setLineWidth(size);

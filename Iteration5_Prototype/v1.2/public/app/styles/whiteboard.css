@@ -8,43 +8,14 @@
     color: white !important;
 }
 .icon-whiteboard-large {
-    height: 100px !important;
-    width: 100px !important;
+    height: 85px !important;
+    width: 85px !important;
     font-size: 22px!important;
     color: white !important;
     border-radius: 50%!important;
 }
-#btn-tools-menu{
-    z-index: 20!important;
-    top: 65px;
-    position: relative;
-
-    
-}
-#container-tools-menu-right{
-     width: 100%;
-position: absolute;
-    left: 65%;
-    bottom: 0px;
-}
-#container-tools-menu-left{
-     width: 100%;
-position: absolute;
-    left: 32%;
-    bottom: 0px;
-}
-#container-tools-menu{
-    display: inline-block !important;
-    width: 100%;
-position: absolute;
-    left: 50%;
-    bottom: -15px;
-}
-#circle-menu1{
- position: relative;
-    left: 60px;
-    top: 10px;
-
+.btn-tools-active {
+    background-color: #00bcd4 !important;
 }
 
 

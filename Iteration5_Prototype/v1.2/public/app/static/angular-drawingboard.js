@@ -217,8 +217,11 @@
                         y = e.pageY;
                     }
                     return {
-                        x: x - context.canvas.offsetLeft,
-                        y: y - context.canvas.offsetTop
+                        // Rebecca: habe den offset hard angepasst, sollte noch geändert werden
+                        //x: x - context.canvas.offsetLeft,
+                        //y: y - context.canvas.offsetTop
+                        x: x - 74,
+                        y: y - 100
                     };
                 },
                 _getMidCoords: function (x1, y1, x2, y2) {
