@@ -23,7 +23,23 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     };
     $scope.contributors = [];
     $scope.desciption = "";
-    $scope.milestons = [];
+    $scope.milestones = [];
+    $scope.milestoneList = [];
+
+    indexData
+        .loadAllMilestones()
+        .then(function (res) {
+            $scope.milestoneList = res;
+        });
+
+    $scope.setSelectedMilestones = function (name, status) {
+        if (!status) {
+            $scope.milestones.push(name);
+        } else {
+            $scope.milestones.splice($scope.milestones.indexOf(name), 1);
+
+        }
+    }
     $scope.title = "";
 
 
@@ -271,7 +287,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     }
     $scope.addHashtags = function (ev) {
         $mdDialog.show({
-                controller: HashtagPopupController,
+                controller: PopupController,
                 templateUrl: 'app/views/hashtag-popup.html',
                 targetEvent: ev,
                 scope: $scope, // use parent scope in template
@@ -287,7 +303,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
     $scope.addDescription = function (ev) {
         $mdDialog.show({
-                controller: DescriptionPopupController,
+                controller: PopupController,
                 templateUrl: 'app/views/description-popup.html',
                 targetEvent: ev,
                 scope: $scope, // use parent scope in template
@@ -298,16 +314,57 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             })
             .then(function () {}, function () {
                 // Todo hier müssen die neuen Desciption und title daten an den server gesender werden    $scope.desciption ;    $scope.title ;
-                // todo an Rebecca wenn title empty ist, dann soll akutelle uhrzei tund datum eingefügt werden --> kann über watch gemacht werdne
             });
     }
 
     $scope.$watch('title', function (newVal, oldVal) {
-        if(newVal == ''){
+        if (newVal == '') {
             var now = new Date();
             $scope.title = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + '_' + now.getHours() + ':' + now.getMinutes();
         }
     });
+    
+    $scope.addMilestone = '';
+    $scope.addNewMilestone = function () {
+
+        // todo: add new milestone to the list hastag list $scope.addMilestone
+        // wenn das zu der Liste hinzugefügt wurde, muss auch nochmal die liste geupdatet werdne aktuell mache ich es nur lokal, dass kann dann gelöscht werden
+        $scope.milestoneList.push($scope.addMilestone);
+
+        $scope.milestones.push($scope.addMilestone);
+        $scope.addMilestone = '';
+
+        $scope.milestoneForm.$setPristine();
+        $scope.milestoneForm.$setUntouched();
+
+    }
+     $scope.addMilestones = function (ev) {
+        $mdDialog.show({
+                controller: PopupController,
+                templateUrl: 'app/views/milestone-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {}
+            })
+            .then(function () {}, function () {
+                // Todo hier müssen die neue milestones abgedatet werden.  $scope.milestones
+            });
+    }
+
+    $scope.statusMilestoneSelected = function (name) {
+
+        for (var i in $scope.milestones) {
+            if ($scope.milestones[i] == name) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    
 });
 
 function SaveDialogController($scope, $mdDialog, authentication) {
@@ -333,7 +390,7 @@ function SaveDialogController($scope, $mdDialog, authentication) {
                     /*Todo    erstellen einer Idee mit  $scope.selectedHashtags
     $scope.contributors 
     $scope.desciption 
-    $scope.milestons 
+    $scope.milestones 
     $scope.title = 
     dem aktuellen datum und Uhrzeit 
     scribble als vektordatei
@@ -345,7 +402,7 @@ function SaveDialogController($scope, $mdDialog, authentication) {
             /*Todo    erstellen einer Idee mit  $scope.selectedHashtags
     $scope.contributors 
     $scope.desciption 
-    $scope.milestons 
+    $scope.milestones 
     $scope.title = 
     dem aktuellen datum und Uhrzeit 
     scribble als vektordatei
@@ -356,7 +413,7 @@ function SaveDialogController($scope, $mdDialog, authentication) {
 }
 
 
-function HashtagPopupController($scope, $mdDialog) {
+function PopupController($scope, $mdDialog) {
 
     $scope.hide = function () {
         $mdDialog.hide();
@@ -367,14 +424,3 @@ function HashtagPopupController($scope, $mdDialog) {
 
 }
 
-
-function DescriptionPopupController($scope, $mdDialog) {
-
-    $scope.hide = function () {
-        $mdDialog.hide();
-    };
-    $scope.cancel = function () {
-        $mdDialog.cancel();
-    };
-
-}

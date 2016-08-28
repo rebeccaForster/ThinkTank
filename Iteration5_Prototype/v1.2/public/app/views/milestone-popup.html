@@ -1,0 +1,39 @@
+<md-dialog aria-label="Milestone Popup" class="popup-hashtag-size">
+    <form name="milestoneForm">
+        <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding>
+            <h2>Your Search Input:</h2>
+            <div>
+                <md-button class="md-raised md-accent" ng-repeat="milestone in milestones" ng-click="setSelectedMilestones(milestones, true);" style="font-size:24px; margin-bottom:5px;">{{milestone}}
+                    <ng-md-icon icon="close"></ng-md-icon>
+                </md-button>
+            </div>
+            <span flex></span>
+            <md-button class="md-icon-button" style="width:64px; height:64px;">
+                <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
+            </md-button>
+
+        </md-toolbar>
+        <md-dialog-content class="content" layout-padding>
+            <div layout="row">
+                <md-input-container class="md-block" flex>
+                    <label>Is your milestone not in the list? Here can you add a new milestone!</label>
+                    <input name="newMilestone" ng-model="addMilestone" validate-new-milestone required />
+
+                    <div ng-messages="milestoneForm.newMilestone.$error">
+                        <div ng-message="validateNewMilestone">This milestone is in the list! You can't add it.</div>
+
+                        <div ng-message="required">This is required.</div>
+
+                    </div>
+                </md-input-container>
+                <md-button ng-disabled="milestoneForm.newMilestone.$invalid" class=" md-raised md-primary" ng-click="addNewMilestone()">+</md-button>
+            </div>
+            <div class="masonry-layout-milestone">
+                <div layout="row" ng-repeat="name in milestoneList | orderBy:'name'" class="item">
+                    <md-button data-ng-class="{'md-accent' : statusMilestoneSelected(name)}" ng-click="setSelectedMilestones( name, statusMilestoneSelected( name))">{{name}}</md-button>
+                </div>
+
+        </md-dialog-content>
+
+    </form>
+</md-dialog>

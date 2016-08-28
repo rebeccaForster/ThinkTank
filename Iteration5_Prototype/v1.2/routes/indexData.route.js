@@ -11,83 +11,91 @@ var Scibble = require('../models/scibble.model.js');
 
 //Test for connection: 
 var hashtags = [
-        {
-            name: 'aReis',
-            priority: 0
+    {
+        name: 'aReis',
+        priority: 0
         }, {
-            name: 'wPepperoni',
-            priority: 2
+        name: 'wPepperoni',
+        priority: 2
         },
-        {
-            name: 'eSausage',
-            priority: 4
+    {
+        name: 'eSausage',
+        priority: 4
         },
-        {
-            name: 'Black Olives',
-            priority: 1
+    {
+        name: 'Black Olives',
+        priority: 1
         },
-        {
-            name: 'rGreen Peppers',
-            priority: 3
+    {
+        name: 'rGreen Peppers',
+        priority: 3
         },
-        {
-            name: 'gSausage',
-            priority: 4
+    {
+        name: 'gSausage',
+        priority: 4
         },
-        {
-            name: 'kBlack Olives',
-            priority: 1
+    {
+        name: 'kBlack Olives',
+        priority: 1
         },
-        {
-            name: 'uGreen Peppers',
-            priority: 3
+    {
+        name: 'uGreen Peppers',
+        priority: 3
         },
-        {
-            name: 'dBlack Olives',
-            priority: 1
+    {
+        name: 'dBlack Olives',
+        priority: 1
         },
-        {
-            name: 'hGreen Peppers',
-            priority: 3
+    {
+        name: 'hGreen Peppers',
+        priority: 3
         }, {
-            name: 'kReis',
-            priority: 0
+        name: 'kReis',
+        priority: 0
         }, {
-            name: 'mvPepperoni',
-            priority: 2
+        name: 'mvPepperoni',
+        priority: 2
         },
-        {
-            name: 'Sausage',
-            priority: 4
+    {
+        name: 'Sausage',
+        priority: 4
         },
-        {
-            name: 'vBlack Olives',
-            priority: 1
+    {
+        name: 'vBlack Olives',
+        priority: 1
         },
-        {
-            name: 'dGreen Peppers',
-            priority: 3
+    {
+        name: 'dGreen Peppers',
+        priority: 3
         }, {
-            name: 'rPepperoni',
-            priority: 2
+        name: 'rPepperoni',
+        priority: 2
         },
-        {
-            name: 'daBlack Olives',
-            priority: 1
+    {
+        name: 'daBlack Olives',
+        priority: 1
         },
-        {
-            name: 'fGreen Peppers',
-            priority: 3
+    {
+        name: 'fGreen Peppers',
+        priority: 3
         },
-        {
-            name: 'nBlack Olives',
-            priority: 1
+    {
+        name: 'nBlack Olives',
+        priority: 1
         },
-        {
-            name: 'gGreen Peppers',
-            priority: 3
+    {
+        name: 'gGreen Peppers',
+        priority: 3
         }
   ];
+
+var milestones = [
+    "find location",
+    "get founding",
+    "define project goal",
+    "find contributors",
+    "find business partners"
+];
 
 var users = [
     {
@@ -239,6 +247,10 @@ router.get('/users', function (req, res, next) {
 
 router.get('/tags', function (req, res, next) {
     res.json(hashtags);
+});
+
+router.get('/milestones', function (req, res, next) {
+    res.json(milestones);
 });
 
 

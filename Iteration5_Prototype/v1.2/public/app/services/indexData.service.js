@@ -9,6 +9,7 @@
 
         var tags = [];
         var users = [];
+        var milestones = [];
 
         var getAllTags = function () {
             $http.get("/api/indexData/tags").then(function (response) {
@@ -23,11 +24,17 @@
             });
             return $q.when(users);
         }
-          
 
+        var loadAllMilestones = function () {
+            $http.get("/api/indexData/milestones").then(function (response) {
+                milestones = response.data;
+            });
+            return $q.when(milestones);
+        }
         return {
             getAllTags: getAllTags,
             loadAllUsers: loadAllUsers,
+            loadAllMilestones: loadAllMilestones,
         };
     }
 
