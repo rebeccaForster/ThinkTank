@@ -19,22 +19,22 @@
             <div style="top:74px; right:0px; position:fixed; width:90px; heigt:100%;">
                 <div layout="column" layout-padding>
                     <div flex=38></div>
-                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" aria-label="Contributors">
+                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" ng-click="addContributers();" aria-label="Contributors">
                         <ng-md-icon icon="person_add" class="icon-white" size="34"></ng-md-icon>
                     </md-button>
                     <div flex=8></div>
 
-                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" aria-label="Descirption">
+                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" ng-click="addDescription();" aria-label="Descirption">
                         <ng-md-icon icon="description" class="icon-white" size="34"></ng-md-icon>
                     </md-button>
                     <div flex=8></div>
 
-                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" aria-label="Milestones">
+                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" ng-click="addMilestones();" aria-label="Milestones">
                         <ng-md-icon icon="add_location" class="icon-white" size="34"></ng-md-icon>
                     </md-button>
                     <div flex=8></div>
 
-                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" ng-click="setHashtags();" aria-label="Hashtags">#</md-button>
+                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" ng-click="addHashtags();" aria-label="Hashtags">#</md-button>
                     <div flex=38></div>
 
                 </div>
@@ -51,7 +51,7 @@
 
             <div layout="row" style="bottom:0px; left:0px; position:fixed; width:100%;" padding-layout>
 
-                    
+
 
                 <div style="bottom:0px; left:40%; position:fixed;">
                     <md-button class="md-icon-button icon-whiteboard-small" aria-label="undo" ng-click="undo()">
@@ -63,24 +63,22 @@
                     <md-button ng-class="{'btn-tools-active':isToolsOpen}" class="icon-background-gray icon-whiteboard-large" id="btn-tools-menu" ng-click="openTools()">
                         Tools
                     </md-button>
-<md-button class="md-icon-button icon-whiteboard-small" aria-label="delete" ng-click="clear();clearHistory();">
+                    <md-button class="md-icon-button icon-whiteboard-small" aria-label="delete" ng-click="clear();clearHistory();">
                         <ng-md-icon icon="delete" class="icon-gray" size="34" ng-click="clear()"></ng-md-icon>
                     </md-button>
                 </div>
+                <div id="circle-menu1" class="cn-menu1"></div>
 
-                                    <div id="circle-menu1" class="cn-menu1"></div>
 
-
-                
             </div>
             <div style="bottom:0px; right:0px; position:fixed;">
-                    <md-button class="md-icon-button  icon-whiteboard-small" aria-label="lock">
-                        <ng-md-icon icon="lock" class="icon-gray" size="34"></ng-md-icon>
-                    </md-button>
-                    <md-button class="md-icon-button  icon-whiteboard-small" ng-click="saveScribble($event)" aria-label="save">
-                        <ng-md-icon icon="save" class="icon-gray" size="34"></ng-md-icon>
-                    </md-button>
-                </div>
+                <md-button class="md-icon-button  icon-whiteboard-small" aria-label="lock">
+                    <ng-md-icon icon="lock" class="icon-gray" size="34"></ng-md-icon>
+                </md-button>
+                <md-button class="md-icon-button  icon-whiteboard-small" ng-click="saveScribble($event)" aria-label="save">
+                    <ng-md-icon icon="save" class="icon-gray" size="34"></ng-md-icon>
+                </md-button>
+            </div>
         </div>
     </md-content>
 </main>

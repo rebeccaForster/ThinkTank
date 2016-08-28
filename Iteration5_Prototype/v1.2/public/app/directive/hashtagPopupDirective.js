@@ -15,12 +15,14 @@ app.directive('validateNewHastag', function (indexData) {
                 });
             ngModel.$validators.validateNewHastag = function (modelValue) {
                 var i = 0;
-                while (i < hashtags.length) {
-                    if (hashtags[i].name.toLowerCase() == modelValue.toLowerCase()) {
-                        return false;
+                if (modelValue != null) {
+                    while (i < hashtags.length) {
+                        if (hashtags[i].name.toLowerCase() == modelValue.toLowerCase()) {
+                            return false;
 
+                        }
+                        i++;
                     }
-                    i++;
                 }
                 return true;
             }

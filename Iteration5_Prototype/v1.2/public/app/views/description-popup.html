@@ -1,0 +1,27 @@
+<md-dialog aria-label="Whiteboard Description Popup" class="popup-hashtag-size">
+    <form name="descriptionForm">
+        <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding ng-init="isWhiteboard = (0 == selectedItem)">
+            <h2>Idea description and title</h2>
+
+            <span flex></span>
+            <md-button class="md-icon-button" style="width:64px; height:64px;">
+                <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
+            </md-button>
+
+        </md-toolbar>
+        <md-dialog-content class="content" layout-padding >
+            <md-input-container class="md-block" flex style="margin-top:25px;">
+                <label>Title</label>
+                <input name="title" ng-model="title"  />
+                
+            </md-input-container>
+            <md-input-container class="md-block" flex>
+                <label>Description</label>
+                <textarea name="description" ng-model="desciption"  </textarea>
+                
+            </md-input-container>
+
+        </md-dialog-content>
+
+    </form>
+</md-dialog>

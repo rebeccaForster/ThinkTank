@@ -269,7 +269,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         $scope.hashtagForm.$setUntouched();
 
     }
-    $scope.setHashtags = function (ev) {
+    $scope.addHashtags = function (ev) {
         $mdDialog.show({
                 controller: HashtagPopupController,
                 templateUrl: 'app/views/hashtag-popup.html',
@@ -285,6 +285,29 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             });
     }
 
+    $scope.addDescription = function (ev) {
+        $mdDialog.show({
+                controller: DescriptionPopupController,
+                templateUrl: 'app/views/description-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {}
+            })
+            .then(function () {}, function () {
+                // Todo hier müssen die neuen Desciption und title daten an den server gesender werden    $scope.desciption ;    $scope.title ;
+                // todo an Rebecca wenn title empty ist, dann soll akutelle uhrzei tund datum eingefügt werden --> kann über watch gemacht werdne
+            });
+    }
+
+    $scope.$watch('title', function (newVal, oldVal) {
+        if(newVal == ''){
+            var now = new Date();
+            $scope.title = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + '_' + now.getHours() + ':' + now.getMinutes();
+        }
+    });
 });
 
 function SaveDialogController($scope, $mdDialog, authentication) {
@@ -334,6 +357,18 @@ function SaveDialogController($scope, $mdDialog, authentication) {
 
 
 function HashtagPopupController($scope, $mdDialog) {
+
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+
+}
+
+
+function DescriptionPopupController($scope, $mdDialog) {
 
     $scope.hide = function () {
         $mdDialog.hide();
