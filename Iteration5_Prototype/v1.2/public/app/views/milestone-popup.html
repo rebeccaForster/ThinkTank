@@ -1,7 +1,7 @@
 <md-dialog aria-label="Milestone Popup" class="popup-hashtag-size">
     <form name="milestoneForm">
         <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding>
-            <h2>Your Search Input:</h2>
+            <h2>Your Milestones:</h2>
             <div>
                 <md-button class="md-raised md-accent" ng-repeat="milestone in milestones" ng-click="setSelectedMilestones(milestones, true);" style="font-size:24px; margin-bottom:5px;">{{milestone}}
                     <ng-md-icon icon="close"></ng-md-icon>
@@ -29,7 +29,7 @@
                 <md-button ng-disabled="milestoneForm.newMilestone.$invalid" class=" md-raised md-primary" ng-click="addNewMilestone()">+</md-button>
             </div>
             <div class="masonry-layout-milestone">
-                <div layout="row" ng-repeat="name in milestoneList | orderBy:'name'" class="item">
+                <div layout="row" ng-repeat="name in milestoneList | orderBy:''" class="item">
                     <md-button data-ng-class="{'md-accent' : statusMilestoneSelected(name)}" ng-click="setSelectedMilestones( name, statusMilestoneSelected( name))">{{name}}</md-button>
                 </div>
 

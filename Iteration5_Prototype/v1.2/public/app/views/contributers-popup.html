@@ -1,0 +1,25 @@
+<md-dialog aria-label="Milestone Popup" class="popup-hashtag-size">
+    <form name="milestoneForm">
+        <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding>
+            <h2>Contributors:</h2>
+            <div>
+                <md-button class="md-raised md-accent" ng-repeat="contr in contributors" ng-click="setSelectedContributors(contributors, true);" style="font-size:24px; margin-bottom:5px;">{{contr}}
+                    <ng-md-icon icon="close"></ng-md-icon>
+                </md-button>
+            </div>
+            <span flex></span>
+            <md-button class="md-icon-button" style="width:64px; height:64px;">
+                <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
+            </md-button>
+
+        </md-toolbar>
+        <md-dialog-content class="content" layout-padding>
+            <div class="masonry-layout-milestone">
+                <div layout="row" ng-repeat="contr in contributorsList | orderBy:'name'" class="item">
+                    <md-button data-ng-class="{'md-accent' : statusContributorsSelected(contr.name)}" ng-click="setSelectedContributors( contr.name, statusContributorsSelected( contr.name))">{{contr.name}}</md-button>
+                </div>
+
+        </md-dialog-content>
+
+    </form>
+</md-dialog>

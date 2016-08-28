@@ -22,6 +22,22 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             });
     };
     $scope.contributors = [];
+    $scope.contributorsList =[];
+    indexData
+		      .loadAllUsers()
+		      .then( function( res ) {
+		        
+                $scope.contributorsList = res;
+		      });
+    
+     $scope.setSelectedContributors = function (name, status) {
+        if (!status) {
+            $scope.contributors.push(name);
+        } else {
+            $scope.contributors.splice($scope.contributors.indexOf(name), 1);
+
+        }
+    }
     $scope.desciption = "";
     $scope.milestones = [];
     $scope.milestoneList = [];
@@ -364,7 +380,32 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         return false;
     }
 
-    
+
+     $scope.addContributors = function (ev) {
+        $mdDialog.show({
+                controller: PopupController,
+                templateUrl: 'app/views/contributers-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {}
+            })
+            .then(function () {}, function () {
+                // Todo hier müssen die neue contirbutors abgedatet werden.  $scope.contibutors
+            });
+    }
+
+    $scope.statusContributorsSelected = function (name) {
+
+        for (var i in $scope.contributors) {
+            if ($scope.contributors[i] == name) {
+                return true;
+            }
+        }
+        return false;
+    }
 });
 
 function SaveDialogController($scope, $mdDialog, authentication) {
