@@ -1,5 +1,5 @@
 'use strict';
-app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $window) {
+app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window) {
     $scope.saveScribble = function (ev) {
         $mdDialog.show({
                 controller: SaveDialogController,
@@ -21,7 +21,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
                 return true;
             });
     };
-    $scope.hashtags = [];
     $scope.contributors = [];
     $scope.desciption = "";
     $scope.milestons = [];
@@ -39,8 +38,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
     $scope.lineWidth = 4;
     $scope.backgroundColor = '#EEE';
     // todo anpassen der höhe an die größen der einzelnen verwendeten Klassen
- $scope.canvasWidth = $window.innerWidth - 90 -100;
-        $scope.canvasHeight =  $window.innerHeight - 90 -74;
+    $scope.canvasWidth = $window.innerWidth - 90 - 100;
+    $scope.canvasHeight = $window.innerHeight - 90 - 74;
     $scope.setDrawingMode = function (mode) {
         $scope.drawingboardRemote.setDrawingMode(mode);
     }
@@ -49,9 +48,9 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
 
     }
     $scope.setCanvasStyle = function () {
-        
+
         return {
-            "height":  $scope.canvasHeight + 'px',
+            "height": $scope.canvasHeight + 'px',
             "width": $scope.canvasWidth + 'px'
         }
     }
@@ -79,15 +78,15 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
     };
 
 
-  var draggable = document.getElementById('circle-menu1');
-  draggable.addEventListener('touchmove', function(event) {
-    var touch = event.targetTouches[0];
-    
-    // Place element where the finger is
-    draggable.style.left = touch.pageX + 'px';
-    draggable.style.top = touch.pageY + 'px';
-    event.preventDefault();
-  }, false);
+    var draggable = document.getElementById('circle-menu1');
+    draggable.addEventListener('touchmove', function (event) {
+        var touch = event.targetTouches[0];
+
+        // Place element where the finger is
+        draggable.style.left = touch.pageX + 'px';
+        draggable.style.top = touch.pageY + 'px';
+        event.preventDefault();
+    }, false);
 
     var cmenu = CMenu('#circle-menu1')
         .config({
@@ -114,28 +113,28 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
                     disabled: true
                             },
                 {
-                    icon: 'fa fa-pencil',
+                    icon: 'my-icon-pen',
                     click: function () {
                         $scope.setDrawingMode('draw');
                     }
                 },
-                    
+
                 {
-                    title: 'Strichstärke',
+                    icon: 'my-icon-strichstärke',
                     hideAfterClick: true,
                     menus: [
                         {
-                            title: 'dünn',
+                            icon: 'my-icon-strichstärke-duenn',
                             click: function () {
                                 $scope.setLineWidth(4);
                             }
                                     }, {
-                            title: 'normal',
+                            icon: 'my-icon-strichstärke-mittel',
                             click: function () {
                                 $scope.setLineWidth(6);
                             }
                                     }, {
-                            title: 'dick',
+                            icon: 'my-icon-strichstärke-dick',
                             click: function () {
                                 $scope.setLineWidth(10);
                             }
@@ -143,7 +142,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
                                 ]
                             },
                 {
-                    title: 'color',
+                    icon: 'my-icon-color',
                     hideAfterClick: true,
 
                     menus: [
@@ -187,7 +186,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
 
                                                     },
                 {
-                    title: 'fill',
+                    icon: 'my-icon-fill',
 
                     click: function () {
                         $scope.setDrawingMode('fill');
@@ -196,7 +195,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
 
                                                     },
                 {
-                    icon: 'fa fa-eraser',
+                    icon: 'my-icon-eraser',
                     click: function () {
                         $scope.setDrawingMode('eraser');
                     }
@@ -227,25 +226,63 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, $w
                                 }
                                 ]
         });
-  
+
     $scope.isToolsOpen = false;
     $scope.openTools = function () {
-           if(!$scope.isToolsOpen){
-                cmenu
-            .styles({
-                top: '50%',
-                left: '50%'
-            })
-            .show();
-           }
-           else{
-               cmenu.hide();
-           }
-           $scope.isToolsOpen = !$scope.isToolsOpen;
+        if (!$scope.isToolsOpen) {
+            cmenu
+                .styles({
+                    top: '50%',
+                    left: '50%'
+                })
+                .show();
+        } else {
+            cmenu.hide();
+        }
+        $scope.isToolsOpen = !$scope.isToolsOpen;
 
     }
     $scope.setLineWidth = function (size) {
         $scope.drawingboardRemote.setLineWidth(size);
+    }
+    $scope.hashtags = [];
+    indexData
+        .getAllTags()
+        .then(function (res) {
+            $scope.hashtags = res;
+        });
+    $scope.addHashtag = '';
+    $scope.addNewHastag = function () {
+
+        // todo: add new hashtag to the list hastag list $scope.addHashtag
+        // wenn das zu der Liste hinzugefügt wurde, muss auch nochmal die liste geupdatet werdne aktuell mache ich es nur lokal, dass kann dann gelöscht werden
+        var dummyNewHashtag = {
+            name: $scope.addHashtag,
+            priority: 0 // 0 ist default wert, wenn er neu initalisiert wird
+        }
+        $scope.hashtags.push(dummyNewHashtag);
+
+        $scope.selectedHashtags.push($scope.addHashtag);
+        $scope.addHashtag = '';
+
+        $scope.hashtagForm.$setPristine();
+        $scope.hashtagForm.$setUntouched();
+
+    }
+    $scope.setHashtags = function (ev) {
+        $mdDialog.show({
+                controller: HashtagPopupController,
+                templateUrl: 'app/views/hashtag-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {}
+            })
+            .then(function () {}, function () {
+                // Todo hier müssen die neuen Hashtag daten an den server gesender werden  $scope.selectedHashtags
+            });
     }
 
 });
@@ -270,7 +307,7 @@ function SaveDialogController($scope, $mdDialog, authentication) {
                 .then(function () {
                     $scope.cancel();
                     $scope.setSignInStatus();
-                    /*Todo    erstellen einer Idee mit $scope.hashtags =[];
+                    /*Todo    erstellen einer Idee mit  $scope.selectedHashtags
     $scope.contributors 
     $scope.desciption 
     $scope.milestons 
@@ -282,7 +319,7 @@ function SaveDialogController($scope, $mdDialog, authentication) {
         } else {
             $scope.cancel();
 
-            /*Todo    erstellen einer Idee mit $scope.hashtags =[];
+            /*Todo    erstellen einer Idee mit  $scope.selectedHashtags
     $scope.contributors 
     $scope.desciption 
     $scope.milestons 
@@ -293,4 +330,16 @@ function SaveDialogController($scope, $mdDialog, authentication) {
         }
 
     };
+}
+
+
+function HashtagPopupController($scope, $mdDialog) {
+
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+
 }

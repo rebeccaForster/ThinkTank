@@ -55,6 +55,32 @@
     z-index: 20;
 }
 
-.my-icon {
-    background: url("../img/test.jpg");
+.my-icon-fill {
+    background: url("../img/icon/fill1.png");
+}
+
+.my-icon-strichstärke {
+    background: url("../img/icon/strichst%C3%A4rke.png");
+}
+
+.my-icon-strichstärke-duenn {
+    background: url("../img/icon/strichst%C3%A4rke_d%C3%BCnn.png");
+}
+
+.my-icon-strichstärke-mittel {
+    background: url("../img/icon/strichst%C3%A4rke_mittel.png");
+}
+
+.my-icon-strichstärke-dick {
+    background: url("../img/icon/strichst%C3%A4rke_dick.png");
+}
+
+.my-icon-pen {
+    background: url("../img/icon/pen.png");
+}
+.my-icon-color {
+    background: url("../img/icon/color1.png");
+}
+.my-icon-eraser {
+    background: url("../img/icon/eraser.png");
 }

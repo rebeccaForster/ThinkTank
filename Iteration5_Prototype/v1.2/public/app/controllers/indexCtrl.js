@@ -7,112 +7,9 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         $mdSidenav(menuId).toggle();
     };
 
-    $scope.hashtags = [];
+    
 
-    indexData
-              .getAllTags()
-              .then( function( res ) {
-                $scope.hashtags = res;
-              });
-
-    $scope.hashtags = [
-        {
-            id: 0,
-            name: 'aReis',
-            priority: 0
-        }, {
-            id: 1,
-            name: 'wPepperoni',
-            priority: 2
-        },
-        {
-            id: 2,
-            name: 'eSausage',
-            priority: 4
-        },
-        {
-            id: 3,
-            name: 'Black Olives',
-            priority: 1
-        },
-        {
-            id: 4,
-            name: 'rGreen Peppers',
-            priority: 3
-        },
-        {
-            id: 5,
-            name: 'gSausage',
-            priority: 4
-        },
-        {
-            id: 6,
-            name: 'kBlack Olives',
-            priority: 1
-        },
-        {
-            id: 7,
-            name: 'uGreen Peppers',
-            priority: 3
-        },
-        {
-            id: 8,
-            name: 'dBlack Olives',
-            priority: 1
-        },
-        {
-            id: 9,
-            name: 'hGreen Peppers',
-            priority: 3
-        }, {
-            id: 10,
-            name: 'kReis',
-            priority: 0
-        }, {
-            id: 11,
-            name: 'mvPepperoni',
-            priority: 2
-        },
-        {
-            id: 12,
-            name: 'Sausage',
-            priority: 4
-        },
-        {
-            id: 13,
-            name: 'vBlack Olives',
-            priority: 1
-        },
-        {
-            id: 14,
-            name: 'dGreen Peppers',
-            priority: 3
-        }, {
-            id: 15,
-            name: 'rPepperoni',
-            priority: 2
-        },
-        {
-            id: 16,
-            name: 'daBlack Olives',
-            priority: 1
-        },
-        {
-            id: 17,
-            name: 'fGreen Peppers',
-            priority: 3
-        },
-        {
-            id: 18,
-            name: 'nBlack Olives',
-            priority: 1
-        },
-        {
-            id: 19,
-            name: 'gGreen Peppers',
-            priority: 3
-        }
-  ];
+    
 
     $scope.menuNonAuth = [
         {
@@ -226,22 +123,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     }
 
-    $scope.searchHashtag = function (ev) {
-        $mdDialog.show({
-                controller: HashtagPopupController,
-                templateUrl: 'app/views/hashtag-popup.html',
-                targetEvent: ev,
-                scope: $scope, // use parent scope in template
-                preserveScope: true,
-                clickOutsideToClose: true,
-                fullscreen: true,
-                locals: {}
-            })
-            .then(function () {}, function () {
-                $scope.updateDashboard();
-            });
-    }
-
+   
 
     $scope.sortingDashboardProfile = ["Latest Ideas", "Most popular", "Friedhof", "Himmel"];
     $scope.sortingMessages = ["Date up", "Date down", "Name up", "Name down"];
@@ -275,8 +157,6 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             "font-size": size
         }
     }
-
-    $scope.sortingType = $scope.sorting[0].title;
 
     $scope.logout = function () {
         authentication.logout();
@@ -350,6 +230,13 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             $mdDialog.hide(answer);
         };
         
+   
+    $scope.changeSortingType = function (index) {
+        $scope.sortingType = index;
+        $scope.updateDashboard();
+
+    }
+    
     $scope.hashtagSelected = function (name) {
 
         for (var i in $scope.selectedHashtags) {
@@ -361,7 +248,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     }
 
     $scope.selectedHashtags = [];
-    $scope.setHashtags = function (name, status) {
+    $scope.setSelectedHashtags = function (name, status) {
         if (!status) {
             $scope.selectedHashtags.push(name);
         } else {
@@ -369,11 +256,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
         }
     }
-    $scope.changeSortingType = function (index) {
-        $scope.sortingType = index;
-        $scope.updateDashboard();
-
-    }
+    
     $scope.updateDashboard = function () {
         // ToDo: es wurden neue Tags hinzugefügt bzw. entfernt und hier müsstest du mithilfe der Tags & des auswählten Sorting die Liste erneuern
         // $scope.sortingType gibt den Namen der Sortierung zurück
@@ -381,17 +264,6 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     }
 
 });
-
-function HashtagPopupController($scope, $mdDialog) {
-
-    $scope.hide = function () {
-        $mdDialog.hide();
-    };
-    $scope.cancel = function () {
-        $mdDialog.cancel();
-    };
-
-}
 
 function LoginDialogController($scope, $mdDialog, authentication) {
     $scope.credentials = {

@@ -19,6 +19,30 @@ angular
 		        
                 $scope.users = res;
 		      });
+    $scope.hashtags = [];
+
+    indexData
+              .getAllTags()
+              .then( function( res ) {
+                $scope.hashtags = res;
+              });
+    
+     $scope.searchHashtag = function (ev) {
+        $mdDialog.show({
+                controller: HashtagPopupController,
+                templateUrl: 'app/views/hashtag-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {}
+            })
+            .then(function () {}, function () {
+                $scope.updateDashboard();
+            });
+    }
+ 
 
 	$scope.maxColumn = 3;
     $scope.maxProfileColumn = 2;
@@ -158,7 +182,6 @@ angular
             );
 
         }
-
         $scope.showProfile = function (index, ev) {
             $mdDialog.show({
                     controller: ProfilePopupController,
@@ -298,5 +321,17 @@ function ProfilePopupController($scope, $mdDialog, profileIndex) {
         $mdDialog.cancel();
     };
 
+
+}
+
+
+function HashtagPopupController($scope, $mdDialog) {
+
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
 
 }

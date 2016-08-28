@@ -12,98 +12,78 @@ var Scibble = require('../models/scibble.model.js');
 //Test for connection: 
 var hashtags = [
         {
-            id: 0,
             name: 'aReis',
             priority: 0
         }, {
-            id: 1,
             name: 'wPepperoni',
             priority: 2
         },
         {
-            id: 2,
             name: 'eSausage',
             priority: 4
         },
         {
-            id: 3,
             name: 'Black Olives',
             priority: 1
         },
         {
-            id: 4,
             name: 'rGreen Peppers',
             priority: 3
         },
         {
-            id: 5,
             name: 'gSausage',
             priority: 4
         },
         {
-            id: 6,
             name: 'kBlack Olives',
             priority: 1
         },
         {
-            id: 7,
             name: 'uGreen Peppers',
             priority: 3
         },
         {
-            id: 8,
             name: 'dBlack Olives',
             priority: 1
         },
         {
-            id: 9,
             name: 'hGreen Peppers',
             priority: 3
         }, {
-            id: 10,
             name: 'kReis',
             priority: 0
         }, {
-            id: 11,
             name: 'mvPepperoni',
             priority: 2
         },
         {
-            id: 12,
             name: 'Sausage',
             priority: 4
         },
         {
-            id: 13,
             name: 'vBlack Olives',
             priority: 1
         },
         {
-            id: 14,
             name: 'dGreen Peppers',
             priority: 3
         }, {
-            id: 15,
             name: 'rPepperoni',
             priority: 2
         },
         {
-            id: 16,
             name: 'daBlack Olives',
             priority: 1
         },
         {
-            id: 17,
             name: 'fGreen Peppers',
             priority: 3
         },
         {
-            id: 18,
             name: 'nBlack Olives',
             priority: 1
         },
         {
-            id: 19,
             name: 'gGreen Peppers',
             priority: 3
         }

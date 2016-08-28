@@ -1,22 +1,36 @@
 <md-dialog aria-label="Search Hashtag Popup" class="popup-hashtag-size">
-    <form>
-        <md-toolbar class="md-tall" layout="row" layout-padding>
-                <h2>Search:</h2>
-                <div>
-                    <md-button class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setHashtags(selectedHashtag, true);" style="font-size:24px; margin-bottom:5px;">#{{selectedHashtag}}
-                        <ng-md-icon icon="close"></ng-md-icon>
-                    </md-button>
-                </div>
-                <span flex></span>
-               <md-button class="md-icon-button" style="width:64px; height:64px;">
-                    <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
+    <form name="hashtagForm">
+        <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding ng-init="isWhiteboard = (0 == selectedItem)">
+            <h2>Your Search Input:</h2>
+            <div>
+                <md-button class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setSelectedHashtags(selectedHashtag, true);" style="font-size:24px; margin-bottom:5px;">#{{selectedHashtag}}
+                    <ng-md-icon icon="close"></ng-md-icon>
                 </md-button>
+            </div>
+            <span flex></span>
+            <md-button class="md-icon-button" style="width:64px; height:64px;">
+                <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
+            </md-button>
 
         </md-toolbar>
-        <md-dialog-content class="content">
+        <md-dialog-content class="content" layout-padding>
+            <div ng-show="isWhiteboard" layout="row">
+                <md-input-container class="md-block" flex>
+                    <label>Is your hashtag not in the list? Here can you add a new hashtag!</label>
+                    <input name="newHashtag" ng-model="addHashtag" validate-new-hastag required />
+
+                    <div ng-messages="hashtagForm.newHashtag.$error">
+                        <div ng-message="validateNewHastag">This hashtag is in the list! You can't add it.</div>
+
+                        <div ng-message="required">This is required.</div>
+
+                    </div>
+                </md-input-container>
+                <md-button ng-disabled="hashtagForm.newHashtag.$invalid" class=" md-raised md-primary" ng-click="addNewHastag()">+</md-button>
+            </div>
             <div class="masonry-layout">
                 <div layout="row" ng-repeat="hashtag in hashtags | orderBy:'name'" class="item">
-                    <md-button data-ng-class="{'md-accent' : hashtagSelected(hashtag.name)}" ng-click="setHashtags(hashtag.name, hashtagSelected(hashtag.name))" ng-style="getHashtagStyle(hashtag.priority)">#{{ hashtag.name }}</md-button>
+                    <md-button data-ng-class="{'md-accent' : hashtagSelected(hashtag.name)}" ng-click="setSelectedHashtags(hashtag.name, hashtagSelected(hashtag.name))" ng-style="getHashtagStyle(hashtag.priority)">#{{ hashtag.name }}</md-button>
                 </div>
 
         </md-dialog-content>
