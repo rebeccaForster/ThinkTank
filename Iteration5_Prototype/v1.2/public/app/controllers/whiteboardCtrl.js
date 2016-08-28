@@ -22,15 +22,15 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             });
     };
     $scope.contributors = [];
-    $scope.contributorsList =[];
+    $scope.contributorsList = [];
     indexData
-		      .loadAllUsers()
-		      .then( function( res ) {
-		        
-                $scope.contributorsList = res;
-		      });
-    
-     $scope.setSelectedContributors = function (name, status) {
+        .loadAllUsers()
+        .then(function (res) {
+
+            $scope.contributorsList = res;
+        });
+
+    $scope.setSelectedContributors = function (name, status) {
         if (!status) {
             $scope.contributors.push(name);
         } else {
@@ -313,7 +313,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 locals: {}
             })
             .then(function () {}, function () {
-                // Todo hier müssen die neuen Hashtag daten an den server gesender werden  $scope.selectedHashtags
+                $scope.updateHashtags();
             });
     }
 
@@ -329,7 +329,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 locals: {}
             })
             .then(function () {}, function () {
-                // Todo hier müssen die neuen Desciption und title daten an den server gesender werden    $scope.desciption ;    $scope.title ;
+                $scope.updateDescription();
             });
     }
 
@@ -339,7 +339,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             $scope.title = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + '_' + now.getHours() + ':' + now.getMinutes();
         }
     });
-    
+
     $scope.addMilestone = '';
     $scope.addNewMilestone = function () {
 
@@ -354,7 +354,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         $scope.milestoneForm.$setUntouched();
 
     }
-     $scope.addMilestones = function (ev) {
+    $scope.addMilestones = function (ev) {
         $mdDialog.show({
                 controller: PopupController,
                 templateUrl: 'app/views/milestone-popup.html',
@@ -366,7 +366,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 locals: {}
             })
             .then(function () {}, function () {
-                // Todo hier müssen die neue milestones abgedatet werden.  $scope.milestones
+                $scope.updateMilestones();
             });
     }
 
@@ -381,7 +381,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     }
 
 
-     $scope.addContributors = function (ev) {
+    $scope.addContributors = function (ev) {
         $mdDialog.show({
                 controller: PopupController,
                 templateUrl: 'app/views/contributers-popup.html',
@@ -393,7 +393,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 locals: {}
             })
             .then(function () {}, function () {
-                // Todo hier müssen die neue contirbutors abgedatet werden.  $scope.contibutors
+                $scope.updateContributors();
             });
     }
 
@@ -406,6 +406,27 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         }
         return false;
     }
+
+
+    $scope.updateContributors() {
+        //Todo hier $scope.contributors in die gespeicherte Idee updaten an den server
+    }
+    $scope.updateAuthor() {
+        //Todo die registrierte Person als author der Idee registrieren und in die contributor liste hinzufügen plus updaten
+    }
+    $scope.updateMilestones() {
+        //Todo hier $scope.milestones in die gespeicherte Idee updaten an den server
+
+    }
+    $scope.updateDescription() {
+        //Todo hier $scope.desciption $scope.title in die gespeicherte Idee updaten an den server
+
+    }
+    $scope.updateHashtags() {
+        //Todo hier $scope.hashtags $scope.title in die gespeicherte Idee updaten an den server
+
+    }
+
 });
 
 function SaveDialogController($scope, $mdDialog, authentication) {
@@ -428,26 +449,14 @@ function SaveDialogController($scope, $mdDialog, authentication) {
                 .then(function () {
                     $scope.cancel();
                     $scope.setSignInStatus();
-                    /*Todo    erstellen einer Idee mit  $scope.selectedHashtags
-    $scope.contributors 
-    $scope.desciption 
-    $scope.milestones 
-    $scope.title = 
-    dem aktuellen datum und Uhrzeit 
-    scribble als vektordatei
- */
+                    $scope.updateDescription();
+                    $scope.updateAuthor();
                 });
         } else {
             $scope.cancel();
 
-            /*Todo    erstellen einer Idee mit  $scope.selectedHashtags
-    $scope.contributors 
-    $scope.desciption 
-    $scope.milestones 
-    $scope.title = 
-    dem aktuellen datum und Uhrzeit 
-    scribble als vektordatei
- */
+            $scope.updateDescription();
+            $scope.updateAuthor();
         }
 
     };
@@ -464,4 +473,3 @@ function PopupController($scope, $mdDialog) {
     };
 
 }
-
