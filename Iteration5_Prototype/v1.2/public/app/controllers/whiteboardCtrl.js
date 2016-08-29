@@ -38,22 +38,30 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
         }
     }
-    $scope.author = authentication.currentUser();
+    $scope.author = '';
     $scope.desciption = "";
-    $scope.milestones = [];
+    $scope.milestones = [] ;
     $scope.milestoneList = [];
-
+    $scope.ideaLifeTime = 30;
+    $scope.ideaDayLeft = 0;
+    
     indexData
         .loadAllMilestones()
         .then(function (res) {
             $scope.milestoneList = res;
         });
 
-    $scope.setSelectedMilestones = function (name, status) {
+    $scope.setSelectedMilestones = function (name, status, extratime, icon) {
+        var milestoneDefault = {
+				name: name, 
+				extratime: extratime,
+				percentage: 0,
+				icon: icon 
+		};
         if (!status) {
-            $scope.milestones.push(name);
+            $scope.milestones.push(milestoneDefault);
         } else {
-            $scope.milestones.splice($scope.milestones.indexOf(name), 1);
+            $scope.milestones.splice($scope.milestones.indexOf(milestoneDefault), 1);
 
         }
     }
@@ -295,7 +303,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         }
         $scope.hashtags.push(dummyNewHashtag);
 
-        $scope.selectedHashtags.push($scope.addHashtag);
+        $scope.setSelectedHashtags($scope.addHashtag, false);
         $scope.addHashtag = '';
 
         $scope.hashtagForm.$setPristine();
@@ -346,9 +354,15 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
         // todo: add new milestone to the list hastag list $scope.addMilestone
         // wenn das zu der Liste hinzugefügt wurde, muss auch nochmal die liste geupdatet werdne aktuell mache ich es nur lokal, dass kann dann gelöscht werden
-        $scope.milestoneList.push($scope.addMilestone);
+         var milestoneDefault = {
+				name: $scope.addMilestone, 
+				extratime: 0,
+				icon: '' 
+		};
+        
+        $scope.milestoneList.push(milestoneDefault);
 
-        $scope.milestones.push($scope.addMilestone);
+        $scope.setSelectedMilestones($scope.addMilestone,false, 0, '');
         $scope.addMilestone = '';
 
         $scope.milestoneForm.$setPristine();
@@ -374,7 +388,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.statusMilestoneSelected = function (name) {
 
         for (var i in $scope.milestones) {
-            if ($scope.milestones[i] == name) {
+            if ($scope.milestones[i].name == name) {
                 return true;
             }
         }
@@ -413,9 +427,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         //Todo hier $scope.contributors in die gespeicherte Idee updaten an den server
     }
     $scope.updateAuthor = function () {
-        
-        $scope.author = authentication.currentUser();
-        
+
+
         //Todo die registrierte Person als author der Idee registrieren und in die contributor liste hinzufügen plus updaten
     }
     $scope.updateMilestones = function () {
@@ -423,7 +436,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
     }
     $scope.updateDescription = function () {
-        //Todo hier $scope.desciption $scope.title in die gespeicherte Idee updaten an den server
+        //Todo hier $scope.desciption $scope.title  $scope.ideaLifeTime in die gespeicherte Idee updaten an den server
 
     }
     $scope.updateHashtags = function () {
@@ -435,7 +448,12 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
     }
 
-
+    $scope.loadIdea = function (idea, edit) {
+        //Todo diese Funktion muss alle Privacy, desciption, milesotnes, hashtags, contirbutors, whiteboard image Daten laden, 
+        //Sie wird aufgerufen, wenn man auf dem Popup Idea aufs whiteboard klickt 
+        // wenn man contributor ist bzw. die Idee bearbeiten möchte, ist edit true
+        // Wie man die Funktion genau aufruft, weiß ich noch nicht, darüber muss ich mir noch gedanken machen
+    }
     $scope.privacyTypesList = ["Only me & contributors", "Everyone", "Customer"];
     $scope.selectedPrivacyType = $scope.privacyTypesList[0];
     $scope.changeSortingType = function (index) {
@@ -459,6 +477,8 @@ function SaveDialogController($scope, $mdDialog, authentication) {
         $mdDialog.cancel();
     };
     $scope.save = function () {
+        $scope.author = authentication.currentUser();
+
         if ($scope.isLoggedIn) {
             authentication
                 .login($scope.credentials)
@@ -472,6 +492,7 @@ function SaveDialogController($scope, $mdDialog, authentication) {
             $scope.cancel();
 
             $scope.updateDescription();
+
             $scope.updateAuthor();
         }
 

@@ -3,7 +3,7 @@
         <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding>
             <h2>Contributors:</h2>
             <div>
-                <md-button class="md-raised md-accent" style="font-size:24px; margin-bottom:5px;" ng-hide="author.url==''">{{author.name}} - author
+                <md-button class="md-raised md-accent" style="font-size:24px; margin-bottom:5px;" ng-hide="author=='' || author.email==''">{{author.name}} - author
                 </md-button>
                 <md-button class="md-raised md-accent" ng-repeat="contr in contributors" ng-click="setSelectedContributors(contributors, true);" style="font-size:24px; margin-bottom:5px;">{{contr}}
                     <ng-md-icon icon="close"></ng-md-icon>

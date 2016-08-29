@@ -17,7 +17,7 @@ app.directive('validateNewMilestone', function (indexData) {
                 var i = 0;
                 if (modelValue != null) {
                     while (i < milestones.length) {
-                        if (milestones[i].toLowerCase() == modelValue.toLowerCase()) {
+                        if (milestones[i].name.toLowerCase() == modelValue.toLowerCase()) {
                             return false;
 
                         }

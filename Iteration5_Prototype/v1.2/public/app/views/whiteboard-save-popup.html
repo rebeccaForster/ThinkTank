@@ -24,7 +24,23 @@
                 </div>
                 <md-input-container class="md-block">
                         <label>Title</label>
-                        <input  name="title" ng-model="title" placeholder="placeholderTitle" />
+                        <input  name="title" ng-model="title"  />
+                    </md-input-container>
+                 <md-input-container class="md-block">
+                        <label>Life Time of the Idea</label>
+                        <input type="number" name="lifetime" ng-model="ideaLifeTime" min="30" max="180"/>
+                      <div ng-messages="saveForm.lifetime.$error" multiple >
+          <div ng-message="required">
+            This is required!
+          </div>
+          <div ng-message="min">
+            30 days is the minimum of the idea life time.
+          </div>
+         
+          <div ng-message="max">
+                       180 days is the minimum of the idea life time.
+
+          </div>
                     </md-input-container>
             </div>
         </md-dialog-content>

@@ -90,11 +90,29 @@ var hashtags = [
   ];
 
 var milestones = [
-    "find location",
-    "get founding",
-    "define project goal",
-    "find contributors",
-    "find business partners"
+        {
+				name: "find location", 
+				extratime: 0,
+				icon: '' 
+		},     {
+				name: "get founding", 
+				extratime: 0,
+				icon: '' 
+		},     {
+				name: "define project goal", 
+				extratime: 0,
+				icon: '' 
+		},     {
+				name: "find contributors", 
+				extratime: 0,
+				icon: '' 
+		},     {
+				name:  "find business partners", 
+				extratime: 0,
+				icon: '' 
+		}
+    
+
 ];
 
 var users = [

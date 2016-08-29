@@ -3,8 +3,12 @@
         <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding>
             <h2>Your Milestones:</h2>
             <div>
-                <md-button class="md-raised md-accent" ng-repeat="milestone in milestones" ng-click="setSelectedMilestones(milestones, true);" style="font-size:24px; margin-bottom:5px;">{{milestone}}
-                    <ng-md-icon icon="close"></ng-md-icon>
+                
+                <md-button class="md-raised md-accent" ng-repeat="milestone in milestones"  style="font-size:24px; margin-bottom:5px;">
+                    <md-checkbox ng-model="milestone.percentage" class="md-primary" aria-label="milestone.name">
+                    {{milestone.name}}
+                </md-checkbox>
+                    <ng-md-icon icon="close" ng-click="setSelectedMilestones(milestones.name, true, milestones.extratime, milestones.icon);"></ng-md-icon>
                 </md-button>
             </div>
             <span flex></span>
@@ -29,8 +33,8 @@
                 <md-button ng-disabled="milestoneForm.newMilestone.$invalid" class=" md-raised md-primary" ng-click="addNewMilestone()">+</md-button>
             </div>
             <div class="masonry-layout-milestone">
-                <div layout="row" ng-repeat="name in milestoneList | orderBy:''" class="item">
-                    <md-button data-ng-class="{'md-accent' : statusMilestoneSelected(name)}" ng-click="setSelectedMilestones( name, statusMilestoneSelected( name))">{{name}}</md-button>
+                <div layout="row" ng-repeat="item in milestoneList | orderBy:'name'" class="item">
+                    <md-button data-ng-class="{'md-accent' : statusMilestoneSelected(item.name)}" ng-click="setSelectedMilestones( item.name, statusMilestoneSelected( item.name), item.extratime, item.icon)">{{item.name}}</md-button>
                 </div>
 
         </md-dialog-content>
