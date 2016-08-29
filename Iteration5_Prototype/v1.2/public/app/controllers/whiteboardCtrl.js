@@ -410,6 +410,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     }
 
 
+
     $scope.updateContributors = function() {
         //Todo hier $scope.contributors in die gespeicherte Idee updaten an den server
     }
@@ -425,8 +426,12 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
     }
     $scope.updateHashtags = function() {
+
         //Todo hier $scope.hashtags $scope.title in die gespeicherte Idee updaten an den server
 
+    }
+    $scope.updatePrivacyStatus = function () {
+        //Todo hier $scope.selectedPrivacyType  in die gespeicherte Idee updaten an den server
     }
 
 
@@ -446,54 +451,61 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         console.log("local data: ");
         console.log(user);
         console.log(idea);
-        console.log("respond data: ");
         ideaService.saveNewIdea(idea, user);
 
-    }
-
-
-function SaveDialogController($scope, $mdDialog, authentication) {
-    $scope.credentials = {
-        email: "",
-        password: ""
     };
-    $scope.placeholderTitle = "aktuells daum und Uhrzeit";
-    $scope.title = "";
-    $scope.hide = function () {
-        $mdDialog.hide();
+
+
+    $scope.privacyTypesList = ["Only me & contributors", "Everyone", "Customer"];
+    $scope.selectedPrivacyType = $scope.privacyTypesList[0];
+    $scope.changeSortingType = function (index) {
+        $scope.selectedPrivacyType = index;
+        $scope.updatePrivacyStatus();
     };
-    $scope.cancel = function () {
-        $mdDialog.cancel();
+
+
+    function SaveDialogController($scope, $mdDialog, authentication) {
+        $scope.credentials = {
+            email: "",
+            password: ""
+        };
+        $scope.placeholderTitle = "aktuells daum und Uhrzeit";
+        $scope.title = "";
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+        $scope.save = function () {
+
+            if(authentication.isLoggedIn()){
+                //Save new idea
+                $scope.saveNewIdea();
+                console.log("test");
+                $scope.cancel();
+            } else {
+                alert("Pleas log in first.");
+            }
+
+            // if ($scope.isLoggedIn) {
+            //     authentication
+            //         .login($scope.credentials)
+            //         .then(function () {
+            //             $scope.cancel();
+            //             $scope.setSignInStatus();
+            //             $scope.updateDescription();
+            //             $scope.updateAuthor();
+            //         });
+            // } else {
+            //     $scope.cancel();
+
+            //     $scope.updateDescription();
+            //     $scope.updateAuthor();
+            // }
+
+        };
     };
-    $scope.save = function () {
-
-        if(authentication.isLoggedIn()){
-            //Save new idea
-            $scope.saveNewIdea();
-            console.log("test");
-            $scope.cancel();
-        } else {
-            alert("Pleas log in first.");
-        }
-
-        // if ($scope.isLoggedIn) {
-        //     authentication
-        //         .login($scope.credentials)
-        //         .then(function () {
-        //             $scope.cancel();
-        //             $scope.setSignInStatus();
-        //             $scope.updateDescription();
-        //             $scope.updateAuthor();
-        //         });
-        // } else {
-        //     $scope.cancel();
-
-        //     $scope.updateDescription();
-        //     $scope.updateAuthor();
-        // }
-
-    };
-}
 
 });
 
