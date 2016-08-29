@@ -9,13 +9,12 @@ var Comment = require('../models/comment.model.js');
 var Idea = require('../models/idea.model.js');
 var Person = require('../models/users.model.js');
 var Scibble = require('../models/scibble.model.js');
-var User = mongoose.model('User');
 
 
 module.exports.saveNewIdea = function(req, res) {
 
 	console.log("test save idea");
-	console.log(req.body);
+	console.log(req.body.idea);
 
   if(!req.body.user.id || !req.body.idea) {
     console.log("idea was not saved because of incomplete data");
@@ -106,11 +105,13 @@ module.exports.saveNewIdea = function(req, res) {
 		
 	});
 
+
 };
 
 
 module.exports.updateIdea = function(req, res) {
 
+	console.log(req.body);
 
 	res.status(200);
     res.json({

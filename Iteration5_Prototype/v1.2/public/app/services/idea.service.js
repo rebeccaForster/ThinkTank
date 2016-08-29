@@ -20,10 +20,17 @@
             idea: idea,
             user: user
         }
+        console.log(data);
+        // return $http.post('/api/ideaData/saveNewIdea', data)
+        //         .success(function (data) {
+        //             console.log(data)
+        //         });
+
         return $http.post('/api/ideaData/saveNewIdea', data)
-                .success(function (data) {
+                .then(function (data) {
                     console.log(data)
-                });
+        });
+
     };
 
      var updateIdea = function(idea, user) {

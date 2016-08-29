@@ -448,9 +448,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             scribble: $scope.drawingboardRemote.toDataURL('image/png')
         };
 
-        console.log("local data: ");
-        console.log(user);
-        console.log(idea);
         ideaService.saveNewIdea(idea, user);
 
     };
@@ -482,7 +479,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             if(authentication.isLoggedIn()){
                 //Save new idea
                 $scope.saveNewIdea();
-                console.log("test");
                 $scope.cancel();
             } else {
                 alert("Pleas log in first.");
