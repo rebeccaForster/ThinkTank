@@ -408,25 +408,37 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     }
 
 
-    $scope.updateContributors() {
+    $scope.updateContributors = function () {
         //Todo hier $scope.contributors in die gespeicherte Idee updaten an den server
     }
-    $scope.updateAuthor() {
+    $scope.updateAuthor = function () {
         //Todo die registrierte Person als author der Idee registrieren und in die contributor liste hinzufügen plus updaten
     }
-    $scope.updateMilestones() {
+    $scope.updateMilestones = function () {
         //Todo hier $scope.milestones in die gespeicherte Idee updaten an den server
 
     }
-    $scope.updateDescription() {
+    $scope.updateDescription = function () {
         //Todo hier $scope.desciption $scope.title in die gespeicherte Idee updaten an den server
 
     }
-    $scope.updateHashtags() {
+    $scope.updateHashtags = function () {
         //Todo hier $scope.hashtags $scope.title in die gespeicherte Idee updaten an den server
 
     }
+    $scope.updatePrivacyStatus = function () {
+        //Todo hier $scope.selectedPrivacyType  in die gespeicherte Idee updaten an den server
 
+    }
+
+
+    $scope.privacyTypesList = ["Only me & contributors", "Everyone", "Customer"];
+    $scope.selectedPrivacyType = $scope.privacyTypesList[0];
+    $scope.changeSortingType = function (index) {
+        $scope.selectedPrivacyType = index;
+        $scope.updatePrivacyStatus();
+
+    }
 });
 
 function SaveDialogController($scope, $mdDialog, authentication) {
