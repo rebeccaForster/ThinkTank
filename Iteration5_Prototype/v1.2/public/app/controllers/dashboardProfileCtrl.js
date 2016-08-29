@@ -43,7 +43,18 @@ angular
             });
     }
  
+     $scope.calculateIdeaLeftDays = function(date){
+        var currentDate = new Date();
+         currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0);
+         
+         var dateParts = date.split(".");
 
+         var createdDate = new Date(dateParts[2], (dateParts[1] - 1), dateParts[0], 0, 0, 0);
+         var days = (currentDate - createdDate)/(1000*60*60*24); // subtraiktion sind ms und umrechnen in tage
+         return days ;
+         
+     
+     }
 	$scope.maxColumn = 3;
     $scope.maxProfileColumn = 2;
 

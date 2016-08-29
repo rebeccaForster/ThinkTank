@@ -15,7 +15,9 @@
                         <span class="md-display-2">{{selectedIdea.title}}</span>
                     </div>
                     <div>
-                        <span class="md-display-1">Date: ....</span>
+                        <span class="md-display-1">Date:{{selectedIdea.created}}</span>
+                        <span class="md-display-1">Last Change:{{selectedIdea.lastchanged}}</span>
+
                     </div>
                 </div>
                 <div flex></div>
@@ -27,17 +29,18 @@
 
         </md-toolbar>
 
-        <div class="container">
+        <div class="container" ng-init="dayLeft = calculateIdeaLeftDays(selectedIdea.created)">
             <div class="header-background-circle md-display-1" layout="column">
                 <div flex></div>
-                <div>{{selectedIdea.dayLeft}}d</div>
+                <div>{{dayLeft}}d</div>
                 <div>/</div>
-                <div>{{selectedIdea.dayMax}}d</div>
+                <div>{{selectedIdea.livetime}}d</div>
                 <div flex></div>
             </div>
             <div class="header-progress">
                 <round-progress max="100" current="100" color="#fafafa" bgcolor="#fafafa" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
-                    <round-progress max="selectedIdea.dayMax" current="selectedIdea.dayLeft" color="#45ccce" bgcolor="gainsboro" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="true" duration="800" animation="easeOutCubic" offset="inherit" animation-delay="0" on-render="showPreciseCurrent">
+                    <!-- current muss noch berechnet werden-->
+                    <round-progress max="selectedIdea.livetime" current="dayLeft" color="#45ccce" bgcolor="gainsboro" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="true" duration="800" animation="easeOutCubic" offset="inherit" animation-delay="0" on-render="showPreciseCurrent">
 
 
                     </round-progress>
@@ -61,7 +64,7 @@
                                     <img class="md-user-avatar" src={{users[selectedIdea.author].profileImg}} />
                                 </md-card-avatar>
                                 <md-card-header-text>
-                                    <span class="md-title">{{users[selectedIdea.author].name}}</span>
+                                    <span class="md-title">{{users[selectedIdea.author].firstname}} {{users[selectedIdea.author].name}}</span>
                                     <span class="md-subhead ">author</span>
                                 </md-card-header-text>
                             </md-card-header>
@@ -72,7 +75,7 @@
                                     <img class="md-user-avatar" src={{users[contributor].profileImg}} />
                                 </md-card-avatar>
                                 <md-card-header-text>
-                                    <span class="md-title">{{users[contributor].name}}</span>
+                                    <span class="md-title">{{users[contributor].firstname}} {{users[contributor].name}}</span>
                                     <span class="md-subhead">contributor</span>
                                 </md-card-header-text>
                             </md-card-header>
@@ -82,7 +85,9 @@
                 </div>
                 <div>
                     <div class="md-display-1" style="font-weight:bold;">Whiteboard Scribble</div>
-                    <img src={{selectedIdea.scribble}} ng-show="{{selectedIdea.scribble.length}} > 0" class="content-image">
+                    <div ng-repeat="scrib in selectedIdea.scribble">
+                    <img src={{scrib}} class="content-image">
+                        </div>
                     <div class="md-headline" ng-show="{{selectedIdea.scribble.length}} <= 0">No Scribble available!</div>
                 </div>
                 <div>
@@ -91,7 +96,7 @@
                 </div>
 
                 <div>
-                    <div class="md-display-1" style="font-weight:bold;">Milsteonstes</div>
+                    <div class="md-display-1" style="font-weight:bold;">Milestones</div>
                     <div>
                         <md-checkbox class="md-display-1" ng-repeat="milestone in selectedIdea.milestones" ng-model="milestone.status" aria-label="milestone.name" ng-disabled="true">
                             {{milestone.name}}

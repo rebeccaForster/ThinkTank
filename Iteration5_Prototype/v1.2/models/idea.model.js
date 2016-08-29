@@ -17,8 +17,21 @@ var IdeaSchema = new mongoose.Schema({
 				icon: String 
 		}] , 
 		tags: [String], //plane text tags
-		livetime: Number,  //seconds of total live time. 
+		livetime: Number,  //days of total live time. 
 		scribbles: [String] // list of scribble object IDs
+		// Todo: (Rebecca) was hier noch fehlt sind die Nachrichten
+		/*
+		  messages: [
+
+            {
+                author: mongoose.Schema.Types.ObjectId,
+                text: String,
+                likeIdeaStatus: boolean,
+                newInputStatus: boolean,
+                troubleStatus: boolean,
+                other: boolean
+            }
+		*/
 	}, 
     { collection : 'ideas' }
 );

@@ -118,142 +118,85 @@ var milestones = [
 var users = [
     {
         id: 0,
-        name: "Marius Mülle0",
+        name: "Mülle0",
+        firstname: 'Marius',
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
         tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 6, 3, 2]
-
+    
+        followedideas: [0],
+        followedpersons: [1]
         }, {
         id: 1,
-        name: "Marius Mülle1",
+        name: "Mülle1",
+        firstname: 'Marius',
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
         tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 6, 3, 2]
+    
+        followedideas: [0],
+        followedpersons: [0]
         }, {
         id: 2,
-        name: "Marius Mülle2",
+        name: "Mülle2",
+        firstname: 'Marius',
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
         tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 4, 3, 2]
+    
+        followedideas: [0],
+        followedpersons: [0]
         }, {
         id: 3,
-        name: "Marius Mülle3",
+        name: "Mülle3",
+        firstname: 'Marius',
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
         tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 5, 3, 2]
+    
+        followedideas: [0],
+        followedpersons: [0]
         }, {
         id: 4,
-        name: "Marius Mülle4",
+        name: "Mülle4",
+        firstname: 'Marius',
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
         tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 6, 3, 2]
+    
+        followedideas: [0],
+        followedpersons: [0]
         }, {
         id: 5,
-        name: "Marius Mülle5",
+        name: "Mülle5",
+        firstname: 'Marius',
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
         tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 2]
+    
+        followedideas: [0],
+        followedpersons: [0]
         }, {
         id: 6,
-        name: "Marius Mülle6",
+        name: "Mülle6",
+        firstname: 'Marius',
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
         tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 5, 3, 2]
+    
+        followedideas: [0],
+        followedpersons: [0]
         }, {
         id: 7,
-        name: "Marius Mülle7",
+        name: "Mülle7",
+        firstname: 'Marius',
         profileImg: "app/img/user.jpg",
         url: "https://www.lfe.mw.tum.de/author/bengler/",
         tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
-        groups: [
-            {
-                name: "ergonomics",
-                owner: true
-                },
-            {
-                name: "automotive driving",
-                owner: false
-                }
-            ],
-        ideas: [1, 5, 3, 2]
-        }
+    
+        followedideas: [0],
+        followedpersons: [0]
+        },
     ];
 
 
