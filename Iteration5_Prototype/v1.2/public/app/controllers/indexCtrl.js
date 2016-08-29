@@ -64,26 +64,23 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         return (0 == $scope.selectedItem) || !$mdMedia('gt-md') ;
     }
 
-    $scope.userTum = {
-        name: "TUM LfE",
-        profileImg: "app/img/user.jpg",
-    };
+  
     $scope.menu = $scope.menuNonAuth;
 
     $scope.isLoggedIn = !authentication.isLoggedIn();
-    $scope.user = $scope.userTum;
+    $scope.user =authentication.currentUser();
     
     $scope.setSignInStatus = function () {
         $scope.isLoggedIn = !authentication.isLoggedIn();
         if (!$scope.isLoggedIn) {
             $scope.menu = $scope.menuAuth;
-            $scope.user = authentication.currentUser();
+           
             console.log($scope.user);
 
         } else {
             $scope.menu = $scope.menuNonAuth;
-            $scope.user = $scope.userTum;
         }
+         $scope.user = authentication.currentUser();
     }
 
     $scope.setSignInStatus();

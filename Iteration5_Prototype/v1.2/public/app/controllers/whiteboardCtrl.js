@@ -38,6 +38,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
         }
     }
+    $scope.author = authentication.currentUser();
     $scope.desciption = "";
     $scope.milestones = [];
     $scope.milestoneList = [];
@@ -412,6 +413,9 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         //Todo hier $scope.contributors in die gespeicherte Idee updaten an den server
     }
     $scope.updateAuthor = function () {
+        
+        $scope.author = authentication.currentUser();
+        
         //Todo die registrierte Person als author der Idee registrieren und in die contributor liste hinzufügen plus updaten
     }
     $scope.updateMilestones = function () {

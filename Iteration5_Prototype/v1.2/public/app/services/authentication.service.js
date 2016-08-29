@@ -53,20 +53,32 @@
                     title: payload.title,
                     profileImg: payload.profileImg, //"app/img/user.jpg",
                     url: payload.url //,
-                    // tags: ["ergonomics", "test", "hashtag"],
-                    // groups: [
-                    //     {
-                    //         name: "ergonomics",
-                    //         owner: true
-                    //     },
-                    //     {
-                    //         name: "automotive driving",
-                    //         owner: false
-                    //     }
-                    // ],
-                    // ideas: [1, 5, 3, 2]
+                        // tags: ["ergonomics", "test", "hashtag"],
+                        // groups: [
+                        //     {
+                        //         name: "ergonomics",
+                        //         owner: true
+                        //     },
+                        //     {
+                        //         name: "automotive driving",
+                        //         owner: false
+                        //     }
+                        // ],
+                        // ideas: [1, 5, 3, 2]
                 };
             }
+            // send default value
+            return {
+                email: '',
+                name: "TUM LfE",
+                firstname: '',
+                id: '',
+                title: '',
+                profileImg: "app/img/user.jpg", //"app/img/user.jpg",
+                url: ''
+            }
+
+
         };
 
         register = function (user) {
