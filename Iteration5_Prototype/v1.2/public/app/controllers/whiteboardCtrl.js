@@ -1,5 +1,5 @@
 'use strict';
-app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window) {
+app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService) {
     $scope.saveScribble = function (ev) {
         $mdDialog.show({
                 controller: SaveDialogController,
@@ -21,6 +21,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 return true;
             });
     };
+
+
     $scope.contributors = [];
     $scope.contributorsList = [];
     indexData
@@ -408,33 +410,54 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     }
 
 
-    $scope.updateContributors() {
+    $scope.updateContributors = function() {
         //Todo hier $scope.contributors in die gespeicherte Idee updaten an den server
     }
-    $scope.updateAuthor() {
+    $scope.updateAuthor = function() {
         //Todo die registrierte Person als author der Idee registrieren und in die contributor liste hinzufügen plus updaten
     }
-    $scope.updateMilestones() {
+    $scope.updateMilestones = function() {
         //Todo hier $scope.milestones in die gespeicherte Idee updaten an den server
 
     }
-    $scope.updateDescription() {
+    $scope.updateDescription = function() {
         //Todo hier $scope.desciption $scope.title in die gespeicherte Idee updaten an den server
 
     }
-    $scope.updateHashtags() {
+    $scope.updateHashtags = function() {
         //Todo hier $scope.hashtags $scope.title in die gespeicherte Idee updaten an den server
 
     }
 
-});
+
+
+    //Save New Idea serverside 
+    $scope.saveNewIdea = function() {
+        var user = authentication.currentUser();
+        var idea = {
+            title: $scope.title,
+            description: $scope.desciption,
+            contributors: $scope.contributors,
+            milestones: $scope.milestones,
+            tags: $scope.hashtags,
+            scribble: $scope.drawingboardRemote.toDataURL('image/png')
+        };
+
+        console.log("local data: ");
+        console.log(user);
+        console.log(idea);
+        console.log("respond data: ");
+        ideaService.saveNewIdea(idea, user);
+
+    }
+
 
 function SaveDialogController($scope, $mdDialog, authentication) {
     $scope.credentials = {
         email: "",
         password: ""
     };
-    $scope.placeholderTitle = "aktuells daum udn Uhrzeit";
+    $scope.placeholderTitle = "aktuells daum und Uhrzeit";
     $scope.title = "";
     $scope.hide = function () {
         $mdDialog.hide();
@@ -443,24 +466,36 @@ function SaveDialogController($scope, $mdDialog, authentication) {
         $mdDialog.cancel();
     };
     $scope.save = function () {
-        if ($scope.isLoggedIn) {
-            authentication
-                .login($scope.credentials)
-                .then(function () {
-                    $scope.cancel();
-                    $scope.setSignInStatus();
-                    $scope.updateDescription();
-                    $scope.updateAuthor();
-                });
-        } else {
-            $scope.cancel();
 
-            $scope.updateDescription();
-            $scope.updateAuthor();
+        if(authentication.isLoggedIn()){
+            //Save new idea
+            $scope.saveNewIdea();
+            console.log("test");
+            $scope.cancel();
+        } else {
+            alert("Pleas log in first.");
         }
+
+        // if ($scope.isLoggedIn) {
+        //     authentication
+        //         .login($scope.credentials)
+        //         .then(function () {
+        //             $scope.cancel();
+        //             $scope.setSignInStatus();
+        //             $scope.updateDescription();
+        //             $scope.updateAuthor();
+        //         });
+        // } else {
+        //     $scope.cancel();
+
+        //     $scope.updateDescription();
+        //     $scope.updateAuthor();
+        // }
 
     };
 }
+
+});
 
 
 function PopupController($scope, $mdDialog) {

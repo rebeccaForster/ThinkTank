@@ -1,19 +1,55 @@
 //idea.route 
 
 var express = require('express');
-var router = express.Router();
-
 var mongoose = require('mongoose');
-var Comment = require('../models/comment.model.js');
 var Idea = require('../models/idea.model.js');
-var Person = require('../models/users.model.js');
-var Scibble = require('../models/scibble.model.js');
+var router = express.Router();
+var ideaControler = require('../controllers/ideaControler');
 
-var idea = {};
 
-router.get('/:id', function (req, res, next) {
-    res.json(idea);
+router.get('/getAllIeas', function (req, res, next) {
+    
+	Idea.find({}, function(err, ideas) {
+
+		if (err) return handleError(err);
+
+		res.status(200);
+		res.json(ideas);
+	})
+    
 });
+
+router.get('/getAllIdeasSorted/:sorting', function (req, res, next) {
+    
+    var options = {
+	    "sort": req.params.sorting
+	}
+	//todo: send error if nothing was found
+
+	var ideas = Idea.find( {}, options);
+
+	res.status(200);
+	res.json(ideas);
+});
+
+router.get('/getIdea/:id', function (req, res, next) {
+
+    var ideas = Idea.find( { _id: req.params.id });
+	console.log(ideas);
+	//todo: send error if nothing was found
+
+	res.status(200);
+	res.json(ideas);
+});
+
+router.get('/searchIdea/:term', function (req, res, next) {
+    var ideas = [{}];
+    res.json(ideas);
+});
+
+
+router.post('/saveNewIdea', ideaControler.saveNewIdea);
+router.post('/updateIdea', ideaControler.updateIdea);
 
 
 module.exports = router;
