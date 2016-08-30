@@ -17,17 +17,18 @@
         return $http.post('/api/ideaData/saveNewIdea', data)
                 .then(function (data) {
                     console.log(data)
+                    return data;
         });
 
     };
 
     var getIdea = function(id) {
       var a = "/api/ideaData/getIdea/";
-        $http.get(a.concat(id)).then(function (response) {
+       return $http.get(a.concat(id)).then(function (response) {
           var idea = response.data;
           console.log(idea);
+            return idea;
         });
-        return $q.when(idea);
      };
 
      var updateIdea = function(idea, user) {
@@ -40,6 +41,7 @@
         return $http.post('/api/ideaData/saveNewIdea', whiteboard)
                 .success(function (data) {
                     console.log(data)
+                    return data;
                 });
     };
 
@@ -53,6 +55,7 @@
         return $http.post('/api/ideaData/writeComment', whiteboard)
                 .success(function (data) {
                     console.log(data)
+                    return data;
                 });
     };
 
