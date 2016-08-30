@@ -33,7 +33,7 @@ router.get('/getAllUsers', function (req, res, next) {
 router.get('/getUser/:id', function (req, res, next) {
 
 	console.log("getUser triggerd");
-	User.find({ 
+	User.findOne({ 
 				_id: req.params.id 
 			}, { 
 				_id : 1,
@@ -51,10 +51,14 @@ router.get('/getUser/:id', function (req, res, next) {
 			}, 
 				function(err, user) {
 
-		if (err) return console.log(err);
-
-		res.status(200);
-		res.json(user);
+		if (err) {
+			console.log(err);
+			res.status(400);
+			res.json(err);
+		} else {
+			res.status(200);
+			res.json(user);
+		}
 	})
 
 });

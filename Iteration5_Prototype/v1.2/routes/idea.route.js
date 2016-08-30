@@ -23,12 +23,16 @@ router.get('/getIdea/:id', function (req, res, next) {
 
 	console.log("getIdea triggerd");
 
-	Idea.find({ _id: req.params.id }, function(err, ideas) {
+	Idea.findOne({ _id: req.params.id }, function(err, idea) {
 
-		if (err) return handleError(err);
-
-		res.status(200);
-		res.json(ideas);
+		if (err) {
+			console.log(err);
+			res.status(400);
+			res.json(err);
+		} else {
+			res.status(200);
+			res.json(idea);
+		}
 	})
 
 });
