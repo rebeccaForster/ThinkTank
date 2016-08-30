@@ -1,25 +1,32 @@
 'use strict';
 app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService, $stateParams) {
     $scope.saveScribble = function (ev) {
-        $mdDialog.show({
-                controller: SaveDialogController,
-                templateUrl: 'app/views/whiteboard-save-popup.html',
-                targetEvent: ev,
-                scope: $scope, // use parent scope in template
-                preserveScope: true,
-                clickOutsideToClose: true,
-                fullscreen: true,
-                locals: {
-                    authentication: authentication
 
-                }
+        if ($scope.ideaId == -1) {
 
-            })
-            .then(function () {
-                return true;
-            }, function () {
-                return true;
-            });
+            $mdDialog.show({
+                    controller: SaveDialogController,
+                    templateUrl: 'app/views/whiteboard-save-popup.html',
+                    targetEvent: ev,
+                    scope: $scope, // use parent scope in template
+                    preserveScope: true,
+                    clickOutsideToClose: true,
+                    fullscreen: true,
+                    locals: {
+                        authentication: authentication
+
+                    }
+
+                })
+                .then(function () {
+                    return true;
+                }, function () {
+                    return true;
+                });
+        } else {
+            $scope.updateIdea();
+        }
+
     };
 
 
@@ -42,11 +49,11 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     }
     $scope.author = '';
     $scope.desciption = "";
-    $scope.milestones = [] ;
+    $scope.milestones = [];
     $scope.milestoneList = [];
     $scope.ideaLifeTime = 30;
     $scope.ideaDayLeft = 0;
-    
+
     indexData
         .loadAllMilestones()
         .then(function (res) {
@@ -55,11 +62,11 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
     $scope.setSelectedMilestones = function (name, status, extratime, icon) {
         var milestoneDefault = {
-				name: name, 
-				extratime: extratime,
-				percentage: 0,
-				icon: icon 
-		};
+            name: name,
+            extratime: extratime,
+            percentage: 0,
+            icon: icon
+        };
         if (!status) {
             $scope.milestones.push(milestoneDefault);
         } else {
@@ -296,8 +303,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.addHashtag = '';
     $scope.addNewHastag = function () {
 
-        // todo: add new hashtag to the list hastag list $scope.addHashtag
-        // wenn das zu der Liste hinzugefügt wurde, muss auch nochmal die liste geupdatet werdne aktuell mache ich es nur lokal, dass kann dann gelöscht werden
         var dummyNewHashtag = {
             name: $scope.addHashtag,
             priority: 0 // 0 ist default wert, wenn er neu initalisiert wird
@@ -323,7 +328,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 locals: {}
             })
             .then(function () {}, function () {
-                $scope.updateHashtags();
+                $scope.updateIdea();
             });
     }
 
@@ -339,7 +344,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 locals: {}
             })
             .then(function () {}, function () {
-                $scope.updateDescription();
+                $scope.updateIdea();
             });
     }
 
@@ -352,18 +357,15 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
     $scope.addMilestone = '';
     $scope.addNewMilestone = function () {
+        var milestoneDefault = {
+            name: $scope.addMilestone,
+            extratime: 0,
+            icon: ''
+        };
 
-        // todo: add new milestone to the list hastag list $scope.addMilestone
-        // wenn das zu der Liste hinzugefügt wurde, muss auch nochmal die liste geupdatet werdne aktuell mache ich es nur lokal, dass kann dann gelöscht werden
-         var milestoneDefault = {
-				name: $scope.addMilestone, 
-				extratime: 0,
-				icon: '' 
-		};
-        
         $scope.milestoneList.push(milestoneDefault);
 
-        $scope.setSelectedMilestones($scope.addMilestone,false, 0, '');
+        $scope.setSelectedMilestones($scope.addMilestone, false, 0, '');
         $scope.addMilestone = '';
 
         $scope.milestoneForm.$setPristine();
@@ -382,7 +384,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 locals: {}
             })
             .then(function () {}, function () {
-                $scope.updateMilestones();
+                $scope.updateIdea();
             });
     }
 
@@ -409,7 +411,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 locals: {}
             })
             .then(function () {}, function () {
-                $scope.updateContributors();
+                $scope.updateIdea();
             });
     }
 
@@ -425,51 +427,48 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
 
 
-    $scope.updateContributors = function() {
-        //Todo hier $scope.contributors in die gespeicherte Idee updaten an den server
-    }
 
-    $scope.updateAuthor = function() {
-
-        //Todo die registrierte Person als author der Idee registrieren und in die contributor liste hinzufügen plus updaten
-    }
-    $scope.updateMilestones = function() {
-        //Todo hier $scope.milestones in die gespeicherte Idee updaten an den server
-
-    }
-
-    $scope.updateDescription = function() {
-        //Todo hier $scope.desciption $scope.title in die gespeicherte Idee updaten an den server
-
-    }
-    
-    $scope.updateHashtags = function() {
-
-        //Todo hier $scope.hashtags $scope.title in die gespeicherte Idee updaten an den server
-
-    }
-    $scope.updatePrivacyStatus = function () {
-        //Todo hier $scope.selectedPrivacyType  in die gespeicherte Idee updaten an den server
-    }
-
-    
     $scope.ideaId = $stateParams.ideaId || '-1';
-     console.log($scope.ideaId);
-    
-    $scope.loadIdea = function (idea, edit) {
+    console.log($scope.ideaId);
+    this.getIdea = function (id) {
         //Todo diese Funktion muss alle Privacy, desciption, milesotnes, hashtags, contirbutors, whiteboard image Daten laden, 
         //Sie wird aufgerufen, wenn man auf dem Popup Idea aufs whiteboard klickt 
         // wenn man contributor ist bzw. die Idee bearbeiten möchte, ist edit true
         // Wie man die Funktion genau aufruft, weiß ich noch nicht, darüber muss ich mir noch gedanken machen
+        if( $scope.ideaId == -1){
+            $scope.clear();
+            
+        }
+        else{
+            //todo get idea und fülle die arrays 
+            //und überprüfe ob die person eingeloggt ist oder nicht und dementsprehcend bearbeiten ja oder nein
+        }
+    };
+    $scope.loadIdea = $scope.getIdea($scope.ideaId);
 
-        //Frederic: die Idee bekommst du aus ideaService.getIdea(id) oder so, das baue ich gleich
-        //edit bekommt man wenn man unter idea.contributors schaut ob da die currentUser.id drin ist, das müsste man hier in der Funktion kontrollieren
-        console.log($scope.ideaId);
+    $scope.updateIdea = function () {
+
+        console.log("update idea");
+
+        var user = authentication.currentUser();
+        var idea = {
+            _id: $scope.ideaId,
+            title: $scope.title,
+            description: $scope.desciption,
+            contributors: $scope.contributors,
+            milestones: $scope.milestones,
+            tags: $scope.hashtags,
+            scribble: $scope.drawingboardRemote.toDataURL('image/png')
+        };
+
+        ideaService.updateIdea(idea, user);
+
     }
 
 
     //Save New Idea serverside 
-    $scope.saveNewIdea = function() {
+    $scope.saveNewIdea = function () {
+        console.log("save new idea");
         var user = authentication.currentUser();
         var idea = {
             title: $scope.title,
@@ -480,7 +479,14 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             scribble: $scope.drawingboardRemote.toDataURL('image/png')
         };
 
-        ideaService.saveNewIdea(idea, user);
+        ideaService
+            .saveNewIdea(idea, user)
+            .then(function (res) {
+
+                $scope.ideaId = res;
+
+
+            });
 
     };
 
@@ -507,9 +513,12 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         };
         $scope.save = function () {
 
-            if(authentication.isLoggedIn()){
-                //Save new idea
+            if (authentication.isLoggedIn()) {
+
                 $scope.saveNewIdea();
+
+                $scope.updateIdea();
+
                 $scope.cancel();
             } else {
                 alert("Pleas log in first.");

@@ -12,12 +12,10 @@
             idea: idea,
             user: user
         }
-        console.log(data);
-
         return $http.post('/api/ideaData/saveNewIdea', data)
                 .then(function (data) {
-                    console.log(data)
-                    return data;
+                    console.log(data.data.id);
+                    return data.data.id;
         });
 
     };
