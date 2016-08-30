@@ -12,7 +12,7 @@ var Person = require('../models/users.model.js');
 
 module.exports.saveNewIdea = function(req, res) {
 
-	console.log("test save idea");
+	console.log("save idea triggerd");
 	console.log(req.body.idea);
 
   if(!req.body.user.id || !req.body.idea) {
@@ -108,13 +108,44 @@ module.exports.saveNewIdea = function(req, res) {
 };
 
 
-module.exports.updateIdea = function(req, res) {
+module.exports.writeComment = function(req, res) {
 
-	console.log(req.body);
+	console.log("save idea triggerd");
+	console.log(req.body.comment);
 
-	res.status(200);
-    res.json({
-      "status" : "not done jet"
+  if(!req.body.user.id || !req.body.comment || !req.body.ideaId || !req.body.comment.text) {
+    console.log("comment was not saved because of incomplete data");
+    sendJSONresponse(res, 400, {
+      "message": "comment was not saved because of incomplete data"
     });
+    return;
+  }
+
+	var comment = new Comment();
+
+	comment.user = req.body.user.id;
+	comment.reaction = req.body.comment.reaction;
+	comment.text = req.body.comment.text;
+	comment.idea = req.body.ideaId;
+	comment.created = Date.now();
+	
+	console.log(comment);
+
+	comment.save(function(err, doc) {
+
+		if (err) {
+			console.log("error: ");
+			console.log(err);
+			res.status(400);
+			res.json(err);
+		} else {
+			console.log("Idea saved: ");
+			console.log(room._id);
+
+			res.status(200);
+			res.json(doc);
+		}
+		
+	});
 
 };
