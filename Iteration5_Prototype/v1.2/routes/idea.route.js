@@ -19,6 +19,20 @@ router.get('/getAllIeas', function (req, res, next) {
     
 });
 
+router.get('/getIdea/:id', function (req, res, next) {
+
+	console.log("getIdea triggerd");
+
+	Idea.find({ _id: req.params.id }, function(err, ideas) {
+
+		if (err) return handleError(err);
+
+		res.status(200);
+		res.json(ideas);
+	})
+
+});
+
 router.get('/getAllIdeasSorted/:sorting', function (req, res, next) {
     
     var options = {
@@ -32,15 +46,6 @@ router.get('/getAllIdeasSorted/:sorting', function (req, res, next) {
 	res.json(ideas);
 });
 
-router.get('/getIdea/:id', function (req, res, next) {
-
-    var ideas = Idea.find( { _id: req.params.id });
-	console.log(ideas);
-	//todo: send error if nothing was found
-
-	res.status(200);
-	res.json(ideas);
-});
 
 router.get('/searchIdea/:term', function (req, res, next) {
     var ideas = [{}];
