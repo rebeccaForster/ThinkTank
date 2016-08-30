@@ -58,14 +58,17 @@ var ideas = [
                 likeIdeaStatus: true,
                 newInputStatus: true,
                 troubleStatus: true,
-                other: false
+                other: false,
+                date: "25.5.2016"
             }, {
                 author: 7,
                 text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
                 likeIdeaStatus: true,
                 newInputStatus: false,
                 troubleStatus: true,
-                other: false
+                other: false,
+                date: "25.5.2016"
+
             },
             {
                 author: 1,
@@ -73,14 +76,18 @@ var ideas = [
                 likeIdeaStatus: false,
                 newInputStatus: false,
                 troubleStatus: true,
-                other: false
+                other: false,
+                date: "25.5.2016"
+
             }, {
                 author: 7,
                 text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
                 likeIdeaStatus: true,
                 newInputStatus: false,
                 troubleStatus: true,
-                other: false
+                other: false,
+                date: "25.5.2016"
+
             },
             {
                 author: 1,
@@ -88,14 +95,18 @@ var ideas = [
                 likeIdeaStatus: false,
                 newInputStatus: false,
                 troubleStatus: true,
-                other: false
+                other: false,
+                date: "25.5.2016"
+
             }, {
                 author: 7,
                 text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
                 likeIdeaStatus: true,
                 newInputStatus: false,
                 troubleStatus: true,
-                other: false
+                other: false,
+                date: "25.5.2016"
+
             },
             {
                 author: 1,
@@ -103,7 +114,9 @@ var ideas = [
                 likeIdeaStatus: false,
                 newInputStatus: false,
                 troubleStatus: true,
-                other: false
+                other: false,
+                date: "25.5.2016"
+
             }
 
             ]

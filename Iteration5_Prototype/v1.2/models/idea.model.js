@@ -29,7 +29,8 @@ var IdeaSchema = new mongoose.Schema({
                 likeIdeaStatus: boolean,
                 newInputStatus: boolean,
                 troubleStatus: boolean,
-                other: boolean
+                other: boolean,
+                date: String
             }
 		*/
 	}, 
