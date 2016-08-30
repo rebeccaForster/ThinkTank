@@ -1,7 +1,7 @@
 'use strict';
 angular
     .module('App')
-    .controller('DashboardProfileCtrl', function ($scope, dashService, profileService, indexData, $location, $mdDialog, $mdMedia, $timeout) {
+    .controller('DashboardProfileCtrl', function ($scope, dashService, profileService, ideaService, indexData, $location, $mdDialog, $mdMedia, $timeout) {
 
         $scope.ideas = {};
         $scope.users = [];
@@ -50,7 +50,7 @@ angular
 
 
         }
-     
+
         $scope.maxColumn = 3;
         $scope.maxProfileColumn = 2;
 
@@ -116,7 +116,16 @@ angular
                 .getUser(id)
                 .then(function (res) {
 
-                    return res;
+                    $scope.user = res; 
+                });
+
+        };
+        $scope.getIdea = function (id) {
+            ideaService
+                .getIdea(id)
+                .then(function (res) {
+
+                    $scope.selectedIdea = res;
                 });
 
         };
@@ -216,7 +225,7 @@ angular
             }
 
         };
-    
+
         $scope.sendComment = function () {
             if (!$scope.isLoggedIn) {
                 var test = false;
@@ -230,15 +239,8 @@ angular
 
 
 function IdeaPopupController($scope, $mdDialog, ideaIndex) {
-    //todo später ersetzen durch get idea
-    var i = 0;
-    while (i < $scope.ideas.length) {
-        if ($scope.ideas[i]._id == ideaIndex) {
-            $scope.selectedIdea = $scope.ideas[i];
-        }
-        i++;
-    }
 
+    $scope.getIdea(ideaIndex);
     $scope.hide = function () {
         $mdDialog.hide();
     };
@@ -248,8 +250,8 @@ function IdeaPopupController($scope, $mdDialog, ideaIndex) {
 
 }
 
-function ProfilePopupController($scope, $mdDialog, profileIndex) {
-    $scope.user = $scope.getUser(profileIndex);
+function ProfilePopupController($scope, $mdDialog, profileIndex, profileService) {
+    $scope.getUser(profileIndex);
 
     $scope.hide = function () {
         $mdDialog.hide();
