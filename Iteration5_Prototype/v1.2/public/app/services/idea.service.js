@@ -15,8 +15,40 @@
       });
     };
 
+    var saveNewIdea = function(idea, user) {
+        var data = {
+            idea: idea,
+            user: user
+        }
+        console.log(data);
+        // return $http.post('/api/ideaData/saveNewIdea', data)
+        //         .success(function (data) {
+        //             console.log(data)
+        //         });
+
+        return $http.post('/api/ideaData/saveNewIdea', data)
+                .then(function (data) {
+                    console.log(data)
+        });
+
+    };
+
+     var updateIdea = function(idea, user) {
+        var data = {
+            idea: idea,
+            user: user
+        }
+
+        return $http.post('/api/idea/new', whiteboard)
+                .success(function (data) {
+                    console.log(data)
+                });
+    };
+
     return {
-      getProfile : getProfile
+      getProfile : getProfile, 
+      saveNewIdea : saveNewIdea, 
+      updateIdea : updateIdea
     };
   }
 

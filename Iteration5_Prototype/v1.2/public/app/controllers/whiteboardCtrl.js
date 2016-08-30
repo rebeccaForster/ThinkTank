@@ -1,5 +1,5 @@
 'use strict';
-app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window) {
+app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService) {
     $scope.saveScribble = function (ev) {
         $mdDialog.show({
                 controller: SaveDialogController,
@@ -21,6 +21,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 return true;
             });
     };
+
+
     $scope.contributors = [];
     $scope.contributorsList = [];
     indexData
@@ -423,29 +425,32 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     }
 
 
-    $scope.updateContributors = function () {
+
+    $scope.updateContributors = function() {
         //Todo hier $scope.contributors in die gespeicherte Idee updaten an den server
     }
-    $scope.updateAuthor = function () {
 
+    $scope.updateAuthor = function() {
 
         //Todo die registrierte Person als author der Idee registrieren und in die contributor liste hinzufügen plus updaten
     }
-    $scope.updateMilestones = function () {
+    $scope.updateMilestones = function() {
         //Todo hier $scope.milestones in die gespeicherte Idee updaten an den server
 
     }
-    $scope.updateDescription = function () {
-        //Todo hier $scope.desciption $scope.title  $scope.ideaLifeTime in die gespeicherte Idee updaten an den server
+
+    $scope.updateDescription = function() {
+        //Todo hier $scope.desciption $scope.title in die gespeicherte Idee updaten an den server
 
     }
-    $scope.updateHashtags = function () {
+    
+    $scope.updateHashtags = function() {
+
         //Todo hier $scope.hashtags $scope.title in die gespeicherte Idee updaten an den server
 
     }
     $scope.updatePrivacyStatus = function () {
         //Todo hier $scope.selectedPrivacyType  in die gespeicherte Idee updaten an den server
-
     }
 
     $scope.loadIdea = function (idea, edit) {
@@ -453,51 +458,64 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         //Sie wird aufgerufen, wenn man auf dem Popup Idea aufs whiteboard klickt 
         // wenn man contributor ist bzw. die Idee bearbeiten möchte, ist edit true
         // Wie man die Funktion genau aufruft, weiß ich noch nicht, darüber muss ich mir noch gedanken machen
+
+        //Frederic: die Idee bekommst du aus ideaService.getIdea(id) oder so, das baue ich gleich
+        //edit bekommt man wenn man unter idea.contributors schaut ob da die currentUser.id drin ist, das müsste man hier in der Funktion kontrollieren
     }
+
+
+    //Save New Idea serverside 
+    $scope.saveNewIdea = function() {
+        var user = authentication.currentUser();
+        var idea = {
+            title: $scope.title,
+            description: $scope.desciption,
+            contributors: $scope.contributors,
+            milestones: $scope.milestones,
+            tags: $scope.hashtags,
+            scribble: $scope.drawingboardRemote.toDataURL('image/png')
+        };
+
+        ideaService.saveNewIdea(idea, user);
+
+    };
+
+
     $scope.privacyTypesList = ["Only me & contributors", "Everyone", "Customer"];
     $scope.selectedPrivacyType = $scope.privacyTypesList[0];
     $scope.changeSortingType = function (index) {
         $scope.selectedPrivacyType = index;
         $scope.updatePrivacyStatus();
+    };
 
-    }
+
+    function SaveDialogController($scope, $mdDialog, authentication) {
+        $scope.credentials = {
+            email: "",
+            password: ""
+        };
+        $scope.placeholderTitle = "aktuells daum und Uhrzeit";
+        $scope.title = "";
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+        $scope.save = function () {
+
+            if(authentication.isLoggedIn()){
+                //Save new idea
+                $scope.saveNewIdea();
+                $scope.cancel();
+            } else {
+                alert("Pleas log in first.");
+            }
+
+        };
+    };
+
 });
-
-function SaveDialogController($scope, $mdDialog, authentication) {
-    $scope.credentials = {
-        email: "",
-        password: ""
-    };
-    $scope.placeholderTitle = "aktuells daum udn Uhrzeit";
-    $scope.title = "";
-    $scope.hide = function () {
-        $mdDialog.hide();
-    };
-    $scope.cancel = function () {
-        $mdDialog.cancel();
-    };
-    $scope.save = function () {
-        $scope.author = authentication.currentUser();
-
-        if ($scope.isLoggedIn) {
-            authentication
-                .login($scope.credentials)
-                .then(function () {
-                    $scope.cancel();
-                    $scope.setSignInStatus();
-                    $scope.updateDescription();
-                    $scope.updateAuthor();
-                });
-        } else {
-            $scope.cancel();
-
-            $scope.updateDescription();
-
-            $scope.updateAuthor();
-        }
-
-    };
-}
 
 
 function PopupController($scope, $mdDialog) {

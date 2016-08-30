@@ -10,8 +10,10 @@
 
           return {
             loadAllIdeas : function() {
-                $http.get("/api/dashboardData/allideas").then(function (response) {
+                // $http.get("/api/dashboardData/allideas").then(function (response) {
+                $http.get("/api/ideaData/getAllIeas").then(function (response) {
                   ideas = response.data;
+                  console.log(ideas);
                 });
                 return $q.when(ideas);
              }, 
