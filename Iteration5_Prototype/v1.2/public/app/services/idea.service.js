@@ -45,9 +45,9 @@
 
     var writeComment = function(ideaId, comment, user) {
         var data = {
-            ideaID, ideaID,
-            comment: comment,
-            user: user
+            ideaID, ideaID, //String
+            comment: comment, //object (text, reaction, optional: title, scribble )
+            user: user //currentUser object
         }
 
         return $http.post('/api/ideaData/writeComment', whiteboard)

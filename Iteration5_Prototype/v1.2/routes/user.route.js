@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var Comment = require('../models/comment.model.js');
 var Idea = require('../models/idea.model.js');
 var User = require('../models/users.model.js');
+var dateFormat = require('dateformat');
 
 
 // router.get('/:id', function (req, res, next) {
@@ -16,18 +17,33 @@ var User = require('../models/users.model.js');
 router.get('/getAllUsers', function (req, res, next) {
 	
 	console.log("getAllUsers triggerd");
-	User.find({}, function(err, user) {
-
-		if (err) { 
+	var users = [];
+	var usersPrint = [];
+	User.find({}, function(err, user) {	
+		if (err) {
 			console.log(err);
-			return handleError(err);
+			res.status(400);
+			res.json(err);
+		} else {
+			users = user; 
 		}
-
-		console.log(user);
+	}).then(function() {
+		users.forEach(function(entry) {
+			usersPrint.push({"_id": entry._id,
+						"profileImg": entry.profileImg,
+						"url": entry.url,
+						"title": entry.title,
+						"firstname": entry.firstname,
+						"email": entry.email,
+						"name": entry.name,
+						"contacs": entry.contacs,
+						"followedpersons": entry.followedpersons,
+						"followedideas": entry.followedideas,
+						"created": dateFormat(entry.created, "mm/dd/yyyy")})
+		});
 		res.status(200);
-		res.json(user);
-	})
-    
+		res.json(usersPrint);	
+	});
 });
 
 router.get('/getUser/:id', function (req, res, next) {
@@ -57,7 +73,18 @@ router.get('/getUser/:id', function (req, res, next) {
 			res.json(err);
 		} else {
 			res.status(200);
-			res.json(user);
+			res.json({"_id": user._id,
+						"profileImg": user.profileImg,
+						"url": user.url,
+						"title": user.title,
+						"firstname": user.firstname,
+						"email": user.email,
+						"name": user.name,
+						"contacs": user.contacs,
+						"followedpersons": user.followedpersons,
+						"followedideas": user.followedideas,
+						"created": dateFormat(user.created, "mm/dd/yyyy")}
+						);
 		}
 	})
 

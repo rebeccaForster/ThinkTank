@@ -5,7 +5,7 @@ var CommentSchema = new mongoose.Schema({
 	reaction: String, //trouble, input, like or more 
 	title: String,
 	text: String,
-	commentator: mongoose.Schema.Types.ObjectId,// person ID 
+	user: mongoose.Schema.Types.ObjectId,// person ID 
 	idea: mongoose.Schema.Types.ObjectId, // idea ID 
 	scribble: String // scribble path
 	}, 

@@ -18,6 +18,8 @@ var userRout = require('./routes/user.route');
 var ideaRout = require('./routes/idea.route');
 var settingsRout = require('./routes/settings.route');
 var messagesRout = require('./routes/messages.route');
+var commentRout = require('./routes/comment.route');
+var dataRout = require('./routes/data.route');
 
 var app = express();
 
@@ -53,6 +55,8 @@ app.use('/api/userData', userRout);
 app.use('/api/ideaData', ideaRout);
 app.use('/api/settingData', settingsRout);
 app.use('/api/messagesData', messagesRout);
+app.use('/api/commentData', commentRout);
+app.use('/api/data', dataRout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
