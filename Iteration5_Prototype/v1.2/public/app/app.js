@@ -5,7 +5,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/dashboard');
 
     $stateProvider.state("whiteboard", {
-        url: "/whiteboard",
+        url: "/whiteboard/:ideaId?",
         controller: "WhiteboardCtrl",
         templateUrl: "app/views/whiteboard.html"
     })

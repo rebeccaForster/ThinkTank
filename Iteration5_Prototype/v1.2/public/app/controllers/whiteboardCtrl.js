@@ -1,5 +1,5 @@
 'use strict';
-app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService) {
+app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService, $stateParams) {
     $scope.saveScribble = function (ev) {
         $mdDialog.show({
                 controller: SaveDialogController,
@@ -67,7 +67,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
         }
     }
-    $scope.title = "";
 
 
     //DrawingBoard
@@ -453,6 +452,10 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         //Todo hier $scope.selectedPrivacyType  in die gespeicherte Idee updaten an den server
     }
 
+    
+    $scope.ideaId = $stateParams.ideaId || '-1';
+     console.log($scope.ideaId);
+    
     $scope.loadIdea = function (idea, edit) {
         //Todo diese Funktion muss alle Privacy, desciption, milesotnes, hashtags, contirbutors, whiteboard image Daten laden, 
         //Sie wird aufgerufen, wenn man auf dem Popup Idea aufs whiteboard klickt 
@@ -461,6 +464,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
         //Frederic: die Idee bekommst du aus ideaService.getIdea(id) oder so, das baue ich gleich
         //edit bekommt man wenn man unter idea.contributors schaut ob da die currentUser.id drin ist, das müsste man hier in der Funktion kontrollieren
+        console.log($scope.ideaId);
     }
 
 

@@ -129,98 +129,10 @@ angular
         );
     }
 
-    $scope.openWhiteboard = function () {
-        $timeout(function() {
-            var el = document.getElementById('nav-item0');
-            angular.element(el).triggerHandler('click');
-        }, 0);
-        //$location.url("/whiteboard");
-
-    }
-    $scope.showIdea = function (index, ev) {
-        $mdDialog.show({
-                controller: IdeaPopupController,
-                templateUrl: 'app/views/idea-popup.html',
-                scope: $scope, // use parent scope in template
-                preserveScope: true,
-                targetEvent: ev,
-                clickOutsideToClose: true,
-                fullscreen: true,
-                locals: {
-                    ideaIndex: index
-                }
-            })
-            .then(function () {}, function () {});
-    };
-
-        $scope.maxColumn = 3;
-        $scope.maxProfileColumn = 2;
-
-        $scope.commentIdea = function (index, ev) {
-            $mdDialog.show(
-                $mdDialog.alert()
-                .parent(angular.element(document.querySelector('#popupContainer')))
-                .clickOutsideToClose(true)
-                .title('Comment Idea')
-                .textContent('Index: ' + index)
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Got it!')
-                .targetEvent(ev)
-            );
-
-        }
-        $scope.followIdea = function (index, ev) {
-            $mdDialog.show(
-                $mdDialog.alert()
-                .clickOutsideToClose(true)
-                .title('Follow Idea')
-                .textContent('Index: ' + index)
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Got it!')
-                .targetEvent(ev)
-            );
-
-        }
-        $scope.participateIdea = function (index, ev) {
-            $mdDialog.show(
-                $mdDialog.alert()
-                .clickOutsideToClose(true)
-                .title('Participate Idea')
-                .textContent('Index: ' + index)
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Got it!')
-                .targetEvent(ev)
-            );
-
-        }
-        $scope.showProfile = function (index, ev) {
-            $mdDialog.show({
-                    controller: ProfilePopupController,
-                    templateUrl: 'app/views/profile-popup.html',
-                    targetEvent: ev,
-                    scope: $scope, // use parent scope in template
-                    preserveScope: true,
-                    clickOutsideToClose: true,
-                    fullscreen: true,
-                    locals: {
-                        profileIndex: index
-                    }
-                })
-                .then(function () {}, function () {});
 
 
-        };
-
-
-
-
-
-        $scope.openWhiteboard = function () {
-            $timeout(function () {
-                var el = document.getElementById('nav-item0');
-                angular.element(el).triggerHandler('click');
-            }, 0);
-            //$location.url("/whiteboard");
+        $scope.openWhiteboard = function (id) {
+            $location.url("/whiteboard" + "/" + id);
 
         }
         $scope.showIdea = function (index, ev) {

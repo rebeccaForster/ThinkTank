@@ -87,7 +87,7 @@
                     <div class="md-display-1" style="font-weight:bold;">
                         <ng-md-icon icon="brush" size="34"></ng-md-icon>
                         Whiteboard Scribble</div>
-                    <div ng-repeat="scrib in selectedIdea.scribble">
+                    <div ng-repeat="scrib in selectedIdea.scribble" ng-click="openWhiteboard('selectedIdea._id')">
                         <img src={{scrib}} class="content-image">
                     </div>
                     <div class="md-headline" ng-show="{{selectedIdea.scribble.length}} <= 0">No Scribble available!</div>
@@ -164,7 +164,7 @@
                                 <img ng-src={{users[message.author].profileImg}} class="md-avatar" alt="{{users[message.author].name}}" ng-click="showProfile(message.author, $event)">
                                 <div class="md-list-item-text" style="width:100%;">
                                     <!-- ToDO: Hier muss noch das gespeicherte Datum von der Nachricht eingefügt werden-->
-                                    <div class="md-subhead messages-icon" style="margin-left:10px;">{{users[message.author].date}}</div>
+                                    <div class="md-subhead messages-icon" style="margin-left:10px;">{{message.date}}</div>
 
                                     <ng-md-icon ng-show="message.likeIdeaStatus" icon="thumb_up" class="icon-gray" class="messages-icon"></ng-md-icon>
                                     <ng-md-icon ng-show="message.newInputStatus" icon="touch_app" class="icon-gray" class="messages-icon"></ng-md-icon>

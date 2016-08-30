@@ -7,9 +7,9 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         $mdSidenav(menuId).toggle();
     };
 
-    
 
-    
+
+
 
     $scope.menuNonAuth = [
         {
@@ -61,66 +61,50 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
 
     $scope.navbarShort = function () {
-        return (0 == $scope.selectedItem) || !$mdMedia('gt-md') ;
+        return ($scope.menuAuth[0].path == $state.current.name) || !$mdMedia('gt-md');
     }
 
-  
+
     $scope.menu = $scope.menuNonAuth;
 
     $scope.isLoggedIn = !authentication.isLoggedIn();
-    $scope.user =authentication.currentUser();
-    
+    $scope.user = authentication.currentUser();
+
     $scope.setSignInStatus = function () {
         $scope.isLoggedIn = !authentication.isLoggedIn();
         if (!$scope.isLoggedIn) {
             $scope.menu = $scope.menuAuth;
-           
+
             console.log($scope.user);
 
         } else {
             $scope.menu = $scope.menuNonAuth;
         }
-         $scope.user = authentication.currentUser();
+        $scope.user = authentication.currentUser();
     }
 
     $scope.setSignInStatus();
-
-    $scope.selectedItem = 1;
-
-    $scope.go = function (index, path, title) {
-        switch (index) {
-        case 1:
+    $scope.go = function (path) {
+        if ($scope.menuAuth[1].path == path) {
             $scope.sorting = $scope.sortingDashboardProfile;
             $scope.sortingType = $scope.sorting[0];
 
-            break;
-        case 2:
-
-            break;
-        case 3:
+        } else {
             $scope.sorting = $scope.sortingMessages;
             $scope.sortingType = $scope.sorting[0];
-
-            break;
-        case 4:
-
-            break;
-
-        default:
         }
         $state.go(path);
-        $scope.title = title;
 
-        if ($scope.selectedItem != index) {
+        if ($scope.menuAuth[1].path != path) {
             // clear hashtag, if a new item in the menu is clicked
             $scope.selectedHashtags = [];
         }
 
-        $scope.selectedItem = index;
-
     }
 
-   
+    $scope.getMenuStatus = function(path){
+        return (path == $state.current.name);
+    };
 
     $scope.sortingDashboardProfile = ["Latest Ideas", "Most popular", "Friedhof", "Himmel"];
     $scope.sortingMessages = ["Date up", "Date down", "Name up", "Name down"];
@@ -223,17 +207,17 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     };
 
 
-        $scope.answer = function (answer) {
-            $mdDialog.hide(answer);
-        };
-        
-   
+    $scope.answer = function (answer) {
+        $mdDialog.hide(answer);
+    };
+
+
     $scope.changeSortingType = function (index) {
         $scope.sortingType = index;
         $scope.updateDashboard();
 
     }
-    
+
     $scope.hashtagSelected = function (name) {
 
         for (var i in $scope.selectedHashtags) {
@@ -253,7 +237,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
         }
     }
-    
+
     $scope.updateDashboard = function () {
         // ToDo: es wurden neue Tags hinzugefügt bzw. entfernt und hier müsstest du mithilfe der Tags & des auswählten Sorting die Liste erneuern
         // $scope.sortingType gibt den Namen der Sortierung zurück

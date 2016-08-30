@@ -29,8 +29,8 @@
 
 <body ng-app="App" layout="row" ng-controller="IndexCtrl" ng-cloak>
     <md-sidenav layout="column" ng-class="{'nav-width-short': navbarShort()}" class="md-sidenav-left md-whiteframe-24dp" md-component-id="left" md-is-locked-open="$mdMedia('(min-width: 0px)')">
-        <md-toolbar class="toolbar-settings md-primary md-hue-2">
-            <div ng-hide="2 == selectedItem" style="text-align:center">
+        <md-toolbar class="toolbar-settings md-primary md-hue-2" >
+            <div ng-hide="menu[2].path == $state.current.name" style="text-align:center">
                 <div style="margin-top:30px;"></div>
 
                 <img ng-src={{user.profileImg}} class="md-avatar" id="nav-img-profile" alt="{{user.name}}">
@@ -39,8 +39,8 @@
             </div>
         </md-toolbar>
         <md-list>
-            <md-item ng-repeat="item in menu" ng-click="go($index, item.path,item.name);" id="nav-item{{$index}}">
-                <md-item-content ng-class="{'item-select' : $index === selectedItem }" layout="row" layout-align="start center">
+            <md-item ng-repeat="item in menu" ng-click="go(item.path);" id="nav-item{{$index}}">
+                <md-item-content ng-class="{'item-select' : getMenuStatus(item.path) }" layout="row" layout-align="start center">
                     <div class="inset">
                         <ng-md-icon icon="{{item.icon}}" size="34"></ng-md-icon>
                     </div>
