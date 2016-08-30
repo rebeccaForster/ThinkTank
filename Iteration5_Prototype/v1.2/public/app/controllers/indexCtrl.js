@@ -85,6 +85,10 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     $scope.setSignInStatus();
     $scope.go = function (path) {
+        if ($state.current.name != path) {
+            // clear hashtag, if a new item in the menu is clicked
+            $scope.selectedHashtags = [];
+        }
         if ($scope.menuAuth[1].path == path) {
             $scope.sorting = $scope.sortingDashboardProfile;
             $scope.sortingType = $scope.sorting[0];
@@ -95,10 +99,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         }
         $state.go(path);
 
-        if ($scope.menuAuth[1].path != path) {
-            // clear hashtag, if a new item in the menu is clicked
-            $scope.selectedHashtags = [];
-        }
+        
 
     }
 

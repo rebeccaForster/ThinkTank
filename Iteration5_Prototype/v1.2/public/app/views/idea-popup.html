@@ -2,7 +2,8 @@
     <form name="ideaForm">
 
         <md-toolbar class="toolbar-settings   md-primary md-hue-2">
-            <img class="header-picture toolbar-settings " src={{setImgPath(selectedIdea.img)}} />
+            <!-- Todo: aktuell könnnen noch keine beliebegen Bilder einbunden werden, daher ist es erst mal ausgeklammert
+            <img class="header-picture toolbar-settings " src={{setImgPath(selectedIdea.img)}} /> -->
 
             <div layout="row" layout-padding style="position: absolute; top: 0px; left:0px; width:100%;">
                 <md-button class="md-icon-button" style="width:64px; height:64px; ">
@@ -90,7 +91,6 @@
                     <div  ng-click="openWhiteboard('selectedIdea._id')">
                         <img src={{setImgPath(selectedIdea.img)}} class="content-image">
                     </div>
-                    <div class="md-headline" ng-show="{{selectedIdea.img.length}} <= 0">No Scribble available!</div>
                 </div>
                 <div>
                     <div class="md-display-1" style="font-weight:bold;">

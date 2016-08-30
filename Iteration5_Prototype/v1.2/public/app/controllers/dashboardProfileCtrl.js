@@ -41,13 +41,16 @@ angular
         $scope.calculateIdeaLeftDays = function (date) {
             var currentDate = new Date();
             currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0);
-
+            if(date = '')
+            {
             var dateParts = date.split("/");
 
             var createdDate = new Date(dateParts[2], (dateParts[0] - 1), dateParts[1], 0, 0, 0);
             var days = (currentDate - createdDate) / (1000 * 60 * 60 * 24); // subtraiktion sind ms und umrechnen in tage
-            return days;
-
+                        
+                return days;
+            }
+            return 0;
 
         }
 
@@ -144,7 +147,6 @@ angular
 
         $scope.setImgPath = function (img) {
             var path = ('app/' + img);
-            console.log(path);
             return path;
         }
         $scope.openWhiteboard = function (id) {

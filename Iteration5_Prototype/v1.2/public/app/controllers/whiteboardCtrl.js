@@ -24,7 +24,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                     return true;
                 });
         } else {
-            $scope.updateIdea();
         }
 
     };
@@ -52,6 +51,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.milestones = [];
     $scope.milestoneList = [];
     $scope.ideaLifeTime = 30;
+    //Todo Rebecca: ich  muss noch die left tage kalkulieren, wenn die Idee geladen wird
     $scope.ideaDayLeft = 0;
 
     indexData
@@ -79,8 +79,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     //DrawingBoard
     // $localStorage.$reset(); 
 
-    // $localStorage.$reset();
-
+    
     $scope.webStorage = 'session';
     $scope.drawingMode = 'draw';
     $scope.drawColor = '#222';
@@ -328,7 +327,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 locals: {}
             })
             .then(function () {}, function () {
-                $scope.updateIdea();
             });
     }
 
@@ -344,7 +342,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 locals: {}
             })
             .then(function () {}, function () {
-                $scope.updateIdea();
             });
     }
 
@@ -384,7 +381,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 locals: {}
             })
             .then(function () {}, function () {
-                $scope.updateIdea();
             });
     }
 
@@ -411,7 +407,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 locals: {}
             })
             .then(function () {}, function () {
-                $scope.updateIdea();
             });
     }
 
@@ -429,22 +424,32 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
 
     $scope.ideaId = $stateParams.ideaId || '-1';
-    console.log($scope.ideaId);
     this.getIdea = function (id) {
         //Todo diese Funktion muss alle Privacy, desciption, milesotnes, hashtags, contirbutors, whiteboard image Daten laden, 
         //Sie wird aufgerufen, wenn man auf dem Popup Idea aufs whiteboard klickt 
         // wenn man contributor ist bzw. die Idee bearbeiten möchte, ist edit true
         // Wie man die Funktion genau aufruft, weiß ich noch nicht, darüber muss ich mir noch gedanken machen
+        console.log('sart get idea in whiteboard');
         if( $scope.ideaId == -1){
-            $scope.clear();
+           // $scope.clear();
+            //$scope.clearHistory();
             
         }
         else{
-            //todo get idea und fülle die arrays 
-            //und überprüfe ob die person eingeloggt ist oder nicht und dementsprehcend bearbeiten ja oder nein
+           ideaService
+                .getIdea(id)
+                .then(function (res) {
+                    console.log('ergebnis der idea object von deer gesuchten ide' , res);
+                    $scope.title = res.title;
+                    $scope.desciption = res.desciption;
+                    $scope.contributors = res.contributors;
+                    $scope.selectedHashtags = res.tags;
+               //Todo load scribble
+                });
+            
+            //Tdo überprüfe ob die person eingeloggt ist oder nicht und dementsprehcend bearbeiten ja oder nein
         }
     };
-    $scope.loadIdea = $scope.getIdea($scope.ideaId);
 
     $scope.updateIdea = function () {
 
@@ -457,7 +462,9 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             description: $scope.desciption,
             contributors: $scope.contributors,
             milestones: $scope.milestones,
-            tags: $scope.hashtags,
+            tags: $scope.selectedHashtags ,
+            // $scope.ideaLifeTime
+            //$scope.selectedPrivacyType
             scribble: $scope.drawingboardRemote.toDataURL('image/png')
         };
 
@@ -475,7 +482,9 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             description: $scope.desciption,
             contributors: $scope.contributors,
             milestones: $scope.milestones,
-            tags: $scope.hashtags,
+            tags: $scope.selectedHashtags ,
+            //$scope.ideaLifeTime
+            //$scope.selectedPrivacyType
             scribble: $scope.drawingboardRemote.toDataURL('image/png')
         };
 
@@ -516,8 +525,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             if (authentication.isLoggedIn()) {
 
                 $scope.saveNewIdea();
-
-                $scope.updateIdea();
 
                 $scope.cancel();
             } else {
