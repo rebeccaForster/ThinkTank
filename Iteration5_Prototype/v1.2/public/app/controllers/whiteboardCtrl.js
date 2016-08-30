@@ -100,7 +100,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
 
     $scope.getDataURL = function () {
-        console.log($scope.drawingboardRemote.toDataURL('image/png'));
+        $scope.drawingboardRemote.toDataURL('image/png');
     };
 
     $scope.clear = function () {
@@ -346,7 +346,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.$watch('title', function (newVal, oldVal) {
         if (newVal == '') {
             var now = new Date();
-            $scope.title = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + '_' + now.getHours() + ':' + now.getMinutes();
+            $scope.title = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + ' ' + now.getHours() + ':' + now.getMinutes();
         }
     });
 
@@ -498,7 +498,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             email: "",
             password: ""
         };
-        $scope.placeholderTitle = "aktuells daum und Uhrzeit";
         $scope.title = "";
         $scope.hide = function () {
             $mdDialog.hide();

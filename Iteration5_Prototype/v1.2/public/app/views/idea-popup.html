@@ -88,7 +88,7 @@
                         <ng-md-icon icon="brush" size="34"></ng-md-icon>
                         Whiteboard Scribble</div>
                     <div ng-repeat="scrib in selectedIdea.scribble" ng-click="openWhiteboard('selectedIdea._id')">
-                        <img src={{scrib}} class="content-image">
+                        <img src={{setImgPath(selectedIdea.img)}} class="content-image">
                     </div>
                     <div class="md-headline" ng-show="{{selectedIdea.scribble.length}} <= 0">No Scribble available!</div>
                 </div>
