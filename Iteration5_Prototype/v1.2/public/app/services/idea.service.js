@@ -7,24 +7,12 @@
 
   function IdeaService ($http, authentication) {
 
-    var getProfile = function () {
-      return $http.get('/api/profile', {
-        headers: {
-          Authorization: 'Bearer '+ authentication.getToken()
-        }
-      });
-    };
-
     var saveNewIdea = function(idea, user) {
         var data = {
             idea: idea,
             user: user
         }
         console.log(data);
-        // return $http.post('/api/ideaData/saveNewIdea', data)
-        //         .success(function (data) {
-        //             console.log(data)
-        //         });
 
         return $http.post('/api/ideaData/saveNewIdea', data)
                 .then(function (data) {
@@ -33,22 +21,45 @@
 
     };
 
+    var getIdea = function(id) {
+      var a = "/api/ideaData/getIdea/";
+        $http.get(a.concat(id)).then(function (response) {
+          var idea = response.data;
+          console.log(idea);
+        });
+        return $q.when(idea);
+     };
+
      var updateIdea = function(idea, user) {
         var data = {
             idea: idea,
             user: user
         }
+        if (!idea.id) return "idea not valid";
 
-        return $http.post('/api/idea/new', whiteboard)
+        return $http.post('/api/ideaData/saveNewIdea', whiteboard)
+                .success(function (data) {
+                    console.log(data)
+                });
+    };
+
+    var writeComment = function(ideaId, comment, user) {
+        var data = {
+            ideaID, ideaID,
+            comment: comment,
+            user: user
+        }
+
+        return $http.post('/api/ideaData/writeComment', whiteboard)
                 .success(function (data) {
                     console.log(data)
                 });
     };
 
     return {
-      getProfile : getProfile, 
       saveNewIdea : saveNewIdea, 
-      updateIdea : updateIdea
+      updateIdea : updateIdea, 
+      getIdea : getIdea
     };
   }
 
