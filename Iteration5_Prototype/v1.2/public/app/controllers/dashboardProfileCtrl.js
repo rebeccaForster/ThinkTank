@@ -1,7 +1,7 @@
 'use strict';
 angular
 	.module('App')
-	.controller('DashboardProfileCtrl', function ($scope, dashService, indexData, $location, $mdDialog, $mdMedia, $timeout) {
+	.controller('DashboardProfileCtrl', function ($scope, dashService, profileService, indexData, $location, $mdDialog, $mdMedia, $timeout) {
 		
 		$scope.ideas = {};
 		$scope.users = [];
@@ -13,12 +13,7 @@ angular
                 $scope.ideas = res;
             });
 
-		indexData
-		      .loadAllUsers()
-		      .then( function( res ) {
-		        
-                $scope.users = res;
-		      });
+		
     $scope.hashtags = [];
 
     indexData
@@ -115,8 +110,15 @@ angular
     };
 
 
-    $scope.user = $scope.users[3];
-
+    $scope.getUser = function (id){
+        profileService
+		      .getUser(id)
+		      .then( function( res ) {
+		        
+                return res;
+		      });
+    
+    };
     $scope.addSearchTag = function (indexIdea, IndexTag, ev) {
         $mdDialog.show(
             $mdDialog.alert()
@@ -235,7 +237,7 @@ function IdeaPopupController($scope, $mdDialog, ideaIndex) {
 }
 
 function ProfilePopupController($scope, $mdDialog, profileIndex) {
-    $scope.user = $scope.users[profileIndex];
+    $scope.user = $scope.getUser(profileIndex);
 
     $scope.hide = function () {
         $mdDialog.hide();

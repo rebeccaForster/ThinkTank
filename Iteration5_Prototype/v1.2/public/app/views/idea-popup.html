@@ -58,24 +58,24 @@
                         <ng-md-icon icon="person_add" size="34"></ng-md-icon>
                         Contributors</div>
                     <div>
-                        <md-card class="content-contributors  md-whiteframe-4dp" ng-click="showProfile(selectedIdea.author, $event)">
+                        <md-card class="content-contributors  md-whiteframe-4dp" ng-click="showProfile(selectedIdea.author, $event)"  ng-init="authorItem = getUser(idea.author)">
                             <md-card-header>
                                 <md-card-avatar>
-                                    <img class="md-user-avatar" src={{users[selectedIdea.author].profileImg}} />
+                                    <img class="md-user-avatar" src={{authorItem.profileImg}} />
                                 </md-card-avatar>
                                 <md-card-header-text>
-                                    <span class="md-title">{{users[selectedIdea.author].firstname}} {{users[selectedIdea.author].name}}</span>
+                                    <span class="md-title">{{authorItem.firstname}} {{authorItem.name}}</span>
                                     <span class="md-subhead ">author</span>
                                 </md-card-header-text>
                             </md-card-header>
                         </md-card>
-                        <md-card class="content-contributors" ng-repeat="contributor in selectedIdea.contributors" class="content-contributors" ng-click="showProfile(contributor, $event)">
+                        <md-card class="content-contributors" ng-repeat="contributor in selectedIdea.contributors" class="content-contributors" ng-click="showProfile(contributor, $event)" ng-init="contrItem = getUser(contributor)">
                             <md-card-header>
                                 <md-card-avatar>
-                                    <img class="md-user-avatar" src={{users[contributor].profileImg}} />
+                                    <img class="md-user-avatar" src={{contrItem.profileImg}} />
                                 </md-card-avatar>
                                 <md-card-header-text>
-                                    <span class="md-title">{{users[contributor].firstname}} {{users[contributor].name}}</span>
+                                    <span class="md-title">{{contrItem.firstname}} {{contrItem.name}}</span>
                                     <span class="md-subhead">contributor</span>
                                 </md-card-header-text>
                             </md-card-header>

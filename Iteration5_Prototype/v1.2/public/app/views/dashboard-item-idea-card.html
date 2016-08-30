@@ -1,6 +1,6 @@
-<md-card-header>
+<md-card-header ng-init="authorItem = getUser(idea.author)">
     <md-card-avatar ng-click="showProfile(idea.author, $event);$event.stopPropagation();">
-        <img class="md-user-avatar" src={{users[idea.author].profileImg}} />
+        <img class="md-user-avatar" src={{authorItem.profileImg}} />
     </md-card-avatar>
     <md-card-header-text >
         <div >
