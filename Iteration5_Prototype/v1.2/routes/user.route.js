@@ -8,6 +8,7 @@ var Comment = require('../models/comment.model.js');
 var Idea = require('../models/idea.model.js');
 var User = require('../models/users.model.js');
 var dateFormat = require('dateformat');
+var userControler = require('../controllers/userControler');
 
 
 // router.get('/:id', function (req, res, next) {
@@ -39,7 +40,7 @@ router.get('/getAllUsers', function (req, res, next) {
 						"contacs": entry.contacs,
 						"followedpersons": entry.followedpersons,
 						"followedideas": entry.followedideas,
-						"created": dateFormat(entry.created, "mm/dd/yyyy")})
+						"created": dateFormat(entry.created, "dd/mm/yyyy")})
 		});
 		res.status(200);
 		res.json(usersPrint);	
@@ -83,11 +84,13 @@ router.get('/getUser/:id', function (req, res, next) {
 						"contacs": user.contacs,
 						"followedpersons": user.followedpersons,
 						"followedideas": user.followedideas,
-						"created": dateFormat(user.created, "mm/dd/yyyy")}
+						"created": dateFormat(user.created, "dd/mm/yyyy")}
 						);
 		}
 	})
-
 });
+
+router.post('/updateUser', userControler.updateUser);
+router.post('/followUser', userControler.followUser);
 
 module.exports = router;

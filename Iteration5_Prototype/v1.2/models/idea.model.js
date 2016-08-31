@@ -10,10 +10,16 @@ var IdeaSchema = new mongoose.Schema({
 		author: mongoose.Schema.Types.ObjectId, //person ID 
 		contributors: [mongoose.Schema.Types.ObjectId], //persons object IDs
 		likes: [mongoose.Schema.Types.ObjectId], //persons object IDs
-		milestones: [String] , 
+		milestones: [{
+			name: String, 
+			extratime: Number, 
+			percentage: Number, 
+			icon: String
+		}] , 
 		tags: [String], //plane text tags
-		livetime: Number,  //days of total live time. 
-		scribbles: [String] // list of scribble object IDs
+		lifetime: Number,  //days of total live time. 
+		privacyType: String, 
+		scribble: String // list of scribble object IDs
 	}, 
     { collection : 'ideas' }
 );

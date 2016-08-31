@@ -44,7 +44,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.desciption = "";
     $scope.milestones = [] ;
     $scope.milestoneList = [];
-    $scope.ideaLifeTime = 30;
+    $scope.ideaLifeTime = 30; //Angabe in Tagen, der Server speichert automatisch 30 falls nichts angegeben ist
     $scope.ideaDayLeft = 0;
     
     indexData
@@ -477,6 +477,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             contributors: $scope.contributors,
             milestones: $scope.milestones,
             tags: $scope.hashtags,
+            lifetime: $scope.ideaLifeTime,
+            privacyType: $scope.selectedPrivacy, 
             scribble: $scope.drawingboardRemote.toDataURL('image/png')
         };
 
@@ -487,9 +489,28 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
     $scope.privacyTypesList = ["Only me & contributors", "Everyone", "Customer"];
     $scope.selectedPrivacyType = $scope.privacyTypesList[0];
+    $scope.selectedPrivacy = 0;
+    //Todo: das scheint noch nicht aufgerufen zu werden
     $scope.changeSortingType = function (index) {
         $scope.selectedPrivacyType = index;
         $scope.updatePrivacyStatus();
+
+        switch(index) {
+            case "Only me & contributors":
+                $scope.selectedPrivacy = 0;
+                break;
+            case "Everyone":
+                $scope.selectedPrivacy = 1;
+                break;
+            case "Customer":
+                $scope.selectedPrivacy = 2;
+                break;
+            default:
+                $scope.selectedPrivacy = 0;
+        }
+        console.log("Privacy number: ");
+        console.log($scope.selectedPrivacy);
+
     };
 
 
