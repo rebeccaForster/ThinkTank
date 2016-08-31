@@ -13,7 +13,7 @@
             <!-- Todo daheim auf andere Seiten anpassen-->
                         <div flex=3></div>
 
-            <div style="border-bottom: 2px solid white;"   ng-click="searchHashtag($event) " flex=89>
+            <div style="border-bottom: 2px solid white;"   ng-click="searchHashtag($event) " flex>
                 <div layout="row">
                     <div flex>
                         <md-button class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setSelectedHashtags(selectedHashtag, true);updateDashboard(); $event.stopPropagation();" style="font-size:24px; margin-bottom:5px;">#{{selectedHashtag}}
