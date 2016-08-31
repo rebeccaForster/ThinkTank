@@ -54,7 +54,7 @@
             <!-- todo divider -->
             <div flex=50 layout="column" style="padding: 0px 40px 40px 40px;">
 
-                <div class="idea-block" style="height:100% !important;">
+                <div class="idea-block" >
                     <div class="md-headline margin-bottom-15" style="font-weight:bold;">
                         <ng-md-icon icon="person_add" size="18"></ng-md-icon>
                         Contributors</div>
@@ -123,8 +123,8 @@
                             React on Idea</div>
                         <div class="md-subhead text-gray">Choose one and more icons and a comment field will open.</div>
                     </div>
-                    <div layout="row">
-                        <div layout="column" flex layout-align="center center" ng-class="{'item-select' : saveComment.likeIdeaStatus}" ng-click="setLikeIdeaStatus();">
+                    <div layout="row" >
+                        <div layout="column" style="margin-top:15px;" flex layout-align="center center" ng-class="{'item-select' : saveComment.likeIdeaStatus}" ng-click="setLikeIdeaStatus();">
                             <ng-md-icon icon="thumb_up" size="40"></ng-md-icon>
                             <br>
                             <div class="md-subhead">I like idea</div>
@@ -171,7 +171,7 @@
                     </div>
                     <md-content>
                         <md-list style=" max-height:400px;overflow-y:visible">
-                            <md-list-item ng-repeat="message in selectedIdea.messages" style="margin-top:15px;margin-bottom:15px; heiht:auto;">
+                            <md-list-item ng-repeat="message in selectedIdea.messages" style="margin-bottom:15px; heiht:auto;">
                                 <img ng-src={{users[message.author].profileImg}} class="md-avatar" alt="{{users[message.author].name}}" ng-click="showProfile(message.author, $event)">
                                 <div class="md-list-item-text" style="width:100%;">
                                     <!-- ToDO: Hier muss noch das gespeicherte Datum von der Nachricht eingefügt werden-->
