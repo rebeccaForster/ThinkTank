@@ -237,7 +237,7 @@ var ideas = [
 		}
                     ] , 
         scribble: ['https://placekitten.com/600/300'],
-        tags: [ "ergonomics", "test", "hashtag"],
+        tags: [ "ergonomics", "test", "hashtag", "ergonomics1", "test1", "hashta1g"],
         livetime: 100,
 
         messages: [
