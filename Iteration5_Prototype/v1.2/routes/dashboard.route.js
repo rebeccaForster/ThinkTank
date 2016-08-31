@@ -120,6 +120,291 @@ var ideas = [
             }
 
             ]
+    },{
+        id: 1,
+        created: "25.08.2016",
+        lastchanged:"29.08.2016",
+        title: "Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj",
+        description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafkljdöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskf",
+        img: 'https://placekitten.com/600/300',
+        author: 0,
+        contributors: [1, 3, 4, 6, 7, 2],
+        milestones: [{
+				name: "find location", 
+				extratime: 0,
+				percentage: 100,
+				icon: '' 
+		},{
+				name: "get founding", 
+				extratime: 0,
+				percentage: 0,
+				icon: '' 
+		}
+                    ] , 
+        scribble: ['https://placekitten.com/600/300'],
+        tags: [ "ergonomics", "test", "hashtag"],
+        livetime: 100,
+
+        messages: [
+
+            {
+                author: 2,
+                text: "asdfl ldajf dsakfjldomotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dr e alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: true,
+                newInputStatus: true,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+            }, {
+                author: 7,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: true,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            },
+            {
+                author: 1,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: false,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            }, {
+                author: 7,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: true,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            },
+            {
+                author: 1,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: false,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            }, {
+                author: 7,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: true,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            },
+            {
+                author: 1,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: false,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            }
+
+            ]
+    },{
+        id: 3,
+        created: "25.08.2016",
+        lastchanged:"29.08.2016",
+        title: "Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj",
+        description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafkljdöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskf",
+        img: 'https://placekitten.com/600/300',
+        author: 0,
+        contributors: [1, 3, 4, 6, 7, 2],
+        milestones: [{
+				name: "find location", 
+				extratime: 0,
+				percentage: 100,
+				icon: '' 
+		},{
+				name: "get founding", 
+				extratime: 0,
+				percentage: 0,
+				icon: '' 
+		}
+                    ] , 
+        scribble: ['https://placekitten.com/600/300'],
+        tags: [ "ergonomics", "test", "hashtag"],
+        livetime: 100,
+
+        messages: [
+
+            {
+                author: 2,
+                text: "asdfl ldajf dsakfjldomotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dr e alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: true,
+                newInputStatus: true,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+            }, {
+                author: 7,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: true,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            },
+            {
+                author: 1,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: false,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            }, {
+                author: 7,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: true,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            },
+            {
+                author: 1,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: false,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            }, {
+                author: 7,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: true,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            },
+            {
+                author: 1,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: false,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            }
+
+            ]
+    },{
+        id: 2,
+        created: "25.08.2016",
+        lastchanged:"29.08.2016",
+        title: "Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva driving asdfkdasfj",
+        description: "blalfsldöfjsdafljdsakfljsdalf daksfjldfkjas dskfj sdafkljdöfjsdafljdsakfljsdalf daksfjldfkjas dskfdöfjsdafljdsakfljsdalf daksfjldfkjas dskf",
+        img: 'https://placekitten.com/600/300',
+        author: 0,
+        contributors: [1, 3, 4, 6, 7, 2],
+        milestones: [{
+				name: "find location", 
+				extratime: 0,
+				percentage: 100,
+				icon: '' 
+		},{
+				name: "get founding", 
+				extratime: 0,
+				percentage: 0,
+				icon: '' 
+		}
+                    ] , 
+        scribble: ['https://placekitten.com/600/300'],
+        tags: [ "ergonomics", "test", "hashtag"],
+        livetime: 100,
+
+        messages: [
+
+            {
+                author: 2,
+                text: "asdfl ldajf dsakfjldomotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dr e alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: true,
+                newInputStatus: true,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+            }, {
+                author: 7,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: true,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            },
+            {
+                author: 1,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: false,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            }, {
+                author: 7,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: true,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            },
+            {
+                author: 1,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: false,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            }, {
+                author: 7,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: true,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            },
+            {
+                author: 1,
+                text: "asdfl ldajf dsakfjldf omotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dromotiva driving asdfkdasfj Automotiva driving asdfkdasfj Automotiva dre alkjdklfjasd ekl re akdsfjl",
+                likeIdeaStatus: false,
+                newInputStatus: false,
+                troubleStatus: true,
+                other: false,
+                date: "25.5.2016"
+
+            }
+
+            ]
     }
     ];
 
