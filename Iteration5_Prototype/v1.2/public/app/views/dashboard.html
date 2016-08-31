@@ -48,8 +48,8 @@
         <div ng-controller="DashboardProfileCtrl" ng-cloak="">
             <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
                 <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
-                    <md-card class="md-whiteframe-4dp" ng-repeat="idea in ideas" ng-if="!(($index+3)%3)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea.id, $event)" >
-
+                    <md-card class="md-whiteframe-4dp" ng-repeat="idea in ideas" ng-if="!(($index+3)%3)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea.id, $event)" style="margin-bottom:30px !important;">
+<!-- todo margin card überall anpassen -->
                     </md-card>
                 </div>
                 <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
