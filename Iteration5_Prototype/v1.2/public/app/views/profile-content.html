@@ -1,18 +1,25 @@
 <div flex=66 layout="column" layout-padding>
-    <div class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
-        <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
-            <md-card class="md-whiteframe-4dp" ng-repeat="indexUserIdea in user.followedideas" ng-init="idea = ideas[indexUserIdea]" ng-if="!(($index+2)%2)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea.id, $event)">
+    <div>
+        <div class="md-display-1" style="font-weight:bold;">Your ideas</div>
+        <div class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
+            <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
+                <md-card class="md-whiteframe-4dp" ng-repeat="indexUserIdea in user.followedideas" ng-init="idea = ideas[indexUserIdea]" ng-if="!(($index+2)%2)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea.id, $event)">
 
-            </md-card>
-        </div>
-        <div flex="50" flex-sm="100" flex-xs="100" layout="column" layout-margin>
-            <md-card  class="md-whiteframe-4dp" ng-repeat="indexUserIdea in user.followedideas" ng-init="idea = ideas[indexUserIdea]" ng-if="!(($index+1)%2)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea.id, $event)">
+                </md-card>
+            </div>
+            <div flex="50" flex-sm="100" flex-xs="100" layout="column" layout-margin>
+                <md-card class="md-whiteframe-4dp" ng-repeat="indexUserIdea in user.followedideas" ng-init="idea = ideas[indexUserIdea]" ng-if="!(($index+1)%2)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea.id, $event)">
 
-            </md-card>
+                </md-card>
+            </div>
         </div>
     </div>
+    <div>
+        <div class="md-display-1" style="font-weight:bold;">Followed ideas</div>
+    </div>
+
 </div>
-<div flex layout="column">
+<div flex=33 layout="column">
     <div>
         <div class="md-display-1" style="font-weight:bold;">Hashtags</div>
         <p class="md-headline" ng-repeat="tag in selectedIdea.tags">#{{tag | uppercase}}</p>
@@ -22,3 +29,5 @@
     </div>
 
 </div>
+
+<!-- Todo Hahstags, dnaach Ideas of this person in 3 kacheln, followed ideas, followed person -->
