@@ -50,11 +50,11 @@
             <md-button class="md-accent" style="font-weight:bold; font-size:34px; margin-right:20px;">Follow idea</md-button>
         </div>
 
-        <md-dialog-content layout="row" >
+        <md-dialog-content layout="row">
             <!-- todo divider -->
             <div flex=50 layout="column" style="padding: 0px 40px 40px 40px;">
 
-                <div class="idea-block">
+                <div class="idea-block" style="height:100% !important;">
                     <div class="md-headline margin-bottom-15" style="font-weight:bold;">
                         <ng-md-icon icon="person_add" size="18"></ng-md-icon>
                         Contributors</div>
@@ -84,7 +84,7 @@
                     </div>
                     <md-button class="md-accent" style="font-weight:bold; font-size:24px;">I want to contribute</md-button>
                 </div>
-                <div  class="idea-block">
+                <div class="idea-block">
                     <div class="md-headline margin-bottom-15" style="font-weight:bold;">
                         <ng-md-icon icon="brush" size="18"></ng-md-icon>
                         Whiteboard Scribble</div>
@@ -93,14 +93,14 @@
                     </div>
                     <div class="md-headline margin-bottom-15" ng-show="{{selectedIdea.scribble.length}} <= 0">No Scribble available!</div>
                 </div>
-                <div  class="idea-block">
+                <div class="idea-block">
                     <div class="md-headline margin-bottom-15" style="font-weight:bold;">
                         <ng-md-icon icon="description" size="18"></ng-md-icon>
                         Description</div>
                     <div class="md-headline">{{selectedIdea.description}}</div>
                 </div>
 
-                <div  class="idea-block">
+                <div class="idea-block">
                     <div class="md-headline margin-bottom-15" style="font-weight:bold;">
                         <ng-md-icon icon="add_location" size="18"></ng-md-icon>
                         Milestones</div>
@@ -110,17 +110,19 @@
                         </md-checkbox>
                     </div>
                 </div>
-                <div  class="idea-block">
+                <div class="idea-block">
                     <div class="md-headline margin-bottom-15" style="font-weight:bold;"># Hashtags</div>
                     <p class="hashtag-style" ng-repeat="tag in selectedIdea.tags" style="padding:0px 10px 0px 10px; margin:0px;display:inline-block">#{{tag | uppercase}}</p>
                 </div>
             </div>
             <div flex=50 layout="column" style="padding: 0px 40px 40px 40px;">
                 <div class="idea-block">
-                    <div class="md-headline " style="font-weight:bold;">
-                        <ng-md-icon icon="forum" size="18"></ng-md-icon>
-                        React on Idea</div>
-                    <div class="md-subhead margin-bottom-15 text-gray">Choose one and more icons and a field will open.</div>
+                    <div class="margin-bottom-15">
+                        <div class="md-headline " style="font-weight:bold;">
+                            <ng-md-icon icon="forum" size="18"></ng-md-icon>
+                            React on Idea</div>
+                        <div class="md-subhead text-gray">Choose one and more icons and a comment field will open.</div>
+                    </div>
                     <div layout="row">
                         <div layout="column" flex layout-align="center center" ng-class="{'item-select' : saveComment.likeIdeaStatus}" ng-click="setLikeIdeaStatus();">
                             <ng-md-icon icon="thumb_up" size="40"></ng-md-icon>
@@ -143,13 +145,9 @@
                             <div class="md-subhead">other comments</div>
                         </div>
                     </div>
-                </div>
-                <div class="idea-block">
-                     <div class="md-headline margin-bottom-15" style="font-weight:bold;">
-                        <ng-md-icon icon="forum" size="18"></ng-md-icon>
-                        Comments</div>
-                    <div ng-show="saveComment.other || saveComment.troubleStatus || saveComment.newInputStatus || saveComment.likeIdeaStatus">
-                        <md-input-container class="md-block">
+
+                    <md-input-container class="md-block">
+                        <div ng-show="saveComment.other || saveComment.troubleStatus || saveComment.newInputStatus || saveComment.likeIdeaStatus">
                             <label>{{newInputText}} {{likeIdeaText}} {{troubleText}} {{otherText}}</label>
                             <textarea name="commentArea" type="text" ng-model="saveComment.text" md-autofocus required></textarea>
                             <div ng-messages="ideaForm.commentArea.$error" ng-show="ideaForm.commentArea.$dirty">
@@ -163,7 +161,13 @@
                             <md-button ng-disabled="true" class="md-icon-button messages-icon" aria-label="Record Video">
                                 <ng-md-icon icon="videocam" class="icon-gray" size="24"></ng-md-icon>
                             </md-button>
-                        </md-input-container>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div class="idea-block">
+                    <div class="md-headline margin-bottom-15" style="font-weight:bold;">
+                        <ng-md-icon icon="forum" size="18"></ng-md-icon>
+                        Comments
                     </div>
                     <md-content>
                         <md-list style=" max-height:400px;overflow-y:visible">
@@ -176,11 +180,13 @@
                                     <ng-md-icon ng-show="message.newInputStatus" icon="touch_app" class="icon-gray" class="messages-icon"></ng-md-icon>
                                     <ng-md-icon ng-show="message.troubleStatus" icon="flash_on" class="icon-gray" class="messages-icon"></ng-md-icon>
                                     <ng-md-icon ng-show="message.other" icon="more_horiz" class="icon-gray" class="messages-icon"></ng-md-icon>
-                                    <div class="md-headline">{{users[message.author].name}},<div class="md-subhead" >{{message.date}}</div></div>
+                                    <div class="md-headline">{{users[message.author].name}},
+                                        <div class="md-subhead">{{message.date}}</div>
+                                    </div>
 
 
                                     <div class="md-subhead">{{message.text}}
-</div>
+                                    </div>
                                 </div>
                                 <md-divider md-inset ng-if="!$last"></md-divider>
                             </md-list-item>
