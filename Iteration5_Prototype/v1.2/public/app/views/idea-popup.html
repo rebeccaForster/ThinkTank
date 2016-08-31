@@ -3,7 +3,7 @@
 
         <md-toolbar class="toolbar-settings   md-primary md-hue-2">
             <img class="header-picture toolbar-settings " src={{selectedIdea.img}} />
-
+            <!-- todo pfeil  und x soll mit kontext abschließen-->
             <div layout="row" layout-padding style="position: absolute; top: 0px; left:0px; width:100%;">
                 <md-button class="md-icon-button" style="width:64px; height:64px; ">
                     <ng-md-icon icon="arrow_back" size="64"></ng-md-icon>
@@ -45,20 +45,20 @@
                 </round-progress>
             </div>
         </div>
-        <div layout="row" style="margin-bottom:135px;">
+        <div layout="row" style="margin-bottom:135px; margin-top:10px;">
             <div flex></div>
             <md-button class="md-accent" style="font-weight:bold; font-size:34px;">Follow idea</md-button>
         </div>
 
-        <md-dialog-content layout="row">
-            <div flex=50 layout="column" layout-padding>
+        <md-dialog-content layout="row" style="padding: 0px 50px 50px 50px;">
+            <div flex=50 layout="column" >
 
                 <div class="idea-block">
                     <div class="md-headline" style="font-weight:bold;">
                         <ng-md-icon icon="person_add" size="18"></ng-md-icon>
                         Contributors</div>
                     <div>
-                        <md-card class="content-contributors  md-whiteframe-4dp" ng-click="showProfile(selectedIdea.author, $event)">
+                        <md-card class="content-contributors" ng-click="showProfile(selectedIdea.author, $event)">
                             <md-card-header>
                                 <md-card-avatar>
                                     <img class="md-user-avatar" src={{users[selectedIdea.author].profileImg}} />
