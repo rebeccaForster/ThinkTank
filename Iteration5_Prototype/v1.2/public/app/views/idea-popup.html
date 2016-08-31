@@ -169,7 +169,7 @@
                         <ng-md-icon icon="forum" size="18"></ng-md-icon>
                         Comments
                     </div>
-                    <md-content>
+                    <md-content style="background-color:white">
                         <md-list style=" max-height:400px;overflow-y:visible">
                             <md-list-item ng-repeat="message in selectedIdea.messages" style="margin-bottom:15px; heiht:auto;">
                                 <img ng-src={{users[message.author].profileImg}} class="md-avatar" alt="{{users[message.author].name}}" ng-click="showProfile(message.author, $event)">
