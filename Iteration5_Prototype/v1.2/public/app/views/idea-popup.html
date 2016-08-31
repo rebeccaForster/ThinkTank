@@ -45,7 +45,7 @@
                 </round-progress>
             </div>
         </div>
-        <div layout="row" style="margin-bottom:125px;">
+        <div layout="row" style="margin-bottom:135px;">
             <div flex></div>
             <md-button class="md-accent" style="font-weight:bold; font-size:34px;">Follow idea</md-button>
         </div>
@@ -53,9 +53,9 @@
         <md-dialog-content layout="row">
             <div flex=50 layout="column" layout-padding>
 
-                <div>
+                <div class="idea-block">
                     <div class="md-headline" style="font-weight:bold;">
-                        <ng-md-icon icon="person_add" size="34"></ng-md-icon>
+                        <ng-md-icon icon="person_add" size="18"></ng-md-icon>
                         Contributors</div>
                     <div>
                         <md-card class="content-contributors  md-whiteframe-4dp" ng-click="showProfile(selectedIdea.author, $event)">
@@ -83,25 +83,25 @@
                     </div>
                     <md-button class="md-accent" style="font-weight:bold; font-size:24px;">I want to contribute</md-button>
                 </div>
-                <div>
+                <div  class="idea-block">
                     <div class="md-headline" style="font-weight:bold;">
-                        <ng-md-icon icon="brush" size="34"></ng-md-icon>
+                        <ng-md-icon icon="brush" size="18"></ng-md-icon>
                         Whiteboard Scribble</div>
                     <div ng-repeat="scrib in selectedIdea.scribble">
                         <img src={{scrib}} class="content-image">
                     </div>
                     <div class="md-headline" ng-show="{{selectedIdea.scribble.length}} <= 0">No Scribble available!</div>
                 </div>
-                <div>
+                <div  class="idea-block">
                     <div class="md-headline" style="font-weight:bold;">
-                        <ng-md-icon icon="description" size="34"></ng-md-icon>
+                        <ng-md-icon icon="description" size="18"></ng-md-icon>
                         Description</div>
                     <p class="md-headline">{{selectedIdea.description}}</p>
                 </div>
 
-                <div>
+                <div  class="idea-block">
                     <div class="md-headline" style="font-weight:bold;">
-                        <ng-md-icon icon="add_location" size="34"></ng-md-icon>
+                        <ng-md-icon icon="add_location" size="18"></ng-md-icon>
                         Milestones</div>
                     <div>
                         <md-checkbox class="md-headline" ng-repeat="milestone in selectedIdea.milestones" ng-model="milestone.status" aria-label="milestone.name" ng-disabled="true">
@@ -109,15 +109,15 @@
                         </md-checkbox>
                     </div>
                 </div>
-                <div>
+                <div  class="idea-block">
                     <div class="md-headline" style="font-weight:bold;"># Hashtags</div>
                     <p class="hashtag-style" ng-repeat="tag in selectedIdea.tags" style="padding:0px 10px 0px 10px; margin:0px;display:inline-block">#{{tag | uppercase}}</p>
                 </div>
             </div>
             <div flex=50 layout="column" layout-padding>
                 <div>
-                    <div class="md-display-1" style="font-weight:bold;">
-                        <ng-md-icon icon="forum" size="34"></ng-md-icon>
+                    <div class="md-headline" style="font-weight:bold;">
+                        <ng-md-icon icon="forum" size="18"></ng-md-icon>
                         Comments/React on Idea</div>
                     <div layout="row">
                         <div layout="column" flex layout-align="center center" ng-class="{'item-select' : saveComment.likeIdeaStatus}" ng-click="setLikeIdeaStatus();">
