@@ -9,7 +9,7 @@ angular
         dashService
             .loadAllIdeas()
             .then(function (res) {
-
+                console.log(res);
                 $scope.ideas = res;
             });
 
@@ -46,6 +46,7 @@ angular
             var dateParts = date.split("/");
 
             var createdDate = new Date(dateParts[2], (dateParts[0] - 1), dateParts[1], 0, 0, 0);
+         var createdDate = new Date(dateParts[2], (dateParts[1] - 1), dateParts[0], 0, 0, 0);
             var days = (currentDate - createdDate) / (1000 * 60 * 60 * 24); // subtraiktion sind ms und umrechnen in tage
                         
                 return days;

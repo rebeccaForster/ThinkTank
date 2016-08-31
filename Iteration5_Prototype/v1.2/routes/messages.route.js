@@ -10,7 +10,7 @@ var Person = require('../models/users.model.js');
 
 var messages = {};
 
-router.get('/', function (req, res, next) {
+router.get('/getMyMessages/:user', function (req, res, next) {
     res.json(messages);
 });
 

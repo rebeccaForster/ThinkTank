@@ -49,8 +49,8 @@ router.get('/getIdea/:id', function (req, res, next) {
 						"milestones": idea.milestones,
 						"likes": idea.likes,
 						"contributors": idea.contributors,
-						"lastchanged": dateFormat(idea.lastchanged, "mm/dd/yyyy"),
-						"created": dateFormat(idea.created, "mm/dd/yyyy")
+						"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy"),
+						"created": dateFormat(idea.created, "dd/mm/yyyy")
 					});
 		}
 	})
@@ -110,6 +110,16 @@ router.get('/getAllIdeasSorted/:sorting', function (req, res, next) {
 	res.json(ideas);
 });
 
+
+router.get('/getOwnIdeas/:user', function (req, res, next) {
+    var ideas = [{}];
+    res.json(ideas);
+});
+
+router.get('/getFollowedIdeas/:user', function (req, res, next) {
+    var ideas = [{}];
+    res.json(ideas);
+});
 
 router.get('/searchIdea/:term', function (req, res, next) {
     var ideas = [{}];

@@ -22,6 +22,7 @@ var userSchema = new mongoose.Schema({
 	interests: String, 
 	publications: String, 
 	//todo hier fehlen noch die tags         tags: ["tag11", "tag21", "g11", "tag112", "tag212", "g112"],
+	// brauchen nohc eine Liste wo die eignenen ideen drinnen stehen
 	url: String, 
 	followedideas: [ mongoose.Schema.Types.ObjectId ],
 	followedpersons: [ mongoose.Schema.Types.ObjectId ], 
