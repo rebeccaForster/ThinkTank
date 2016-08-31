@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var CommentSchema = new mongoose.Schema({
 	created: { type: Date, default: Date.now }, 
 	reaction: String, //trouble, input, like or more 
+	// Frage: wie stellst du dir den reaction string vor????????? ich bekomme nur true oder false zuück und keine Namen
 	title: String,
 	text: String,
 	user: mongoose.Schema.Types.ObjectId,// person ID 
