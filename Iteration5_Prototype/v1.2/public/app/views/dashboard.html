@@ -10,8 +10,10 @@
     </md-toolbar>
     <md-toolbar>
         <div class="md-toolbar-tools toolbar-settings-bottom" layout='row'>
+            <!-- Todo daheim auf andere Seiten anpassen-->
+                        <div flex=3></div>
 
-            <div style="border-bottom: 2px solid white;"   ng-click="searchHashtag($event) " flex>
+            <div style="border-bottom: 2px solid white;"   ng-click="searchHashtag($event) " flex=89>
                 <div layout="row">
                     <div flex>
                         <md-button class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setSelectedHashtags(selectedHashtag, true);updateDashboard(); $event.stopPropagation();" style="font-size:24px; margin-bottom:5px;">#{{selectedHashtag}}
@@ -30,7 +32,10 @@
                 <md-select ng-model="sortingType" aria-label="sorting" ng-change="changeSortingType(sortingType)">
                     <md-option ng-value="t" data-ng-repeat="t in sorting">{{ t }}</md-option>
                 </md-select>
+
             </md-input-container>
+                        <div flex=3></div>
+
         </div>
     </md-toolbar>
 </header>
