@@ -44,7 +44,7 @@
                     <div class="inset">
                         <ng-md-icon icon="{{item.icon}}" size="34"></ng-md-icon>
                     </div>
-                    <div ng-hide="navbarShort()" class="inset md-headline" style="font-weight:bold; margin-top:10px;">{{item.title}}
+                    <div ng-hide="navbarShort()" class="inset md-headline" style="font-weight:bold; margin-top:15px;">{{item.title}}
                     </div>
                 </md-item-content>
             </md-item>
@@ -59,7 +59,6 @@
                 Sign In
             </div>
         </div>
-
         <div layout="row" layout-align="start center" ng-hide="isLoggedIn" ng-click="logout()">
             <div class="inset">
                 <ng-md-icon icon="logout" size="34"></ng-md-icon>
