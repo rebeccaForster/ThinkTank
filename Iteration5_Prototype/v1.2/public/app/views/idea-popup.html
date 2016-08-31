@@ -51,10 +51,11 @@
         </div>
 
         <md-dialog-content layout="row" >
+            <!-- todo divider -->
             <div flex=50 layout="column" style="padding: 0px 40px 40px 40px;">
 
                 <div class="idea-block">
-                    <div class="md-headline" style="font-weight:bold;">
+                    <div class="md-headline margin-bottom-15" style="font-weight:bold;">
                         <ng-md-icon icon="person_add" size="18"></ng-md-icon>
                         Contributors</div>
                     <div>
@@ -84,23 +85,23 @@
                     <md-button class="md-accent" style="font-weight:bold; font-size:24px;">I want to contribute</md-button>
                 </div>
                 <div  class="idea-block">
-                    <div class="md-headline" style="font-weight:bold;">
+                    <div class="md-headline margin-bottom-15" style="font-weight:bold;">
                         <ng-md-icon icon="brush" size="18"></ng-md-icon>
                         Whiteboard Scribble</div>
                     <div ng-repeat="scrib in selectedIdea.scribble">
                         <img src={{scrib}} class="content-image">
                     </div>
-                    <div class="md-headline" ng-show="{{selectedIdea.scribble.length}} <= 0">No Scribble available!</div>
+                    <div class="md-headline margin-bottom-15" ng-show="{{selectedIdea.scribble.length}} <= 0">No Scribble available!</div>
                 </div>
                 <div  class="idea-block">
-                    <div class="md-headline" style="font-weight:bold;">
+                    <div class="md-headline margin-bottom-15" style="font-weight:bold;">
                         <ng-md-icon icon="description" size="18"></ng-md-icon>
                         Description</div>
-                    <p class="md-headline">{{selectedIdea.description}}</p>
+                    <div class="md-headline">{{selectedIdea.description}}</div>
                 </div>
 
                 <div  class="idea-block">
-                    <div class="md-headline" style="font-weight:bold;">
+                    <div class="md-headline margin-bottom-15" style="font-weight:bold;">
                         <ng-md-icon icon="add_location" size="18"></ng-md-icon>
                         Milestones</div>
                     <div>
@@ -110,13 +111,13 @@
                     </div>
                 </div>
                 <div  class="idea-block">
-                    <div class="md-headline" style="font-weight:bold;"># Hashtags</div>
+                    <div class="md-headline margin-bottom-15" style="font-weight:bold;"># Hashtags</div>
                     <p class="hashtag-style" ng-repeat="tag in selectedIdea.tags" style="padding:0px 10px 0px 10px; margin:0px;display:inline-block">#{{tag | uppercase}}</p>
                 </div>
             </div>
             <div flex=50 layout="column" style="padding: 0px 40px 40px 40px;">
                 <div>
-                    <div class="md-headline" style="font-weight:bold;">
+                    <div class="md-headline margin-bottom-15" style="font-weight:bold;">
                         <ng-md-icon icon="forum" size="18"></ng-md-icon>
                         Comments/React on Idea</div>
                     <div layout="row">
