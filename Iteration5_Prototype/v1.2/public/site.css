@@ -59,6 +59,9 @@ md-card {
 .icon-gray{
     fill:#737373;
 }
+.text-gray{
+    color:#737373;
+}
 .icon-background-gray{
     background-color: #737373 !important;
 }
