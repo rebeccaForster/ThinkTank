@@ -1,41 +1,42 @@
 <header>
 
-    <md-toolbar class="md-primary md-hue-1 toolbar-settings-top" layout-padding>
-        <div class="md-toolbar-tools">
+    <md-toolbar class="md-primary md-hue-1 toolbar-settings-top">
+        <div style="margin-right:20px !important; margin-left:20px !important; " flex layout='row'>
 
-            <div class="md-headline">
-                Academic Think Tank
+            <div class="md-toolbar-tools">
+
+                <div class="md-headline">
+                    Academic Think Tank
+                </div>
             </div>
         </div>
     </md-toolbar>
     <md-toolbar>
-        <div class="md-toolbar-tools toolbar-settings-bottom" layout='row'layout-padding>
+        <div class="md-toolbar-tools toolbar-settings-bottom" layout='row'>
             <!-- Todo daheim auf andere Seiten anpassen-->
-                        <div flex=4 ></div>
-
-            <div style="border-bottom: 2px solid white;"   ng-click="searchHashtag($event) " flex>
-                <div layout="row">
-                    <div flex>
-                        <md-button class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setSelectedHashtags(selectedHashtag, true);updateDashboard(); $event.stopPropagation();" style="font-size:24px; margin-bottom:5px;">#{{selectedHashtag}}
-                            <ng-md-icon icon="close"></ng-md-icon>
-                        </md-button>
+            <div style="margin-right:20px !important; margin-left:20px !important; " flex layout='row'>
+                <div style="border-bottom: 2px solid white;" ng-click="searchHashtag($event) " flex>
+                    <div layout="row">
+                        <div flex>
+                            <md-button class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setSelectedHashtags(selectedHashtag, true);updateDashboard(); $event.stopPropagation();" style="font-size:24px; margin-bottom:5px;">#{{selectedHashtag}}
+                                <ng-md-icon icon="close"></ng-md-icon>
+                            </md-button>
+                        </div>
+                        <md-button aria-label="Search">
+                            <ng-md-icon icon="search" size="64" class="icon-white"></ng-md-icon>
                     </div>
-                    <md-button aria-label="Search">
-                        <ng-md-icon icon="search" size="64" class="icon-white"></ng-md-icon>
+                    </md-button>
                 </div>
-                </md-button>
+
+
+                <div flex=5></div>
+                <md-input-container>
+                    <md-select ng-model="sortingType" aria-label="sorting" ng-change="changeSortingType(sortingType)">
+                        <md-option ng-value="t" data-ng-repeat="t in sorting">{{ t }}</md-option>
+                    </md-select>
+
+                </md-input-container>
             </div>
-
-
-            <div flex=5></div>
-            <md-input-container>
-                <md-select ng-model="sortingType" aria-label="sorting" ng-change="changeSortingType(sortingType)">
-                    <md-option ng-value="t" data-ng-repeat="t in sorting">{{ t }}</md-option>
-                </md-select>
-
-            </md-input-container>
-                        <div flex=4></div>
-
         </div>
     </md-toolbar>
 </header>
