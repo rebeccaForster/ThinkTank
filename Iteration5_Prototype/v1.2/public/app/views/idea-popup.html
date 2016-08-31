@@ -45,16 +45,16 @@
                 </round-progress>
             </div>
         </div>
-        <div layout="row" style="margin-bottom:110px;">
+        <div layout="row" style="margin-bottom:125px;">
             <div flex></div>
-            <md-button class="md-accent" style="font-weight:bold; font-size:45px;">Follow idea</md-button>
+            <md-button class="md-accent" style="font-weight:bold; font-size:34px;">Follow idea</md-button>
         </div>
 
         <md-dialog-content layout="row">
             <div flex=50 layout="column" layout-padding>
 
                 <div>
-                    <div class="md-display-1" style="font-weight:bold;">
+                    <div class="md-headline" style="font-weight:bold;">
                         <ng-md-icon icon="person_add" size="34"></ng-md-icon>
                         Contributors</div>
                     <div>
@@ -84,7 +84,7 @@
                     <md-button class="md-accent" style="font-weight:bold; font-size:24px;">I want to contribute</md-button>
                 </div>
                 <div>
-                    <div class="md-display-1" style="font-weight:bold;">
+                    <div class="md-headline" style="font-weight:bold;">
                         <ng-md-icon icon="brush" size="34"></ng-md-icon>
                         Whiteboard Scribble</div>
                     <div ng-repeat="scrib in selectedIdea.scribble">
@@ -93,25 +93,25 @@
                     <div class="md-headline" ng-show="{{selectedIdea.scribble.length}} <= 0">No Scribble available!</div>
                 </div>
                 <div>
-                    <div class="md-display-1" style="font-weight:bold;">
+                    <div class="md-headline" style="font-weight:bold;">
                         <ng-md-icon icon="description" size="34"></ng-md-icon>
                         Description</div>
                     <p class="md-headline">{{selectedIdea.description}}</p>
                 </div>
 
                 <div>
-                    <div class="md-display-1" style="font-weight:bold;">
+                    <div class="md-headline" style="font-weight:bold;">
                         <ng-md-icon icon="add_location" size="34"></ng-md-icon>
                         Milestones</div>
                     <div>
-                        <md-checkbox class="md-display-1" ng-repeat="milestone in selectedIdea.milestones" ng-model="milestone.status" aria-label="milestone.name" ng-disabled="true">
+                        <md-checkbox class="md-headline" ng-repeat="milestone in selectedIdea.milestones" ng-model="milestone.status" aria-label="milestone.name" ng-disabled="true">
                             {{milestone.name}}
                         </md-checkbox>
                     </div>
                 </div>
                 <div>
-                    <div class="md-display-1" style="font-weight:bold;"># Hashtags</div>
-                    <p class="md-headline" ng-repeat="tag in selectedIdea.tags" style="padding:0px 10px 0px 10px; margin:0px;display:inline-block">#{{tag | uppercase}}</p>
+                    <div class="md-headline" style="font-weight:bold;"># Hashtags</div>
+                    <p class="hashtag-style" ng-repeat="tag in selectedIdea.tags" style="padding:0px 10px 0px 10px; margin:0px;display:inline-block">#{{tag | uppercase}}</p>
                 </div>
             </div>
             <div flex=50 layout="column" layout-padding>
