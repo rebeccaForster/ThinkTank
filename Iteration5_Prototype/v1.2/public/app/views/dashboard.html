@@ -18,7 +18,7 @@
                 <div style="border-bottom: 2px solid white;" ng-click="searchHashtag($event) " flex>
                     <div layout="row">
                         <div flex>
-                            <md-button class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setSelectedHashtags(selectedHashtag, true);updateDashboard(); $event.stopPropagation();" style="font-size:24px; margin-bottom:5px;">#{{selectedHashtag}}
+                            <md-button class="md-raised md-accent hashtag-style" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setSelectedHashtags(selectedHashtag, true);updateDashboard(); $event.stopPropagation();" style=" margin-bottom:5px;">#{{selectedHashtag}}
                                 <ng-md-icon icon="close"></ng-md-icon>
                             </md-button>
                         </div>
@@ -40,8 +40,8 @@
         </div>
     </md-toolbar>
 </header>
-<md-button class="md-fab md-fab-bottom-right" ng-click="openWhiteboard()" style="position:fixed; min-height:128px !important;  min-width:128px !important;" aria-label="Add">
-    <ng-md-icon icon="add" size="34"></ng-md-icon>
+<md-button class="md-fab md-fab-bottom-right" ng-click="openWhiteboard()" style="position:fixed; min-height:128px !important;  min-width:128px !important;-webkit-box-shadow: 1px 15px 23px 0px rgba(46,74,117,1);-moz-box-shadow: 1px 15px 23px 0px rgba(46,74,117,1); box-shadow: 1px 15px 23px 0px rgba(46,74,117,1);" aria-label="Add">
+    <ng-md-icon icon="add" size="51"></ng-md-icon>
 </md-button>
 <main class="" layout="row" flex>
     <md-content flex>

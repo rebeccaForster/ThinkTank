@@ -38,20 +38,21 @@
                 <span ng-hide="navbarShort()" class="md-headline" style="front-weight=bold;">{{user.name}}</span>
             </div>
         </md-toolbar>
-        <md-list>
-            <md-item ng-repeat="item in menu" ng-click="go($index, item.path,item.name);" id="nav-item{{$index}}">
+        <md-list style="margin:15px;">
+            <md-item ng-repeat="item in menu" ng-click="go($index, item.path,item.name);" id="nav-item{{$index}}" >
                 <md-item-content ng-class="{'item-select' : $index === selectedItem }" layout="row" layout-align="start center">
                     <div class="inset">
                         <ng-md-icon icon="{{item.icon}}" size="34"></ng-md-icon>
                     </div>
-                    <div ng-hide="navbarShort()" class="inset md-headline" style="font-weight:bold;">{{item.title}}
+                    <div ng-hide="navbarShort()" class="inset md-headline" style="font-weight:bold; margin-top:10px;">{{item.title}}
                     </div>
                 </md-item-content>
             </md-item>
         </md-list>
         <div flex></div>
+        <!-- to do-->
         <div layout="row" layout-align="start center" ng-show="isLoggedIn" ng-click="showLoginBox($event)">
-            <div class="inset">
+            <div class="inset" >
                 <ng-md-icon icon="login" size="34"></ng-md-icon>
             </div>
             <div ng-hide="navbarShort()" class="inset md-headline" style="font-weight:bold;">
