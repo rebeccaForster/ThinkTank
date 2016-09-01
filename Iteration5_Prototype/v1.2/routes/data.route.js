@@ -16,6 +16,7 @@ router.get('/getAllHashtags', function (req, res, next) {
 	var tags = new Array;
 	var ideas = new Array;
 	var hashTags = new Array;
+	var hashTagObjecs = new Array;
 	Idea.find({}, function(err, doc) {
 
 		if (err) {
@@ -26,14 +27,52 @@ router.get('/getAllHashtags', function (req, res, next) {
 			ideas = doc; 
 		}
 	}).then(function() {
+		
 		ideas.forEach(function(entry) {
 			tags = tags.concat(entry.tags);
 		});
-		hashTags = tags.filter(function(elem, pos) {
-			  return tags.indexOf(elem) == pos;
-			});
+
+		//Make it uiniqu and set prio all to one 
+		// hashTags = tags.filter(function(elem, pos) {
+		// 	  return tags.indexOf(elem) == pos;
+		// 	});
+
+		// hashTags.forEach(function(tag) {
+		// 	hashTagObjecs.push({
+		// 		name: tag,
+		// 		priority: 1
+		// 	})
+		// });
+		// res.status(200);
+		// res.json(hashTagObjecs);	
+
+	    var prev, maxPrio = 5, mostComPrio = 0;
+
+	    tags.sort();
+
+	    for ( var i = 0; i < tags.length; i++ ) {
+	        if ( tags[i] !== prev ) {
+	            hashTagObjecs.push({
+	            	name: tags[i], 
+	            	priority: 1
+	            });
+	        } else {
+	            hashTagObjecs[hashTagObjecs.length-1].priority++;
+	        }
+	        prev = tags[i];
+	    }
+
+		hashTagObjecs.forEach(function(tag) {
+			if(tag.priority > mostComPrio) mostComPrio = tag.priority;
+		});
+
+	    for ( var i = 0; i < hashTagObjecs.length; i++ ) {
+	        hashTagObjecs[i].priority = Math.round((hashTagObjecs[i].priority/mostComPrio)*maxPrio);
+	    }
+	       
+
 		res.status(200);
-		res.json(hashTags);	
+		res.json(hashTagObjecs);	
 	});
 });
 
