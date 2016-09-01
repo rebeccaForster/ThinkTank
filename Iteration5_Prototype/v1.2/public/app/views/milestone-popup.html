@@ -3,11 +3,11 @@
         <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding>
             <h2>Your Milestones:</h2>
             <div>
-                
-                <md-button class="md-raised md-accent" ng-repeat="milestone in milestones"  style="font-size:24px; margin-bottom:5px;">
+
+                <md-button class="md-raised md-accent" ng-repeat="milestone in milestones" style="font-size:24px; margin-bottom:5px;">
                     <md-checkbox ng-model="milestone.percentage" class="md-primary" aria-label="milestone.name">
-                    {{milestone.name}}
-                </md-checkbox>
+                        {{milestone.name}}
+                    </md-checkbox>
                     <ng-md-icon icon="close" ng-click="setSelectedMilestones(milestones.name, true, milestones.extratime, milestones.icon);"></ng-md-icon>
                 </md-button>
             </div>
@@ -17,27 +17,41 @@
             </md-button>
 
         </md-toolbar>
-        <md-dialog-content class="content" layout-padding>
+        <md-dialog-content class="content">
             <div layout="row">
-                <md-input-container class="md-block" flex>
-                    <label>Is your milestone not in the list? Here can you add a new milestone!</label>
-                    <input name="newMilestone" ng-model="addMilestone" validate-new-milestone required />
+                <div class="background-color-white" ng-include="'app/views/abc-list.html'">
 
-                    <div ng-messages="milestoneForm.newMilestone.$error">
-                        <div ng-message="validateNewMilestone">This milestone is in the list! You can't add it.</div>
-
-                        <div ng-message="required">This is required.</div>
-
-                    </div>
-                </md-input-container>
-                <md-button ng-disabled="milestoneForm.newMilestone.$invalid" class=" md-raised md-primary" ng-click="addNewMilestone()">+</md-button>
-            </div>
-            <div class="masonry-layout-milestone">
-                <div layout="row" ng-repeat="item in milestoneList | orderBy:'name'" class="item">
-                    <md-button data-ng-class="{'md-accent' : statusMilestoneSelected(item.name)}" ng-click="setSelectedMilestones( item.name, statusMilestoneSelected( item.name), item.extratime, item.icon)">{{item.name}}</md-button>
                 </div>
+                <div layout="column" flex>
+                    <div layout="row">
+                        <md-input-container class="md-block" flex>
+                            <label>Is your milestone not in the list? Here can you add a new milestone!</label>
+                            <input name="newMilestone" ng-model="addMilestone" validate-new-milestone required />
 
+                            <div ng-messages="milestoneForm.newMilestone.$error">
+                                <div ng-message="validateNewMilestone">This milestone is in the list! You can't add it.</div>
+
+                                <div ng-message="required">This is required.</div>
+
+                            </div>
+                        </md-input-container>
+                        <md-button ng-disabled="milestoneForm.newMilestone.$invalid" class=" md-raised md-primary" ng-click="addNewMilestone()">+</md-button>
+                    </div>
+                    <div class="masonry-layout-milestone">
+                        <div layout="row" ng-repeat="item in milestoneList | orderBy:'name'" class="item">
+                            <md-button data-ng-class="{'md-accent' : statusMilestoneSelected(item.name)}" ng-click="setSelectedMilestones( item.name, statusMilestoneSelected( item.name), item.extratime, item.icon)">{{item.name}}</md-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="background-color-white" ng-include="'app/views/abc-list.html'">
+
+                </div>
+            </div>
         </md-dialog-content>
+        <md-dialog-actions layout="row">
 
+            <span flex></span>
+            <md-button class=" md-raised md-primary" ng-click="cancel();">Okay</md-button>
+        </md-dialog-actions>
     </form>
 </md-dialog>

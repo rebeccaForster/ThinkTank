@@ -1,13 +1,14 @@
-<md-card-header >
-    <md-card-avatar ng-click="showProfile(idea.author, $event);$event.stopPropagation();">
-        <img class="md-user-avatar" src={{setImgPath(idea.author.profileImg)}} />
+<md-card-header ng-init="getIdeaCardAuthor(idea.author)">
+    <md-card-avatar ng-click="showProfile(ideaCardAuthor[$index], $event);$event.stopPropagation();">
+        <img class="md-user-avatar" src={{ideaCardAuthor[$index].profileImg}} alt=" {{ideaCardAuthor[$index].firstname}} {{ideaCardAuthor[$index].name}}"/>
     </md-card-avatar>
     <md-card-header-text >
         <div >
-            <span class="md-display-1" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical; font-weight:bold;">{{idea.title}}</span>
+            <span class="md-headline font-weight-bold" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;">{{idea.title}}</span>
+           
         </div>
         <div>
-            <span class="md-title">Author: {{idea.author.firstname}} {{idea.author.name}}</span>
+            <span class="md-title">Author: {{ideaCardAuthor[$index].firstname}} {{ideaCardAuthor[$index].name}}</span>
         </div>
     </md-card-header-text>
 
@@ -20,17 +21,3 @@
 <md-card-content>
     <md-button ng-repeat="tag in idea.tags" class="hashtag-style" data-ng-class="{'md-accent' : hashtagSelected(tag)}" ng-click="setSelectedHashtags(tag, hashtagSelected(tag));updateDashboard(); ;$event.stopPropagation();">#{{tag | uppercase}}</md-button>
 </md-card-content>
-<!--
-<md-card-actions layout="row" layout-align="end center">
-    <md-button ng-click="commentIdea(idea.id, $event)" class="md-icon-button" aria-label="Comment">
-        <ng-md-icon icon="forum" class="icon-gray"></ng-md-icon>
-    </md-button>
-    <md-button ng-click="followIdea(idea.id, $event)" class="md-icon-button" aria-label="Follow">
-        <ng-md-icon icon="notifications" class="icon-gray"></ng-md-icon>
-    </md-button>
-    <md-button ng-click="participateIdea(idea.id, $event)" class="md-icon-button" aria-label="Participate">
-        <ng-md-icon icon="linkedin" class="icon-gray"></ng-md-icon>
-    </md-button>
-
-</md-card-actions>
--->

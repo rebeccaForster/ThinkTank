@@ -1,5 +1,6 @@
 'use strict';
 app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService, $stateParams) {
+    $scope.isWhiteboard = true;
     $scope.saveScribble = function (ev) {
 
         if ($scope.ideaId == -1) {
@@ -153,7 +154,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             hideAfterClick: false,
             menus: [
                 {
-                    icon: 'fa fa-font',
+                    icon: 'my-icon-text',
                     click: function () {
                         console.log('Function text input');
                     },
@@ -251,21 +252,21 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
 
                 {
-                    icon: 'fa fa-microphone',
+                    icon: 'my-icon-voice',
                     click: function () {
                         console.log('Function keyboard_voice');
                     },
                     disabled: true
                             },
                 {
-                    icon: 'fa fa-video-camera',
+                    icon: 'my-icon-video',
                     click: function () {
                         console.log('Function record');
                     },
                     disabled: true
                                 },
                 {
-                    icon: 'fa fa-paperclip',
+                    icon: 'my-icon-attach',
                     click: function () {
                         console.log('Function attach file');
                     },

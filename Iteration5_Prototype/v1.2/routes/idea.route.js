@@ -102,8 +102,6 @@ router.get('/getAllIdeasSorted/:sorting', function (req, res, next) {
     var options = {
 	    "sort": req.params.sorting
 	}
-	//todo: send error if nothing was found
-
 	var ideas = Idea.find( {}, options);
 
 	res.status(200);

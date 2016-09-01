@@ -1,11 +1,13 @@
 'use strict';
 angular
     .module('App')
+    // the controller is used on the dashboard and profile site the reason ist that the functionaity is the same only the font design is differnt
     .controller('DashboardProfileCtrl', function ($scope, dashService, profileService, ideaService, indexData, $location, $mdDialog, $mdMedia, $timeout) {
 
-        $scope.ideas = {};
-        $scope.users = [];
+        $scope.ideas = [];
 
+        // loads all ideas from the server and save it in a variable.
+        // this variable will be loaded in the html  
         dashService
             .loadAllIdeas()
             .then(function (res) {
@@ -14,14 +16,22 @@ angular
             });
 
 
-        $scope.hashtags = [];
 
+        $scope.hashtags = [];
+        // loads all hashtags with name and priority from the server and save it in a variable.
+        // this variable will be loaded in the hashtag popup 
         indexData
             .getAllTags()
             .then(function (res) {
                 $scope.hashtags = res;
             });
 
+        /* function: open an dialog with all hashtags and selected hashtags
+                        via the dialog can hashtags be added or cleared to the searchbar
+                        after the dialog is closed the dashboard must be updated with
+                        the selected hashtags and the sorting item of the hashtag*/
+        // input: $event
+        // output: -
         $scope.searchHashtag = function (ev) {
             $mdDialog.show({
                     controller: HashtagPopupController,
@@ -38,65 +48,65 @@ angular
                 });
         }
 
+        /*
+        function: calculate the days which are left after the idea was created
+        input: date when the idea was created
+        output: number of days which are left after the idea was created
+        */
         $scope.calculateIdeaLeftDays = function (date) {
             var currentDate = new Date();
             currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0);
-            if(date = '')
-            {
-            var dateParts = date.split("/");
+            if (date = '') {
+                var dateParts = date.split("/");
+                var createdDate = new Date(dateParts[2], (dateParts[1] - 1), dateParts[0], 0, 0, 0);
+                var days = (currentDate - createdDate) / (1000 * 60 * 60 * 24); // subtraiktion sind ms und umrechnen in tage
 
-            var createdDate = new Date(dateParts[2], (dateParts[0] - 1), dateParts[1], 0, 0, 0);
-         var createdDate = new Date(dateParts[2], (dateParts[1] - 1), dateParts[0], 0, 0, 0);
-            var days = (currentDate - createdDate) / (1000 * 60 * 60 * 24); // subtraiktion sind ms und umrechnen in tage
-                        
                 return days;
             }
             return 0;
 
         }
 
+        // number of columns of the dashboard site for md-cards
         $scope.maxColumn = 3;
+        // number of columns of the profile site for md-cards
         $scope.maxProfileColumn = 2;
 
-        $scope.commentIdea = function (index, ev) {
-            $mdDialog.show(
-                $mdDialog.alert()
-                .parent(angular.element(document.querySelector('#popupContainer')))
-                .clickOutsideToClose(true)
-                .title('Comment Idea')
-                .textContent('Index: ' + index)
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Got it!')
-                .targetEvent(ev)
-            );
+
+        /*
+           function: 
+           input: id of the idea
+           output:
+           */
+        $scope.commentIdea = function (id) {
+            
 
         }
-        $scope.followIdea = function (index, ev) {
-            $mdDialog.show(
-                $mdDialog.alert()
-                .clickOutsideToClose(true)
-                .title('Follow Idea')
-                .textContent('Index: ' + index)
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Got it!')
-                .targetEvent(ev)
-            );
-
+         /*
+           function: 
+           input: id of the idea
+           output:
+           */
+        $scope.followIdea = function (id) {
+           
         }
-        $scope.participateIdea = function (index, ev) {
-            $mdDialog.show(
-                $mdDialog.alert()
-                .clickOutsideToClose(true)
-                .title('Participate Idea')
-                .textContent('Index: ' + index)
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Got it!')
-                .targetEvent(ev)
-            );
-
+         /*
+           function: 
+           input: id of the idea
+           output:
+           */
+        $scope.participateIdea = function (id) {
+            
         }
 
-        $scope.showProfile = function (index, ev) {
+        
+        
+        /*
+           function: 
+           input: id of the idea
+           output:
+           */
+        $scope.showProfile = function (profile, ev) {
             $mdDialog.show({
                     controller: ProfilePopupController,
                     templateUrl: 'app/views/profile-popup.html',
@@ -106,21 +116,53 @@ angular
                     clickOutsideToClose: true,
                     fullscreen: true,
                     locals: {
-                        profileIndex: index
+                        profile: profile
                     }
                 })
                 .then(function () {}, function () {});
 
 
         };
+        $scope.ideaCardAuthor = [];
+        $scope.getIdeaCardAuthor = function (id) {
+            profileService
+                .getUser(id)
+                .then(function (res) {
+
+                    $scope.ideaCardAuthor.push(res);
+                });
+
+        };
+        $scope.ideaAuthor = '';
+
+        $scope.getIdeaAuthor = function (id) {
+            profileService
+                .getUser(id)
+                .then(function (res) {
+
+                    $scope.ideaAuthor = (res);
+                });
+
+        };
 
 
+        $scope.ideaContr = [];
+
+        $scope.getIdeaContr = function (id) {
+            profileService
+                .getUser(id)
+                .then(function (res) {
+
+                    $scope.ideaContr.push(res);
+                });
+
+        };
         $scope.getUser = function (id) {
             profileService
                 .getUser(id)
                 .then(function (res) {
 
-                    $scope.user = res; 
+                    return res;
                 });
 
         };
@@ -129,7 +171,7 @@ angular
                 .getIdea(id)
                 .then(function (res) {
 
-                    $scope.selectedIdea = res;
+                    return res;
                 });
 
         };
@@ -154,7 +196,7 @@ angular
             $location.url("/whiteboard" + "/" + id);
 
         }
-        $scope.showIdea = function (index, ev) {
+        $scope.showIdea = function (idea, ev) {
             $mdDialog.show({
                     controller: IdeaPopupController,
                     templateUrl: 'app/views/idea-popup.html',
@@ -164,7 +206,7 @@ angular
                     clickOutsideToClose: true,
                     fullscreen: true,
                     locals: {
-                        ideaIndex: index
+                        idea: idea
                     }
                 })
                 .then(function () {
@@ -241,9 +283,9 @@ angular
     });
 
 
-function IdeaPopupController($scope, $mdDialog, ideaIndex) {
+function IdeaPopupController($scope, $mdDialog, idea) {
 
-    $scope.getIdea(ideaIndex);
+    $scope.selectedIdea = idea;
     $scope.hide = function () {
         $mdDialog.hide();
     };
@@ -253,9 +295,8 @@ function IdeaPopupController($scope, $mdDialog, ideaIndex) {
 
 }
 
-function ProfilePopupController($scope, $mdDialog, profileIndex, profileService) {
-    $scope.getUser(profileIndex);
-
+function ProfilePopupController($scope, $mdDialog, profile, profileService) {
+    $scope.user = profile;
     $scope.hide = function () {
         $mdDialog.hide();
     };

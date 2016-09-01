@@ -1,39 +1,15 @@
 <header>
 
-    <md-toolbar class="md-primary md-hue-1 toolbar-settings-top">
-        <div class="md-toolbar-tools">
+     <md-toolbar class="md-primary md-hue-1 toolbar-settings-top">
+        <div class="md-toolbar-tools" style="margin-right:20px !important; margin-left:20px !important; " flex layout='row'>
 
-            <div class="md-display-1">
+            <div class="md-headline">
                 Academic Think Tank
             </div>
         </div>
     </md-toolbar>
-    <md-toolbar>
-        <div class="md-toolbar-tools toolbar-settings-bottom" layout='row'>
 
-            <div style="border-bottom: 2px solid white;" flex>
-                <div layout="row">
-                    <div flex>
-
-                    </div>
-                    <md-button aria-label="Search" ng-click="searchHashtag($event)">
-                        <ng-md-icon icon="search" size="64" class="icon-white"></ng-md-icon>
-                    </md-button>
-                </div>
-
-            </div>
-
-
-            <div flex=5></div>
-            <md-input-container>
-                <md-select ng-model="sortingType" aria-label="sorting" >
-                    <md-option ng-value="t" data-ng-repeat="t in sorting">{{ t }}</md-option>
-                </md-select>
-            </md-input-container>
-        </div>
-    </md-toolbar>
-
-</header>
+ </header>
 <md-button class="md-fab md-fab-bottom-right" style="position:fixed; min-height:128px !important;  min-width:128px !important;" aria-label="Email">
     <ng-md-icon icon="email" size="34"></ng-md-icon>
 </md-button>

@@ -8,7 +8,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     };
 
 
-
+$scope.abcList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 
 
     $scope.menuNonAuth = [
@@ -237,6 +237,8 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             $scope.selectedHashtags.splice($scope.selectedHashtags.indexOf(name), 1);
 
         }
+       
+        
     }
 
     $scope.updateDashboard = function () {

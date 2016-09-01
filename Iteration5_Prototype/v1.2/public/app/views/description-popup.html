@@ -1,6 +1,6 @@
 <md-dialog aria-label="Whiteboard Description Popup" class="popup-hashtag-size">
     <form name="descriptionForm">
-        <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding ng-init="isWhiteboard = (0 == selectedItem)">
+        <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding >
             <h2>Idea description and title</h2>
 
             <span flex></span>
@@ -23,5 +23,10 @@
 
         </md-dialog-content>
 
+        <md-dialog-actions layout="row">
+
+            <span flex></span>
+            <md-button class=" md-raised md-primary" ng-click="cancel();">Okay</md-button>
+        </md-dialog-actions>
     </form>
 </md-dialog>

@@ -51,7 +51,7 @@
                     firstname: payload.firstname,
                     id: payload._id,
                     title: payload.title,
-                    profileImg: payload.profileImg, //"app/img/user.jpg",
+                    profileImg: payload.profileImg, //"app/img/user.svg",
                     url: payload.url //,
                         // tags: ["ergonomics", "test", "hashtag"],
                         // groups: [
@@ -74,7 +74,7 @@
                 firstname: '',
                 id: '',
                 title: '',
-                profileImg: "app/img/user.jpg", //"app/img/user.jpg",
+                profileImg: "app/img/user.svg", //"app/img/user.svg",
                 url: ''
             }
 

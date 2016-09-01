@@ -34,7 +34,7 @@ module.exports.register = function(req, res) {
   if (req.body.profileImg) {
     user.profileImg = req.body.profileImg;
   } else {
-    user.profileImg = "app/img/user.jpg";
+    user.profileImg = "app/img/user.svg";
   }
 
   user.setPassword(req.body.password);
