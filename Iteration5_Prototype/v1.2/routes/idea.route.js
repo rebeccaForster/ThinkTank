@@ -7,6 +7,7 @@ var router = express.Router();
 var ideaControler = require('../controllers/ideaControler');
 var dateFormat = require('dateformat');
 var Comment = require('../models/comment.model.js');
+var User = require('../models/users.model.js');
 
 
 router.get('/getAllIeas', function (req, res, next) {
@@ -25,35 +26,116 @@ router.get('/getAllIeas', function (req, res, next) {
 	})
 });
 
+// router.get('/getIdea/:id', function (req, res, next) {
+
+// 	console.log("getIdea triggerd");
+		// Idea.findOne({ _id: req.params.id }, function(err, idea) {
+		// if (err) {
+		// 	console.log(err);
+		// 	res.status(400);
+		// 	res.json(err);
+		// } else {
+
+		// 	res.status(200);
+		// 	res.json({"_id": idea._id,
+		// 				"livetime": idea.livetime,
+		// 				"description": idea.description,
+		// 				"abstract": idea.abstract,
+		// 				"title": idea.title,
+		// 				"author": author,
+		// 				"img": idea.img,
+		// 				"scribbles": idea.scribbles,
+		// 				"tags": idea.tags,
+		// 				"milestones": idea.milestones,
+		// 				"likes": idea.likes,
+		// 				"contributors": idea.contributors,
+		// 				"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy"),
+		// 				"created": dateFormat(idea.created, "dd/mm/yyyy")
+		// 			});
+		// }
+// });
+
 router.get('/getIdea/:id', function (req, res, next) {
 
 	console.log("getIdea triggerd");
 	Idea.findOne({ _id: req.params.id }, function(err, idea) {
-
 		if (err) {
 			console.log(err);
 			res.status(400);
 			res.json(err);
 		} else {
-			
-			res.status(200);
-			res.json({"_id": idea._id,
-						"livetime": idea.livetime,
-						"description": idea.description,
-						"abstract": idea.abstract,
-						"title": idea.title,
-						"author": idea.author,
-						"img": idea.img,
-						"scribbles": idea.scribbles,
-						"tags": idea.tags,
-						"milestones": idea.milestones,
-						"likes": idea.likes,
-						"contributors": idea.contributors,
-						"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy"),
-						"created": dateFormat(idea.created, "dd/mm/yyyy")
-					});
+				
+				var author = new Array;
+				User.findOne({ _id: idea.author }, function(err, doc) {
+				if (err) {
+					console.log(err);
+					res.status(400);
+					res.json(err);
+				} else {
+					
+					res.status(200);
+					var author = {
+						"_id": doc._id,
+						"profileImg": doc.profileImg,
+						"url": doc.url,
+						"title": doc.title,
+						"firstname": doc.firstname,
+						"email": doc.email,
+						"name": doc.name,
+						"contacs": doc.contacs,
+						"followedpersons": doc.followedpersons,
+						"followedideas": doc.followedideas,
+						"created": dateFormat(doc.created, "dd/mm/yyyy")};
+
+						console.log(typeof idea.contributors);
+						User.find({ _id: { $in: idea.contributors }}, function(err, contributorList) {
+							if (err) {
+								console.log(err);
+								res.status(400);
+								res.json(err);
+							} else {
+
+								var contributors = new Array;
+
+								contributorList.forEach(function(cont) {
+									contributors.push({
+										"_id": cont._id,
+										"profileImg": cont.profileImg,
+										"url": cont.url,
+										"title": cont.title,
+										"firstname": cont.firstname,
+										"email": cont.email,
+										"name": cont.name,
+										"contacs": cont.contacs,
+										"followedpersons": cont.followedpersons,
+										"followedideas": cont.followedideas,
+										"created": dateFormat(cont.created, "dd/mm/yyyy")
+									});
+								});
+
+								res.status(200);
+								res.json({"_id": idea._id,
+											"livetime": idea.livetime,
+											"description": idea.description,
+											"abstract": idea.abstract,
+											"title": idea.title,
+											"author": author,
+											"img": idea.img,
+											"scribbles": idea.scribbles,
+											"tags": idea.tags,
+											"milestones": idea.milestones,
+											"likes": idea.likes,
+											"contributors": contributors,
+											"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy"),
+											"created": dateFormat(idea.created, "dd/mm/yyyy")
+										});
+								
+						}
+					})
+				}
+			})
 		}
-	})
+	});
 
 	//for messages 
 	// var comments;
