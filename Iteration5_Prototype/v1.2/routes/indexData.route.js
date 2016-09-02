@@ -110,8 +110,6 @@ var milestones = [
 				extratime: 0,
 				icon: '' 
 		}
-    
-
 ];
 
 var users = [
