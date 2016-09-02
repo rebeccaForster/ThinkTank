@@ -318,7 +318,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     }
     $scope.addHashtags = function (ev) {
         $mdDialog.show({
-                controller: TagPopupController,
+                controller: HashtagPopupController,
                 templateUrl: 'app/views/hashtag-popup.html',
                 targetEvent: ev,
                 scope: $scope, // use parent scope in template
@@ -567,16 +567,7 @@ function DescriptionPopupController($scope, $mdDialog) {
     };
 
 }
-function TagPopupController($scope, $mdDialog) {
 
-    $scope.hide = function () {
-        $mdDialog.hide();
-    };
-    $scope.cancel = function () {
-        $mdDialog.cancel();
-    };
-
-}
 
 function ContrPopupController($scope, $mdDialog) {
 
@@ -600,23 +591,3 @@ function MilestonesPopupController($scope, $mdDialog) {
 
 }
 
-function PopupController($scope, $mdDialog) {
-
-    $scope.hide = function () {
-        $mdDialog.hide();
-    };
-    $scope.cancel = function () {
-        $mdDialog.cancel();
-    };
-
-}
-function PopupController($scope, $mdDialog) {
-
-    $scope.hide = function () {
-        $mdDialog.hide();
-    };
-    $scope.cancel = function () {
-        $mdDialog.cancel();
-    };
-
-}

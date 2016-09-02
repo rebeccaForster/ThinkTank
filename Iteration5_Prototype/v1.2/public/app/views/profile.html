@@ -29,10 +29,24 @@
 <div class="margin-top-15" style="margin-bottom:135px;"></div>
 <main class="" layout="row" flex>
     <md-content flex>
-        <div ng-controller="DashboardProfileCtrl" ng-cloak="">
-            <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column" ng-include="'app/views/profile-content.html'">
+        <div ng-controller="ProfileCtrl" ng-cloak="">
+           <div style="top:370px; right:0px; position:fixed; width:90px; heigt:100%;">
+                <div layout="column" layout-padding>
+                    <div flex=38></div>
+                   
+                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" ng-click="updateDescription($event);" aria-label="Descirption">
+                        <ng-md-icon icon="description" class="icon-white" size="34"></ng-md-icon>
+                    </md-button>
+                    <div flex=8></div>
 
 
+                    <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" ng-click="addHashtags($event);" aria-label="Hashtags">#</md-button>
+                    <div flex=38></div>
+
+                </div>
+            </div>
+            <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column" ng-include="'app/views/profile-content.html'" style="margin-right: 120px;">
+                 
             </md-content>
         </div>
     </md-content>

@@ -2,7 +2,7 @@
 angular
     .module('App')
     // the controller is used on the dashboard and profile site the reason ist that the functionaity is the same only the font design is differnt
-    .controller('DashboardProfileCtrl', function ($scope, dashService, profileService, ideaService, indexData, $location, $mdDialog, $mdMedia, $timeout) {
+    .controller('DashboardCtrl', function ($scope, dashService, profileService, ideaService, indexData, $location, $mdDialog, $mdMedia, $timeout) {
 
         $scope.ideas = [];
 

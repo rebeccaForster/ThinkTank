@@ -19,7 +19,7 @@
 
                 </div>
                 <div layout="column" flex>
-                    <div ng-show="isWhiteboard" layout="row">
+                    <div ng-show="isWhiteboard || isProfile" layout="row">
                         <md-input-container class="md-block" flex>
                             <label>Is your hashtag not in the list? Here can you add a new hashtag!</label>
                             <input name="newHashtag" ng-model="addHashtag" validate-new-hastag required />
