@@ -318,7 +318,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     }
     $scope.addHashtags = function (ev) {
         $mdDialog.show({
-                controller: PopupController,
+                controller: TagPopupController,
                 templateUrl: 'app/views/hashtag-popup.html',
                 targetEvent: ev,
                 scope: $scope, // use parent scope in template
@@ -333,7 +333,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
     $scope.addDescription = function (ev) {
         $mdDialog.show({
-                controller: PopupController,
+                controller: DescriptionPopupController,
                 templateUrl: 'app/views/description-popup.html',
                 targetEvent: ev,
                 scope: $scope, // use parent scope in template
@@ -372,7 +372,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     }
     $scope.addMilestones = function (ev) {
         $mdDialog.show({
-                controller: PopupController,
+                controller: MilestonesPopupController,
                 templateUrl: 'app/views/milestone-popup.html',
                 targetEvent: ev,
                 scope: $scope, // use parent scope in template
@@ -398,7 +398,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
     $scope.addContributors = function (ev) {
         $mdDialog.show({
-                controller: PopupController,
+                controller: ContrPopupController,
                 templateUrl: 'app/views/contributers-popup.html',
                 targetEvent: ev,
                 scope: $scope, // use parent scope in template
@@ -557,6 +557,59 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 });
 
 
+function DescriptionPopupController($scope, $mdDialog) {
+
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+
+}
+function TagPopupController($scope, $mdDialog) {
+
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+
+}
+
+function ContrPopupController($scope, $mdDialog) {
+
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+
+}
+
+function MilestonesPopupController($scope, $mdDialog) {
+
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+
+}
+
+function PopupController($scope, $mdDialog) {
+
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+
+}
 function PopupController($scope, $mdDialog) {
 
     $scope.hide = function () {

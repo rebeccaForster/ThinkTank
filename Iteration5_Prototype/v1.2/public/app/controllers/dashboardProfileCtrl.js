@@ -16,7 +16,7 @@ angular
             });
 
 
-
+    
         $scope.hashtags = [];
         // loads all hashtags with name and priority from the server and save it in a variable.
         // this variable will be loaded in the hashtag popup 
@@ -133,6 +133,9 @@ angular
                 });
 
         };
+    
+  
+    
         $scope.ideaAuthor = '';
 
         $scope.getIdeaAuthor = function (id) {
@@ -157,24 +160,7 @@ angular
                 });
 
         };
-        $scope.getUser = function (id) {
-            profileService
-                .getUser(id)
-                .then(function (res) {
-
-                    return res;
-                });
-
-        };
-        $scope.getIdea = function (id) {
-            ideaService
-                .getIdea(id)
-                .then(function (res) {
-
-                    return res;
-                });
-
-        };
+        
         $scope.addSearchTag = function (indexIdea, IndexTag, ev) {
             $mdDialog.show(
                 $mdDialog.alert()
