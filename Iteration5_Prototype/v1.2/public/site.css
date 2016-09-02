@@ -22,6 +22,7 @@ md-input-container {
 
 md-card {
     background-color: white;
+    margin-bottom: 30px !important;
 }
 
 .nav-width-short {
@@ -37,7 +38,60 @@ md-card {
 }
 
 
+.margin-bottom-15{
+    margin-bottom: 15px;
 }
+.margin-top-15{
+    margin-top: 15px;
+}
+.margin-top-25{
+    margin-top: 25px;
+}
+
+.background-color-white{
+    background-color: white;
+}
+.width-100-prozent{
+    width: 100%;
+}
+.margin-bottom-30{
+    margin-bottom: 30px !imporant;
+}
+.font-size-34{
+    font-size: 34px !important;
+}
+.padding-right-40{
+    padding-right: 40px;
+}
+
+.padding-bottom-40{
+    padding-bottom: 40px;
+}
+
+.padding-left-40{
+    padding-left: 40px;
+}
+
+.padding-right-40{
+    padding-right: 40px;
+}
+.margin-right-20{
+    margin-right: 20px;
+
+}
+.font-weight-bold{
+    font-weight: bold !important;
+
+}
+
+.margin-15{
+    margin: 15px;
+}
+
+.text-gray{
+    color:#737373;
+}
+
 .nav-img-user {
     z-index: 2;
     width: 72px;
@@ -61,7 +115,7 @@ md-card {
     min-height: 223px !important;
 }
 .hashtag-style {
-    font-size: 24px  !important;
+    font-size: 20px  !important;
     font-weight: bold !important;
 }
 .toolbar-settings-top {
@@ -70,3 +124,4 @@ md-card {
 .toolbar-settings-bottom {
     min-height: 149px !important;
 }
+

@@ -32,7 +32,10 @@
     opacity: 0.5;
    position: 50% 50%;
 }
+.idea-block{
+    margin-bottom: 40px;
 
+}
 .popup-size {
     max-width: 100%;
     max-height: auto;

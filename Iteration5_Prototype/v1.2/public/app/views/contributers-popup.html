@@ -15,13 +15,27 @@
             </md-button>
 
         </md-toolbar>
-        <md-dialog-content class="content" layout-padding>
-            <div class="masonry-layout-milestone">
-                <div layout="row" ng-repeat="contr in contributorsList | orderBy:'name'" class="item">
-                    <md-button data-ng-class="{'md-accent' : statusContributorsSelected(contr.name)}" ng-click="setSelectedContributors( contr.name, statusContributorsSelected( contr.name))">{{contr.name}}</md-button>
+        <md-dialog-content class="content">
+            <div layout="row">
+                <div class="background-color-white" ng-include="'app/views/abc-list.html'">
+
                 </div>
 
-        </md-dialog-content>
+                <div class="masonry-layout-milestone">
+                    <div layout="row" ng-repeat="contr in contributorsList | orderBy:'name'" class="item">
+                        <md-button data-ng-class="{'md-accent' : statusContributorsSelected(contr.name)}" ng-click="setSelectedContributors( contr.name, statusContributorsSelected( contr.name))">{{contr.name}}</md-button>
+                    </div>
+                </div>
+                <div flex></div>
+                <div class="background-color-white" ng-include="'app/views/abc-list.html'">
 
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+
+            <span flex></span>
+            <md-button class=" md-raised md-primary" ng-click="cancel();">Okay</md-button>
+        </md-dialog-actions>
     </form>
 </md-dialog>

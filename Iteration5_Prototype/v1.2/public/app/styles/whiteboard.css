@@ -56,7 +56,7 @@
 }
 
 .my-icon-fill {
-    background: url("../img/icon/fill1.png");
+    background: url("../img/icon/ic_format_color_fill_white_24px.svg");
 }
 
 .my-icon-strichstärke {
@@ -76,11 +76,31 @@
 }
 
 .my-icon-pen {
-    background: url("../img/icon/pen.png");
+    background: url("../img/icon/ic_create_white_24px.svg");
 }
 .my-icon-color {
-    background: url("../img/icon/color1.png");
+    background: url("../img/icon/ic_palette_white_24px.svg");
 }
 .my-icon-eraser {
-    background: url("../img/icon/eraser.png");
+    background: url("../img/icon/eraser.svg");
+}
+
+.my-icon-attach{
+    background: url("../img/icon/ic_attach_file_white_24px.svg");
+
+}
+
+.my-icon-voice{
+    background: url("../img/icon/ic_mic_white_24px.svg");
+
+}
+
+
+.my-icon-text{
+    background: url("../img/icon/ic_text_format_white_24px.svg");
+
+}
+.my-icon-video{
+    background: url("../img/icon/ic_videocam_white_24px.svg");
+
 }
