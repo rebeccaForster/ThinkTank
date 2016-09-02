@@ -49,6 +49,11 @@ router.get('/getAllUsers', function (req, res, next) {
 
 router.get('/getUser/:id', function (req, res, next) {
 
+	if (!req.params.id || typeof req.params.id != typeof "String" ) {
+			res.status(400);
+			res.json("id not valid");
+		} else {
+
 	console.log("getUser triggerd");
 	User.findOne({ 
 				_id: req.params.id 
@@ -195,8 +200,9 @@ router.get('/getUser/:id', function (req, res, next) {
 					})
 				}
 			})
-		}
+		} 
 	})
+}
 });
 
 router.post('/updateUser', userControler.updateUser);

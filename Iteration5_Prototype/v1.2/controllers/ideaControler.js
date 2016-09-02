@@ -7,7 +7,7 @@ var router = express.Router();
 
 var Comment = require('../models/comment.model.js');
 var Idea = require('../models/idea.model.js');
-var Person = require('../models/users.model.js');
+var Users = require('../models/users.model.js');
 
 
 module.exports.saveNewIdea = function(req, res) {
@@ -120,12 +120,165 @@ module.exports.saveNewIdea = function(req, res) {
 	});
 };
 
+module.exports.updateIdea = function(req, res) {
+
+	console.log("save idea triggerd");
+	console.log(req.body.idea.privacyType);
+
+  if(!req.body.user.id || !req.body.idea) {
+    console.log("idea was not saved because of incomplete data");
+    sendJSONresponse(res, 400, {
+      "message": "user and idea required"
+    });
+    return;
+  }
+
+  var idea = new Idea();
+
+  if(req.body.idea.scribble) {
+
+  	var a = "useruploads/";
+  	var b = "public/app/";
+  	var now = Date.now();
+  	var scribblePath = a.concat(now , ".png");
+  	var scribbleSavePath = b.concat(a, now, ".png");
+  	idea.scribble = scribblePath;
+  	idea.img = scribblePath;
+
+	// strip off the data: url prefix to get just the base64-encoded bytes
+	var data = req.body.idea.scribble.replace(/^data:image\/\w+;base64,/, "");
+	var buf = new Buffer(data, 'base64');
+	fs.writeFile(scribbleSavePath, buf)
+
+
+  } else {
+  	idea.scribble = "";
+  	idea.img = "";
+  }
+
+ 	idea.author = req.body.user.id;
+	idea.created = Date.now();
+	idea.lastchanged = Date.now();
+	idea.title = req.body.idea.title;
+	idea.abstract = "";
+
+	if(req.body.idea.description) {
+		idea.description = req.body.idea.description;
+	} 
+	
+	// TODO: Disabled untill form passes objectIDs of users
+	// if(req.body.idea.contributors) {
+	// 	idea.contributors = req.body.idea.contributors;
+	// } else {
+	// 	idea.contributors = [];
+	// }
+
+	if(req.body.idea.milestones) {
+		idea.milestones = req.body.idea.milestones;
+	}
+
+	if(req.body.idea.tags && req.body.idea.tags.length > 0) {
+		var tagNames = [];
+		for (var i in req.body.idea.tags) {
+		  tagNames.push(req.body.idea.tags[i].name);
+		}
+		idea.tags = tagNames;
+	}
+
+	if(req.body.idea.privacyType >= 0) {
+		idea.privacyType = req.body.idea.privacyType;
+	}
+
+	console.log(idea);
+
+	idea.save(function(err, room) {
+
+		if (err) {
+			console.log("error: ");
+			console.log(err);
+			res.json({
+			  id : err
+			});
+		} else {
+			console.log("Idea saved: ");
+			console.log(room._id);
+
+			res.status(200);
+			res.json({
+			  id : room._id
+			});
+		}
+		
+	});
+};
 
 module.exports.followIdea = function(req, res) {
 	//we need: ideaId, userId
+
+	if(!req.body.user.id || !req.body.ideaId) {
+	    console.log("was not saved because of incomplete data");
+	    sendJSONresponse(res, 400, {
+	      "message": "user and ideaId required"
+	    });
+	    return;
+	  }
+
+
+
+	  Users.update({ _id: req.body.user.id },
+		   { $push: { followedideas: req.body.ideaId } }, function(err, room) {
+
+		if (err) {
+			console.log("error: ");
+			console.log(err);
+			res.json({
+			  id : err
+			});
+		} else {
+			console.log("followed: ");
+			console.log(room._id);
+
+			res.status(200);
+			res.json({
+			  id : room._id
+			});
+		}
+		
+	});
 };
 
 module.exports.likeIdea = function(req, res) {
 	//we need: ideaId, userId
+
+		if(!req.body.user.id || !req.body.ideaId) {
+	    console.log("was not saved because of incomplete data");
+	    sendJSONresponse(res, 400, {
+	      "message": "user and ideaId required"
+	    });
+	    return;
+	  }
+
+
+
+	  Idea.update({ _id: req.body.ideaId },
+		   { $push: { likes: req.body.user.id } }, function(err, room) {
+
+		if (err) {
+			console.log("error: ");
+			console.log(err);
+			res.json({
+			  id : err
+			});
+		} else {
+			console.log("liked: ");
+			console.log(room._id);
+
+			res.status(200);
+			res.json({
+			  id : room._id
+			});
+		}
+		
+	});
 };
 

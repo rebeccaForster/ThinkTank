@@ -57,10 +57,41 @@
                 });
     };
 
+
+
+     var followIdea = function(ideaId, user) {
+        var data = {
+            ideaId: ideaId,
+            user: user
+        }
+
+        return $http.post('/api/ideaData/followIdea', whiteboard)
+                .success(function (data) {
+                    console.log(data)
+                    return data;
+                });
+    };
+
+
+     var likeIdea = function(ideaId, user) {
+        var data = {
+            ideaId: ideaId,
+            user: user
+        }
+
+        return $http.post('/api/ideaData/likeIdea', whiteboard)
+                .success(function (data) {
+                    console.log(data)
+                    return data;
+                });
+    };
+
     return {
       saveNewIdea : saveNewIdea, 
       updateIdea : updateIdea, 
-      getIdea : getIdea
+      getIdea : getIdea, 
+      likeIdea : likeIdea, 
+      followIdea : followIdea
     };
   }
 

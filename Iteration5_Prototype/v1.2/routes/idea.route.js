@@ -66,42 +66,6 @@ router.get('/getAllIeas', function (req, res, next) {
 	})
 });
 
-// router.get('/getAllIeas', function (req, res, next) {
-    
-//     console.log("getAllIdeas triggerd");
-// 	Idea.find({}, function(err, ideas) {
-
-// 		if (err) {
-// 			console.log(err);
-// 			res.status(400);
-// 			res.json(err);
-// 		} else {
-// 			var ideasList = new Array;
-
-// 			ideas.forEach(function(idea) {
-// 				ideasList.push({"_id": idea._id,
-// 								"livetime": idea.livetime,
-// 								"description": idea.description,
-// 								"abstract": idea.abstract,
-// 								"title": idea.title,
-// 								"author": idea.author,
-// 								"img": idea.img,
-// 								"scribbles": idea.scribbles,
-// 								"tags": idea.tags,
-// 								"milestones": idea.milestones,
-// 								"likes": idea.likes,
-// 								"contributors": idea.contributors,
-// 								"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy"),
-// 								"created": dateFormat(idea.created, "dd/mm/yyyy")
-// 							});
-// 				});
-
-// 			res.status(200);
-// 			res.json(ideasList);
-// 		}
-// 	})
-// });
-
 router.get('/getIdea/:id', function (req, res, next) {
 
 	console.log("getIdea triggerd");
@@ -255,6 +219,7 @@ router.get('/searchIdea/:term', function (req, res, next) {
 
 
 router.post('/saveNewIdea', ideaControler.saveNewIdea);
+router.post('/updateIdea', ideaControler.saveNewIdea);
 
 
 module.exports = router;

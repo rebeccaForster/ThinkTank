@@ -26,9 +26,24 @@
 
         };
 
+      var followUser = function(followedPersonId, user) {
+        var data = {
+            followedPersonId: followedPersonId,
+            user: user
+        }
+        if (!idea.id) return "idea not valid";
+
+        return $http.post('/api/userData/followUser', whiteboard)
+                .success(function (data) {
+                    console.log(data)
+                    return data;
+                });
+    };
+
         return {
             loadAllUsers: loadAllUsers,
-            getUser: getUser
+            getUser: getUser, 
+            followUser : followUser
         };
     }
 
