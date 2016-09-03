@@ -8,7 +8,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     };
 
 $scope.openWhiteboard = function (id) {
-            $location.url("/whiteboard" + "/" + id);
+     $state.go($scope.menu[0].path, { ideaId: id });
 
         }
 $scope.abcList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]

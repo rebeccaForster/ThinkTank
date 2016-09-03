@@ -7,7 +7,7 @@ Frederic
 2. getIdea
 	- Author funktioniert
 	- Commentare fehlen
-	- lifeCycle fehlt
+	- lifeCycle fehlt (bzw. es hieß die ganze Ziet lifeTime worauf ich es geladen habe)
 	- Scribble fehlt auch
 4. getAllUser
 	- sollten nur die registrierten angeziegt werden
@@ -15,8 +15,8 @@ Frederic
 5. Whiteboard:
 	-update Funktion überprüfen
 	- tags werden immer noch nicht richtig gespeichert, da nur null objekte später in der Idee bei gespeicherten Tags stehen
-
-
+	
+	
 rebecca:
 
 1. whiteboard:

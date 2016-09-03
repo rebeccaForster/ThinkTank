@@ -114,7 +114,9 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.clear = function () {
         $scope.drawingboardRemote.clear();
     };
-
+$scope.reloadImage= function (img) {
+        $scope.drawingboardRemote.reloadImage(img);
+    };
     $scope.undo = function () {
         $scope.drawingboardRemote.undo();
     };
@@ -421,17 +423,17 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
 
 
-    $scope.ideaId = $stateParams.ideaId || '-1';
-    $scope.$on('$viewContentLoaded',
-        function (event) {
+    $scope.ideaId = $stateParams.ideaId;
+    
+   angular.element(document).ready(function () {
             //Todo diese Funktion muss alle Privacy, desciption, milesotnes, hashtags, contirbutors, whiteboard image Daten laden, 
             //Sie wird aufgerufen, wenn man auf dem Popup Idea aufs whiteboard klickt 
             // wenn man contributor ist bzw. die Idee bearbeiten möchte, ist edit true
             // Wie man die Funktion genau aufruft, weiß ich noch nicht, darüber muss ich mir noch gedanken machen
-            console.log('sart get idea in whiteboard');
+            console.log('state whiteboard');
             if ($scope.ideaId == -1) {
-                //$scope.clear();
-                //$scope.clearHistory();
+                $scope.clear();
+                $scope.clearHistory();
 
             } else {
                 ideaService
@@ -445,7 +447,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                         $scope.ideaLifeTime = res.lifetime;
                         $scope.selectedPrivacyType = res.privacyType;
                         $scope.milestones = res.milestones;
-                        //Todo load scribble
+                        $scope.reloadImage("app/" + res.img);
+                        //Todo load scribble instead of img
                     });
 
                 //Tdo überprüfe ob die person eingeloggt ist oder nicht und dementsprehcend bearbeiten ja oder nein
