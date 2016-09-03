@@ -3,7 +3,7 @@
 
         <md-toolbar class="toolbar-settings   md-primary md-hue-2">
             <!-- todo pfeil  und x soll mit kontext abschließen-->
-            <img class="header-picture toolbar-settings " src={{setImgPath(selectedIdea.img)}} />
+            <img class="header-picture toolbar-settings " src={{setImgPath(getIdeaInfo.img)}} />
 
             <div layout="row" layout-padding style="position: absolute; top: 0px; left:0px; width:100%;">
                 <md-button class="md-icon-button" style="width:64px; height:64px; ">
@@ -13,10 +13,10 @@
 
                 <div>
                     <div>
-                        <span class="md-display-2">{{selectedIdea.title}}</span>
+                        <span class="md-display-2">{{getIdeaInfo.title}}</span>
                     </div>
                     <div>
-                        <span class="md-display-1">Date:{{selectedIdea.created}}</span>
+                        <span class="md-display-1">Date:{{getIdeaInfo.created}}</span>
                     </div>
                 </div>
                 <div flex></div>
@@ -28,18 +28,18 @@
 
         </md-toolbar>
 
-        <div class="container" ng-init="dayLeft = calculateIdeaLeftDays(selectedIdea.created)">
+        <div class="container" ng-init="dayLeft = calculateIdeaLeftDays(getIdeaInfo.created)">
             <div class="header-background-circle md-display-1" layout="column">
                 <div flex></div>
                 <div>{{dayLeft}}d</div>
                 <div>/</div>
-                <div>{{selectedIdea.lifetime}}d</div>
+                <div>{{getIdeaInfo.lifetime}}d</div>
                 <div flex></div>
             </div>
             <div class="header-progress">
                 <round-progress max="100" current="100" color="#fafafa" bgcolor="#fafafa" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
                     <!-- current muss noch berechnet werden-->
-                    <round-progress max="selectedIdea.lifetime" current="dayLeft" color="#45ccce" bgcolor="gainsboro" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="true" duration="800" animation="easeOutCubic" offset="inherit" animation-delay="0" on-render="showPreciseCurrent">
+                    <round-progress max="getIdeaInfo.lifetime" current="dayLeft" color="#45ccce" bgcolor="gainsboro" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="true" duration="800" animation="easeOutCubic" offset="inherit" animation-delay="0" on-render="showPreciseCurrent">
 
 
                     </round-progress>
@@ -62,24 +62,24 @@
                             Contributors
                         </div>
                         <div>
-                            <md-card class="content-contributors" ng-init="getIdeaAuthor(selectedIdea.author)" ng-click="showProfile(ideaAuthor, $event)">
+                            <md-card class="content-contributors" ng-click="showProfile(getIdeaInfo.author._id, $event)">
                                 <md-card-header>
                                     <md-card-avatar>
-                                        <img class="md-user-avatar" src={{ideaAuthor.profileImg}} alt="{{ideaAuthor.firstname}} {{ideaAuthor.name}}" />
+                                        <img class="md-user-avatar" src={{getIdeaInfo.author.profileImg}} alt="{{ideaAuthor.firstname}} {{ideaAuthor.name}}" />
                                     </md-card-avatar>
                                     <md-card-header-text>
-                                        <span class="md-title">{{ideaAuthor.firstname}} {{ideaAuthor.name}}</span>
+                                        <span class="md-title">{{getIdeaInfo.author.firstname}} {{getIdeaInfo.author.name}}</span>
                                         <span class="md-subhead ">author</span>
                                     </md-card-header-text>
                                 </md-card-header>
                             </md-card>
-                            <md-card class="content-contributors" ng-repeat="contributor in selectedIdea.contributors" ng-init="getIdeaContr(contributor)" class="content-contributors" ng-click="showProfile(ideaContr[$index], $event)">
+                            <md-card class="content-contributors" ng-repeat="contributor in getIdeaInfo.contributors"  class="content-contributors" ng-click="showProfile(contributor._id, $event)">
                                 <md-card-header>
                                     <md-card-avatar>
-                                        <img class="md-user-avatar" src={{ideaContr[$index].profileImg}} alt="{{ideaContr[$index].firstname}} {{ideaContr.name}}" />
+                                        <img class="md-user-avatar" src={{contributor.profileImg}} alt="{{contributor.firstname}} {{contributor.name}}" />
                                     </md-card-avatar>
                                     <md-card-header-text>
-                                        <span class="md-title">{{ideaContr.firstname}} {{ideaContr.name}}</span>
+                                        <span class="md-title">{{contributor.firstname}} {{contributor.name}}</span>
                                         <span class="md-subhead">contributor</span>
                                     </md-card-header-text>
                                 </md-card-header>
@@ -92,8 +92,8 @@
                             <ng-md-icon icon="brush" size="18"></ng-md-icon>
                             Whiteboard Scribble
                         </div>
-                        <div ng-click="openWhiteboard('selectedIdea._id')">
-                            <img src={{setImgPath(selectedIdea.scribble)}} class="content-image">
+                        <div ng-click="openWhiteboard('getIdeaInfo._id')">
+                            <img src={{setImgPath(getIdeaInfo.scribble)}} class="content-image">
                         </div>
                     </div>
                     <div class="idea-block">
@@ -101,7 +101,7 @@
                             <ng-md-icon icon="description" size="18"></ng-md-icon>
                             Description
                         </div>
-                        <div class="md-headline">{{selectedIdea.description}}</div>
+                        <div class="md-headline">{{getIdeaInfo.description}}</div>
                     </div>
 
                     <div class="idea-block">
@@ -110,14 +110,14 @@
                             Milestones
                         </div>
                         <div>
-                            <md-checkbox class="md-display-1" ng-repeat="milestone in selectedIdea.milestones" ng-model="milestone.status" aria-label="milestone.name" ng-disabled="true">
+                            <md-checkbox class="md-display-1" ng-repeat="milestone in getIdeaInfo.milestones" ng-model="milestone.status" aria-label="milestone.name" ng-disabled="true">
                                 {{milestone.name}}
                             </md-checkbox>
                         </div>
                     </div>
                     <div class="idea-block">
                         <div class="md-headline margin-bottom-15 font-weight-bold"># Hashtags</div>
-                        <p class="md-headline" ng-repeat="tag in selectedIdea.tags" style="padding:0px 10px 0px 10px; margin:0px;display:inline-block">#{{tag | uppercase}}</p>
+                        <p class="md-headline" ng-repeat="tag in getIdeaInfo.tags" style="padding:0px 10px 0px 10px; margin:0px;display:inline-block">#{{tag | uppercase}}</p>
                     </div>
                 </div>
             </div>
@@ -177,14 +177,14 @@
                     </div>
                     <md-content class="background-color-white">
                         <md-list style=" max-height:400px;overflow-y:visible">
-                            <md-list-item ng-repeat="message in selectedIdea.messages" style="margin-bottom:15px; heiht:auto;">
+                            <md-list-item ng-repeat="message in getIdeaInfo.messages" style="margin-bottom:15px; heiht:auto;">
 
                                 <div class="md-list-item-text margin-bottom-15 width-100-prozent">
                                     <!-- ToDO: header mittig machen den namen und zu bild-->
-                                    <div layout="row" ng-init="author = getUser(message.author);">
+                                    <div layout="row">
 
-                                        <img ng-src={{author.profileImg}} class="md-avatar" alt="{{author.name}}" ng-click="showProfile(author, $event)">
-                                        <div class="md-headline">{{author.name}},
+                                        <img ng-src={{author.profileImg}} class="md-avatar" alt="{{author.name}}" ng-click="showProfile(getIdeaInfo.author._id, $event)">
+                                        <div class="md-headline">{{getIdeaInfo.author.firstname}} {{getIdeaInfo.author.name}},
                                         </div>
                                         <div class="md-subhead">{{message.date}}</div>
                                         <div flex></div>

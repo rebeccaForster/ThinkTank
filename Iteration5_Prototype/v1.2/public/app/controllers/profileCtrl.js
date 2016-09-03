@@ -10,6 +10,8 @@ app.controller('ProfileCtrl', function ($scope, indexData, $mdDialog, authentica
         url: $scope.user.url,
         profileImg: $scope.user.profileImg
     };
+    // number of columns of the profile site for md-cards
+        $scope.maxProfileColumn = 2;
     $scope.addHashtags = function (ev) {
         $scope.hashtags = [];
         indexData

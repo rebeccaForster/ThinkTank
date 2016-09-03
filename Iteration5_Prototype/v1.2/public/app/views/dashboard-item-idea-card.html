@@ -1,6 +1,6 @@
-<md-card-header ng-init="getIdeaCardAuthor(idea.author)">
-    <md-card-avatar ng-click="showProfile(ideaCardAuthor[$index], $event);$event.stopPropagation();">
-        <img class="md-user-avatar" src={{ideaCardAuthor[$index].profileImg}} alt=" {{ideaCardAuthor[$index].firstname}} {{ideaCardAuthor[$index].name}}"/>
+<md-card-header >
+    <md-card-avatar ng-click="showProfile(idea.author._id, $event);$event.stopPropagation();">
+        <img class="md-user-avatar" src={{idea.author.profileImg}} alt=" {{idea.author.firstname}} {{idea.author.name}}"/>
     </md-card-avatar>
     <md-card-header-text >
         <div >
@@ -8,7 +8,7 @@
            
         </div>
         <div>
-            <span class="md-title">Author: {{ideaCardAuthor[$index].firstname}} {{ideaCardAuthor[$index].name}}</span>
+            <span class="md-title">Author: {{idea.author.firstname}} {{idea.author.name}}</span>
         </div>
     </md-card-header-text>
 

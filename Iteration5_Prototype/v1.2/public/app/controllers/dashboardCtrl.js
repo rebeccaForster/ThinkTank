@@ -4,7 +4,7 @@ angular
     // the controller is used on the dashboard and profile site the reason ist that the functionaity is the same only the font design is differnt
     .controller('DashboardCtrl', function ($scope, dashService, profileService, ideaService, indexData, $location, $mdDialog, $mdMedia, $timeout) {
 
-        $scope.ideas = [];
+        $scope.ideaList = [];
 
         // loads all ideas from the server and save it in a variable.
         // this variable will be loaded in the html  
@@ -12,7 +12,7 @@ angular
             .loadAllIdeas()
             .then(function (res) {
                 console.log(res);
-                $scope.ideas = res;
+                $scope.ideaList = res;
             });
 
         $scope.getUser = function (id) {
@@ -20,7 +20,7 @@ angular
                 .getUser(id)
                 .then(function (res) {
 
-                    console.log('getuser:', res);
+                   $scope.getProfileInfo =  res;
                 });
 
         };
@@ -29,7 +29,7 @@ angular
                 .getIdea(id)
                 .then(function (res) {
 
-                    console.log('getidea:', res);
+                    $scope.getIdeaInfo = res;
                 });
         };
 
@@ -85,8 +85,7 @@ angular
 
         // number of columns of the dashboard site for md-cards
         $scope.maxColumn = 3;
-        // number of columns of the profile site for md-cards
-        $scope.maxProfileColumn = 2;
+        
 
 
         /*
@@ -122,7 +121,9 @@ angular
            input: id of the idea
            output:
            */
-        $scope.showProfile = function (profile, ev) {
+        $scope.showProfile = function (id, ev) {
+                $scope.getUser(id);
+
             $mdDialog.show({
                     controller: ProfilePopupController,
                     templateUrl: 'app/views/profile-popup.html',
@@ -132,50 +133,16 @@ angular
                     clickOutsideToClose: true,
                     fullscreen: true,
                     locals: {
-                        profile: profile
                     }
                 })
                 .then(function () {}, function () {});
 
 
         };
-        $scope.ideaCardAuthor = [];
-        $scope.getIdeaCardAuthor = function (id) {
-            profileService
-                .getUser(id)
-                .then(function (res) {
-
-                    $scope.ideaCardAuthor.push(res);
-                });
-
-        };
+       
 
 
-
-        $scope.ideaAuthor = '';
-
-        $scope.getIdeaAuthor = function (id) {
-            profileService
-                .getUser(id)
-                .then(function (res) {
-
-                    $scope.ideaAuthor = (res);
-                });
-
-        };
-
-
-        $scope.ideaContr = [];
-
-        $scope.getIdeaContr = function (id) {
-            profileService
-                .getUser(id)
-                .then(function (res) {
-
-                    $scope.ideaContr.push(res);
-                });
-
-        };
+    
 
         $scope.addSearchTag = function (indexIdea, IndexTag, ev) {
             $mdDialog.show(
@@ -198,7 +165,9 @@ angular
             $location.url("/whiteboard" + "/" + id);
 
         }
-        $scope.showIdea = function (idea, ev) {
+        $scope.showIdea = function (id, ev) {
+                $scope.getIdea(id);
+
             $mdDialog.show({
                     controller: IdeaPopupController,
                     templateUrl: 'app/views/idea-popup.html',
@@ -208,7 +177,6 @@ angular
                     clickOutsideToClose: true,
                     fullscreen: true,
                     locals: {
-                        idea: idea
                     }
                 })
                 .then(function () {
@@ -285,9 +253,7 @@ angular
     });
 
 
-function IdeaPopupController($scope, $mdDialog, idea) {
-    $scope.getIdea(idea._id);
-    $scope.selectedIdea = idea;
+function IdeaPopupController($scope, $mdDialog) {
     $scope.hide = function () {
         $mdDialog.hide();
     };
@@ -297,9 +263,8 @@ function IdeaPopupController($scope, $mdDialog, idea) {
 
 }
 
-function ProfilePopupController($scope, $mdDialog, profile, profileService) {
-    $scope.getUser(profile._id);
-    $scope.user = profile;
+function ProfilePopupController($scope, $mdDialog) {
+    
     $scope.hide = function () {
         $mdDialog.hide();
     };
