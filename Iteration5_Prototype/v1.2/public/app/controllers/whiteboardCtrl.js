@@ -1,5 +1,5 @@
 'use strict';
-app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService, $stateParams) {
+app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService, $stateParams,  $rootScope) {
     $scope.isWhiteboard = true;
     $scope.saveScribble = function (ev) {
 
@@ -25,6 +25,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                     return true;
                 });
         } else {
+            $scope.updateIdea();
         }
 
     };
@@ -80,7 +81,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     //DrawingBoard
     // $localStorage.$reset(); 
 
-    
+
     $scope.webStorage = 'session';
     $scope.drawingMode = 'draw';
     $scope.drawColor = '#222';
@@ -327,8 +328,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 fullscreen: true,
                 locals: {}
             })
-            .then(function () {}, function () {
-            });
+            .then(function () {}, function () {});
     }
 
     $scope.addDescription = function (ev) {
@@ -342,8 +342,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 fullscreen: true,
                 locals: {}
             })
-            .then(function () {}, function () {
-            });
+            .then(function () {}, function () {});
     }
 
     $scope.$watch('title', function (newVal, oldVal) {
@@ -381,8 +380,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 fullscreen: true,
                 locals: {}
             })
-            .then(function () {}, function () {
-            });
+            .then(function () {}, function () {});
     }
 
     $scope.statusMilestoneSelected = function (name) {
@@ -407,8 +405,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 fullscreen: true,
                 locals: {}
             })
-            .then(function () {}, function () {
-            });
+            .then(function () {}, function () {});
     }
 
     $scope.statusContributorsSelected = function (name) {
@@ -425,32 +422,35 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
 
     $scope.ideaId = $stateParams.ideaId || '-1';
-    this.getIdea = function (id) {
-        //Todo diese Funktion muss alle Privacy, desciption, milesotnes, hashtags, contirbutors, whiteboard image Daten laden, 
-        //Sie wird aufgerufen, wenn man auf dem Popup Idea aufs whiteboard klickt 
-        // wenn man contributor ist bzw. die Idee bearbeiten möchte, ist edit true
-        // Wie man die Funktion genau aufruft, weiß ich noch nicht, darüber muss ich mir noch gedanken machen
-        console.log('sart get idea in whiteboard');
-        if( $scope.ideaId == -1){
-           // $scope.clear();
-            //$scope.clearHistory();
-            
-        }
-        else{
-           ideaService
-                .getIdea(id)
-                .then(function (res) {
-                    console.log('ergebnis der idea object von deer gesuchten ide' , res);
-                    $scope.title = res.title;
-                    $scope.desciption = res.desciption;
-                    $scope.contributors = res.contributors;
-                    $scope.selectedHashtags = res.tags;
-               //Todo load scribble
-                });
-            
-            //Tdo überprüfe ob die person eingeloggt ist oder nicht und dementsprehcend bearbeiten ja oder nein
-        }
-    };
+    $scope.$on('$viewContentLoaded',
+        function (event) {
+            //Todo diese Funktion muss alle Privacy, desciption, milesotnes, hashtags, contirbutors, whiteboard image Daten laden, 
+            //Sie wird aufgerufen, wenn man auf dem Popup Idea aufs whiteboard klickt 
+            // wenn man contributor ist bzw. die Idee bearbeiten möchte, ist edit true
+            // Wie man die Funktion genau aufruft, weiß ich noch nicht, darüber muss ich mir noch gedanken machen
+            console.log('sart get idea in whiteboard');
+            if ($scope.ideaId == -1) {
+                //$scope.clear();
+                //$scope.clearHistory();
+
+            } else {
+                ideaService
+                    .getIdea($scope.ideaId)
+                    .then(function (res) {
+                        console.log('ergebnis der idea object von deer gesuchten ide', res);
+                        $scope.title = res.title;
+                        $scope.desciption = res.description;
+                        $scope.contributors = res.contributors;
+                        $scope.selectedHashtags = res.tags;
+                        $scope.ideaLifeTime = res.lifetime;
+                        $scope.selectedPrivacyType = res.privacyType;
+                        $scope.milestones = res.milestones;
+                        //Todo load scribble
+                    });
+
+                //Tdo überprüfe ob die person eingeloggt ist oder nicht und dementsprehcend bearbeiten ja oder nein
+            }
+        });
 
     $scope.updateIdea = function () {
 
@@ -463,9 +463,9 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             description: $scope.desciption,
             contributors: $scope.contributors,
             milestones: $scope.milestones,
-            tags: $scope.selectedHashtags ,
-            // $scope.ideaLifeTime
-            //$scope.selectedPrivacyType
+            tags: $scope.selectedHashtags,
+            lifetime: $scope.ideaLifeTime,
+            privacyType: $scope.selectedPrivacyType,
             scribble: $scope.drawingboardRemote.toDataURL('image/png')
         };
 
@@ -483,9 +483,9 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             description: $scope.desciption,
             contributors: $scope.contributors,
             milestones: $scope.milestones,
-            tags: $scope.selectedHashtags ,
-            //$scope.ideaLifeTime
-            //$scope.selectedPrivacyType
+            tags: $scope.selectedHashtags,
+            lifetime: $scope.ideaLifeTime,
+            privacyType: $scope.selectedPrivacyType,
             scribble: $scope.drawingboardRemote.toDataURL('image/png')
         };
 
@@ -509,18 +509,18 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         $scope.selectedPrivacyType = index;
         $scope.updatePrivacyStatus();
 
-        switch(index) {
-            case "Only me & contributors":
-                $scope.selectedPrivacy = 0;
-                break;
-            case "Everyone":
-                $scope.selectedPrivacy = 1;
-                break;
-            case "Customer":
-                $scope.selectedPrivacy = 2;
-                break;
-            default:
-                $scope.selectedPrivacy = 0;
+        switch (index) {
+        case "Only me & contributors":
+            $scope.selectedPrivacy = 0;
+            break;
+        case "Everyone":
+            $scope.selectedPrivacy = 1;
+            break;
+        case "Customer":
+            $scope.selectedPrivacy = 2;
+            break;
+        default:
+            $scope.selectedPrivacy = 0;
         }
         console.log("Privacy number: ");
         console.log($scope.selectedPrivacy);
@@ -590,4 +590,3 @@ function MilestonesPopupController($scope, $mdDialog) {
     };
 
 }
-

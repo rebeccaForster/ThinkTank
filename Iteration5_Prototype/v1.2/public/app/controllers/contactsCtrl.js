@@ -7,7 +7,7 @@ app.controller('ContactsCtrl', function($scope,indexData, $mdDialog,profileServi
             $scope.getAllUserList = res;
         });
     
-    
+   
         $scope.getUser = function (id) {
             profileService
                 .getUser(id)

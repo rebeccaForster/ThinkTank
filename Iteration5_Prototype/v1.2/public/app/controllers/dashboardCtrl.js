@@ -161,10 +161,7 @@ angular
             var path = ('app/' + img);
             return path;
         }
-        $scope.openWhiteboard = function (id) {
-            $location.url("/whiteboard" + "/" + id);
-
-        }
+        
         $scope.isDashbaord = true;
         $scope.showIdea = function (id, ev) {
                 $scope.getIdea(id);

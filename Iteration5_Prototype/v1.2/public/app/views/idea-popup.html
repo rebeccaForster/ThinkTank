@@ -92,7 +92,7 @@
                             <ng-md-icon icon="brush" size="18"></ng-md-icon>
                             Whiteboard Scribble
                         </div>
-                        <div ng-click="openWhiteboard('getIdeaInfo._id')">
+                        <div ng-click="openWhiteboard(getIdeaInfo._id)">
                             <img src={{setImgPath(getIdeaInfo.scribble)}} class="content-image">
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                         <div class="md-subhead text-gray">Choose one and more icons and a comment field will open.</div>
                     </div>
                     <div layout="row">
-                        <div layout="column" class="margin-top-15" flex layout-align="center center" ng-class="{'item-select' : saveComment.likeIdeaStatus}" ng-click="setLikeIdeaStatus();">
+                        <div layout="column" flex layout-align="center center" ng-class="{'item-select' : saveComment.likeIdeaStatus}" ng-click="setLikeIdeaStatus();">
                             <ng-md-icon icon="thumb_up" size="40"></ng-md-icon>
 
                             <br>

@@ -46,7 +46,7 @@
         <md-dialog-actions layout="row">
             <span flex></span>
             <md-button type="submit" ng-disabled="registerForm.$invalid" class="md-raised md-primary" ng-hide="isProfile" >Sign Up</md-button>
-            <md-button ng-disabled="registerForm.Firstname.$invalid || registerForm.Name.$invalid || registerForm.Email.$invalid" class="md-raised md-primary" ng-click="cancel()">Okay</md-button>
+            <md-button ng-disabled="registerForm.Firstname.$invalid || registerForm.Name.$invalid || registerForm.Email.$invalid" class="md-raised md-primary" ng-click="cancel()"  ng-show="isProfile">Okay</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>
