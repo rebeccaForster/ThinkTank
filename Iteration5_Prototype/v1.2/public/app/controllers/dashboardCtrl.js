@@ -165,6 +165,7 @@ angular
             $location.url("/whiteboard" + "/" + id);
 
         }
+        $scope.isDashbaord = true;
         $scope.showIdea = function (id, ev) {
                 $scope.getIdea(id);
 

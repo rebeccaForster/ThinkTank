@@ -1,5 +1,5 @@
 'use strict';
-app.controller('ProfileCtrl', function ($scope, indexData, $mdDialog, authentication) {
+app.controller('ProfileCtrl', function ($scope, indexData, $mdDialog, authentication, profileService, ideaService) {
     $scope.user = authentication.currentUser();
     $scope.isProfile = true;
     $scope.credentials = {
@@ -10,6 +10,75 @@ app.controller('ProfileCtrl', function ($scope, indexData, $mdDialog, authentica
         url: $scope.user.url,
         profileImg: $scope.user.profileImg
     };
+    
+    
+          $scope.getUser = function (id) {
+            profileService
+                .getUser(id)
+                .then(function (res) {
+
+                   $scope.getProfileInfo =  res;
+                });
+
+        };
+        $scope.getIdea = function (id) {
+            ideaService
+                .getIdea(id)
+                .then(function (res) {
+
+                    $scope.getIdeaInfo = res;
+                });
+        };
+    
+        /*
+           function: 
+           input: id of the idea
+           output:
+           */
+        $scope.showProfile = function (id, ev) {
+                $scope.getUser(id);
+
+            $mdDialog.show({
+                    controller: ProfilePopupController,
+                    templateUrl: 'app/views/profile-popup.html',
+                    targetEvent: ev,
+                    scope: $scope, // use parent scope in template
+                    preserveScope: true,
+                    clickOutsideToClose: true,
+                    fullscreen: true,
+                    locals: {
+                    }
+                })
+                .then(function () {}, function () {});
+
+
+        };
+     $scope.showIdea = function (id, ev) {
+                $scope.getIdea(id);
+
+            $mdDialog.show({
+                    controller: IdeaPopupController,
+                    templateUrl: 'app/views/idea-popup.html',
+                    scope: $scope, // use parent scope in template
+                    preserveScope: true,
+                    targetEvent: ev,
+                    clickOutsideToClose: true,
+                    fullscreen: true,
+                    locals: {
+                    }
+                })
+                .then(function () {
+                    $scope.saveComment = defaultCommentText;
+
+                }, function () {
+                    $scope.saveComment = defaultCommentText;
+
+                });
+
+
+        };
+    
+    
     // number of columns of the profile site for md-cards
         $scope.maxProfileColumn = 2;
     $scope.addHashtags = function (ev) {
