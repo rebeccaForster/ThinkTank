@@ -15,8 +15,24 @@ angular
                 $scope.ideas = res;
             });
 
+        $scope.getUser = function (id) {
+            profileService
+                .getUser(id)
+                .then(function (res) {
 
-    
+                    console.log('getuser:', res);
+                });
+
+        };
+        $scope.getIdea = function (id) {
+            ideaService
+                .getIdea(id)
+                .then(function (res) {
+
+                    console.log('getidea:', res);
+                });
+        };
+
         $scope.hashtags = [];
         // loads all hashtags with name and priority from the server and save it in a variable.
         // this variable will be loaded in the hashtag popup 
@@ -79,28 +95,28 @@ angular
            output:
            */
         $scope.commentIdea = function (id) {
-            
 
-        }
-         /*
-           function: 
-           input: id of the idea
-           output:
-           */
+
+            }
+            /*
+              function: 
+              input: id of the idea
+              output:
+              */
         $scope.followIdea = function (id) {
-           
-        }
-         /*
-           function: 
-           input: id of the idea
-           output:
-           */
+
+            }
+            /*
+              function: 
+              input: id of the idea
+              output:
+              */
         $scope.participateIdea = function (id) {
-            
+
         }
 
-        
-        
+
+
         /*
            function: 
            input: id of the idea
@@ -133,9 +149,9 @@ angular
                 });
 
         };
-    
-  
-    
+
+
+
         $scope.ideaAuthor = '';
 
         $scope.getIdeaAuthor = function (id) {
@@ -160,7 +176,7 @@ angular
                 });
 
         };
-        
+
         $scope.addSearchTag = function (indexIdea, IndexTag, ev) {
             $mdDialog.show(
                 $mdDialog.alert()
@@ -270,7 +286,7 @@ angular
 
 
 function IdeaPopupController($scope, $mdDialog, idea) {
-
+    $scope.getIdea(idea._id);
     $scope.selectedIdea = idea;
     $scope.hide = function () {
         $mdDialog.hide();
@@ -282,6 +298,7 @@ function IdeaPopupController($scope, $mdDialog, idea) {
 }
 
 function ProfilePopupController($scope, $mdDialog, profile, profileService) {
+    $scope.getUser(profile._id);
     $scope.user = profile;
     $scope.hide = function () {
         $mdDialog.hide();
