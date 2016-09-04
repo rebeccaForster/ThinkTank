@@ -20,7 +20,7 @@ angular
                 .getUser(id)
                 .then(function (res) {
 
-                   $scope.getProfileInfo =  res;
+                    $scope.getProfileInfo = res;
                 });
 
         };
@@ -85,7 +85,7 @@ angular
 
         // number of columns of the dashboard site for md-cards
         $scope.maxColumn = 3;
-        
+
 
 
         /*
@@ -122,7 +122,7 @@ angular
            output:
            */
         $scope.showProfile = function (id, ev) {
-                $scope.getUser(id);
+            $scope.getUser(id);
 
             $mdDialog.show({
                     controller: ProfilePopupController,
@@ -132,17 +132,24 @@ angular
                     preserveScope: true,
                     clickOutsideToClose: true,
                     fullscreen: true,
-                    locals: {
-                    }
+                    locals: {}
                 })
-                .then(function () {}, function () {});
+                .then(function () {
+                    if (!$scope.isBack) {
+                        // Wrap the function Make sure that the params are an array.. and push it to the array
+                        $scope.funqueue.push(wrapFunction($scope.showProfile, this, [id]));
+                    }
+
+                }, function () {
+                    $scope.funqueue = [];
+                });
 
 
         };
-       
 
 
-    
+
+
 
         $scope.addSearchTag = function (indexIdea, IndexTag, ev) {
             $mdDialog.show(
@@ -161,10 +168,10 @@ angular
             var path = ('app/' + img);
             return path;
         }
-        
+
         $scope.isDashbaord = true;
         $scope.showIdea = function (id, ev) {
-                $scope.getIdea(id);
+            $scope.getIdea(id);
 
             $mdDialog.show({
                     controller: IdeaPopupController,
@@ -174,20 +181,23 @@ angular
                     targetEvent: ev,
                     clickOutsideToClose: true,
                     fullscreen: true,
-                    locals: {
-                    }
+                    locals: {}
                 })
                 .then(function () {
                     $scope.saveComment = defaultCommentText;
+                   if (!$scope.isBack) {
+                        // Wrap the function Make sure that the params are an array.. and push it to the array
+                        $scope.funqueue.push(wrapFunction($scope.showProfile, this, [id]));
+                    }
+
 
                 }, function () {
                     $scope.saveComment = defaultCommentText;
-
+                    $scope.funqueue = [];
                 });
 
 
         };
-
 
 
         var defaultCommentText = {
@@ -248,10 +258,24 @@ angular
 
         };
 
+        // Function wrapping code.
+        // fn - reference to function.
+        // context - what you want "this" to be.
+        // params - array of parameters to pass to function.
+        var wrapFunction = function (fn, context, params) {
+                return function () {
+                    fn.apply(context, params);
+                };
+            }
+            // Create an array and append your functions to them
+        $scope.funqueue = [];
+
     });
 
 
 function IdeaPopupController($scope, $mdDialog) {
+            $scope.isBack = false;
+
     $scope.hide = function () {
         $mdDialog.hide();
     };
@@ -259,17 +283,38 @@ function IdeaPopupController($scope, $mdDialog) {
         $mdDialog.cancel();
     };
 
+    $scope.back = function () {
+        
+        if ($scope.funqueue.length == 1) {
+            ($scope.funqueue.pop())();
+        } else if ($scope.funqueue.length) {
+            ($scope.funqueue.shift())();
+        }
+        $scope.isBack = true;
+                $mdDialog.hide();
+
+    };
+    
 }
 
 function ProfilePopupController($scope, $mdDialog) {
-    
+        $scope.isBack = false;
+
     $scope.hide = function () {
         $mdDialog.hide();
     };
     $scope.cancel = function () {
         $mdDialog.cancel();
     };
-
+    $scope.back = function () {
+        if ($scope.funqueue.length == 1) {
+            ($scope.funqueue.pop())();
+        } else if ($scope.funqueue.length) {
+            ($scope.funqueue.shift())();
+        }
+        $scope.isBack = true;
+        $mdDialog.hide();
+    };
 
 }
 
@@ -282,5 +327,6 @@ function HashtagPopupController($scope, $mdDialog) {
     $scope.cancel = function () {
         $mdDialog.cancel();
     };
+
 
 }

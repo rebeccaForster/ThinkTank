@@ -3,7 +3,7 @@
        <md-toolbar class="toolbar-settings  md-primary md-hue-2">
             <div layout="row" layout-padding>
                 <md-button class="md-icon-button" style="width:64px; height:64px; ">
-                    <ng-md-icon icon="arrow_back" size="64"></ng-md-icon>
+                    <ng-md-icon icon="arrow_back" ng-show="funqueue.length" size="64" ng-click="back()"></ng-md-icon>
                 </md-button>
                 <div flex></div>
                 <div>
