@@ -5,18 +5,19 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/dashboard');
 
     $stateProvider.state("whiteboard", {
-        url: "/whiteboard/:ideaId?",
+        url: "/whiteboard",
+        params: { 'ideaId': '-1' },
         controller: "WhiteboardCtrl",
         templateUrl: "app/views/whiteboard.html"
     })
     $stateProvider.state("dashboard", {
         url: "/dashboard",
-        controller: "DashboardProfileCtrl",
+        controller: "DashboardCtrl",
         templateUrl: "app/views/dashboard.html"
     })
     $stateProvider.state("profile", {
         url: "/profile",
-        controller: "DashboardProfileCtrl",
+        controller: "ProfileCtrl",
         templateUrl: "app/views/profile.html"
     })
     $stateProvider.state("messages", {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="841.89px" height="595.28px" viewBox="0 0 841.89 595.28" enable-background="new 0 0 841.89 595.28" xml:space="preserve">
+<symbol  id="eraser" viewBox="-24 -24 48 48">
+	<path fill="#FFFFFF" d="M7.864,16.278l9.179-9.162c1.448-1.464,1.448-3.8,0-5.267L0-15.193c-2.894-2.894-7.585-2.894-10.497,0
+		l-6.547,6.546c-1.447,1.467-1.447,3.803,0,5.267L2.615,16.278C4.079,17.726,6.415,17.726,7.864,16.278 M-14.429-6.015l6.565-6.545
+		c1.445-1.467,3.781-1.467,5.248,0l6.546,6.545l-9.179,9.183L-14.429-6.015z"/>
+	<polygon fill="none" points="24,-24 -24,-24 -24,24 24,24 	"/>
+</symbol>
+<use xlink:href="#eraser"  width="48" height="48" id="XMLID_3_" x="-24" y="-24" transform="matrix(1 0 0 -1 421.6948 297.8618)" overflow="visible"/>
+</svg>

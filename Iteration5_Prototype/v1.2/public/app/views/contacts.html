@@ -1,24 +1,65 @@
 <header>
-     <md-toolbar class="md-primary md-hue-1 toolbar-settings-top">
-        <div class="md-toolbar-tools" style="margin-right:20px !important; margin-left:20px !important; " flex layout='row'>
-
-            <div class="md-headline">
+    <md-toolbar class="md-primary md-hue-1 ">
+        <div class="md-toolbar-tools toolbar-settings-top" layout='row'>
+            <div class="md-headline" style="margin-right:20px !important; margin-left:20px !important; ">
                 Academic Think Tank
             </div>
         </div>
     </md-toolbar>
+    <md-toolbar>
+        <div class="md-toolbar-tools toolbar-settings-bottom" layout='row'>
+
+            <div style="margin-right:20px !important; margin-left:20px !important; " flex layout='row'>
+                <div style="border-bottom: 2px solid white;" ng-click="searchHashtag($event) " flex>
+                    <div layout="row">
+                        <div flex>
+                           
+                        </div>
+                        <md-button aria-label="Search">
+                            <ng-md-icon icon="search" size="64" class="icon-white"></ng-md-icon>
+                    </div>
+                    </md-button>
+                </div>
+
+
+                <div flex=5></div>
+                <md-input-container>
+                    <md-select ng-model="sortingType" aria-label="sorting" ng-change="changeSortingType(sortingType)">
+                        <md-option ng-value="t" data-ng-repeat="t in sorting">{{ t }}</md-option>
+                    </md-select>
+
+                </md-input-container>
+            </div>
+        </div>
+    </md-toolbar>
 </header>
-<md-button class="md-fab md-fab-bottom-right"  style="position:fixed; min-height:128px !important;  min-width:128px !important;" aria-label="Add">
-    <ng-md-icon icon="add" size="34"></ng-md-icon>
-</md-button>
+
 <main class="" layout="row" flex>
     <md-content flex>
         <div ng-controller="ContactsCtrl" ng-cloak="">
             <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
-                <div flex="50" flex-sm="100" flex-xs="100" layout="column">
-                    ContactsCtrl
-                </div>
+                <div flex layout="column">
 
+                    <md-list>
+                        <md-list-item ng-repeat="user in getAllUserList" style="margin-bottom:15px; heiht:auto;">
+
+                            <div class="md-list-item-text margin-bottom-15 width-100-prozent">
+                                <!-- ToDO: header mittig machen den namen und zu bild-->
+                                <div layout="row">
+
+                                    <img ng-src={{user.profileImg}} class="md-avatar" alt="{{user.name}}" ng-click="showProfile(user._id, $event)">
+                                    <div class="md-headline">{{user.firstname}} {{user.name}}
+                                    </div>
+                                    <div flex></div>
+                                    <ng-md-icon icon="message" size="34" flex=5></ng-md-icon>
+                                    <ng-md-icon icon="keyboard_voice" size="34" flex=5></ng-md-icon>
+                                    <ng-md-icon icon="videocam" size="34" flex=5></ng-md-icon>
+                                </div>
+                                <md-divider ng-if="!$last"></md-divider>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </div>
             </md-content>
         </div>
 

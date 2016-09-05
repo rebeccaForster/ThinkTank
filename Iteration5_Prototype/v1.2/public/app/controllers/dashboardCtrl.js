@@ -2,9 +2,9 @@
 angular
     .module('App')
     // the controller is used on the dashboard and profile site the reason ist that the functionaity is the same only the font design is differnt
-    .controller('DashboardProfileCtrl', function ($scope, dashService, profileService, ideaService, indexData, $location, $mdDialog, $mdMedia, $timeout) {
+    .controller('DashboardCtrl', function ($scope, dashService, profileService, ideaService, indexData, $location, $mdDialog, $mdMedia, $timeout) {
 
-        $scope.ideas = [];
+        $scope.ideaList = [];
 
         // loads all ideas from the server and save it in a variable.
         // this variable will be loaded in the html  
@@ -12,10 +12,26 @@ angular
             .loadAllIdeas()
             .then(function (res) {
                 console.log(res);
-                $scope.ideas = res;
+                $scope.ideaList = res;
             });
 
+        $scope.getUser = function (id) {
+            profileService
+                .getUser(id)
+                .then(function (res) {
 
+                    $scope.getProfileInfo = res;
+                });
+
+        };
+        $scope.getIdea = function (id) {
+            ideaService
+                .getIdea(id)
+                .then(function (res) {
+
+                    $scope.getIdeaInfo = res;
+                });
+        };
 
         $scope.hashtags = [];
         // loads all hashtags with name and priority from the server and save it in a variable.
@@ -69,8 +85,7 @@ angular
 
         // number of columns of the dashboard site for md-cards
         $scope.maxColumn = 3;
-        // number of columns of the profile site for md-cards
-        $scope.maxProfileColumn = 2;
+
 
 
         /*
@@ -79,34 +94,36 @@ angular
            output:
            */
         $scope.commentIdea = function (id) {
-            
 
-        }
-         /*
-           function: 
-           input: id of the idea
-           output:
-           */
+
+            }
+            /*
+              function: 
+              input: id of the idea
+              output:
+              */
         $scope.followIdea = function (id) {
-           
-        }
-         /*
-           function: 
-           input: id of the idea
-           output:
-           */
+
+            }
+            /*
+              function: 
+              input: id of the idea
+              output:
+              */
         $scope.participateIdea = function (id) {
-            
+
         }
 
-        
-        
+
+
         /*
            function: 
            input: id of the idea
            output:
            */
-        $scope.showProfile = function (profile, ev) {
+        $scope.showProfile = function (id, ev) {
+            $scope.getUser(id);
+
             $mdDialog.show({
                     controller: ProfilePopupController,
                     templateUrl: 'app/views/profile-popup.html',
@@ -115,66 +132,25 @@ angular
                     preserveScope: true,
                     clickOutsideToClose: true,
                     fullscreen: true,
-                    locals: {
-                        profile: profile
-                    }
+                    locals: {}
                 })
-                .then(function () {}, function () {});
+                .then(function () {
+                    if (!$scope.isBack) {
+                        // Wrap the function Make sure that the params are an array.. and push it to the array
+                        $scope.funqueue.push(wrapFunction($scope.showProfile, this, [id]));
+                    }
 
-
-        };
-        $scope.ideaCardAuthor = [];
-        $scope.getIdeaCardAuthor = function (id) {
-            profileService
-                .getUser(id)
-                .then(function (res) {
-
-                    $scope.ideaCardAuthor.push(res);
+                }, function () {
+                    $scope.funqueue = [];
                 });
 
-        };
-        $scope.ideaAuthor = '';
-
-        $scope.getIdeaAuthor = function (id) {
-            profileService
-                .getUser(id)
-                .then(function (res) {
-
-                    $scope.ideaAuthor = (res);
-                });
 
         };
 
 
-        $scope.ideaContr = [];
 
-        $scope.getIdeaContr = function (id) {
-            profileService
-                .getUser(id)
-                .then(function (res) {
 
-                    $scope.ideaContr.push(res);
-                });
 
-        };
-        $scope.getUser = function (id) {
-            profileService
-                .getUser(id)
-                .then(function (res) {
-
-                    return res;
-                });
-
-        };
-        $scope.getIdea = function (id) {
-            ideaService
-                .getIdea(id)
-                .then(function (res) {
-
-                    return res;
-                });
-
-        };
         $scope.addSearchTag = function (indexIdea, IndexTag, ev) {
             $mdDialog.show(
                 $mdDialog.alert()
@@ -192,11 +168,11 @@ angular
             var path = ('app/' + img);
             return path;
         }
-        $scope.openWhiteboard = function (id) {
-            $location.url("/whiteboard" + "/" + id);
 
-        }
-        $scope.showIdea = function (idea, ev) {
+        $scope.isDashbaord = true;
+        $scope.showIdea = function (id, ev) {
+            $scope.getIdea(id);
+
             $mdDialog.show({
                     controller: IdeaPopupController,
                     templateUrl: 'app/views/idea-popup.html',
@@ -205,21 +181,23 @@ angular
                     targetEvent: ev,
                     clickOutsideToClose: true,
                     fullscreen: true,
-                    locals: {
-                        idea: idea
-                    }
+                    locals: {}
                 })
                 .then(function () {
                     $scope.saveComment = defaultCommentText;
+                   if (!$scope.isBack) {
+                        // Wrap the function Make sure that the params are an array.. and push it to the array
+                        $scope.funqueue.push(wrapFunction($scope.showProfile, this, [id]));
+                    }
+
 
                 }, function () {
                     $scope.saveComment = defaultCommentText;
-
+                    $scope.funqueue = [];
                 });
 
 
         };
-
 
 
         var defaultCommentText = {
@@ -280,12 +258,24 @@ angular
 
         };
 
+        // Function wrapping code.
+        // fn - reference to function.
+        // context - what you want "this" to be.
+        // params - array of parameters to pass to function.
+        var wrapFunction = function (fn, context, params) {
+                return function () {
+                    fn.apply(context, params);
+                };
+            }
+            // Create an array and append your functions to them
+        $scope.funqueue = [];
+
     });
 
 
-function IdeaPopupController($scope, $mdDialog, idea) {
+function IdeaPopupController($scope, $mdDialog) {
+            $scope.isBack = false;
 
-    $scope.selectedIdea = idea;
     $scope.hide = function () {
         $mdDialog.hide();
     };
@@ -293,17 +283,38 @@ function IdeaPopupController($scope, $mdDialog, idea) {
         $mdDialog.cancel();
     };
 
+    $scope.back = function () {
+        
+        if ($scope.funqueue.length == 1) {
+            ($scope.funqueue.pop())();
+        } else if ($scope.funqueue.length) {
+            ($scope.funqueue.shift())();
+        }
+        $scope.isBack = true;
+                $mdDialog.hide();
+
+    };
+    
 }
 
-function ProfilePopupController($scope, $mdDialog, profile, profileService) {
-    $scope.user = profile;
+function ProfilePopupController($scope, $mdDialog) {
+        $scope.isBack = false;
+
     $scope.hide = function () {
         $mdDialog.hide();
     };
     $scope.cancel = function () {
         $mdDialog.cancel();
     };
-
+    $scope.back = function () {
+        if ($scope.funqueue.length == 1) {
+            ($scope.funqueue.pop())();
+        } else if ($scope.funqueue.length) {
+            ($scope.funqueue.shift())();
+        }
+        $scope.isBack = true;
+        $mdDialog.hide();
+    };
 
 }
 
@@ -316,5 +327,6 @@ function HashtagPopupController($scope, $mdDialog) {
     $scope.cancel = function () {
         $mdDialog.cancel();
     };
+
 
 }

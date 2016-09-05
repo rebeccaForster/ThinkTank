@@ -1,0 +1,25 @@
+Frederic
+
+1. wenn ich getallIdeas hole
+	-steht nur created in author drinnen
+	- tags sind null objekte
+	- Contributors werden nicht drinnen gespeichert
+2. getIdea
+	- Author funktioniert
+	- Commentare fehlen
+	- lifeCycle fehlt (bzw. es hieß die ganze Ziet lifeTime worauf ich es geladen habe)
+	- Scribble fehlt auch
+4. getAllUser
+	- sollten nur die registrierten angeziegt werden
+
+5. Whiteboard:
+	-update Funktion überprüfen
+	- tags werden immer noch nicht richtig gespeichert, da nur null objekte später in der Idee bei gespeicherten Tags stehen
+	
+	
+rebecca:
+
+1. whiteboard:
+	- laden der funktion
+	- cleanen der Seite wenn si eneu geladen wird
+	- title gibt es noch Probleme

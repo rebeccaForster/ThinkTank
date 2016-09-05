@@ -3,15 +3,15 @@
        <md-toolbar class="toolbar-settings  md-primary md-hue-2">
             <div layout="row" layout-padding>
                 <md-button class="md-icon-button" style="width:64px; height:64px; ">
-                    <ng-md-icon icon="arrow_back" size="64"></ng-md-icon>
+                    <ng-md-icon icon="arrow_back" ng-show="funqueue.length" size="64" ng-click="back()"></ng-md-icon>
                 </md-button>
                 <div flex></div>
                 <div>
                     <div>
-                        <span class="md-display-3">{{user.firstname}} {{user.name}}</span>
+                        <span class="md-display-3">{{getProfileInfo.firstname}} {{getProfileInfo.name}}</span>
                     </div>
                     <div>
-                        <span class="md-display-2"><a href={{user.url}}>{{user.url}}</a></span>
+                        <span class="md-display-2"><a href={{user.url}}>{{getProfileInfo.url}}</a></span>
                     </div>
                 </div>
                 <span flex></span>
@@ -34,7 +34,7 @@
 <md-button class="md-accent margin-right-20 font-weight-bold font-size-34">Follow person</md-button>
         </div>
 
-        <md-dialog-content layout="row" ng-include="'app/views/profile-content.html'">
+        <md-dialog-content layout="row" ng-include="'app/views/profile-content.html'" class="padding-right-40 padding-left-40 padding-bottom-40">
 
 
         </md-dialog-content>

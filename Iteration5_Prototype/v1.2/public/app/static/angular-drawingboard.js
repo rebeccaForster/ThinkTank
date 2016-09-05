@@ -305,16 +305,23 @@
                             scope.context.lineWidth = size;
                         },
                         setDrawColor: function (color) {
-                           scope.drawColor = color;
+                            scope.drawColor = color;
                         },
                         setDrawingMode: function (mode) {
-                           scope.drawingMode = mode;
+                            scope.drawingMode = mode;
                         },
                         undo: function () {
                             return util.undo(scope.context, scope.webStorage);
                         },
                         redo: function () {
                             return util.redo(scope.context, scope.webStorage);
+                        },
+                        reloadImage: function (path) {
+                            drawing = new Image();
+                            drawing.src = path;
+                            scope.context.drawImage(drawing, 0, 0);
+
+                          
                         },
                         startDraw: function () {},
                         endDraw: function () {},

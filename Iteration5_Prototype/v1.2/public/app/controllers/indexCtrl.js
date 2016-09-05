@@ -1,13 +1,16 @@
 'use strict';
 // navigationCtrl.$inject = ['$location','authentication'];
 
-app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, indexData, $mdDialog, $mdMedia) {
+app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, indexData, $mdDialog, $location, $mdMedia) {
 
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
     };
 
+$scope.openWhiteboard = function (id) {
+     $state.go($scope.menu[0].path, { ideaId: id });
 
+        }
 $scope.abcList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 
 
@@ -93,7 +96,11 @@ $scope.abcList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P
             $scope.sorting = $scope.sortingDashboardProfile;
             $scope.sortingType = $scope.sorting[0];
 
-        } else {
+        } else if ($scope.menuAuth[4].path == path) {
+            $scope.sorting = $scope.sortingContactsProfile;
+            $scope.sortingType = $scope.sorting[0];
+
+        }else {
             $scope.sorting = $scope.sortingMessages;
             $scope.sortingType = $scope.sorting[0];
         }
@@ -108,6 +115,7 @@ $scope.abcList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P
     };
 
     $scope.sortingDashboardProfile = ["Latest Ideas", "Most popular", "Friedhof", "Himmel"];
+    $scope.sortingContactsProfile = ["Firstname", "Name"];
     $scope.sortingMessages = ["Date up", "Date down", "Name up", "Name down"];
     $scope.sorting = $scope.sortingDashboardProfile;
     $scope.sortingType = $scope.sorting[0];
