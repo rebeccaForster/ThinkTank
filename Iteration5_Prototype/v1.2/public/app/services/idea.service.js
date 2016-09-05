@@ -34,12 +34,14 @@
             idea: idea,
             user: user
         }
-        if (!idea.id) return "idea not valid";
+        console.log("update idea posted");
+        console.log(idea);
+        // if (!idea.id) return "idea not valid";
 
-        return $http.post('/api/ideaData/saveNewIdea', whiteboard)
-                .success(function (data) {
-                    console.log(data)
-                    return data;
+        return $http.post('/api/ideaData/updateIdea', data)
+                .success(function (retData) {
+                    console.log(retData)
+                    return retData;
                 });
     };
 

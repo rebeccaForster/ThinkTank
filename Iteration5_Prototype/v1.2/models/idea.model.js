@@ -17,7 +17,7 @@ var IdeaSchema = new mongoose.Schema({
 			icon: String
 		}] , 
 		tags: [String], //plane text tags
-		lifetime: Number,  //days of total live time. 
+		livetime: Number,  //days of total live time. 
 		privacyType: String, 
 		scribble: String // list of scribble object IDs
 	}, 

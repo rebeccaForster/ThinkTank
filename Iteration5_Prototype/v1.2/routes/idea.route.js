@@ -23,6 +23,7 @@ router.get('/getAllIeas', function (req, res, next) {
 		     }}, function(err, ideas) {
 	// Idea.find([{}], function(err, ideas) {
 
+
 		if (err) {
 			console.log(err);
 			res.status(400);
@@ -37,17 +38,17 @@ router.get('/getAllIeas', function (req, res, next) {
 								"abstract": idea.abstract,
 								"title": idea.title,
 								"author": {
-									"_id": idea.author._id,
-									"profileImg": idea.author.profileImg,
-									"url": idea.author.url,
-									"title": idea.author.title,
-									"firstname": idea.author.firstname,
-									"email": idea.author.email,
-									"name": idea.author.name,
-									"contacs": idea.author.contacs,
-									"followedpersons": idea.author.followedpersons,
-									"followedideas": idea.author.followedideas,
-									"created": dateFormat(idea.author.created, "dd/mm/yyyy")
+									"_id": idea.author[0]._id,
+									"profileImg": idea.author[0].profileImg,
+									"url": idea.author[0].url,
+									"title": idea.author[0].title,
+									"firstname": idea.author[0].firstname,
+									"email": idea.author[0].email,
+									"name": idea.author[0].name,
+									"contacs": idea.author[0].contacs,
+									"followedpersons": idea.author[0].followedpersons,
+									"followedideas": idea.author[0].followedideas,
+									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy")
 								},
 								"img": idea.img,
 								"scribbles": idea.scribbles,
@@ -125,6 +126,7 @@ router.get('/getIdea/:id', function (req, res, next) {
 								});
 
 								res.status(200);
+								console.log(idea.scribble);
 								res.json({"_id": idea._id,
 											"livetime": idea.livetime,
 											"description": idea.description,
@@ -132,7 +134,7 @@ router.get('/getIdea/:id', function (req, res, next) {
 											"title": idea.title,
 											"author": author,
 											"img": idea.img,
-											"scribbles": idea.scribbles,
+											"scribble": idea.scribble,
 											"tags": idea.tags,
 											"milestones": idea.milestones,
 											"likes": idea.likes,
@@ -219,7 +221,8 @@ router.get('/searchIdea/:term', function (req, res, next) {
 
 
 router.post('/saveNewIdea', ideaControler.saveNewIdea);
-router.post('/updateIdea', ideaControler.saveNewIdea);
+router.post('/updateIdea', ideaControler.updateIdea); 
+router.post('/writeComment', ideaControler.writeComment);
 
 
 module.exports = router;

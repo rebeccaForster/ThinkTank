@@ -1,5 +1,5 @@
 'use strict';
-app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService, $stateParams,  $rootScope) {
+app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService, $stateParams,  $rootScope, profileService) {
     $scope.isWhiteboard = true;
     $scope.saveScribble = function (ev) {
 
@@ -33,7 +33,14 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
     $scope.contributors = [];
     $scope.contributorsList = [];
-    indexData
+    // indexData
+    //     .loadAllUsers()
+    //     .then(function (res) {
+
+    //         $scope.contributorsList = res;
+    //     });
+
+    profileService
         .loadAllUsers()
         .then(function (res) {
 
