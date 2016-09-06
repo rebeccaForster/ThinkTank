@@ -33,13 +33,13 @@
                 <div flex></div>
                 <div>{{dayLeft}}d</div>
                 <div>/</div>
-                <div>{{getIdeaInfo.lifetime}}d</div>
+                <div>{{getIdeaInfo.livetime}}d</div>
                 <div flex></div>
             </div>
             <div class="header-progress">
                 <round-progress max="100" current="100" color="#fafafa" bgcolor="#fafafa" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
                     <!-- current muss noch berechnet werden-->
-                    <round-progress max="getIdeaInfo.lifetime" current="dayLeft" color="#45ccce" bgcolor="gainsboro" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="true" duration="800" animation="easeOutCubic" offset="inherit" animation-delay="0" on-render="showPreciseCurrent">
+                    <round-progress max="getIdeaInfo.livetime" current="dayLeft" color="#45ccce" bgcolor="gainsboro" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="true" duration="800" animation="easeOutCubic" offset="inherit" animation-delay="0" on-render="showPreciseCurrent">
 
 
                     </round-progress>
@@ -73,7 +73,7 @@
                                     </md-card-header-text>
                                 </md-card-header>
                             </md-card>
-                            <md-card class="content-contributors" ng-repeat="contributor in getIdeaInfo.contributors"  class="content-contributors" ng-click="showProfile(contributor._id, $event)">
+                            <md-card class="content-contributors" ng-repeat="contributor in getIdeaInfo.contributors" class="content-contributors" ng-click="showProfile(contributor._id, $event)">
                                 <md-card-header>
                                     <md-card-avatar>
                                         <img class="md-user-avatar" src={{contributor.profileImg}} alt="{{contributor.firstname}} {{contributor.name}}" />
@@ -92,7 +92,7 @@
                             <ng-md-icon icon="brush" size="18"></ng-md-icon>
                             Whiteboard Scribble
                         </div>
-                        <div ng-click="openWhiteboard(getIdeaInfo._id)">
+                        <div ng-click="goWhiteboard(getIdeaInfo._id)">
                             <img src={{setImgPath(getIdeaInfo.scribble)}} class="content-image">
                         </div>
                     </div>
@@ -109,15 +109,15 @@
                             <ng-md-icon icon="add_location" size="18"></ng-md-icon>
                             Milestones
                         </div>
-                        <div>
-                            <md-checkbox class="md-display-1" ng-repeat="milestone in getIdeaInfo.milestones" ng-model="milestone.status" aria-label="milestone.name" ng-disabled="true">
-                                {{milestone.name}}
-                            </md-checkbox>
-                        </div>
+                        <p class="hashtag-style background-color-white" ng-repeat="milestone in getIdeaInfo.milestones" style="margin:0px 10px 0px 10px; display:inline-block">
+                            {{milestone.name}}
+                            <ng-md-icon icon="done" size="18" style="fill:green;" ng-show="milestone.percentage"></ng-md-icon>
+                        </p>
+
                     </div>
                     <div class="idea-block">
                         <div class="md-headline margin-bottom-15 font-weight-bold"># Hashtags</div>
-                        <p class="md-headline" ng-repeat="tag in getIdeaInfo.tags" style="padding:0px 10px 0px 10px; margin:0px;display:inline-block">#{{tag | uppercase}}</p>
+                        <p class="hashtag-style" ng-repeat="tag in getIdeaInfo.tags" style="margin:0px 10px 0px 10px;display:inline-block">#{{tag | uppercase}}</p>
                     </div>
                 </div>
             </div>
@@ -160,7 +160,7 @@
                                 <div ng-message="required">You have to input a comment!</div>
                             </div>
 
-                            <md-button ng-disabled="ideaForm.commentArea.$invalid" class="md-accent messages-icon" ng-click="sendComment()" style="font-weight:bold; font-size:24px;">Send</md-button>
+                            <md-button ng-disabled="ideaForm.commentArea.$invalid" class="md-accent messages-icon" ng-click="sendComment(getIdeaInfo._id)" style="font-weight:bold; font-size:24px;">Send</md-button>
                             <md-button ng-disabled="true" class="md-icon-button messages-icon" aria-label="Record Audio">
                                 <ng-md-icon icon="keyboard_voice" class="icon-gray" size="24"></ng-md-icon>
                             </md-button>

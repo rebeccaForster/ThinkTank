@@ -32,26 +32,23 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
 
     $scope.contributors = [];
+    $scope.contributorsId = [];
     $scope.contributorsList = [];
-    // indexData
-    //     .loadAllUsers()
-    //     .then(function (res) {
-
-    //         $scope.contributorsList = res;
-    //     });
-
     profileService
         .loadAllUsers()
         .then(function (res) {
 
             $scope.contributorsList = res;
+        console.log('contributorsList: ', $scope.contributorsList);
         });
 
-    $scope.setSelectedContributors = function (name, status) {
+    $scope.setSelectedContributors = function (name, id, status) {
         if (!status) {
             $scope.contributors.push(name);
+            $scope.contributorsId.push(id);
         } else {
             $scope.contributors.splice($scope.contributors.indexOf(name), 1);
+            $scope.contributorsId.splice($scope.contributorsId.indexOf(id), 1);
 
         }
     }
@@ -60,7 +57,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.milestones = [];
     $scope.milestoneList = [];
     $scope.ideaLifeTime = 30; //Angabe in Tagen, der Server speichert automatisch 30 falls nichts angegeben ist
-    //Todo Rebecca: ich  muss noch die left tage kalkulieren, wenn die Idee geladen wird
     $scope.ideaDayLeft = 0;
 
     indexData
@@ -449,13 +445,14 @@ $scope.reloadImage= function (img) {
                         console.log('ergebnis der idea object von deer gesuchten ide', res);
                         $scope.title = res.title;
                         $scope.desciption = res.description;
-                        $scope.contributors = res.contributors;
+                        $scope.contributors = res.contributorsId;
                         $scope.selectedHashtags = res.tags;
-                        $scope.ideaLifeTime = res.lifetime;
+                        $scope.ideaLifeTime = res.livetime;
                         $scope.selectedPrivacyType = res.privacyType;
                         $scope.milestones = res.milestones;
                         $scope.reloadImage("app/" + res.img);
                         //Todo load scribble instead of img
+                        $scope.ideaDayLeft = $scope.calculateIdeaLeftDays(res.created);
                     });
 
                 //Tdo überprüfe ob die person eingeloggt ist oder nicht und dementsprehcend bearbeiten ja oder nein
@@ -471,10 +468,10 @@ $scope.reloadImage= function (img) {
             _id: $scope.ideaId,
             title: $scope.title,
             description: $scope.desciption,
-            contributors: $scope.contributors,
+            contributors: $scope.contributorsId,
             milestones: $scope.milestones,
             tags: $scope.selectedHashtags,
-            lifetime: $scope.ideaLifeTime,
+            livetime: $scope.ideaLifeTime,
             privacyType: $scope.selectedPrivacyType,
             scribble: $scope.drawingboardRemote.toDataURL('image/png')
         };
@@ -491,10 +488,10 @@ $scope.reloadImage= function (img) {
         var idea = {
             title: $scope.title,
             description: $scope.desciption,
-            contributors: $scope.contributors,
+            contributors: $scope.contributorsId,
             milestones: $scope.milestones,
             tags: $scope.selectedHashtags,
-            lifetime: $scope.ideaLifeTime,
+            livetime: $scope.ideaLifeTime,
             privacyType: $scope.selectedPrivacyType,
             scribble: $scope.drawingboardRemote.toDataURL('image/png')
         };
