@@ -5,7 +5,7 @@
             <div>
 
                 <md-button class="md-raised md-accent" ng-repeat="milestone in milestones" style="font-size:24px; margin-bottom:5px;">
-                    <md-checkbox ng-model="milestone.percentage" class="md-primary" aria-label="milestone.name">
+                    <md-checkbox ng-checked="milestone.percentage" ng-click="changeMilestoneStatus($index)" class="md-primary" aria-label="milestone.name">
                         {{milestone.name}}
                     </md-checkbox>
                     <ng-md-icon icon="close" ng-click="setSelectedMilestones(milestones.name, true, milestones.extratime, milestones.icon);"></ng-md-icon>

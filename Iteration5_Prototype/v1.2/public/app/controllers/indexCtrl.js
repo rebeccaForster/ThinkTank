@@ -2,7 +2,6 @@
 // navigationCtrl.$inject = ['$location','authentication'];
 
 app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, profileService, ideaService, $mdDialog, $location, $mdMedia) {
-
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
     };
@@ -70,9 +69,11 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
 
     $scope.navbarShort = function () {
-        return ($scope.menuAuth[0].path == $state.current.name) || !$mdMedia('gt-md');
+        return ($scope.menu[0].path == $state.current.name) || !$mdMedia('gt-md');
     }
-
+$scope.isProfile = function () {
+        return ($scope.menu[2].path == $state.current.name);
+    }
 
     $scope.menu = $scope.menuNonAuth;
 
@@ -262,6 +263,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             .then(function (res) {
 
                 $scope.getProfileInfo = res;
+            console.log('profile: ', res);
             });
 
     };

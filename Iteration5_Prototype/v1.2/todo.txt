@@ -8,7 +8,6 @@ Frederic
 		#sollte gehen, als IDs, kann ich noch zu Objecten umbauen wenn das in der Übersicht/Dashboard schon wichtig ist. 
 		#Contributors wurden nicht gespeichert, da du die Namen übergeben hast nicht die IDs. Die braucht es allerdings. (War auch immernoch Müller n, habe das mal auf den aktuellen Service gebracht)
 2. getIdea
-	- Author funktioniert
 	- Commentare fehlen
 		#ist geschrieben aber noch auskommentiert, brauchen erstmal ein formular um kommentare zu speichern
 	- lifeCycle fehlt (bzw. es hieß die ganze Ziet lifeTime worauf ich es geladen habe)
@@ -20,14 +19,8 @@ Frederic
 		#done, da war ein s zu viel 
 		--> verstehe ich nciht was du meinst
 		#es geht oder? 
-4. getAllUser
-	- sollten nur die registrierten angeziegt werden
-		#ja? das kommt bei mir auch 
 
-5. Whiteboard:
-	-update Funktion überprüfen
-		#done, geht jetzt 
-	- tags: gehen jetzt. 
+
 	
 rebecca:
 

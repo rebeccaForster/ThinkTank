@@ -1,8 +1,7 @@
 'use strict';
 app.controller('ProfileCtrl', function ($scope, indexData, $mdDialog, authentication, profileService, ideaService) {
-    $scope.user = authentication.currentUser();
-    $scope.isProfile = true;
-    $scope.credentials = {
+ 
+       $scope.credentials = {
         email: $scope.user.email,
         name: $scope.user.name,
         title: $scope.user.title,
@@ -10,9 +9,7 @@ app.controller('ProfileCtrl', function ($scope, indexData, $mdDialog, authentica
         url: $scope.user.url,
         profileImg: $scope.user.profileImg
     };
-    
-       
-    
+        $scope.selectedHashtags = $scope.user.tags;
     // number of columns of the profile site for md-cards
         $scope.maxProfileColumn = 2;
     $scope.addHashtags = function (ev) {

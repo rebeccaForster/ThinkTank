@@ -52,6 +52,15 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
         }
     }
+    $scope.changeMilestoneStatus = function(index){
+        if($scope.milestones[index].percentage)
+        {
+            $scope.milestones[index].percentage = 0;
+        }else{
+        $scope.milestones[index].percentage = 1;
+        }
+    
+    }
     $scope.author = '';
     $scope.desciption = "";
     $scope.milestones = [];

@@ -5,28 +5,64 @@
     </div>
     <div class="idea-block">
         <div class="md-headline margin-bottom-15 font-weight-bold">Ideas</div>
-        <!--
-        <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
-            <md-card class="md-whiteframe-4dp margin-bottom-30" ng-repeat="idea in ideaList" ng-if="!(($index+3)%3)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea._id, $event)">
-            </md-card>
-        </div>
-        <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
-            <md-card class="md-whiteframe-4dp margin-bottom-30" ng-repeat="idea in ideaList" ng-if="!(($index+2)%3)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea._id, $event)">
+        <div layout='row'>
+            <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
+                <md-card class="md-whiteframe-4dp margin-bottom-30" ng-repeat="idea in getProfileInfo.ownIdeas" ng-if="!(($index+3)%3)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea._id, $event)">
+                </md-card>
+            </div>
+            <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
+                <md-card class="md-whiteframe-4dp margin-bottom-30" ng-repeat="idea in getProfileInfo.ownIdeas" ng-if="!(($index+2)%3)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea._id, $event)">
 
-            </md-card>
-        </div>
-        <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
-            <md-card class="md-whiteframe-4dp margin-bottom-30" ng-repeat="idea in ideaList" ng-if="!(($index+1)%3)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea._id, $event)">
+                </md-card>
+            </div>
+            <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
+                <md-card class="md-whiteframe-4dp margin-bottom-30" ng-repeat="idea in getProfileInfo.ownIdeas" ng-if="!(($index+1)%3)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea._id, $event)">
 
-            </md-card>
+                </md-card>
+            </div>
+            <div ng-hide="getProfileInfo.ownIdeas.length">
+                You have no own ideas
+            </div>
         </div>
--->
-    </div>
-    <div class="idea-block">
-        <div class="md-headline margin-bottom-15 font-weight-bold">Followed Ideas</div>
-    </div>
-    <div class="idea-block">
-        <div class="md-headline margin-bottom-15 font-weight-bold">Followed Person</div>
-    </div>
-</div>
+        <div class="idea-block">
+            <div class="md-headline margin-bottom-15 font-weight-bold">Followed Ideas</div>
+            <div layout='row'>
 
+                <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
+                    <md-card class="md-whiteframe-4dp margin-bottom-30" ng-repeat="idea in getProfileInfo.followedideas" ng-if="!(($index+3)%3)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea._id, $event)">
+                    </md-card>
+                </div>
+                <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
+                    <md-card class="md-whiteframe-4dp margin-bottom-30" ng-repeat="idea in getProfileInfo.followedideas" ng-if="!(($index+2)%3)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea._id, $event)">
+
+                    </md-card>
+                </div>
+                <div flex flex-sm="100" flex-xs="100" layout="column" layout-margin>
+                    <md-card class="md-whiteframe-4dp margin-bottom-30" ng-repeat="idea in getProfileInfo.followedideas" ng-if="!(($index+1)%3)" ng-include="'app/views/dashboard-item-idea-card.html'" ng-click="showIdea(idea._id, $event)">
+
+                    </md-card>
+                </div>
+            </div>
+
+            <div ng-hide="getProfileInfo.followedideas.length">
+                You follow no ideas
+            </div>
+        </div>
+        <div class="idea-block">
+            <div class="md-headline margin-bottom-15 font-weight-bold">Followed Person</div>
+            <md-card class="content-contributors" ng-repeat="contributor in getProfileInfo.followedpersons" class="content-contributors" ng-click="showProfile(contributor._id, $event)">
+                <md-card-header>
+                    <md-card-avatar>
+                        <img class="md-user-avatar" src={{contributor.profileImg}} alt="{{contributor.firstname}} {{contributor.name}}" />
+                    </md-card-avatar>
+                    <md-card-header-text>
+                        <span class="md-title">{{contributor.firstname}} {{contributor.name}}</span>
+                        <span class="md-subhead">contributor</span>
+                    </md-card-header-text>
+                </md-card-header>
+            </md-card>
+            <div ng-hide="getProfileInfo.followedpersons.length">
+                You follow no persons
+            </div>
+        </div>
+    </div>
