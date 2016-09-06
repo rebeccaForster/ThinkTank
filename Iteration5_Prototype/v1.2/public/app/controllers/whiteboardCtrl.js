@@ -49,7 +49,9 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 fullscreen: true,
                 locals: {
                     authentication: authentication,
-                    isSendComment: false
+                    isSendComment: false,
+                    addFollowIdea: false,
+                    addFollowPerson: false
                 }
 
             })

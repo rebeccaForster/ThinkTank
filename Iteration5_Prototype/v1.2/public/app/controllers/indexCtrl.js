@@ -12,7 +12,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         });
 
     }
-    $scope.goBackIdeaPopUp = function(id){
+    $scope.goBackIdeaPopUp = function (id) {
         $state.go($scope.menu[1].path);
         $scope.goBackPopup();
     }
@@ -71,10 +71,10 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     $scope.navbarShort = function () {
         return ($scope.menu[0].path == $state.current.name) || !$mdMedia('gt-md');
     }
-$scope.isProfile = function () {
+    $scope.isProfile = function () {
         return ($scope.menuAuth[2].path == $state.current.name);
     }
-$scope.isWhiteboard = function () {
+    $scope.isWhiteboard = function () {
         return ($scope.menu[0].path == $state.current.name);
     }
     $scope.menu = $scope.menuNonAuth;
@@ -99,6 +99,96 @@ $scope.isWhiteboard = function () {
         }
 
 
+    }
+
+    $scope.getFollowPerson = function (followPersonId) {
+        if ($scope.user) {
+
+            var i = 0;
+            while (i < $scope.user.followedpersons.length) {
+                if ($scope.user.followedpersons[i]._id == followPersonId) {
+                    return true;
+                }
+                i++;
+            };
+        }
+        return false;
+    }
+
+    $scope.setFollowPerson = function (followPersonId, isFollow) {
+
+        //check if user is logged in 
+        if (!$scope.isLoggedIn) {
+            //if isFollow true than delete that the user is followed and //Todo update user
+            if (isFollow) {} else { // elsee add user as follow
+                profileService
+                    .followUser(followPersonId, $scope.user)
+                    .success(function (data) {
+
+                        console.log("return data after follow person", data);
+                        //Todo update user ist abhängig was in data drinnen steht
+                    });
+
+            }
+
+
+        } else {
+
+            // log in user,                if the loggin successfull, verify            if the user followed the person            if not follow
+            $scope.showLoginBox(false, false, followPersonId);
+
+        }
+    }
+
+    $scope.getFollowIdea = function (followIdeaId) {
+        if ($scope.user) {
+            var i = 0;
+            while (i < $scope.user.followedideas.length) {
+                if ($scope.user.followedideas[i]._id == followIdeaId) {
+                    return true;
+                }
+                i++;
+            };
+        }
+        return false;
+    }
+
+    $scope.setFollowIdea = function (followIdeaId, isFollow) {
+
+        //check if user is logged in and update user
+        if (!$scope.isLoggedIn) {
+            //if isFollow true than delete that the idea is followed
+            if (isFollow) {} else { // elsee add idea as follow
+
+                ideaService
+                    .followIdea(followIdeaId, $scope.user)
+                    .success(function (data) {
+
+                        console.log("return data after follow idea", data);
+                        //Todo update user ist abhängig was in data drinnen steht
+                    });
+            }
+
+
+        } else {
+
+            // log in user,                if the loggin successfull, verify            if the user followed the idea            if not follow
+            $scope.showLoginBox(false, followIdeaId, false);
+
+        }
+    }
+    $scope.isUserContributor = function (followIdeaId) {
+        if ($scope.user) {
+
+            var i = 0;
+            while (i < $scope.user.ownIdeas.length) {
+                if ($scope.user.ownIdeas[i]._id == followIdeaId) {
+                    return true;
+                }
+                i++;
+            };
+        }
+        return false;
     }
     $scope.setSignInStatus();
     $scope.go = function (path) {
@@ -126,12 +216,12 @@ $scope.isWhiteboard = function () {
 
 
     }
-$scope.logout = function () {
+    $scope.logout = function () {
         authentication.logout();
         $scope.setSignInStatus();
-    if(!($scope.menu[0].path == $state.current.name)){
+        if (!($scope.menu[0].path == $state.current.name)) {
             $scope.go($scope.menu[1].path);
-    }
+        }
 
     }
     $scope.getMenuStatus = function (path) {
@@ -172,7 +262,7 @@ $scope.logout = function () {
         }
     }
 
-    
+
 
     /*
              function: 
@@ -204,7 +294,7 @@ $scope.logout = function () {
 
 
     };
-    $scope.showLoginBox = function (isSendComment, ev) {
+    $scope.showLoginBox = function (isSendComment, addFollowIdea, addFollowPerson, ev) {
         $mdDialog.show({
                 controller: LoginDialogController,
                 templateUrl: 'app/views/login-popup.html',
@@ -215,20 +305,26 @@ $scope.logout = function () {
                 fullscreen: true,
                 locals: {
                     authentication: authentication,
-                    isSendComment: isSendComment
+                    isSendComment: isSendComment,
+                    addFollowIdea: addFollowIdea,
+                    addFollowPerson: addFollowPerson
                 }
 
             })
             .then(function () {
-                if (!$scope.isBack && isSendComment) {
-                    // Wrap the function Make sure that the params are an array.. and push it to the array
-                    $scope.funqueue.push(wrapFunction($scope.showProfile, this, [id]));
-                }
+                    if ($scope.isBack && !$scope.isLoggedIn) {
+                        if (addFollowIdea && !$scope.getFollowIdea() && !$scope.isUserContributor(addFollowIdea)) {
+                            $scope.setFollowIdea(addFollowIdea, false);
+                        } else if (addFollowPerson && !$scope.getFollowPerson() && $scope.user._id != $scope.getProfileInfo._id) {
+                            $scope.setFollowPerson(addFollowPerson, false);
 
-            }, function () {
-                $scope.funqueue = [];
+                        }
+                    }
+                },
+                function () {
+                    $scope.funqueue = [];
 
-            });
+                });
 
 
 
@@ -270,7 +366,7 @@ $scope.logout = function () {
             .then(function (res) {
 
                 $scope.getProfileInfo = res;
-            console.log('profile: ', res);
+                console.log('profile: ', res);
             });
 
     };
@@ -453,7 +549,7 @@ $scope.logout = function () {
 
     $scope.sendComment = function (ideaId) {
         if ($scope.isLoggedIn) {
-            $scope.showLoginBox(true);
+            $scope.showLoginBox(true, false, false);
         } else {
             ideaService
                 .writeComment(ideaId, $scope.saveComment, $scope.user)
@@ -489,7 +585,7 @@ $scope.logout = function () {
     }
 });
 
-function LoginDialogController($scope, $mdDialog, isSendComment, authentication) {
+function LoginDialogController($scope, $mdDialog, isSendComment, addFollowIdea, addFollowPerson, authentication) {
     $scope.isBack = false;
 
     $scope.credentials = {
@@ -510,11 +606,13 @@ function LoginDialogController($scope, $mdDialog, isSendComment, authentication)
             .then(function () {
                 $scope.setSignInStatus();
 
-                if (isSendComment) {
+                if (isSendComment || addFollowIdea || addFollowPerson) {
+
                     $scope.back();
                 } else {
                     $scope.cancel();
                 }
+
 
             });
 
@@ -551,7 +649,7 @@ function RegisterDialogController($scope, $mdDialog, authentication) {
             .register($scope.credentials)
             .then(function () {
                 $scope.cancel();
-                $scope.showLoginBox(false);
+                $scope.showLoginBox(false, false, false);
             });
 
     };

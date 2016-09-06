@@ -46,9 +46,12 @@
                 </round-progress>
             </div>
         </div>
-        <div layout="row" class="margin-top-15" style="margin-bottom:135px;">
+        <div layout="row" class="margin-top-15" style="margin-bottom:135px;" ng-init="isUserFollowIdea = getFollowIdea(getIdeaInfo._id); isUserContr =isUserContributor(getIdeaInfo._id)">
             <div flex></div>
-            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34">Follow idea</md-button>
+            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-if="isUserFollowIdea" ng-hide="isUserContr"   ng-click="setFollowIdea(getIdeaInfo._id,true)">Follow not idea</md-button>
+            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-if="!isUserFollowIdea" ng-hide="isUserContr"  ng-click="setFollowIdea(getIdeaInfo._id,false)">Follow idea</md-button>
+            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34"  ng-show="isUserContr"  ng-click="goWhiteboard(getIdeaInfo._id)">Edit idea</md-button>
+            
         </div>
 
         <md-dialog-content layout="row" class="padding-right-40 padding-left-40 padding-bottom-40">

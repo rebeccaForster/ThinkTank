@@ -1,6 +1,6 @@
 <md-dialog aria-label="Profile Popup" class="popup-size">
     <form>
-       <md-toolbar class="toolbar-settings  md-primary md-hue-2">
+        <md-toolbar class="toolbar-settings  md-primary md-hue-2">
             <div layout="row" layout-padding>
                 <md-button class="md-icon-button" style="width:64px; height:64px; ">
                     <ng-md-icon icon="arrow_back" ng-show="funqueue.length" size="64" ng-click="back()"></ng-md-icon>
@@ -15,23 +15,24 @@
                     </div>
                 </div>
                 <span flex></span>
-               <md-button class="md-icon-button" style="width:64px; height:64px;">
+                <md-button class="md-icon-button" style="width:64px; height:64px;">
                     <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
                 </md-button>
             </div>
 
         </md-toolbar>
         <div class="container">
-            <img ng-src={{user.profileImg}} class="md-avatar header-background-circle" alt="{{user.name}}">
+            <img ng-src={{getProfileInfo.profileImg}} class="md-avatar header-background-circle" alt="{{getProfileInfo.name}}">
             <div class="header-progress">
                 <round-progress max="100" current="100" color="#fafafa" bgcolor="#fafafa" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
 
                 </round-progress>
             </div>
         </div>
-        <div layout="row"  class="margin-top-15" style="margin-bottom:135px;">
+        <div layout="row" class="margin-top-15" style="margin-bottom:135px;" >
             <div flex></div>
-<md-button class="md-accent margin-right-20 font-weight-bold font-size-34">Follow person</md-button>
+            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-if="getFollowPerson(getProfileInfo._id)" ng-hide="(user._id == getProfileInfo._id)" ng-click="setFollowPerson(getProfileInfo._id,true)">Follow not person</md-button>
+            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-if="!getFollowPerson(getProfileInfo._id);" ng-hide="user._id == getProfileInfo._id" ng-click="setFollowPerson(getProfileInfo._id,false)">Follow person</md-button>
         </div>
 
         <md-dialog-content layout="row" ng-include="'app/views/profile-content.html'" class="padding-right-40 padding-left-40 padding-bottom-40">

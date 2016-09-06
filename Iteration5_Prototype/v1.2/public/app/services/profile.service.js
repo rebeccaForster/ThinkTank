@@ -31,9 +31,9 @@
             followedPersonId: followedPersonId,
             user: user
         }
-        if (!idea.id) return "idea not valid";
+        //if (!followedPersonId) return "idea not valid";
 
-        return $http.post('/api/userData/followUser', whiteboard)
+        return $http.post('/api/userData/followUser', data)
                 .success(function (data) {
                     console.log(data)
                     return data;
