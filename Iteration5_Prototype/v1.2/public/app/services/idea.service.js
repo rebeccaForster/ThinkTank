@@ -121,7 +121,9 @@
             writeComment: writeComment,
             getIdea: getIdea,
             likeIdea: likeIdea,
-            followIdea: followIdea
+            followIdea: followIdea,
+            unfollowIdea: unfollowIdea
+
         };
     }
 

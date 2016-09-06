@@ -4,7 +4,7 @@
         .module('App')
         .service('profileService', ProfileService);
 
-  
+
 
     function ProfileService($http, authentication, $q) {
 
@@ -26,24 +26,39 @@
 
         };
 
-      var followUser = function(followedPersonId, user) {
-        var data = {
-            followedPersonId: followedPersonId,
-            user: user
-        }
-        //if (!followedPersonId) return "idea not valid";
+        var followUser = function (followedPersonId, user) {
+            var data = {
+                    followedPersonId: followedPersonId,
+                    user: user
+                }
+                //if (!followedPersonId) return "idea not valid";
 
-        return $http.post('/api/userData/followUser', data)
+            return $http.post('/api/userData/followUser', data)
                 .success(function (data) {
                     console.log(data)
                     return data;
                 });
-      };
+        };
+
+        var unfollowUser = function (followedPersonId, user) {
+            var data = {
+                    followedPersonId: followedPersonId,
+                    user: user
+                }
+                //if (!followedPersonId) return "idea not valid";
+
+            return $http.post('/api/userData/unfollowUser', data)
+                .success(function (data) {
+                    console.log(data)
+                    return data;
+                });
+        };
 
         return {
             loadAllUsers: loadAllUsers,
-            getUser: getUser, 
-            followUser : followUser
+            getUser: getUser,
+            followUser: followUser,
+            unfollowUser: unfollowUser
         };
     }
 

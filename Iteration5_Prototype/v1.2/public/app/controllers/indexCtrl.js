@@ -120,7 +120,15 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         //check if user is logged in 
         if (!$scope.isLoggedIn) {
             //if isFollow true than delete that the user is followed and //Todo update user
-            if (isFollow) {} else { // elsee add user as follow
+            if (isFollow) {
+             profileService
+                    .unfollowUser(followPersonId, $scope.user)
+                    .success(function (data) {
+
+                        console.log("return data after follow person", data);
+                        //Todo update user ist abhängig was in data drinnen steht
+                    });
+            } else { // elsee add user as follow
                 profileService
                     .followUser(followPersonId, $scope.user)
                     .success(function (data) {
@@ -158,7 +166,15 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         //check if user is logged in and update user
         if (!$scope.isLoggedIn) {
             //if isFollow true than delete that the idea is followed
-            if (isFollow) {} else { // elsee add idea as follow
+            if (isFollow) {
+             ideaService
+                    .unfollowIdea(followIdeaId, $scope.user)
+                    .success(function (data) {
+
+                        console.log("return data after follow idea", data);
+                        //Todo update user ist abhängig was in data drinnen steht
+                    });
+            } else { // elsee add idea as follow
 
                 ideaService
                     .followIdea(followIdeaId, $scope.user)
