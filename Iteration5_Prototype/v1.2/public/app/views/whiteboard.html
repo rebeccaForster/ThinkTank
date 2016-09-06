@@ -1,6 +1,7 @@
 <header>
-     <md-toolbar class="md-primary md-hue-1 ">
-        <div class="md-toolbar-tools toolbar-settings-top"  layout='row'>
+    <md-toolbar class="md-primary md-hue-1 ">
+        <div class="md-toolbar-tools toolbar-settings-top" layout='row'>
+
             <div class="md-headline" style="margin-right:20px !important; margin-left:20px !important; ">
                 Academic Think Tank
             </div>
@@ -11,7 +12,7 @@
 <main class="" layout="row" flex id="whiteboard-main">
 
     <md-content noFlex>
-        <div ng-controller="WhiteboardCtrl" ng-cloak="" >
+        <div ng-controller="WhiteboardCtrl" ng-cloak="">
             <div style="top:74px; right:0px; position:fixed; width:90px; heigt:100%;">
                 <div layout="column" layout-padding>
                     <div flex=38></div>
@@ -45,9 +46,15 @@
             </div>
 
 
-            <div layout="row" style="bottom:0px; left:0px; position:fixed; width:100%;" padding-layout>
+            <div layout="row" style="bottom:0px; left:100px; position:fixed; width:100%;" padding-layout>
+
+                <div style="bottom:0px; left:100px; position:fixed;">
+                    <md-button aria-label="lock" ng-show="ideaId != -1" ng-click="goBackIdeaPopUp(ideaId)">
+                        Go back to idea
+                    </md-button>
 
 
+                </div>
 
                 <div style="bottom:0px; left:40%; position:fixed;">
                     <md-button class="md-icon-button icon-whiteboard-small" aria-label="undo" ng-click="undo()">
@@ -63,24 +70,24 @@
                         <ng-md-icon icon="delete" class="icon-gray" size="34" ng-click="clear()"></ng-md-icon>
                     </md-button>
                     <md-button class="md-icon-button  icon-whiteboard-small" ng-click="saveScribble($event)" aria-label="save">
-                    <ng-md-icon icon="save" class="icon-gray" size="34"></ng-md-icon>
-                </md-button>
+                        <ng-md-icon icon="save" class="icon-gray" size="34"></ng-md-icon>
+                    </md-button>
                 </div>
                 <div id="circle-menu1" class="cn-menu1"></div>
 
 
             </div>
             <div style="bottom:0px; right:10px; position:fixed;">
-                    <md-button class="md-icon-button  icon-whiteboard-small" aria-label="lock">
-                        <ng-md-icon icon="lock" class="icon-gray" size="34"></ng-md-icon>
-                    </md-button>
-                    <md-input-container>
-                        <md-select ng-model="selectedPrivacyType" aria-label="privacyTypesList" ng-change="changePrivacy(selectedPrivacyType)" style="margin-bottom: 20px; width:100%;">
-                            <md-option ng-value="t" data-ng-repeat="t in privacyTypesList">{{ t }}</md-option>
-                        </md-select>
+                <md-button class="md-icon-button  icon-whiteboard-small" aria-label="lock">
+                    <ng-md-icon icon="lock" class="icon-gray" size="34"></ng-md-icon>
+                </md-button>
+                <md-input-container>
+                    <md-select ng-model="selectedPrivacyType" aria-label="privacyTypesList" ng-change="changePrivacy(selectedPrivacyType)" style="margin-bottom: 20px; width:100%;">
+                        <md-option ng-value="t" data-ng-repeat="t in privacyTypesList">{{ t }}</md-option>
+                    </md-select>
 
-                    </md-input-container>
-                
+                </md-input-container>
+
             </div>
         </div>
     </md-content>

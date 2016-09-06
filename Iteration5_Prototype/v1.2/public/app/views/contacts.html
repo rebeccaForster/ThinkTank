@@ -41,7 +41,7 @@
                 <div flex layout="column">
 
                     <md-list>
-                        <md-list-item ng-repeat="user in getAllUserList" style="margin-bottom:15px; heiht:auto;">
+                        <md-list-item ng-repeat="user in getAllUserList  | orderBy:'name'" style="margin-bottom:15px; heiht:auto;">
 
                             <div class="md-list-item-text margin-bottom-15 width-100-prozent">
                                 <!-- ToDO: header mittig machen den namen und zu bild-->

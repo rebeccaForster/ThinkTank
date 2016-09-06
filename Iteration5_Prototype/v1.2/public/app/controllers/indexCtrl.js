@@ -1,17 +1,23 @@
 'use strict';
 // navigationCtrl.$inject = ['$location','authentication'];
 
-app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, indexData, $mdDialog, $location, $mdMedia) {
+app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, profileService, ideaService, $mdDialog, $location, $mdMedia) {
 
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
     };
 
-$scope.openWhiteboard = function (id) {
-     $state.go($scope.menu[0].path, { ideaId: id });
+    $scope.openWhiteboard = function (id) {
+        $state.go($scope.menu[0].path, {
+            ideaId: id
+        });
 
-        }
-$scope.abcList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+    }
+    $scope.goBackIdeaPopUp = function(id){
+        $state.go($scope.menu[1].path);
+        $scope.goBackPopup();
+    }
+    $scope.abcList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
 
     $scope.menuNonAuth = [
@@ -71,26 +77,33 @@ $scope.abcList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P
     $scope.menu = $scope.menuNonAuth;
 
     $scope.isLoggedIn = !authentication.isLoggedIn();
-    $scope.user = authentication.currentUser();
+    $scope.user = '';
 
     $scope.setSignInStatus = function () {
         $scope.isLoggedIn = !authentication.isLoggedIn();
         if (!$scope.isLoggedIn) {
             $scope.menu = $scope.menuAuth;
+            var user = authentication.currentUser();
+            profileService
+                .getUser(user.id)
+                .then(function (res) {
 
-            console.log($scope.user);
-
+                    $scope.user = res;
+                });
         } else {
             $scope.menu = $scope.menuNonAuth;
+            $scope.user = '';
         }
-        $scope.user = authentication.currentUser();
-    }
 
+
+    }
     $scope.setSignInStatus();
     $scope.go = function (path) {
         if ($state.current.name != path) {
             // clear hashtag, if a new item in the menu is clicked
             $scope.selectedHashtags = [];
+            // clear all hashtags if the path is changed via the menu
+            $scope.funqueue = [];
         }
         if ($scope.menuAuth[1].path == path) {
             $scope.sorting = $scope.sortingDashboardProfile;
@@ -100,17 +113,17 @@ $scope.abcList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P
             $scope.sorting = $scope.sortingContactsProfile;
             $scope.sortingType = $scope.sorting[0];
 
-        }else {
+        } else {
             $scope.sorting = $scope.sortingMessages;
             $scope.sortingType = $scope.sorting[0];
         }
         $state.go(path);
 
-        
+
 
     }
 
-    $scope.getMenuStatus = function(path){
+    $scope.getMenuStatus = function (path) {
         return (path == $state.current.name);
     };
 
@@ -153,7 +166,14 @@ $scope.abcList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P
         $scope.setSignInStatus();
     }
 
-    $scope.showProfile = function (index, ev) {
+    /*
+             function: 
+             input: id of the idea
+             output:
+             */
+    $scope.showProfile = function (id, ev) {
+        $scope.getUser(id);
+
         $mdDialog.show({
                 controller: ProfilePopupController,
                 templateUrl: 'app/views/profile-popup.html',
@@ -162,15 +182,21 @@ $scope.abcList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P
                 preserveScope: true,
                 clickOutsideToClose: true,
                 fullscreen: true,
-                locals: {
-                    profileIndex: index
-                }
+                locals: {}
             })
-            .then(function () {}, function () {});
+            .then(function () {
+                if (!$scope.isBack) {
+                    // Wrap the function Make sure that the params are an array.. and push it to the array
+                    $scope.funqueue.push(wrapFunction($scope.showProfile, this, [id]));
+                }
+
+            }, function () {
+                $scope.funqueue = [];
+            });
 
 
     };
-    $scope.showLoginBox = function (ev) {
+    $scope.showLoginBox = function (isSendComment, ev) {
         $mdDialog.show({
                 controller: LoginDialogController,
                 templateUrl: 'app/views/login-popup.html',
@@ -180,20 +206,134 @@ $scope.abcList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P
                 clickOutsideToClose: true,
                 fullscreen: true,
                 locals: {
-                    authentication: authentication
+                    authentication: authentication,
+                    isSendComment: isSendComment
                 }
 
             })
             .then(function () {
-                return true;
+                if (!$scope.isBack && isSendComment) {
+                    // Wrap the function Make sure that the params are an array.. and push it to the array
+                    $scope.funqueue.push(wrapFunction($scope.showProfile, this, [id]));
+                }
+
             }, function () {
-                return true;
+                $scope.funqueue = [];
+
             });
 
 
 
 
     };
+    $scope.setImgPath = function (img) {
+        var path = ('app/' + img);
+        return path;
+    }
+
+    /*
+          function: 
+          input: id of the idea
+          output:
+          */
+    $scope.commentIdea = function (id) {
+
+
+        }
+        /*
+          function: 
+          input: id of the idea
+          output:
+          */
+    $scope.followIdea = function (id) {
+
+        }
+        /*
+          function: 
+          input: id of the idea
+          output:
+          */
+    $scope.participateIdea = function (id) {
+
+    }
+    $scope.getUser = function (id) {
+        profileService
+            .getUser(id)
+            .then(function (res) {
+
+                $scope.getProfileInfo = res;
+            });
+
+    };
+    $scope.getIdea = function (id) {
+        ideaService
+            .getIdea(id)
+            .then(function (res) {
+
+                $scope.getIdeaInfo = res;
+            });
+    };
+
+    /*
+        function: calculate the days which are left after the idea was created
+        input: date when the idea was created
+        output: number of days which are left after the idea was created
+        */
+    $scope.calculateIdeaLeftDays = function (date) {
+        var currentDate = new Date();
+        currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0);
+        if (date = '') {
+            var dateParts = date.split("/");
+            var createdDate = new Date(dateParts[2], (dateParts[1] - 1), dateParts[0], 0, 0, 0);
+            var days = (currentDate - createdDate) / (1000 * 60 * 60 * 24); // subtraiktion sind ms und umrechnen in tage
+
+            return days;
+        }
+        return 0;
+
+    }
+
+    function clearComment() {
+
+        $scope.saveComment = {
+            author: -1,
+            text: '',
+            likeIdeaStatus: false,
+            newInputStatus: false,
+            troubleStatus: false,
+            other: false
+        };
+
+    }
+
+    $scope.showIdea = function (id, ev) {
+        $scope.getIdea(id);
+        clearComment();
+        $mdDialog.show({
+                controller: IdeaPopupController,
+                templateUrl: 'app/views/idea-popup.html',
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {}
+            })
+            .then(function () {
+                if (!$scope.isBack) {
+                    // Wrap the function Make sure that the params are an array.. and push it to the array
+                    $scope.funqueue.push(wrapFunction($scope.showIdea, this, [id]));
+                }
+
+
+            }, function () {
+                $scope.funqueue = [];
+            });
+
+
+    };
+
+
 
 
 
@@ -245,8 +385,8 @@ $scope.abcList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P
             $scope.selectedHashtags.splice($scope.selectedHashtags.indexOf(name), 1);
 
         }
-       
-        
+
+
     }
 
     $scope.updateDashboard = function () {
@@ -254,10 +394,95 @@ $scope.abcList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P
         // $scope.sortingType gibt den Namen der Sortierung zurück
         // $scope.selectedHashtags  gibt alle Tags IDs an, nach denen man suchen soll
     }
+    $scope.saveComment = {
+        author: -1,
+        text: '',
+        likeIdeaStatus: false,
+        newInputStatus: false,
+        troubleStatus: false,
+        other: false
+    };
 
+    $scope.newInputText = '';
+    $scope.likeIdeaText = '';
+    $scope.troubleText = '';
+    $scope.otherText = '';
+    // set the status of the different comment reactions
+    $scope.setNewInputStatus = function () {
+        $scope.saveComment.newInputStatus = !$scope.saveComment.newInputStatus;
+        if ($scope.saveComment.newInputStatus) {
+            $scope.newInputText = 'Explain your brilliant idea!';
+        } else {
+            $scope.newInputText = '';
+        }
+    };
+    $scope.setLikeIdeaStatus = function () {
+        $scope.saveComment.likeIdeaStatus = !$scope.saveComment.likeIdeaStatus;
+        if ($scope.saveComment.likeIdeaStatus) {
+            $scope.likeIdeaText = 'What do you like about the idea?';
+        } else {
+            $scope.likeIdeaText = '';
+        }
+    };
+    $scope.setTroubleStatus = function () {
+        $scope.saveComment.troubleStatus = !$scope.saveComment.troubleStatus;
+        if ($scope.saveComment.troubleStatus) {
+            $scope.troubleText = 'Where do you see problems?';
+        } else {
+            $scope.troubleText = '';
+        }
+    };
+    $scope.setOtherComment = function () {
+        $scope.saveComment.other = !$scope.saveComment.other;
+        if ($scope.saveComment.other) {
+            $scope.otherText = 'Something else.';
+        } else {
+            $scope.otherText = '';
+        }
+
+    };
+
+    $scope.sendComment = function (ideaId) {
+        if ($scope.isLoggedIn) {
+            $scope.showLoginBox(true);
+        } else {
+            ideaService
+                .writeComment(ideaId, $scope.saveComment, $scope.user)
+                .success(function (data) {
+                    console.log('comment return data: ', data);
+                    $scope.getIdea(ideaId);
+                    clearComment();
+
+                });
+
+        }
+
+    };
+
+    // Function wrapping code.
+    // fn - reference to function.
+    // context - what you want "this" to be.
+    // params - array of parameters to pass to function.
+    var wrapFunction = function (fn, context, params) {
+            return function () {
+                fn.apply(context, params);
+            };
+        }
+        // Create an array and append your functions to them
+    $scope.funqueue = [];
+    $scope.goBackPopup = function () {
+        if ($scope.funqueue.length == 1) {
+            ($scope.funqueue.pop())();
+        } else if ($scope.funqueue.length) {
+            ($scope.funqueue.shift())();
+        }
+        $scope.isBack = true;
+    }
 });
 
-function LoginDialogController($scope, $mdDialog, authentication) {
+function LoginDialogController($scope, $mdDialog, isSendComment, authentication) {
+    $scope.isBack = false;
+
     $scope.credentials = {
         email: "",
         password: ""
@@ -274,12 +499,23 @@ function LoginDialogController($scope, $mdDialog, authentication) {
         authentication
             .login($scope.credentials)
             .then(function () {
-                $scope.cancel();
                 $scope.setSignInStatus();
+
+                if (isSendComment) {
+                    $scope.back();
+                } else {
+                    $scope.cancel();
+                }
 
             });
 
 
+    };
+    $scope.back = function () {
+        $scope.goBackPopup();
+
+
+        $mdDialog.hide();
     };
 }
 
@@ -306,7 +542,7 @@ function RegisterDialogController($scope, $mdDialog, authentication) {
             .register($scope.credentials)
             .then(function () {
                 $scope.cancel();
-                $scope.showLoginBox();
+                $scope.showLoginBox(false);
             });
 
     };

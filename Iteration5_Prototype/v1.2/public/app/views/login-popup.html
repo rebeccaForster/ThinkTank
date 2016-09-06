@@ -1,6 +1,10 @@
 <md-dialog id="login-dialog" aria-label="Login" ng-cloak style="max-width: 90%;width: 500px;">
     <form name="loginForm" ng-submit="login()">
         <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding>
+            <md-button class="md-icon-button" style="width:64px; height:64px; ">
+                <ng-md-icon icon="arrow_back" size="64" ng-show="funqueue.length" ng-click="back()"></ng-md-icon>
+            </md-button>
+            <div flex></div>
             <h2>Sign In</h2>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="cancel()">

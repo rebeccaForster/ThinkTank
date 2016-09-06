@@ -2,7 +2,7 @@
 angular
     .module('App')
     // the controller is used on the dashboard and profile site the reason ist that the functionaity is the same only the font design is differnt
-    .controller('DashboardCtrl', function ($scope, dashService, profileService, ideaService, indexData, $location, $mdDialog, $mdMedia, $timeout) {
+    .controller('DashboardCtrl', function ($scope, dashService, indexData, $location, $mdDialog, $mdMedia, $timeout) {
 
         $scope.ideaList = [];
 
@@ -15,23 +15,7 @@ angular
                 $scope.ideaList = res;
             });
 
-        $scope.getUser = function (id) {
-            profileService
-                .getUser(id)
-                .then(function (res) {
 
-                    $scope.getProfileInfo = res;
-                });
-
-        };
-        $scope.getIdea = function (id) {
-            ideaService
-                .getIdea(id)
-                .then(function (res) {
-
-                    $scope.getIdeaInfo = res;
-                });
-        };
 
         $scope.hashtags = [];
         // loads all hashtags with name and priority from the server and save it in a variable.
@@ -64,88 +48,13 @@ angular
                 });
         }
 
-        /*
-        function: calculate the days which are left after the idea was created
-        input: date when the idea was created
-        output: number of days which are left after the idea was created
-        */
-        $scope.calculateIdeaLeftDays = function (date) {
-            var currentDate = new Date();
-            currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0);
-            if (date = '') {
-                var dateParts = date.split("/");
-                var createdDate = new Date(dateParts[2], (dateParts[1] - 1), dateParts[0], 0, 0, 0);
-                var days = (currentDate - createdDate) / (1000 * 60 * 60 * 24); // subtraiktion sind ms und umrechnen in tage
-
-                return days;
-            }
-            return 0;
-
-        }
 
         // number of columns of the dashboard site for md-cards
         $scope.maxColumn = 3;
 
 
 
-        /*
-           function: 
-           input: id of the idea
-           output:
-           */
-        $scope.commentIdea = function (id) {
 
-
-            }
-            /*
-              function: 
-              input: id of the idea
-              output:
-              */
-        $scope.followIdea = function (id) {
-
-            }
-            /*
-              function: 
-              input: id of the idea
-              output:
-              */
-        $scope.participateIdea = function (id) {
-
-        }
-
-
-
-        /*
-           function: 
-           input: id of the idea
-           output:
-           */
-        $scope.showProfile = function (id, ev) {
-            $scope.getUser(id);
-
-            $mdDialog.show({
-                    controller: ProfilePopupController,
-                    templateUrl: 'app/views/profile-popup.html',
-                    targetEvent: ev,
-                    scope: $scope, // use parent scope in template
-                    preserveScope: true,
-                    clickOutsideToClose: true,
-                    fullscreen: true,
-                    locals: {}
-                })
-                .then(function () {
-                    if (!$scope.isBack) {
-                        // Wrap the function Make sure that the params are an array.. and push it to the array
-                        $scope.funqueue.push(wrapFunction($scope.showProfile, this, [id]));
-                    }
-
-                }, function () {
-                    $scope.funqueue = [];
-                });
-
-
-        };
 
 
 
@@ -164,119 +73,22 @@ angular
         }
 
 
-        $scope.setImgPath = function (img) {
-            var path = ('app/' + img);
-            return path;
-        }
+
 
         $scope.isDashbaord = true;
-        $scope.showIdea = function (id, ev) {
-            $scope.getIdea(id);
-
-            $mdDialog.show({
-                    controller: IdeaPopupController,
-                    templateUrl: 'app/views/idea-popup.html',
-                    scope: $scope, // use parent scope in template
-                    preserveScope: true,
-                    targetEvent: ev,
-                    clickOutsideToClose: true,
-                    fullscreen: true,
-                    locals: {}
-                })
-                .then(function () {
-                    $scope.saveComment = defaultCommentText;
-                   if (!$scope.isBack) {
-                        // Wrap the function Make sure that the params are an array.. and push it to the array
-                        $scope.funqueue.push(wrapFunction($scope.showProfile, this, [id]));
-                    }
 
 
-                }, function () {
-                    $scope.saveComment = defaultCommentText;
-                    $scope.funqueue = [];
-                });
 
-
-        };
-
-
-        var defaultCommentText = {
-            author: -1,
-            text: '',
-            likeIdeaStatus: false,
-            newInputStatus: false,
-            troubleStatus: false,
-            other: false
-        };
-        $scope.saveComment = defaultCommentText;
-
-        $scope.newInputText = '';
-        $scope.likeIdeaText = '';
-        $scope.troubleText = '';
-        $scope.otherText = '';
-        // set the status of the different comment reactions
-        $scope.setNewInputStatus = function () {
-            $scope.saveComment.newInputStatus = !$scope.saveComment.newInputStatus;
-            if ($scope.saveComment.newInputStatus) {
-                $scope.newInputText = 'Explain your brilliant idea!';
-            } else {
-                $scope.newInputText = '';
-            }
-        };
-        $scope.setLikeIdeaStatus = function () {
-            $scope.saveComment.likeIdeaStatus = !$scope.saveComment.likeIdeaStatus;
-            if ($scope.saveComment.likeIdeaStatus) {
-                $scope.likeIdeaText = 'What do you like about the idea?';
-            } else {
-                $scope.likeIdeaText = '';
-            }
-        };
-        $scope.setTroubleStatus = function () {
-            $scope.saveComment.troubleStatus = !$scope.saveComment.troubleStatus;
-            if ($scope.saveComment.troubleStatus) {
-                $scope.troubleText = 'Where do you see problems?';
-            } else {
-                $scope.troubleText = '';
-            }
-        };
-        $scope.setOtherComment = function () {
-            $scope.saveComment.other = !$scope.saveComment.other;
-            if ($scope.saveComment.other) {
-                $scope.otherText = 'Something else.';
-            } else {
-                $scope.otherText = '';
-            }
-
-        };
-
-        $scope.sendComment = function () {
-            if (!$scope.isLoggedIn) {
-                var test = false;
-                test = $scope.showLoginBox();
-
-            }
-
-        };
-
-        // Function wrapping code.
-        // fn - reference to function.
-        // context - what you want "this" to be.
-        // params - array of parameters to pass to function.
-        var wrapFunction = function (fn, context, params) {
-                return function () {
-                    fn.apply(context, params);
-                };
-            }
-            // Create an array and append your functions to them
-        $scope.funqueue = [];
 
     });
 
 
 function IdeaPopupController($scope, $mdDialog) {
-            $scope.isBack = false;
+
+    $scope.isBack = false;
 
     $scope.hide = function () {
+
         $mdDialog.hide();
     };
     $scope.cancel = function () {
@@ -284,21 +96,22 @@ function IdeaPopupController($scope, $mdDialog) {
     };
 
     $scope.back = function () {
-        
-        if ($scope.funqueue.length == 1) {
-            ($scope.funqueue.pop())();
-        } else if ($scope.funqueue.length) {
-            ($scope.funqueue.shift())();
-        }
-        $scope.isBack = true;
-                $mdDialog.hide();
+        $scope.goBackPopup();
+
+        $mdDialog.hide();
 
     };
-    
+    $scope.goWhiteboard = function (id) {
+       $scope.openWhiteboard(id);
+                $mdDialog.hide();
+
+
+    }
+
 }
 
 function ProfilePopupController($scope, $mdDialog) {
-        $scope.isBack = false;
+    $scope.isBack = false;
 
     $scope.hide = function () {
         $mdDialog.hide();
@@ -307,12 +120,8 @@ function ProfilePopupController($scope, $mdDialog) {
         $mdDialog.cancel();
     };
     $scope.back = function () {
-        if ($scope.funqueue.length == 1) {
-            ($scope.funqueue.pop())();
-        } else if ($scope.funqueue.length) {
-            ($scope.funqueue.shift())();
-        }
-        $scope.isBack = true;
+        $scope.goBackPopup();
+
         $mdDialog.hide();
     };
 
