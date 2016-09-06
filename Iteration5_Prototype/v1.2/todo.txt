@@ -3,9 +3,7 @@ Frederic
 1. wenn ich getallIdeas hole
 	-steht nur created in author drinnen 
 		#done
-	- tags sind null objekte 
-		#bei mir sind es die listen mit den namen der Tags wenn in der Idee welche gespeichert sind. Allerdings ohne Prio.
---> bei mir auch, aber es funktioniert nicht!!!!!!! 
+	- tags: geht jetzt.  
 	- Contributors werden nicht drinnen gespeichert
 		#sollte gehen, als IDs, kann ich noch zu Objecten umbauen wenn das in der Übersicht/Dashboard schon wichtig ist. 
 		#Contributors wurden nicht gespeichert, da du die Namen übergeben hast nicht die IDs. Die braucht es allerdings. (War auch immernoch Müller n, habe das mal auf den aktuellen Service gebracht)
@@ -15,10 +13,13 @@ Frederic
 		#ist geschrieben aber noch auskommentiert, brauchen erstmal ein formular um kommentare zu speichern
 	- lifeCycle fehlt (bzw. es hieß die ganze Ziet lifeTime worauf ich es geladen habe)
 		#done, lag am speicherprozess. Ideen die du schon gespeichert hast haben eventuell immer noch keine livetime, neue aber schon
-	--> verstehe ich nicht, wenn ich eine idee speicher, haben die neuen immer eine livetime in Tagen wird das bitte auch gespeichert!!!!! Es ist immer noch nciht drinnen	
+		--> verstehe ich nicht, wenn ich eine idee speicher, haben die neuen immer eine livetime in Tagen wird das bitte auch gespeichert!!!!! Es ist immer noch nciht drinnen	
+		#ich hab hier eine livetime: 1473151283153. Das sind die Secunden ab Speicherdatum + 30 Tage. Du kannst also für die Berechung der Restzeit einfach Date.now()-livetime machen; 
+		In Tagen dann noch x / (24*60*60)
 - Scribble fehlt auch
 		#done, da war ein s zu viel 
---> verstehe ich nciht was du meinst
+		--> verstehe ich nciht was du meinst
+		#es geht oder? 
 4. getAllUser
 	- sollten nur die registrierten angeziegt werden
 		#ja? das kommt bei mir auch 
@@ -26,9 +27,7 @@ Frederic
 5. Whiteboard:
 	-update Funktion überprüfen
 		#done, geht jetzt 
-	- tags werden immer noch nicht richtig gespeichert, da nur null objekte später in der Idee bei gespeicherten Tags stehen
-		#bitte keine objekte sondern nur die Strings schicken. Das Funktioniert (denke ich^^)
-	--> funktioniert nicht, da ich dir schon immer nur ein array mit strings übergebe!!!!!!
+	- tags: gehen jetzt. 
 	
 rebecca:
 
