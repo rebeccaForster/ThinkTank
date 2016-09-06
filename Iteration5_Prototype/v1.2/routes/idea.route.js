@@ -160,46 +160,6 @@ router.get('/getIdea/:id', function (req, res, next) {
 		}
 	});
 
-	//for messages 
-	// var comments;
-	// Idea.findOne({ _id: req.params.id }, function(err, idea) {
-
-	// 	if (err) {
-	// 		console.log(err);
-	// 		res.status(400);
-	// 		res.json(err);
-	// 	} else {
-	// 		Comment.find({ idea: idea._id }, function(err, doc) {
-	// 			if (err) {
-	// 				console.log(err);
-	// 				res.status(400);
-	// 				res.json(err);
-	// 			} else {
-	// 				comments = doc;
-	// 			}
-	// 		}).then(function() {
-
-	// 			res.status(200);
-	// 			res.json({"_id": idea._id,
-	// 						"livetime": idea.livetime,
-	// 						"description": idea.description,
-	// 						"abstract": idea.abstract,
-	// 						"title": idea.title,
-	// 						"author": idea.author,
-	// 						"img": idea.img,
-	// 						"scribbles": idea.scribbles,
-	// 						"tags": idea.tags,
-	// 						"milestones": idea.milestones,
-	// 						"likes": idea.likes,
-	// 						"contributors": idea.contributors,
-	// 						"lastchanged": dateFormat(idea.lastchanged, "mm/dd/yyyy"),
-	// 						"created": dateFormat(idea.created, "mm/dd/yyyy"), 
-	// 						"comments": comments
-	// 					});
-	// 		});
-	// 	}
-	// })
-
 });
 
 router.get('/getAllIdeasSorted/:sorting', function (req, res, next) {
@@ -214,25 +174,13 @@ router.get('/getAllIdeasSorted/:sorting', function (req, res, next) {
 });
 
 
-router.get('/getOwnIdeas/:user', function (req, res, next) {
-    var ideas = [{}];
-    res.json(ideas);
-});
-
-router.get('/getFollowedIdeas/:user', function (req, res, next) {
-    var ideas = [{}];
-    res.json(ideas);
-});
-
-router.get('/searchIdea/:term', function (req, res, next) {
-    var ideas = [{}];
-    res.json(ideas);
-});
-
-
 router.post('/saveNewIdea', ideaControler.saveNewIdea);
 router.post('/updateIdea', ideaControler.updateIdea); 
 router.post('/writeComment', ideaControler.writeComment);
+router.post('/followIdea', ideaControler.followIdea);
+router.post('/likeIdea', ideaControler.likeIdea);
+router.post('/unFollowIdea', ideaControler.followIdea);
+router.post('/dislikeIdea', ideaControler.likeIdea);
 
 
 module.exports = router;

@@ -38,7 +38,7 @@
                     console.log(data)
                     return data;
                 });
-    };
+      };
 
         return {
             loadAllUsers: loadAllUsers,

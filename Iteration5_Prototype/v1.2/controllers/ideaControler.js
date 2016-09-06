@@ -333,6 +333,76 @@ module.exports.likeIdea = function(req, res) {
 	});
 };
 
+module.exports.unFollowIdea = function(req, res) {
+	//we need: ideaId, userId
+
+	if(!req.body.user.id || !req.body.ideaId) {
+	    console.log("was not saved because of incomplete data");
+	    sendJSONresponse(res, 400, {
+	      "message": "user and ideaId required"
+	    });
+	    return;
+	  }
+
+
+
+	  Users.update({ _id: req.body.user.id },
+		   { $pull: { followedideas: req.body.ideaId } }, function(err, room) {
+
+		if (err) {
+			console.log("error: ");
+			console.log(err);
+			res.json({
+			  id : err
+			});
+		} else {
+			console.log("followed: ");
+			console.log(room._id);
+
+			res.status(200);
+			res.json({
+			  id : room._id
+			});
+		}
+		
+	});
+};
+
+module.exports.dislikeIdea = function(req, res) {
+	//we need: ideaId, userId
+
+		if(!req.body.user.id || !req.body.ideaId) {
+	    console.log("was not saved because of incomplete data");
+	    sendJSONresponse(res, 400, {
+	      "message": "user and ideaId required"
+	    });
+	    return;
+	  }
+
+
+
+	  Idea.update({ _id: req.body.ideaId },
+		   { $pull: { likes: req.body.user.id } }, function(err, room) {
+
+		if (err) {
+			console.log("error: ");
+			console.log(err);
+			res.json({
+			  id : err
+			});
+		} else {
+			console.log("liked: ");
+			console.log(room._id);
+
+			res.status(200);
+			res.json({
+			  id : room._id
+			});
+		}
+		
+	});
+};
+
 
 module.exports.writeComment = function(req, res) {
 

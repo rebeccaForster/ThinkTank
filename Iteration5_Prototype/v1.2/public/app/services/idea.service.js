@@ -88,6 +88,33 @@
                 });
         };
 
+        var unFollowIdea = function (ideaId, user) {
+            var data = {
+                ideaId: ideaId,
+                user: user
+            }
+
+            return $http.post('/api/ideaData/unFollowIdea', data)
+                .success(function (data) {
+                    console.log(data)
+                    return data;
+                });
+        };
+
+
+        var dislikeIdea = function (ideaId, user) {
+            var data = {
+                ideaId: ideaId,
+                user: user
+            }
+
+            return $http.post('/api/ideaData/dislikeIdea', whiteboard)
+                .success(function (data) {
+                    console.log(data)
+                    return data;
+                });
+        };
+
         return {
             saveNewIdea: saveNewIdea,
             updateIdea: updateIdea,
