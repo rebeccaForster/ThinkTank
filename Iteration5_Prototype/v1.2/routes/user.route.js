@@ -284,6 +284,7 @@ router.get('/getUser/:id', function (req, res, next) {
 
 router.post('/updateUser', userControler.updateUser);
 router.post('/followUser', userControler.followUser);
-router.post('/unFollowUser', userControler.followUser);
+router.post('/unFollowUser', userControler.unFollowUser);
 
 module.exports = router;
+

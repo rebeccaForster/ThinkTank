@@ -125,7 +125,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
                     .unfollowUser(followPersonId, $scope.user)
                     .success(function (data) {
 
-                        console.log("return data after follow person", data);
+                        console.log("return data after unfollow person", data);
                         //Todo update user ist abhängig was in data drinnen steht
                     });
             } else { // elsee add user as follow

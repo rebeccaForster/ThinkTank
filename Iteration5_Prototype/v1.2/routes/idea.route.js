@@ -68,48 +68,48 @@ router.get('/getAllIeas', function (req, res, next) {
 });
 
 
-router.get('/getIdea/:id', function (req, res, next) {
+// router.get('/getIdea/:id', function (req, res, next) {
 
-	console.log("getIdea triggerd");
-	// Idea.findOne({ _id: req.params.id }, function(err, idea) {
-	Idea.aggregate({
-	   $lookup:
-	     {
-	       from: "users",
-	       localField: "author",
-	       foreignField: "_id",
-	       as: "author"
-	     }}, function(err, ideas) {
+// 	console.log("getIdea triggerd");
+// 	// Idea.findOne({ _id: req.params.id }, function(err, idea) {
+// 	Idea.aggregate({
+// 	   $lookup:
+// 	     {
+// 	       from: "users",
+// 	       localField: "author",
+// 	       foreignField: "_id",
+// 	       as: "author"
+// 	     }}, function(err, ideas) {
 
-		if (err) {
-			console.log(err);
-			res.status(400);
-			res.json(err);
-		} else {
+// 		if (err) {
+// 			console.log(err);
+// 			res.status(400);
+// 			res.json(err);
+// 		} else {
 					
-			res.status(200);
-			res.json({"_id": idea._id,
-						"livetime": idea.livetime,
-						"description": idea.description,
-						"abstract": idea.abstract,
-						"title": idea.title,
-						"author": idea.author[0],
-						"img": idea.img,
-						"scribble": idea.scribble,
-						"tags": idea.tags,
-						"milestones": idea.milestones,
-						"likes": idea.likes,
-						"contributors": idea.contributors,
-						"comments": idea.comments,
-						"privacyType": idea.privacyType,
-						"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy"),
-						"created": dateFormat(idea.created, "dd/mm/yyyy")
-					});
-		}
+// 			res.status(200);
+// 			res.json({"_id": idea._id,
+// 						"livetime": idea.livetime,
+// 						"description": idea.description,
+// 						"abstract": idea.abstract,
+// 						"title": idea.title,
+// 						"author": idea.author[0],
+// 						"img": idea.img,
+// 						"scribble": idea.scribble,
+// 						"tags": idea.tags,
+// 						"milestones": idea.milestones,
+// 						"likes": idea.likes,
+// 						"contributors": idea.contributors,
+// 						"comments": idea.comments,
+// 						"privacyType": idea.privacyType,
+// 						"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy"),
+// 						"created": dateFormat(idea.created, "dd/mm/yyyy")
+// 					});
+// 		}
 
-	});
+// 	});
 
-});
+// });
 
 
 router.get('/getIdea/:id', function (req, res, next) {
@@ -194,7 +194,7 @@ router.get('/getIdea/:id', function (req, res, next) {
 													"likes": idea.likes,
 													"contributors": contributors,
 													"comments": comments,
-													"privacyType": privacyType,
+													"privacyType": idea.privacyType,
 													"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy"),
 													"created": dateFormat(idea.created, "dd/mm/yyyy")
 												});

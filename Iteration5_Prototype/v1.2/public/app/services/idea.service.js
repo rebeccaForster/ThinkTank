@@ -122,7 +122,7 @@
             getIdea: getIdea,
             likeIdea: likeIdea,
             followIdea: followIdea,
-            unfollowIdea: unfollowIdea
+            unFollowIdea: unFollowIdea
 
         };
     }

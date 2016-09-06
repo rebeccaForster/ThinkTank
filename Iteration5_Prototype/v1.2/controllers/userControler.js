@@ -15,7 +15,8 @@ module.exports.updateUser = function(req, res) {
 
 module.exports.followUser = function(req, res) {
 	//we need: userId, follower=currenUser
-	if(!req.body.user.id || !req.body.followedPersonId) {
+	console.log(req.body);
+	if(!req.body.user._id || !req.body.followedPersonId) {
 	    console.log("was not saved because of incomplete data");
 	    sendJSONresponse(res, 400, {
 	      "message": "user and follower required"
@@ -23,7 +24,7 @@ module.exports.followUser = function(req, res) {
 	    return;
 	  }
 
-	  Users.update({ _id: req.body.user.id },
+	  Person.update({ _id: req.body.user._id },
 		   { $push: { followedpersons: req.body.followedPersonId } }, function(err, room) {
 
 		if (err) {
@@ -34,11 +35,10 @@ module.exports.followUser = function(req, res) {
 			});
 		} else {
 			console.log("followed: ");
-			console.log(room._id);
 
 			res.status(200);
 			res.json({
-			  id : room._id
+			  "done" : "followed"
 			});
 		}
 		
@@ -48,7 +48,7 @@ module.exports.followUser = function(req, res) {
 
 module.exports.unFollowUser = function(req, res) {
 	//we need: userId, follower=currenUser
-	if(!req.body.user.id || !req.body.followedPersonId) {
+	if(!req.body.user._id || !req.body.followedPersonId) {
 	    console.log("was not saved because of incomplete data");
 	    sendJSONresponse(res, 400, {
 	      "message": "user and follower required"
@@ -56,7 +56,7 @@ module.exports.unFollowUser = function(req, res) {
 	    return;
 	  }
 
-	  Users.update({ _id: req.body.user.id },
+	  Person.update({ _id: req.body.user._id },
 		   { $pull: { followedpersons: req.body.followedPersonId } }, function(err, room) {
 
 		if (err) {
@@ -66,12 +66,11 @@ module.exports.unFollowUser = function(req, res) {
 			  id : err
 			});
 		} else {
-			console.log("followed: ");
-			console.log(room._id);
+			console.log("unfollowed: ");
 
 			res.status(200);
 			res.json({
-			  id : room._id
+			  "done" : "unfollowed"
 			});
 		}
 		
