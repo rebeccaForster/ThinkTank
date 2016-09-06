@@ -11,6 +11,16 @@ md-sidenav ng-md-icon {
     top: 5px;
 }
 
+.fab-style {
+    position: fixed;
+    margin: 20px !important;
+    min-height: 128px !important;
+    min-width: 128px !important;
+    -webkit-box-shadow: 1px 15px 23px 0px rgba(46, 74, 117, 1) !important;
+    -moz-box-shadow: 1px 15px 23px 0px rgba(46, 74, 117, 1) !important;
+    box-shadow: 1px 15px 23px 0px rgba(46, 74, 117, 1) !important;
+}
+
 .item-select {
     color: #00bcd4;
     fill: #00bcd4 !important;
@@ -37,60 +47,64 @@ md-card {
     margin-left: 12px;
 }
 
-
-.margin-bottom-15{
+.margin-bottom-15 {
     margin-bottom: 15px;
 }
-.margin-top-15{
+
+.margin-top-15 {
     margin-top: 15px;
 }
-.margin-top-25{
+
+.margin-top-25 {
     margin-top: 25px;
 }
 
-.background-color-white{
+.background-color-white {
     background-color: white;
 }
-.width-100-prozent{
+
+.width-100-prozent {
     width: 100%;
 }
-.margin-bottom-30{
+
+.margin-bottom-30 {
     margin-bottom: 30px !imporant;
 }
-.font-size-34{
+
+.font-size-34 {
     font-size: 34px !important;
 }
-.padding-right-40{
+
+.padding-right-40 {
     padding-right: 40px;
 }
 
-.padding-bottom-40{
+.padding-bottom-40 {
     padding-bottom: 40px;
 }
 
-.padding-left-40{
+.padding-left-40 {
     padding-left: 40px;
 }
 
-.padding-right-40{
+.padding-right-40 {
     padding-right: 40px;
 }
-.margin-right-20{
+
+.margin-right-20 {
     margin-right: 20px;
-
 }
-.font-weight-bold{
+
+.font-weight-bold {
     font-weight: bold !important;
-
 }
 
-
-.margin-15{
+.margin-15 {
     margin: 15px;
 }
 
-.text-gray{
-    color:#737373;
+.text-gray {
+    color: #737373;
 }
 
 .nav-img-user {
@@ -102,27 +116,32 @@ md-card {
     top: 112px;
     margin-left: 12px;
 }
-.icon-white{
-    fill:white;
+
+.icon-white {
+    fill: white;
 }
 
-.icon-gray{
-    fill:#737373;
+.icon-gray {
+    fill: #737373;
 }
-.icon-background-gray{
+
+.icon-background-gray {
     background-color: #737373 !important;
 }
+
 .toolbar-settings {
     min-height: 223px !important;
 }
+
 .hashtag-style {
-    font-size: 20px  !important;
+    font-size: 20px !important;
     font-weight: bold !important;
 }
+
 .toolbar-settings-top {
     min-height: 74px !important;
 }
+
 .toolbar-settings-bottom {
     min-height: 149px !important;
 }
-

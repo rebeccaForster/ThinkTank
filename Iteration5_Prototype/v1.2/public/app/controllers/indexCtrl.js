@@ -72,9 +72,11 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         return ($scope.menu[0].path == $state.current.name) || !$mdMedia('gt-md');
     }
 $scope.isProfile = function () {
-        return ($scope.menu[2].path == $state.current.name);
+        return ($scope.menuAuth[2].path == $state.current.name);
     }
-
+$scope.isWhiteboard = function () {
+        return ($scope.menu[0].path == $state.current.name);
+    }
     $scope.menu = $scope.menuNonAuth;
 
     $scope.isLoggedIn = !authentication.isLoggedIn();
@@ -100,6 +102,7 @@ $scope.isProfile = function () {
     }
     $scope.setSignInStatus();
     $scope.go = function (path) {
+        //todo ändern der sorting daten in abhängigkeit vom wechsel als Event --> wie ich es beim whiteboard eigtl vorhatte
         if ($state.current.name != path) {
             // clear hashtag, if a new item in the menu is clicked
             $scope.selectedHashtags = [];
@@ -123,7 +126,14 @@ $scope.isProfile = function () {
 
 
     }
+$scope.logout = function () {
+        authentication.logout();
+        $scope.setSignInStatus();
+    if(!($scope.menu[0].path == $state.current.name)){
+            $scope.go($scope.menu[1].path);
+    }
 
+    }
     $scope.getMenuStatus = function (path) {
         return (path == $state.current.name);
     };
@@ -162,10 +172,7 @@ $scope.isProfile = function () {
         }
     }
 
-    $scope.logout = function () {
-        authentication.logout();
-        $scope.setSignInStatus();
-    }
+    
 
     /*
              function: 

@@ -36,7 +36,7 @@ app.controller('ProfileCtrl', function ($scope, indexData, $mdDialog, authentica
     $scope.updateDescription = function (ev) {
         $mdDialog.show({
                 controller: UpdateProfilePopupController,
-                templateUrl: 'app/views/register-popup.html',
+                templateUrl: 'app/views/user-data-popup.html',
                 targetEvent: ev,
                 scope: $scope, // use parent scope in template
                 preserveScope: true,

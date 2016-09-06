@@ -2,7 +2,6 @@
     <form name="registerForm" ng-submit="register()">
 
         <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding>
-            <h2 >Sign Up</h2>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="cancel()">
                 <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
@@ -10,13 +9,13 @@
         </md-toolbar>
         <md-dialog-content>
             <div class="md-dialog-content"  ng-include="'app/views/user-data-content.html'">
-               
+              
             </div>
         </md-dialog-content>
 
         <md-dialog-actions layout="row">
             <span flex></span>
-            <md-button type="submit" ng-disabled="registerForm.$invalid" class="md-raised md-primary" >Sign Up</md-button>
+            <md-button ng-disabled="registerForm.Firstname.$invalid || registerForm.Name.$invalid || registerForm.Email.$invalid" class="md-raised md-primary" ng-click="cancel()"  >Okay</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>

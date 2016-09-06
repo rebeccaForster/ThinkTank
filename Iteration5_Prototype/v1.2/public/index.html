@@ -27,7 +27,7 @@
 <body ng-app="App" layout="row" ng-controller="IndexCtrl" ng-cloak>
     <md-sidenav layout="column" ng-class="{'nav-width-short': navbarShort()}" class="md-sidenav-left md-whiteframe-24dp" md-component-id="left" md-is-locked-open="$mdMedia('(min-width: 0px)')">
         <md-toolbar class="toolbar-settings md-primary md-hue-2">
-            <div ng-hide="isProfile" style="text-align:center">
+            <div ng-hide="isProfile()" style="text-align:center">
                 <div style="margin-top:30px;"></div>
 
                 <img ng-src={{user.profileImg}} class="md-avatar" id="nav-img-profile" alt="{{user.firstname}} {{user.name}}">

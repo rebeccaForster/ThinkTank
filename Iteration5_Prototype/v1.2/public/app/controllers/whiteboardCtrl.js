@@ -1,36 +1,66 @@
 'use strict';
-app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService, $stateParams,  $rootScope, profileService) {
-    $scope.isWhiteboard = true;
+app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService, $stateParams, $rootScope, profileService) {
     $scope.saveScribble = function (ev) {
 
         if ($scope.ideaId == -1) {
+            if ($scope.isLoggedIn) {
+                $scope.login();
+            } else {
+                $scope.openSaveDialog();
 
-            $mdDialog.show({
-                    controller: SaveDialogController,
-                    templateUrl: 'app/views/whiteboard-save-popup.html',
-                    targetEvent: ev,
-                    scope: $scope, // use parent scope in template
-                    preserveScope: true,
-                    clickOutsideToClose: true,
-                    fullscreen: true,
-                    locals: {
-                        authentication: authentication
-
-                    }
-
-                })
-                .then(function () {
-                    return true;
-                }, function () {
-                    return true;
-                });
+            }
         } else {
             $scope.updateIdea();
         }
 
     };
 
+    $scope.openSaveDialog = function (ev) {
 
+
+        $mdDialog.show({
+                controller: SaveDialogController,
+                templateUrl: 'app/views/whiteboard-save-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {
+                    authentication: authentication
+
+                }
+
+            })
+            .then(function () {}, function () {});
+
+
+    };
+
+    $scope.login = function (ev) {
+        
+        $mdDialog.show({
+                controller: LoginDialogController,
+                templateUrl: 'app/views/login-popup.html',
+                targetEvent: ev,
+                scope: $scope, // use parent scope in template
+                preserveScope: true,
+                clickOutsideToClose: true,
+                fullscreen: true,
+                locals: {
+                    authentication: authentication,
+                    isSendComment: false
+                }
+
+            })
+            .then(function () {
+               
+
+            }, function () {
+                $scope.openSaveDialog();
+
+            });
+    };
     $scope.contributors = [];
     $scope.contributorsId = [];
     $scope.contributorsList = [];
@@ -39,7 +69,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         .then(function (res) {
 
             $scope.contributorsList = res;
-        console.log('contributorsList: ', $scope.contributorsList);
+            console.log('contributorsList: ', $scope.contributorsList);
         });
 
     $scope.setSelectedContributors = function (name, id, status) {
@@ -52,14 +82,13 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
         }
     }
-    $scope.changeMilestoneStatus = function(index){
-        if($scope.milestones[index].percentage)
-        {
+    $scope.changeMilestoneStatus = function (index) {
+        if ($scope.milestones[index].percentage) {
             $scope.milestones[index].percentage = 0;
-        }else{
-        $scope.milestones[index].percentage = 1;
+        } else {
+            $scope.milestones[index].percentage = 1;
         }
-    
+
     }
     $scope.author = '';
     $scope.desciption = "";
@@ -124,10 +153,15 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     };
 
     $scope.clear = function () {
-        $scope.drawingboardRemote.clear();
+        if ($scope.drawingboardRemote) {
+            $scope.drawingboardRemote.clear();
+        }
     };
-$scope.reloadImage= function (img) {
-        $scope.drawingboardRemote.reloadImage(img);
+    $scope.reloadImage = function (img) {
+        if ($scope.drawingboardRemote) {
+
+            $scope.drawingboardRemote.reloadImage(img);
+        }
     };
     $scope.undo = function () {
         $scope.drawingboardRemote.undo();
@@ -138,7 +172,10 @@ $scope.reloadImage= function (img) {
     };
 
     $scope.clearHistory = function () {
-        $scope.drawingboardRemote.clearStorage();
+        if ($scope.drawingboardRemote) {
+
+            $scope.drawingboardRemote.clearStorage();
+        }
     };
 
 
@@ -359,6 +396,7 @@ $scope.reloadImage= function (img) {
             .then(function () {}, function () {});
     }
 
+
     $scope.$watch('title', function (newVal, oldVal) {
         if (newVal == '') {
             var now = new Date();
@@ -436,37 +474,39 @@ $scope.reloadImage= function (img) {
 
 
     $scope.ideaId = $stateParams.ideaId;
-    
-   angular.element(document).ready(function () {
-            //Todo diese Funktion muss alle Privacy, desciption, milesotnes, hashtags, contirbutors, whiteboard image Daten laden, 
-            //Sie wird aufgerufen, wenn man auf dem Popup Idea aufs whiteboard klickt 
-            // wenn man contributor ist bzw. die Idee bearbeiten möchte, ist edit true
-            // Wie man die Funktion genau aufruft, weiß ich noch nicht, darüber muss ich mir noch gedanken machen
-            console.log('state whiteboard');
-            if ($scope.ideaId == -1) {
-                $scope.clear();
-                $scope.clearHistory();
 
-            } else {
-                ideaService
-                    .getIdea($scope.ideaId)
-                    .then(function (res) {
-                        console.log('ergebnis der idea object von deer gesuchten ide', res);
-                        $scope.title = res.title;
-                        $scope.desciption = res.description;
-                        $scope.contributors = res.contributorsId;
-                        $scope.selectedHashtags = res.tags;
-                        $scope.ideaLifeTime = res.livetime;
-                        $scope.selectedPrivacyType = res.privacyType;
-                        $scope.milestones = res.milestones;
-                        $scope.reloadImage("app/" + res.img);
-                        //Todo load scribble instead of img
-                        $scope.ideaDayLeft = $scope.calculateIdeaLeftDays(res.created);
-                    });
+    angular.element(document).ready(function () {
+        //Todo diese Funktion muss alle Privacy, desciption, milesotnes, hashtags, contirbutors, whiteboard image Daten laden, 
+        //Sie wird aufgerufen, wenn man auf dem Popup Idea aufs whiteboard klickt 
+        // wenn man contributor ist bzw. die Idee bearbeiten möchte, ist edit true
+        // Wie man die Funktion genau aufruft, weiß ich noch nicht, darüber muss ich mir noch gedanken machen
+        console.log('state whiteboard');
+        if ($scope.ideaId == -1) {
+            $scope.clear();
+            $scope.clearHistory();
+            var now = new Date();
+            $scope.title = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + ' ' + now.getHours() + ':' + now.getMinutes();
 
-                //Tdo überprüfe ob die person eingeloggt ist oder nicht und dementsprehcend bearbeiten ja oder nein
-            }
-        });
+        } else {
+            ideaService
+                .getIdea($scope.ideaId)
+                .then(function (res) {
+                    console.log('ergebnis der idea object von deer gesuchten ide', res);
+                    $scope.title = res.title;
+                    $scope.desciption = res.description;
+                    $scope.contributors = res.contributorsId;
+                    $scope.selectedHashtags = res.tags;
+                    $scope.ideaLifeTime = res.livetime;
+                    $scope.selectedPrivacyType = res.privacyType;
+                    $scope.milestones = res.milestones;
+                    $scope.reloadImage("app/" + res.img);
+                    //Todo load scribble instead of img
+                    $scope.ideaDayLeft = $scope.calculateIdeaLeftDays(res.created);
+                });
+
+            //Tdo überprüfe ob die person eingeloggt ist oder nicht und dementsprehcend bearbeiten ja oder nein
+        }
+    });
 
     $scope.updateIdea = function () {
 
@@ -517,6 +557,7 @@ $scope.reloadImage= function (img) {
     };
 
 
+
     $scope.privacyTypesList = ["Only me & contributors", "Everyone", "Customer"];
     $scope.selectedPrivacyType = $scope.privacyTypesList[0];
     $scope.selectedPrivacy = 0;
@@ -557,15 +598,10 @@ $scope.reloadImage= function (img) {
             $mdDialog.cancel();
         };
         $scope.save = function () {
+            $scope.saveNewIdea();
 
-            if (authentication.isLoggedIn()) {
+            $scope.cancel();
 
-                $scope.saveNewIdea();
-
-                $scope.cancel();
-            } else {
-                alert("Pleas log in first.");
-            }
 
         };
     };

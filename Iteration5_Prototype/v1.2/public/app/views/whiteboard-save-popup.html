@@ -1,27 +1,17 @@
 <md-dialog aria-label="Save Whiteboard Popup" ng-cloak style="max-width: 90%;width: 500px;">
     <form name="saveForm" >
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>Save</h2>
-                <span flex></span>
-                <md-button class="md-icon-button" ng-click="cancel()">
-                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-                </md-button>
-            </div>
-        </md-toolbar>
+        
+ <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding>
+                <h2>Save Idea</h2>
+            
+            <span flex></span>
+            <md-button class="md-icon-button" style="width:64px; height:64px;">
+                <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
+            </md-button>
 
+        </md-toolbar>
         <md-dialog-content>
             <div class="md-dialog-content">
-                <div ng-show="isLoggedIn">
-                    <md-input-container class="md-block">
-                        <label>Email</label>
-                        <input name="Email" ng-model="credentials.email" md-autofocus  />
-                    </md-input-container>
-                    <md-input-container class="md-block">
-                        <label>Password</label>
-                        <input type="password" name="password" ng-model="credentials.password"  />
-                    </md-input-container>
-                </div>
                 <md-input-container class="md-block">
                         <label>Title</label>
                         <input  name="title" ng-model="title"  />
