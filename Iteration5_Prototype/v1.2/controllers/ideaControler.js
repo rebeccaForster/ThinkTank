@@ -94,9 +94,9 @@ module.exports.saveNewIdea = function(req, res) {
 	}
 
 	if(req.body.idea.livetime && typeof req.body.idea.livetime === typeof 1) {
-		idea.livetime = Date.now() +  (req.body.idea.livetime * 24*60*60 );
+		idea.livetime = req.body.idea.livetime;
 	} else {
-		idea.livetime = Date.now() + 2592000; //30 Tage 
+		idea.livetime = 30;
 	}
 
 	console.log(idea);
@@ -333,13 +333,83 @@ module.exports.likeIdea = function(req, res) {
 	});
 };
 
+module.exports.unFollowIdea = function(req, res) {
+	//we need: ideaId, userId
+
+	if(!req.body.user.id || !req.body.ideaId) {
+	    console.log("was not saved because of incomplete data");
+	    sendJSONresponse(res, 400, {
+	      "message": "user and ideaId required"
+	    });
+	    return;
+	  }
+
+
+
+	  Users.update({ _id: req.body.user.id },
+		   { $pull: { followedideas: req.body.ideaId } }, function(err, room) {
+
+		if (err) {
+			console.log("error: ");
+			console.log(err);
+			res.json({
+			  id : err
+			});
+		} else {
+			console.log("followed: ");
+			console.log(room._id);
+
+			res.status(200);
+			res.json({
+			  id : room._id
+			});
+		}
+		
+	});
+};
+
+module.exports.dislikeIdea = function(req, res) {
+	//we need: ideaId, userId
+
+		if(!req.body.user.id || !req.body.ideaId) {
+	    console.log("was not saved because of incomplete data");
+	    sendJSONresponse(res, 400, {
+	      "message": "user and ideaId required"
+	    });
+	    return;
+	  }
+
+
+
+	  Idea.update({ _id: req.body.ideaId },
+		   { $pull: { likes: req.body.user.id } }, function(err, room) {
+
+		if (err) {
+			console.log("error: ");
+			console.log(err);
+			res.json({
+			  id : err
+			});
+		} else {
+			console.log("liked: ");
+			console.log(room._id);
+
+			res.status(200);
+			res.json({
+			  id : room._id
+			});
+		}
+		
+	});
+};
+
 
 module.exports.writeComment = function(req, res) {
 
 	console.log("save idea triggerd");
 	console.log(req.body.comment);
 
-  if(!req.body.user.id || !req.body.comment || !req.body.ideaId || !req.body.comment.text) {
+  if(!req.body.user._id || !req.body.comment || !req.body.ideaId || !req.body.comment.text) {
     console.log("comment was not saved because of incomplete data");
     sendJSONresponse(res, 400, {
       "message": "comment was not saved because of incomplete data"
@@ -350,7 +420,10 @@ module.exports.writeComment = function(req, res) {
 	var comment = new Comment();
 
 	comment.user = req.body.user.id;
-	comment.reaction = req.body.comment.reaction;
+	comment.ikeIdeaStatus = req.body.comment.ikeIdeaStatus;
+	comment.newInputStatus = req.body.comment.newInputStatus;
+	comment.troubleStatus = req.body.comment.troubleStatus;
+	comment.otherreaction = req.body.comment.otherreaction;
 	comment.text = req.body.comment.text;
 	comment.idea = req.body.ideaId;
 	comment.created = Date.now();
@@ -365,8 +438,8 @@ module.exports.writeComment = function(req, res) {
 			res.status(400);
 			res.json(err);
 		} else {
-			console.log("Idea saved: ");
-			console.log(room._id);
+			console.log("Comment saved: ");
+			console.log(doc._id);
 
 			res.status(200);
 			res.json(doc);

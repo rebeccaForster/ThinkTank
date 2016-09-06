@@ -117,6 +117,7 @@ router.get('/getUser/:id', function (req, res, next) {
 													"firstname": auth.firstname,
 													"email": auth.email,
 													"name": auth.name,
+													"tags": auth.tags,
 													"contacs": auth.authacs,
 													"followedpersons": auth.followedpersons,
 													"followedideas": auth.followedideas,
@@ -147,6 +148,7 @@ router.get('/getUser/:id', function (req, res, next) {
 									"firstname": cont.firstname,
 									"email": cont.email,
 									"name": cont.name,
+									"tags": cont.tags,
 									"contacs": cont.contacs,
 									"followedpersons": cont.followedpersons,
 									"followedideas": cont.followedideas,
@@ -161,23 +163,97 @@ router.get('/getUser/:id', function (req, res, next) {
 									res.json(err);
 								} else {
 
+									// var ownIdeas = new Array;
+									// ownideas.forEach(function(ownIdea) {
+									// 	User.find({ _id: ownIdea.author }, function(err, ownIdeaAuthor) {
+									// 		if (err) {
+									// 			console.log(err);
+									// 			res.status(400);
+									// 			res.json(err);
+									// 		} else {
+
+									// 			ownIdeas.push({"_id": ownIdea._id,
+									// 						"livetime": ownIdea.livetime,
+									// 						"description": ownIdea.description,
+									// 						"abstract": ownIdea.abstract,
+									// 						"title": ownIdea.title,
+									// 						"author": 
+									// 						{
+									// 							"_id": ownIdeaAuthor._id,
+									// 							"profileImg": ownIdeaAuthor.profileImg,
+									// 							"url": ownIdeaAuthor.url,
+									// 							"title": ownIdeaAuthor.title,
+									// 							"firstname": ownIdeaAuthor.firstname,
+									// 							"email": ownIdeaAuthor.email,
+									// 							"name": ownIdeaAuthor.name,
+									// 							"tags": ownIdeaAuthor.tags,
+									// 							"contacs": ownIdeaAuthor.contacts,
+									// 							"followedpersons": ownIdeaAuthor.followedpersons,
+									// 							"followedideas": ownIdeaAuthor.followedideas,
+									// 							"created": dateFormat(ownIdeaAuthor.created, "dd/mm/yyyy")
+									// 						},
+									// 						"img": ownIdea.img,
+									// 						"scribbles": ownIdea.scribbles,
+									// 						"tags": ownIdea.tags,
+									// 						"milestones": ownIdea.milestones,
+									// 						"likes": ownIdea.likes,
+									// 						"contributors": ownIdea.contributors,
+									// 						"lastchanged": dateFormat(ownIdea.lastchanged, "dd/mm/yyyy"),
+									// 						"created": dateFormat(ownIdea.created, "dd/mm/yyyy") });
+									// 		}
+									// 	})
+									// });
+
+									//Original 
+									// var ownIdeas = new Array;
+									// ownideas.forEach(function(ownIdea) {
+									// ownIdeas.push({"_id": ownIdea._id,
+									// 			"livetime": ownIdea.livetime,
+									// 			"description": ownIdea.description,
+									// 			"abstract": ownIdea.abstract,
+									// 			"title": ownIdea.title,
+									// 			"author": ownIdea.author,
+									// 			"img": ownIdea.img,
+									// 			"scribbles": ownIdea.scribbles,
+									// 			"tags": ownIdea.tags,
+									// 			"milestones": ownIdea.milestones,
+									// 			"likes": ownIdea.likes,
+									// 			"contributors": ownIdea.contributors,
+									// 			"lastchanged": dateFormat(ownIdea.lastchanged, "dd/mm/yyyy"),
+									// 			"created": dateFormat(ownIdea.created, "dd/mm/yyyy") });
+									// });
+
+									// Fake
 									var ownIdeas = new Array;
 									ownideas.forEach(function(ownIdea) {
-										ownIdeas.push({"_id": ownIdea._id,
-													"livetime": ownIdea.livetime,
-													"description": ownIdea.description,
-													"abstract": ownIdea.abstract,
-													"title": ownIdea.title,
-													"author": ownIdea.author,
-													"img": ownIdea.img,
-													"scribbles": ownIdea.scribbles,
-													"tags": ownIdea.tags,
-													"milestones": ownIdea.milestones,
-													"likes": ownIdea.likes,
-													"contributors": ownIdea.contributors,
-													"lastchanged": dateFormat(ownIdea.lastchanged, "dd/mm/yyyy"),
-													"created": dateFormat(ownIdea.created, "dd/mm/yyyy")
-										});
+									ownIdeas.push({"_id": ownIdea._id,
+												"livetime": ownIdea.livetime,
+												"description": ownIdea.description,
+												"abstract": ownIdea.abstract,
+												"title": ownIdea.title,
+												"author": 
+												{
+														"_id": user._id,
+														"profileImg": user.profileImg,
+														"url": user.url,
+														"title": user.title,
+														"firstname": user.firstname,
+														"email": user.email,
+														"name": user.name,
+														"tags": user.tags,
+														"contacs": user.contacs,
+														"followedpersons": user.followedpersons,
+														"followedideas": user.followedideas,
+														"created": dateFormat(user.created, "dd/mm/yyyy")
+													},
+												"img": ownIdea.img,
+												"scribbles": ownIdea.scribbles,
+												"tags": ownIdea.tags,
+												"milestones": ownIdea.milestones,
+												"likes": ownIdea.likes,
+												"contributors": ownIdea.contributors,
+												"lastchanged": dateFormat(ownIdea.lastchanged, "dd/mm/yyyy"),
+												"created": dateFormat(ownIdea.created, "dd/mm/yyyy") });
 									});
 
 									res.status(200);
@@ -188,6 +264,7 @@ router.get('/getUser/:id', function (req, res, next) {
 												"firstname": user.firstname,
 												"email": user.email,
 												"name": user.name,
+												"tags": user.tags,
 												"contacs": user.contacs,
 												"followedpersons": followedpersons,
 												"followedideas": followedideas,
@@ -207,5 +284,6 @@ router.get('/getUser/:id', function (req, res, next) {
 
 router.post('/updateUser', userControler.updateUser);
 router.post('/followUser', userControler.followUser);
+router.post('/unFollowUser', userControler.followUser);
 
 module.exports = router;
