@@ -74,15 +74,18 @@ module.exports.saveNewIdea = function(req, res) {
 		idea.milestones = "no milestones";
 	}
 
+	
 	if(req.body.idea.tags && req.body.idea.tags.length > 0) {
-		var tagNames = [];
-		for (var i in req.body.idea.tags) {
-		  tagNames.push(req.body.idea.tags[i].name);
-		}
-		idea.tags = tagNames;
+		// var tagNames = [];
+		// for (var i in req.body.idea.tags) {
+		//   tagNames.push(req.body.idea.tags[i]);
+		// }
+		// idea.tags = tagNames;
+		idea.tags = req.body.idea.tags;
 	} else {
 		idea.tags = [];
 	}
+
 
 	if(req.body.idea.privacyType >= 0) {
 		idea.privacyType = req.body.idea.privacyType;
@@ -192,11 +195,12 @@ module.exports.updateIdea = function(req, res) {
 				}
 
 				if(req.body.idea.tags && req.body.idea.tags.length > 0) {
-					var tagNames = [];
-					for (var i in req.body.idea.tags) {
-					  tagNames.push(req.body.idea.tags[i].name);
-					}
-					idea.tags = tagNames;
+					// var tagNames = [];
+					// for (var i in req.body.idea.tags) {
+					//   tagNames.push(req.body.idea.tags[i].name);
+					// }
+					// idea.tags = tagNames;
+					idea.tags = req.body.idea.tags;
 				}
 
 				if(req.body.idea.privacyType >= 0) {
