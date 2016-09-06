@@ -125,24 +125,34 @@ router.get('/getIdea/:id', function (req, res, next) {
 									});
 								});
 
-								res.status(200);
-								console.log(idea.scribble);
-								res.json({"_id": idea._id,
-											"livetime": idea.livetime,
-											"description": idea.description,
-											"abstract": idea.abstract,
-											"title": idea.title,
-											"author": author,
-											"img": idea.img,
-											"scribble": idea.scribble,
-											"tags": idea.tags,
-											"milestones": idea.milestones,
-											"likes": idea.likes,
-											"contributors": contributors,
-											"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy"),
-											"created": dateFormat(idea.created, "dd/mm/yyyy")
-										});
-								
+								Comment.find({ idea: idea._id }, function(err, commentsList) {
+									if (err) {
+										console.log(err);
+										res.status(400);
+										res.json(err);
+									} else {
+										comments = commentsList;
+									
+										res.status(200);
+										console.log(idea.scribble);
+										res.json({"_id": idea._id,
+													"livetime": idea.livetime,
+													"description": idea.description,
+													"abstract": idea.abstract,
+													"title": idea.title,
+													"author": author,
+													"img": idea.img,
+													"scribble": idea.scribble,
+													"tags": idea.tags,
+													"milestones": idea.milestones,
+													"likes": idea.likes,
+													"contributors": contributors,
+													"comments": comments,
+													"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy"),
+													"created": dateFormat(idea.created, "dd/mm/yyyy")
+												});
+									}
+							})
 						}
 					})
 				}
