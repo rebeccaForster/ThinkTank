@@ -48,7 +48,7 @@ router.get('/getAllIeas', function (req, res, next) {
 									"contacs": idea.author[0].contacs,
 									"followedpersons": idea.author[0].followedpersons,
 									"followedideas": idea.author[0].followedideas,
-									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy hh:MM")
+									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy HH:MM")
 								},
 								"img": idea.img,
 								"scribbles": idea.scribbles,
@@ -57,8 +57,8 @@ router.get('/getAllIeas', function (req, res, next) {
 								"likes": idea.likes,
 								"privacyType": idea.privacyType,
 								"contributors": idea.contributors,
-								"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy hh:MM"),
-								"created": dateFormat(idea.created, "dd/mm/yyyy hh:MM")
+								"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy HH:MM"),
+								"created": dateFormat(idea.created, "dd/mm/yyyy HH:MM")
 							});
 				});
 
@@ -144,7 +144,7 @@ router.get('/getIdea/:id', function (req, res, next) {
 						"contacs": doc.contacs,
 						"followedpersons": doc.followedpersons,
 						"followedideas": doc.followedideas,
-						"created": dateFormat(doc.created, "dd/mm/yyyy hh:MM")};
+						"created": dateFormat(doc.created, "dd/mm/yyyy HH:MM")};
 
 						console.log(typeof idea.contributors);
 						User.find({ _id: { $in: idea.contributors }}, function(err, contributorList) {
@@ -168,7 +168,7 @@ router.get('/getIdea/:id', function (req, res, next) {
 										"contacs": cont.contacs,
 										"followedpersons": cont.followedpersons,
 										"followedideas": cont.followedideas,
-										"created": dateFormat(cont.created, "dd/mm/yyyy hh:MM")
+										"created": dateFormat(cont.created, "dd/mm/yyyy HH:MM")
 									});
 								});
 
@@ -185,7 +185,7 @@ router.get('/getIdea/:id', function (req, res, next) {
 										commentsList.forEach(function(comment) {
 											comments.push({
 												"_id": comment._id,
-												"created": dateFormat(comment.created, "dd/mm/yyyy hh:MM"), 
+												"created": dateFormat(comment.created, "dd/mm/yyyy HH:MM"), 
 												"likeIdeaStatus": comment.likeIdeaStatus, 
 												"newInputStatus": comment.newInputStatus, 
 												"troubleStatus": comment.troubleStatus, 
@@ -213,8 +213,8 @@ router.get('/getIdea/:id', function (req, res, next) {
 													"contributors": contributors,
 													"comments": comments,
 													"privacyType": idea.privacyType,
-													"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy hh:MM"),
-													"created": dateFormat(idea.created, "dd/mm/yyyy hh:MM")
+													"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy HH:MM"),
+													"created": dateFormat(idea.created, "dd/mm/yyyy HH:MM")
 												});
 									}
 							})
@@ -268,7 +268,7 @@ router.get('/getAllIdeasSorted/date', function (req, res, next) {
 									"contacs": idea.author[0].contacs,
 									"followedpersons": idea.author[0].followedpersons,
 									"followedideas": idea.author[0].followedideas,
-									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy hh:MM")
+									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy HH:MM")
 								},
 								"img": idea.img,
 								"scribbles": idea.scribbles,
@@ -276,8 +276,8 @@ router.get('/getAllIdeasSorted/date', function (req, res, next) {
 								"milestones": idea.milestones,
 								"likes": idea.likes,
 								"contributors": idea.contributors,
-								"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy hh:MM"),
-								"created": dateFormat(idea.created, "dd/mm/yyyy hh:MM")
+								"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy HH:MM"),
+								"created": dateFormat(idea.created, "dd/mm/yyyy HH:MM")
 							});
 				});
 
@@ -288,20 +288,23 @@ router.get('/getAllIdeasSorted/date', function (req, res, next) {
 });
 
 router.post('/searchIdeas/', function (req, res, next) { 
-
-	var searchTags = req.body.term;
+	
+	console.log(req.body.tags);
+	var searchTags = req.body.tags;
 
 	console.log("search for Tags triggerd");
-		Idea.aggregate([
-			{
-			   $lookup:
-			     {
-			       from: "users",
-			       localField: "author",
-			       foreignField: "_id",
-			       as: "author"
-			     }}, 
-			      { $match: { tags : { $in: searchTags }} } , function(err, ideas) {
+		// Idea.aggregate([
+		// 	{ $match: { "tags" : { $in: searchTags }} } ,
+		// 	{
+		// 	   $lookup:
+		// 	     {
+		// 	       from: "users",
+		// 	       localField: "author",
+		// 	       foreignField: "_id",
+		// 	       as: "author"
+		// 	     }}, function(err, ideas) {
+	Idea.find({ tags : { $in: searchTags }}, function(err, ideas) {
+	// Idea.find({}, function(err, ideas) {
 
 		if (err) {
 			console.log(err);
@@ -316,18 +319,31 @@ router.post('/searchIdeas/', function (req, res, next) {
 								"description": idea.description,
 								"abstract": idea.abstract,
 								"title": idea.title,
+								// "author": {
+								// 	"_id": idea.author[0]._id,
+								// 	"profileImg": idea.author[0].profileImg,
+								// 	"url": idea.author[0].url,
+								// 	"title": idea.author[0].title,
+								// 	"firstname": idea.author[0].firstname,
+								// 	"email": idea.author[0].email,
+								// 	"name": idea.author[0].name,
+								// 	"contacs": idea.author[0].contacs,
+								// 	"followedpersons": idea.author[0].followedpersons,
+								// 	"followedideas": idea.author[0].followedideas,
+								// 	"created": dateFormat(idea.author[0].created, "dd/mm/yyyy HH:MM")
+								// },
 								"author": {
-									"_id": idea.author[0]._id,
-									"profileImg": idea.author[0].profileImg,
-									"url": idea.author[0].url,
-									"title": idea.author[0].title,
-									"firstname": idea.author[0].firstname,
-									"email": idea.author[0].email,
-									"name": idea.author[0].name,
-									"contacs": idea.author[0].contacs,
-									"followedpersons": idea.author[0].followedpersons,
-									"followedideas": idea.author[0].followedideas,
-									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy hh:MM")
+									"_id": "57cee2a7ded7832d5845549d",
+									"profileImg": "asönfls.png",
+									"url": "nothing",
+									"title": "Dr. Prof",
+									"firstname": "Nono",
+									"email": "no@body.com",
+									"name": "Body",
+									"contacs": "[]",
+									"followedpersons": "[]",
+									"followedideas": "[]",
+									"created": "07/09/201"6
 								},
 								"img": idea.img,
 								"scribbles": idea.scribbles,
@@ -335,15 +351,17 @@ router.post('/searchIdeas/', function (req, res, next) {
 								"milestones": idea.milestones,
 								"likes": idea.likes,
 								"contributors": idea.contributors,
-								"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy hh:MM"),
-								"created": dateFormat(idea.created, "dd/mm/yyyy hh:MM")
+								"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy HH:MM"),
+								"created": dateFormat(idea.created, "dd/mm/yyyy HH:MM")
 							});
 				});
 
+			console.log(ideasList);
 			res.status(200);
 			res.json(ideasList);
 		}
-	}]) 
+	}); 
+	// }]); 
 
 });
 

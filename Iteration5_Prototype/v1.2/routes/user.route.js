@@ -40,7 +40,7 @@ router.get('/getAllUsers', function (req, res, next) {
 						"contacs": entry.contacs,
 						"followedpersons": entry.followedpersons,
 						"followedideas": entry.followedideas,
-						"created": dateFormat(entry.created, "dd/mm/yyyy")})
+						"created": dateFormat(entry.created, "dd/mm/yyyy HH:MM")})
 		});
 		res.status(200);
 		res.json(usersPrint);	
@@ -121,7 +121,7 @@ router.get('/getUser/:id', function (req, res, next) {
 													"contacs": auth.authacs,
 													"followedpersons": auth.followedpersons,
 													"followedideas": auth.followedideas,
-													"created": dateFormat(auth.created, "dd/mm/yyyy")
+													"created": dateFormat(auth.created, "dd/mm/yyyy HH:MM")
 												},
 												"img": cont.img,
 												"scribbles": cont.scribbles,
@@ -129,8 +129,8 @@ router.get('/getUser/:id', function (req, res, next) {
 												"milestones": cont.milestones,
 												"likes": cont.likes,
 												"contributors": cont.contributors,
-												"lastchanged": dateFormat(cont.lastchanged, "dd/mm/yyyy"),
-												"created": dateFormat(cont.created, "dd/mm/yyyy")
+												"lastchanged": dateFormat(cont.lastchanged, "dd/mm/yyyy HH:MM"),
+												"created": dateFormat(cont.created, "dd/mm/yyyy HH:MM")
 											});
 										}
 									})
@@ -152,7 +152,7 @@ router.get('/getUser/:id', function (req, res, next) {
 									"contacs": cont.contacs,
 									"followedpersons": cont.followedpersons,
 									"followedideas": cont.followedideas,
-									"created": dateFormat(cont.created, "dd/mm/yyyy")
+									"created": dateFormat(cont.created, "dd/mm/yyyy HH:MM")
 								});
 							});
 
@@ -244,7 +244,7 @@ router.get('/getUser/:id', function (req, res, next) {
 														"contacs": user.contacs,
 														"followedpersons": user.followedpersons,
 														"followedideas": user.followedideas,
-														"created": dateFormat(user.created, "dd/mm/yyyy")
+														"created": dateFormat(user.created, "dd/mm/yyyy HH:MM")
 													},
 												"img": ownIdea.img,
 												"scribbles": ownIdea.scribbles,
@@ -252,8 +252,8 @@ router.get('/getUser/:id', function (req, res, next) {
 												"milestones": ownIdea.milestones,
 												"likes": ownIdea.likes,
 												"contributors": ownIdea.contributors,
-												"lastchanged": dateFormat(ownIdea.lastchanged, "dd/mm/yyyy"),
-												"created": dateFormat(ownIdea.created, "dd/mm/yyyy") });
+												"lastchanged": dateFormat(ownIdea.lastchanged, "dd/mm/yyyy HH:MM"),
+												"created": dateFormat(ownIdea.created, "dd/mm/yyyy HH:MM") });
 									});
 
 									res.status(200);
@@ -269,7 +269,7 @@ router.get('/getUser/:id', function (req, res, next) {
 												"followedpersons": followedpersons,
 												"followedideas": followedideas,
 												"ownIdeas": ownIdeas, 
-												"created": dateFormat(user.created, "dd/mm/yyyy")}
+												"created": dateFormat(user.created, "dd/mm/yyyy HH:MM")}
 												);
 								}
 							})

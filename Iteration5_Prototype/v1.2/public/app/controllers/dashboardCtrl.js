@@ -2,7 +2,7 @@
 angular
     .module('App')
     // the controller is used on the dashboard and profile site the reason ist that the functionaity is the same only the font design is differnt
-    .controller('DashboardCtrl', function ($scope, dashService, indexData, $location, $mdDialog, $mdMedia, $timeout) {
+    .controller('DashboardCtrl', function ($scope, dashService, indexData, $location, $mdDialog, $mdMedia, $timeout, ideaService) {
 
         $scope.ideaList = [];
 
@@ -22,7 +22,7 @@ angular
             // ToDo: es wurden neue Tags hinzugefügt bzw. entfernt und hier müsstest du mithilfe der Tags & des auswählten Sorting die Liste erneuern
             // $scope.sortingType gibt den Namen der Sortierung zurück
             // $scope.selectedHashtags  gibt alle Tags IDs an, nach denen man suchen soll
-            ideaService
+            ideaService 
                 .searchIdeas($scope.selectedHashtags)
                 .success(function (data) {
                     updateIdeaList();
