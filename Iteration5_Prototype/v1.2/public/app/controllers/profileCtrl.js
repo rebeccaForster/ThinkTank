@@ -1,19 +1,23 @@
 'use strict';
 app.controller('ProfileCtrl', function ($scope, indexData, $mdDialog, authentication, profileService, ideaService) {
- 
-       $scope.credentials = {
-        email: $scope.user.email,
-        name: $scope.user.name,
-        title: $scope.user.title,
-        firstname: $scope.user.firstname,
-        url: $scope.user.url,
-        profileImg: $scope.user.profileImg
-    };
-        $scope.selectedHashtags = $scope.user.tags;
+
+
+    function setHashtags(tags) {
+        var i = 0;
+        if (tags != null) {
+            while (i < tags.length) {
+                if (!$scope.hashtagSelected(tags[i])) {
+                    $scope.setSelectedHashtags(tags[i], false);
+                }
+                i++;
+            }
+        }
+    }
+    setHashtags($scope.user.tags);
     // number of columns of the profile site for md-cards
-        $scope.maxProfileColumn = 2;
+    $scope.maxProfileColumn = 2;
     $scope.addHashtags = function (ev) {
-        
+
         $scope.addHashtag = '';
         $mdDialog.show({
                 controller: HashtagPopupController,
@@ -25,7 +29,10 @@ app.controller('ProfileCtrl', function ($scope, indexData, $mdDialog, authentica
                 fullscreen: true,
                 locals: {}
             })
-            .then(function () {}, function () {});
+            .then(function () {},
+                function () {
+                    updateProfileData();
+                });
     }
 
     $scope.updateDescription = function (ev) {
@@ -39,7 +46,38 @@ app.controller('ProfileCtrl', function ($scope, indexData, $mdDialog, authentica
                 fullscreen: true,
                 locals: {}
             })
-            .then(function () {}, function () {});
+            .then(function () {},
+                function () {
+                    updateProfileData();
+                });
+    }
+
+    $scope.credentials = {
+        email: $scope.user.email,
+        name: $scope.user.name,
+        title: $scope.user.title,
+        firstname: $scope.user.firstname,
+        url: $scope.user.url,
+        profileImg: $scope.user.profileImg
+    };
+
+    function updateProfileData() {
+
+        $scope.user.tags = $scope.selectedHashtags;
+        $scope.user.email = $scope.credentials.email;
+        $scope.user.name = $scope.credentials.name;
+        $scope.user.title = $scope.credentials.title;
+        $scope.user.firstname = $scope.credentials.firstname;
+        $scope.user.url = $scope.credentials.url;
+        $scope.user.profileImg = $scope.credentials.profileImg;
+
+
+        profileService
+            .updateUser(authentication.currentUser(), $scope.user)
+            .success(function (data) {
+                $scope.getSignInUser($scope.user._id);
+            });
+
     }
 });
 
