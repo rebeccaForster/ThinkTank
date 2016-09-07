@@ -8,7 +8,7 @@ var CommentSchema = new mongoose.Schema({
   	otherreaction: Boolean,
 	title: String,
 	text: String,
-	user: mongoose.Schema.Types.ObjectId,// person ID 
+	author: mongoose.Schema.Types.ObjectId,// person ID 
 	idea: mongoose.Schema.Types.ObjectId // idea ID 
 	}, 
     { collection : 'comments' }

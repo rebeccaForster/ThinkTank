@@ -87,7 +87,7 @@ module.exports.updateUser = function(req, res) {
 
 				console.log(user);
 
-				Idea.update({ _id: user._id} , {
+				User.update({ _id: user._id} , {
 					"email" : user.email,
 					"name" : user.name,
 					"firstname" : user.firstname,
@@ -110,8 +110,8 @@ module.exports.updateUser = function(req, res) {
 						  id : err
 						});
 					} else {
-						console.log("Idea saved: ");
-						console.log(room._id);
+						console.log("User updated: ");
+						console.log(room);
 
 						res.status(200);
 						res.json({
