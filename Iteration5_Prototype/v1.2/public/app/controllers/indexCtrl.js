@@ -362,6 +362,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
              */
     $scope.showProfile = function (id, ev) {
         $scope.getUser(id);
+        clearComment();
 
         $mdDialog.show({
                 controller: ProfilePopupController,
@@ -379,8 +380,10 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
                     $scope.funqueue.push(wrapFunction($scope.showProfile, this, [id]));
                 }
 
+
             }, function () {
                 $scope.funqueue = [];
+
             });
 
 
@@ -409,6 +412,8 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
                         } else if (addFollowPerson && !$scope.getFollowPerson() && $scope.user._id != $scope.getProfileInfo._id) {
                             $scope.setFollowPerson(addFollowPerson, false);
 
+                        } else if (isSendComment) {
+                            $scope.sendComment(isSendComment);
                         }
                     }
                 },
@@ -461,14 +466,28 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             });
 
     };
+
+    $scope.commentAuthor = [];
     $scope.getIdea = function (id) {
         ideaService
             .getIdea(id)
             .then(function (res) {
 
-                $scope.getIdeaInfo = res;
-            });
-    };
+                    $scope.getIdeaInfo = res;
+                    var i = 0;
+                    while (i < $scope.getIdeaInfo.comments.length) {
+
+                        profileService
+                            .getUser($scope.getIdeaInfo.comments[i].author)
+                            .then(function (res) {
+
+                                $scope.commentAuthor.push(res);
+                            });
+                        i++;
+                    }
+                    });
+            
+    }
 
     /*
         function: calculate the days which are left after the idea was created
@@ -509,7 +528,6 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     $scope.showIdea = function (id, ev) {
         $scope.getIdea(id);
-        clearComment();
         $mdDialog.show({
                 controller: IdeaPopupController,
                 templateUrl: 'app/views/idea-popup.html',
@@ -529,6 +547,8 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
             }, function () {
                 $scope.funqueue = [];
+                clearComment();
+
             });
 
 
@@ -589,7 +609,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     }
 
-   
+
     $scope.saveComment = {
         author: -1,
         text: '',
@@ -640,7 +660,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     $scope.sendComment = function (ideaId) {
         if ($scope.isLoggedIn) {
-            $scope.showLoginBox(true, false, false);
+            $scope.showLoginBox(ideaId, false, false);
         } else {
             ideaService
                 .writeComment(ideaId, $scope.saveComment, $scope.user)

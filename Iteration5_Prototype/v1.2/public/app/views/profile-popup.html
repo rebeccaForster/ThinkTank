@@ -1,21 +1,20 @@
 <md-dialog aria-label="Profile Popup" class="popup-size">
     <form>
         <md-toolbar class="toolbar-settings  md-primary md-hue-2">
-            <div layout="row" layout-padding>
-                <md-button class="md-icon-button" style="width:64px; height:64px; ">
-                    <ng-md-icon icon="arrow_back" ng-show="funqueue.length" size="64" ng-click="back()"></ng-md-icon>
+            <div  layout-padding>
+                             
+                 <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; left:5px; top:5px; ">
+                    <ng-md-icon icon="arrow_back" aria-label="back" size="64" ng-show="funqueue.length" ng-click="back()"></ng-md-icon>
                 </md-button>
-                <div flex></div>
-                <div>
-                    <div>
+                <div style="margin-right:80px; margin-left:80px; ">
+                     <div>
                         <span class="md-display-3">{{getProfileInfo.firstname}} {{getProfileInfo.name}}</span>
                     </div>
                     <div>
                         <span class="md-display-2"><a href={{user.url}}>{{getProfileInfo.url}}</a></span>
                     </div>
                 </div>
-                <span flex></span>
-                <md-button class="md-icon-button" style="width:64px; height:64px;">
+                <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
                     <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
                 </md-button>
             </div>

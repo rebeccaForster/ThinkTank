@@ -1,18 +1,20 @@
 <md-dialog aria-label="Milestone Popup" class="popup-hashtag-size">
     <form name="milestoneForm">
-        <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding>
-            <h2>Contributors:</h2>
-            <div>
+        <md-toolbar class="md-tall md-primary md-hue-2" layout-padding>
+
+            <div style="margin-right:80px; margin-left:10px;  ">
+                <span class="md-display-3">Contributors:</span>
                 <md-button class="md-raised md-accent" style="font-size:24px; margin-bottom:5px;" ng-hide="author=='' || author.email==''">{{author.name}} - author
                 </md-button>
                 <md-button class="md-raised md-accent" ng-repeat="contr in contributors" ng-click="setSelectedContributors(contr, contributorsId[$index], true);" style="font-size:24px; margin-bottom:5px;">{{contr}}
                     <ng-md-icon icon="close"></ng-md-icon>
                 </md-button>
             </div>
-            <span flex></span>
-            <md-button class="md-icon-button" style="width:64px; height:64px;">
+            <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
                 <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
             </md-button>
+
+
 
         </md-toolbar>
         <md-dialog-content class="content">

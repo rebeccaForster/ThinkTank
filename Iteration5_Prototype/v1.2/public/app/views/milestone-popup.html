@@ -1,21 +1,20 @@
 <md-dialog aria-label="Milestone Popup" class="popup-hashtag-size">
     <form name="milestoneForm">
-        <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding>
-            <h2>Your Milestones:</h2>
-            <div>
+        <md-toolbar class="md-tall md-primary md-hue-2" layout-padding>
+          
+            <div style="margin-right:80px; margin-left:10px; ">
+                    <span class="md-display-3">Milestones:</span>
 
-                <md-button class="md-raised md-accent" ng-repeat="milestone in milestones" style="font-size:24px; margin-bottom:5px;">
-                    <md-checkbox ng-checked="milestone.percentage" ng-click="changeMilestoneStatus($index)" class="md-primary" aria-label="milestone.name">
-                        {{milestone.name}}
-                    </md-checkbox>
-                    <ng-md-icon icon="close" ng-click="setSelectedMilestones(milestones.name, true, milestones.extratime, milestones.icon);"></ng-md-icon>
-                </md-button>
+                    <md-button class="md-raised md-accent" ng-repeat="milestone in milestones" style="font-size:24px; margin-bottom:5px;">
+                        <md-checkbox ng-checked="milestone.percentage" ng-click="changeMilestoneStatus($index)" class="md-primary" aria-label="milestone.name">
+                            {{milestone.name}}
+                        </md-checkbox>
+                        <ng-md-icon icon="close" ng-click="setSelectedMilestones(milestones.name, true, milestones.extratime, milestones.icon);"></ng-md-icon>
+                    </md-button>
             </div>
-            <span flex></span>
-            <md-button class="md-icon-button" style="width:64px; height:64px;">
+            <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
                 <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
             </md-button>
-
         </md-toolbar>
         <md-dialog-content class="content">
             <div layout="row">

@@ -20,7 +20,8 @@
     height: 184px;
     border: 0px solid black;
     border-radius: 92px;
-    margin-left: 12px;
+    margin-left: 8px;
+    margin-top:4px;
 }
 
 .header-picture {
