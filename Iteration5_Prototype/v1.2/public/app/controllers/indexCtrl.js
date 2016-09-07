@@ -87,12 +87,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         if (!$scope.isLoggedIn) {
             $scope.menu = $scope.menuAuth;
             var user = authentication.currentUser();
-            profileService
-                .getUser(user.id)
-                .then(function (res) {
-
-                    $scope.user = res;
-                });
+            $scope.getSignInUser(user.id);
         } else {
             $scope.menu = $scope.menuNonAuth;
             $scope.user = '';
@@ -100,7 +95,15 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
 
     }
+    $scope.getSignInUser = function (id) {
 
+        profileService
+            .getUser(id)
+            .then(function (res) {
+
+                $scope.user = res;
+            });
+    }
     $scope.getFollowPerson = function (followPersonId) {
         if ($scope.user) {
 
@@ -121,12 +124,12 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         if (!$scope.isLoggedIn) {
             //if isFollow true than delete that the user is followed and //Todo update user
             if (isFollow) {
-             profileService
+                profileService
                     .unfollowUser(followPersonId, $scope.user)
                     .success(function (data) {
 
                         console.log("return data after unfollow person", data);
-                        //Todo update user ist abhängig was in data drinnen steht
+                        $scope.getSignInUser($scope.user._id);
                     });
             } else { // elsee add user as follow
                 profileService
@@ -134,7 +137,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
                     .success(function (data) {
 
                         console.log("return data after follow person", data);
-                        //Todo update user ist abhängig was in data drinnen steht
+                        $scope.getSignInUser($scope.user._id);
                     });
 
             }
@@ -167,12 +170,12 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         if (!$scope.isLoggedIn) {
             //if isFollow true than delete that the idea is followed
             if (isFollow) {
-             ideaService
+                ideaService
                     .unfollowIdea(followIdeaId, $scope.user)
                     .success(function (data) {
 
                         console.log("return data after follow idea", data);
-                        //Todo update user ist abhängig was in data drinnen steht
+                        $scope.getSignInUser($scope.user._id);
                     });
             } else { // elsee add idea as follow
 
@@ -181,7 +184,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
                     .success(function (data) {
 
                         console.log("return data after follow idea", data);
-                        //Todo update user ist abhängig was in data drinnen steht
+                        $scope.getSignInUser($scope.user._id);
                     });
             }
 
