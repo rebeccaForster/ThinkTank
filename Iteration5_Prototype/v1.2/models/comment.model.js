@@ -9,8 +9,7 @@ var CommentSchema = new mongoose.Schema({
 	title: String,
 	text: String,
 	user: mongoose.Schema.Types.ObjectId,// person ID 
-	idea: mongoose.Schema.Types.ObjectId, // idea ID 
-	scribble: String // scribble path
+	idea: mongoose.Schema.Types.ObjectId // idea ID 
 	}, 
     { collection : 'comments' }
 );

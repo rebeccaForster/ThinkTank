@@ -93,7 +93,8 @@ router.get('/getAllMilestones', function (req, res, next) {
 		}
 	}).then(function() {
 		ideas.forEach(function(entry) {
-			milestonses = milestonses.concat(entry.milestonses);
+			milestonses = milestonses.concat(entry.milestones);
+			// console.log(entry.milestones);
 		});
 		uniqueMilestones = milestonses.filter(function(elem, pos) {
 			  return milestonses.indexOf(elem) == pos;

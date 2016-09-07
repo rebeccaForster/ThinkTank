@@ -192,7 +192,7 @@ router.get('/getIdea/:id', function (req, res, next) {
 												"otherreaction": comment.otherreaction, 
 												"title": comment.title, 
 												"text": comment.text, 
-												"user": comment.user, 
+												"author": comment.author, 
 												"idea": comment.idea
 											});
 										});
@@ -356,7 +356,7 @@ router.post('/updateIdea', ideaControler.updateIdea);
 router.post('/writeComment', ideaControler.writeComment);
 router.post('/followIdea', ideaControler.followIdea);
 router.post('/likeIdea', ideaControler.likeIdea);
-router.post('/unFollowIdea', ideaControler.followIdea);
+router.post('/unFollowIdea', ideaControler.unFollowIdea);
 router.post('/dislikeIdea', ideaControler.likeIdea);
 
 
