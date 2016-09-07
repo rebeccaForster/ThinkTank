@@ -1,5 +1,5 @@
 'use strict';
-app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService, $stateParams, $rootScope, profileService, $mdToast) {
+app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService, $stateParams, $rootScope, profileService, $mdToast, dataService) {
     $scope.saveScribble = function (ev) {
 
         if ($scope.ideaId == -1) {
@@ -99,11 +99,18 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.ideaLifeTime = 30; //Angabe in Tagen, der Server speichert automatisch 30 falls nichts angegeben ist
     $scope.ideaDayLeft = 0;
     $scope.lastchanged = '';
-    indexData
+    // indexData
+    //     .loadAllMilestones()
+    //     .then(function (res) {
+    //         $scope.milestoneList = res;
+    //     });
+    dataService
         .loadAllMilestones()
         .then(function (res) {
             $scope.milestoneList = res;
         });
+    console.log($scope.milestoneList);
+
 
     $scope.setSelectedMilestones = function (name, status, extratime, icon) {
         var milestoneDefault = {
