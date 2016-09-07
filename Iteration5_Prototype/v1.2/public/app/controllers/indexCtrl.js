@@ -196,12 +196,12 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
         }
     }
-    $scope.isUserContributor = function (followIdeaId) {
+    $scope.isUserContributor = function (ideaId) {
         if ($scope.user) {
 
             var i = 0;
             while (i < $scope.user.ownIdeas.length) {
-                if ($scope.user.ownIdeas[i]._id == followIdeaId) {
+                if ($scope.user.ownIdeas[i]._id == ideaId) {
                     return true;
                 }
                 i++;
@@ -406,7 +406,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     $scope.calculateIdeaLeftDays = function (date) {
         var currentDate = new Date();
         currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0);
-        if (date = '') {
+        if (date != '' && date != null) {
             var dateParts = date.split("/");
             var createdDate = new Date(dateParts[2], (dateParts[1] - 1), dateParts[0], 0, 0, 0);
             var days = (currentDate - createdDate) / (1000 * 60 * 60 * 24); // subtraiktion sind ms und umrechnen in tage

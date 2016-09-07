@@ -38,7 +38,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     };
 
     $scope.login = function (ev) {
-        
+
         $mdDialog.show({
                 controller: LoginDialogController,
                 templateUrl: 'app/views/login-popup.html',
@@ -56,7 +56,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
             })
             .then(function () {
-               
+
 
             }, function () {
                 $scope.openSaveDialog();
@@ -490,28 +490,35 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             $scope.title = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + ' ' + now.getHours() + ':' + now.getMinutes();
 
         } else {
-            ideaService
-                .getIdea($scope.ideaId)
-                .then(function (res) {
-                    console.log('ergebnis der idea object von deer gesuchten ide', res);
-                    $scope.title = res.title;
-                    $scope.desciption = res.description;
-                    $scope.contributors = res.contributorsId;
-                    $scope.selectedHashtags = res.tags;
-                    $scope.ideaLifeTime = res.livetime;
-                    $scope.selectedPrivacyType = res.privacyType;
-                    $scope.milestones = res.milestones;
-                    $scope.reloadImage("app/" + res.img);
-                    //Todo load scribble instead of img
-                    $scope.ideaDayLeft = $scope.calculateIdeaLeftDays(res.created);
-                });
-
-            //Tdo überprüfe ob die person eingeloggt ist oder nicht und dementsprehcend bearbeiten ja oder nein
+            loadIdea($scope.ideaId);
         }
     });
 
+    function loadIdea(id) {
+        ideaService
+            .getIdea(id)
+            .then(function (res) {
+                console.log('ergebnis der idea object von deer gesuchten ide', res);
+                $scope.title = res.title;
+                $scope.desciption = res.description;
+                $scope.contributors = res.contributorsId;
+                $scope.selectedHashtags = res.tags;
+                $scope.ideaLifeTime = res.livetime;
+                $scope.selectedPrivacyType = $scope.privacyTypesList[res.privacyType];
+                $scope.milestones = res.milestones;
+                $scope.reloadImage("app/" + res.scribble);
+                $scope.ideaDayLeft = $scope.calculateIdeaLeftDays(res.created);
+            });
+    }
     $scope.updateIdea = function () {
-
+        var i = 0;
+        var indexPrivacy = 0;
+        while (i < $scope.privacyTypesList.length) {
+            if ($scope.selectedPrivacyType == $scope.privacyTypesList[i]) {
+                indexPrivacy = i;
+            }
+            i++;
+        }
         console.log("update idea");
 
         var user = authentication.currentUser();
@@ -523,27 +530,42 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             milestones: $scope.milestones,
             tags: $scope.selectedHashtags,
             livetime: $scope.ideaLifeTime,
-            privacyType: $scope.selectedPrivacyType,
+            privacyType: indexPrivacy,
             scribble: $scope.drawingboardRemote.toDataURL('image/png')
         };
 
-        ideaService.updateIdea(idea, user);
+        ideaService
+            .updateIdea(idea, user)
+            .success(function (retData) {
+                loadIdea($scope.ideaId);
+            });
 
     }
 
 
     //Save New Idea serverside 
     $scope.saveNewIdea = function () {
-        console.log("save new idea");
+        var user = authentication.currentUser();
+         var i = 0;
+        var indexPrivacy = 0;
+        while (i < $scope.privacyTypesList.length) {
+            if ($scope.selectedPrivacyType == $scope.privacyTypesList[i]) {
+                indexPrivacy = i;
+            }
+            i++;
+        }
+        console.log("update idea");
+
         var user = authentication.currentUser();
         var idea = {
+            _id: $scope.ideaId,
             title: $scope.title,
             description: $scope.desciption,
             contributors: $scope.contributorsId,
             milestones: $scope.milestones,
             tags: $scope.selectedHashtags,
             livetime: $scope.ideaLifeTime,
-            privacyType: $scope.selectedPrivacyType,
+            privacyType: indexPrivacy,
             scribble: $scope.drawingboardRemote.toDataURL('image/png')
         };
 
