@@ -414,7 +414,7 @@ module.exports.writeComment = function(req, res) {
 
 	var comment = new Comment();
 
-	comment.author = req.body.user.id;
+	comment.author = req.body.user._id;
 	comment.likeIdeaStatus = req.body.comment.likeIdeaStatus;
 	comment.newInputStatus = req.body.comment.newInputStatus;
 	comment.troubleStatus = req.body.comment.troubleStatus;
@@ -434,7 +434,7 @@ module.exports.writeComment = function(req, res) {
 			res.json(err);
 		} else {
 			console.log("Comment saved: ");
-			console.log(doc._id);
+			console.log(doc);
 
 			res.status(200);
 			res.json(doc);
