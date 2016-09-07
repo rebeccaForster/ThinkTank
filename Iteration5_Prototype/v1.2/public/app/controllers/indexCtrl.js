@@ -71,7 +71,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     $scope.reactionCountLikeIdea = function () {
         var count = 0;
-        if ($scope.getIdeaInfo.comments != null) {
+        if ($scope.getIdeaInfo != null) {
             var i = 0;
             while (i < $scope.getIdeaInfo.comments.length) {
                 if ($scope.getIdeaInfo.comments[i].likeIdeaStatus) {
@@ -87,7 +87,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     $scope.reactionCountNewInput = function () {
         var count = 0;
-        if ($scope.getIdeaInfo.comments != null) {
+        if ($scope.getIdeaInfo != null) {
 
             var i = 0;
 
@@ -105,7 +105,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     $scope.reactionCountSeeTrouble = function () {
         var count = 0;
-        if ($scope.getIdeaInfo.comments != null) {
+        if ($scope.getIdeaInfo != null) {
 
             var i = 0;
             while (i < $scope.getIdeaInfo.comments.length) {
@@ -121,7 +121,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     $scope.reactionCountOtherReaction = function () {
         var count = 0;
-        if ($scope.getIdeaInfo.comments != null) {
+        if ($scope.getIdeaInfo != null) {
 
             var i = 0;
             while (i < $scope.getIdeaInfo.comments.length) {

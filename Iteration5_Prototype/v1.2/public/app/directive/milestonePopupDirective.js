@@ -1,6 +1,6 @@
 'use strict';
 
-app.directive('validateNewMilestone', function (indexData) {
+app.directive('validateNewMilestone', function (dataService) {
     return {
         restrict: "A",
 
@@ -8,7 +8,7 @@ app.directive('validateNewMilestone', function (indexData) {
 
         link: function (scope, element, attributes, ngModel) {
             var milestones = [];
-            indexData
+            dataService
                 .loadAllMilestones()
                 .then(function (res) {
                     milestones = res;

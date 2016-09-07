@@ -121,8 +121,8 @@ function ProfilePopupController($scope, $mdDialog) {
 }
 
 
-function HashtagPopupController($scope, $mdDialog, indexData) {
-    indexData
+function HashtagPopupController($scope, $mdDialog, dataService) {
+    dataService
         .getAllTags()
         .then(function (res) {
             $scope.hashtags = res;

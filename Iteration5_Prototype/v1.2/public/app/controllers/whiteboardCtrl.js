@@ -501,9 +501,13 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
                     i++;
                 }
+                while(i < res.tags.length){
+                    if( !$scope.hashtagSelected(res.tags[i])){
+                        $scope.setSelectedHashtags(res.tags[i], false);
+                    }
+                    i++;
+                }
 
-
-                $scope.selectedHashtags = res.tags;
                 $scope.ideaLifeTime = res.livetime;
                 $scope.selectedPrivacyType = $scope.privacyTypesList[res.privacyType];
                 $scope.milestones = res.milestones;
@@ -669,8 +673,8 @@ profileService
 
 }
 
-function MilestonesPopupController($scope, $mdDialog, indexData) {
-indexData
+function MilestonesPopupController($scope, $mdDialog, dataService) {
+dataService
         .loadAllMilestones()
         .then(function (res) {
             $scope.milestoneList = res;

@@ -1,6 +1,6 @@
 'use strict';
 
-app.directive('validateNewHastag', function (indexData) {
+app.directive('validateNewHastag', function (dataService) {
     return {
         restrict: "A",
 
@@ -8,7 +8,7 @@ app.directive('validateNewHastag', function (indexData) {
 
         link: function (scope, element, attributes, ngModel) {
             var hashtags = [];
-            indexData
+            dataService
                 .getAllTags()
                 .then(function (res) {
                     hashtags = res;
