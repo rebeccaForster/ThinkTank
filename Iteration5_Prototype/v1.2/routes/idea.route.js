@@ -48,7 +48,7 @@ router.get('/getAllIeas', function (req, res, next) {
 									"contacs": idea.author[0].contacs,
 									"followedpersons": idea.author[0].followedpersons,
 									"followedideas": idea.author[0].followedideas,
-									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy")
+									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy hh:MM")
 								},
 								"img": idea.img,
 								"scribbles": idea.scribbles,
@@ -57,8 +57,8 @@ router.get('/getAllIeas', function (req, res, next) {
 								"likes": idea.likes,
 								"privacyType": idea.privacyType,
 								"contributors": idea.contributors,
-								"lastchanged": dateFormat(idea.lastchanged, "MM:hh dd/mm/yyyy"),
-								"created": dateFormat(idea.created, "dd/mm/yyyy")
+								"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy hh:MM"),
+								"created": dateFormat(idea.created, "dd/mm/yyyy hh:MM")
 							});
 				});
 
@@ -144,7 +144,7 @@ router.get('/getIdea/:id', function (req, res, next) {
 						"contacs": doc.contacs,
 						"followedpersons": doc.followedpersons,
 						"followedideas": doc.followedideas,
-						"created": dateFormat(doc.created, "dd/mm/yyyy")};
+						"created": dateFormat(doc.created, "dd/mm/yyyy hh:MM")};
 
 						console.log(typeof idea.contributors);
 						User.find({ _id: { $in: idea.contributors }}, function(err, contributorList) {
@@ -168,11 +168,11 @@ router.get('/getIdea/:id', function (req, res, next) {
 										"contacs": cont.contacs,
 										"followedpersons": cont.followedpersons,
 										"followedideas": cont.followedideas,
-										"created": dateFormat(cont.created, "dd/mm/yyyy")
+										"created": dateFormat(cont.created, "dd/mm/yyyy hh:MM")
 									});
 								});
 
-								Comment.find({ idea: idea._id }, function(err, commentsList) {
+								Comment.find({ $query: { idea: idea._id }, $orderby: { created : -1 } }, function(err, commentsList) {
 									if (err) {
 										console.log(err);
 										res.status(400);
@@ -196,8 +196,8 @@ router.get('/getIdea/:id', function (req, res, next) {
 													"contributors": contributors,
 													"comments": comments,
 													"privacyType": idea.privacyType,
-													"lastchanged": dateFormat(idea.lastchanged, "MM:hh dd/mm/yyyy"),
-													"created": dateFormat(idea.created, "dd/mm/yyyy")
+													"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy hh:MM"),
+													"created": dateFormat(idea.created, "dd/mm/yyyy hh:MM")
 												});
 									}
 							})
@@ -251,7 +251,7 @@ router.get('/getAllIdeasSorted/date', function (req, res, next) {
 									"contacs": idea.author[0].contacs,
 									"followedpersons": idea.author[0].followedpersons,
 									"followedideas": idea.author[0].followedideas,
-									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy")
+									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy hh:MM")
 								},
 								"img": idea.img,
 								"scribbles": idea.scribbles,
@@ -259,8 +259,8 @@ router.get('/getAllIdeasSorted/date', function (req, res, next) {
 								"milestones": idea.milestones,
 								"likes": idea.likes,
 								"contributors": idea.contributors,
-								"lastchanged": dateFormat(idea.lastchanged, "MM:hh dd/mm/yyyy"),
-								"created": dateFormat(idea.created, "dd/mm/yyyy")
+								"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy hh:MM"),
+								"created": dateFormat(idea.created, "dd/mm/yyyy hh:MM")
 							});
 				});
 
@@ -312,7 +312,7 @@ router.get('/searchIdeas/:term', function (req, res, next) {
 									"contacs": idea.author[0].contacs,
 									"followedpersons": idea.author[0].followedpersons,
 									"followedideas": idea.author[0].followedideas,
-									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy")
+									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy hh:MM")
 								},
 								"img": idea.img,
 								"scribbles": idea.scribbles,
@@ -320,8 +320,8 @@ router.get('/searchIdeas/:term', function (req, res, next) {
 								"milestones": idea.milestones,
 								"likes": idea.likes,
 								"contributors": idea.contributors,
-								"lastchanged": dateFormat(idea.lastchanged, "MM:hh dd/mm/yyyy"),
-								"created": dateFormat(idea.created, "dd/mm/yyyy")
+								"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy hh:MM"),
+								"created": dateFormat(idea.created, "dd/mm/yyyy hh:MM")
 							});
 				});
 
