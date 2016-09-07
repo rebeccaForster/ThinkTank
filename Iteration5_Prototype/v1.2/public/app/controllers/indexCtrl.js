@@ -171,7 +171,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             //if isFollow true than delete that the idea is followed
             if (isFollow) {
                 ideaService
-                    .unfollowIdea(followIdeaId, $scope.user)
+                    .unFollowIdea(followIdeaId, $scope.user)
                     .success(function (data) {
 
                         console.log("return data after follow idea", data);
@@ -573,7 +573,6 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             ideaService
                 .writeComment(ideaId, $scope.saveComment, $scope.user)
                 .success(function (data) {
-                    console.log('comment return data: ', data);
                     $scope.getIdea(ideaId);
                     clearComment();
 

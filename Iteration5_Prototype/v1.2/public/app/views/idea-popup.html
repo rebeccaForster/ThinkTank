@@ -46,11 +46,11 @@
                 </round-progress>
             </div>
         </div>
-        <div layout="row" class="margin-top-15" style="margin-bottom:135px;" ng-init="isUserFollowIdea = getFollowIdea(getIdeaInfo._id); isUserContr =isUserContributor(getIdeaInfo._id)">
+        <div layout="row" class="margin-top-15" style="margin-bottom:135px;" >
             <div flex></div>
-            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-if="isUserFollowIdea" ng-hide="isUserContr"   ng-click="setFollowIdea(getIdeaInfo._id,true)">Follow not idea</md-button>
-            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-if="!isUserFollowIdea" ng-hide="isUserContr"  ng-click="setFollowIdea(getIdeaInfo._id,false)">Follow idea</md-button>
-            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34"  ng-show="isUserContr"  ng-click="goWhiteboard(getIdeaInfo._id)">Edit idea</md-button>
+            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-if="getFollowIdea(getIdeaInfo._id)" ng-hide="isUserContributor(getIdeaInfo._id) "   ng-click="setFollowIdea(getIdeaInfo._id,true)">Follow not idea</md-button>
+            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-if="!isUserContributor(getIdeaInfo._id)" ng-hide="getFollowIdea(getIdeaInfo._id)"  ng-click="setFollowIdea(getIdeaInfo._id,false)">Follow idea</md-button>
+            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34"  ng-show="isUserContributor(getIdeaInfo._id)"  ng-click="goWhiteboard(getIdeaInfo._id)">Edit idea</md-button>
             
         </div>
 
@@ -180,16 +180,16 @@
                     </div>
                     <md-content class="background-color-white">
                         <md-list style=" max-height:400px;overflow-y:visible">
-                            <md-list-item ng-repeat="message in getIdeaInfo.messages" style="margin-bottom:15px; heiht:auto;">
+                            <md-list-item ng-repeat="message in getIdeaInfo.comments | orderBy:'created':true" style="margin-bottom:15px; heiht:auto;">
 
                                 <div class="md-list-item-text margin-bottom-15 width-100-prozent">
                                     <!-- ToDO: header mittig machen den namen und zu bild-->
                                     <div layout="row">
 
-                                        <img ng-src={{author.profileImg}} class="md-avatar" alt="{{author.name}}" ng-click="showProfile(getIdeaInfo.author._id, $event)">
-                                        <div class="md-headline">{{getIdeaInfo.author.firstname}} {{getIdeaInfo.author.name}},
+                                        <img ng-src={{message.author.profileImg}} class="md-avatar" alt="{{message.author.name}}" ng-click="showProfile(message.author.author._id, $event)">
+                                        <div class="md-headline">{{message.author.firstname}} {{message.author.name}},
                                         </div>
-                                        <div class="md-subhead">{{message.date}}</div>
+                                        <div class="md-subhead">{{message.created}}</div>
                                         <div flex></div>
                                         <ng-md-icon ng-show="message.likeIdeaStatus" icon="thumb_up" class="icon-gray"></ng-md-icon>
                                         <ng-md-icon ng-show="message.newInputStatus" icon="touch_app" class="icon-gray" class="messages-icon"></ng-md-icon>
