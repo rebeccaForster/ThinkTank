@@ -414,7 +414,7 @@ module.exports.writeComment = function(req, res) {
 
 	var comment = new Comment();
 
-	comment.user = req.body.user.id;
+	comment.author = req.body.user.id;
 	comment.likeIdeaStatus = req.body.comment.likeIdeaStatus;
 	comment.newInputStatus = req.body.comment.newInputStatus;
 	comment.troubleStatus = req.body.comment.troubleStatus;
