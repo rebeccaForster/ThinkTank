@@ -67,11 +67,11 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
   ];
 
-    
 
-        $scope.reactionCountLikeIdea = function () {
-            var count = 0;
 
+    $scope.reactionCountLikeIdea = function () {
+        var count = 0;
+        if ($scope.getIdeaInfo.comments != null) {
             var i = 0;
             while (i < $scope.getIdeaInfo.comments.length) {
                 if ($scope.getIdeaInfo.comments[i].likeIdeaStatus) {
@@ -80,14 +80,17 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
                 }
                 i++;
             }
-            return count;
         }
-        
-        
-         $scope.reactionCountNewInput = function () {
-            var count = 0;
+        return count;
+    }
+
+
+    $scope.reactionCountNewInput = function () {
+        var count = 0;
+        if ($scope.getIdeaInfo.comments != null) {
 
             var i = 0;
+
             while (i < $scope.getIdeaInfo.comments.length) {
                 if ($scope.getIdeaInfo.comments[i].newInputStatus) {
                     count++;
@@ -95,12 +98,14 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
                 }
                 i++;
             }
-            return count;
         }
-         
-         
-          $scope.reactionCountSeeTrouble = function () {
-            var count = 0;
+        return count;
+    }
+
+
+    $scope.reactionCountSeeTrouble = function () {
+        var count = 0;
+        if ($scope.getIdeaInfo.comments != null) {
 
             var i = 0;
             while (i < $scope.getIdeaInfo.comments.length) {
@@ -110,11 +115,13 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
                 }
                 i++;
             }
-            return count;
         }
-          
-           $scope.reactionCountOtherReaction = function () {
-            var count = 0;
+        return count;
+    }
+
+    $scope.reactionCountOtherReaction = function () {
+        var count = 0;
+        if ($scope.getIdeaInfo.comments != null) {
 
             var i = 0;
             while (i < $scope.getIdeaInfo.comments.length) {
@@ -124,11 +131,12 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
                 }
                 i++;
             }
-            return count;
         }
-        
-        
-    
+        return count;
+    }
+
+
+
 
     $scope.navbarShort = function () {
         return ($scope.menu[0].path == $state.current.name) || !$mdMedia('gt-md');
@@ -471,7 +479,9 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         var currentDate = new Date();
         currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0);
         if (date != '' && date != null) {
-            var dateParts = date.split("/");
+            var dateParts = date.split(" ");
+
+            dateParts = dateParts[0].split("/");
             var createdDate = new Date(dateParts[2], (dateParts[1] - 1), dateParts[0], 0, 0, 0);
             var days = (currentDate - createdDate) / (1000 * 60 * 60 * 24); // subtraiktion sind ms und umrechnen in tage
 
