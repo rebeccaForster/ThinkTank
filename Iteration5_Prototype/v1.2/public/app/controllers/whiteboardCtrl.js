@@ -66,13 +66,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.contributors = [];
     $scope.contributorsId = [];
     $scope.contributorsList = [];
-    profileService
-        .loadAllUsers()
-        .then(function (res) {
-
-            $scope.contributorsList = res;
-            console.log('contributorsList: ', $scope.contributorsList);
-        });
+    
 
     $scope.setSelectedContributors = function (name, id, status) {
         if (!status) {
@@ -99,11 +93,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.ideaLifeTime = 30; //Angabe in Tagen, der Server speichert automatisch 30 falls nichts angegeben ist
     $scope.ideaDayLeft = 0;
     $scope.lastchanged = '';
-    indexData
-        .loadAllMilestones()
-        .then(function (res) {
-            $scope.milestoneList = res;
-        });
+    
 
     $scope.setSelectedMilestones = function (name, status, extratime, icon) {
         var milestoneDefault = {
@@ -348,12 +338,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.setLineWidth = function (size) {
         $scope.drawingboardRemote.setLineWidth(size);
     }
-    $scope.hashtags = [];
-    indexData
-        .getAllTags()
-        .then(function (res) {
-            $scope.hashtags = res;
-        });
+    
     $scope.addHashtag = '';
     $scope.addNewHastag = function () {
 
@@ -371,6 +356,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
     }
     $scope.addHashtags = function (ev) {
+       
         $mdDialog.show({
                 controller: HashtagPopupController,
                 templateUrl: 'app/views/hashtag-popup.html',
@@ -660,8 +646,13 @@ function DescriptionPopupController($scope, $mdDialog) {
 }
 
 
-function ContrPopupController($scope, $mdDialog) {
+function ContrPopupController($scope, $mdDialog,profileService) {
+profileService
+        .loadAllUsers()
+        .then(function (res) {
 
+            $scope.contributorsList = res;
+        });
     $scope.hide = function () {
         $mdDialog.hide();
     };
@@ -671,8 +662,12 @@ function ContrPopupController($scope, $mdDialog) {
 
 }
 
-function MilestonesPopupController($scope, $mdDialog) {
-
+function MilestonesPopupController($scope, $mdDialog, indexData) {
+indexData
+        .loadAllMilestones()
+        .then(function (res) {
+            $scope.milestoneList = res;
+        });
     $scope.hide = function () {
         $mdDialog.hide();
     };

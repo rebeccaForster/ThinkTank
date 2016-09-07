@@ -17,14 +17,6 @@ angular
 
 
 
-        $scope.hashtags = [];
-        // loads all hashtags with name and priority from the server and save it in a variable.
-        // this variable will be loaded in the hashtag popup 
-        indexData
-            .getAllTags()
-            .then(function (res) {
-                $scope.hashtags = res;
-            });
 
         /* function: open an dialog with all hashtags and selected hashtags
                         via the dialog can hashtags be added or cleared to the searchbar
@@ -128,8 +120,12 @@ function ProfilePopupController($scope, $mdDialog) {
 }
 
 
-function HashtagPopupController($scope, $mdDialog) {
-
+function HashtagPopupController($scope, $mdDialog, indexData) {
+        indexData
+            .getAllTags()
+            .then(function (res) {
+                $scope.hashtags = res;
+            });
     $scope.hide = function () {
         $mdDialog.hide();
     };

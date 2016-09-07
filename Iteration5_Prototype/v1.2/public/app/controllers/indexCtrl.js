@@ -209,6 +209,8 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         }
         return false;
     }
+    $scope.hashtags = [];
+
     $scope.setSignInStatus();
     $scope.go = function (path) {
         //todo ändern der sorting daten in abhängigkeit vom wechsel als Event --> wie ich es beim whiteboard eigtl vorhatte

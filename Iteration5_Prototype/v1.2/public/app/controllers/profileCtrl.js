@@ -13,12 +13,7 @@ app.controller('ProfileCtrl', function ($scope, indexData, $mdDialog, authentica
     // number of columns of the profile site for md-cards
         $scope.maxProfileColumn = 2;
     $scope.addHashtags = function (ev) {
-        $scope.hashtags = [];
-        indexData
-            .getAllTags()
-            .then(function (res) {
-                $scope.hashtags = res;
-            });
+        
         $scope.addHashtag = '';
         $mdDialog.show({
                 controller: HashtagPopupController,
