@@ -343,7 +343,7 @@ router.post('/searchIdeas/', function (req, res, next) {
 									"contacs": "[]",
 									"followedpersons": "[]",
 									"followedideas": "[]",
-									"created": "07/09/201"6
+									"created": "07/09/2016"
 								},
 								"img": idea.img,
 								"scribbles": idea.scribbles,
