@@ -1,11 +1,20 @@
 <md-dialog id="register-dialog" aria-label="Login" ng-cloak class="popup-hashtag-size">
     <form name="registerForm" ng-submit="register()">
 
-        <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding>
-            <span flex></span>
-            <md-button class="md-icon-button" ng-click="cancel()">
-                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        <md-toolbar class="md-tall md-primary md-hue-2"  layout-padding>
+            
+            <div style="margin-right:80px; margin-left:10px;  ">
+                <div>
+                    <span class="md-display-3">Profile Data</span>
+                </div>
+
+            </div>
+            <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
+                <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
             </md-button>
+            
+            
+            
         </md-toolbar>
         <md-dialog-content>
             <div class="md-dialog-content"  ng-include="'app/views/user-data-content.html'">

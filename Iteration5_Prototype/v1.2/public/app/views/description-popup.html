@@ -1,11 +1,15 @@
 <md-dialog aria-label="Whiteboard Description Popup" class="popup-hashtag-size">
     <form name="descriptionForm">
-        <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding>
+        <md-toolbar class="md-tall md-primary md-hue-2" layout-padding>
 
-            <h2>Idea description and title</h2>
-            <span flex></span>
-            <md-button class="md-icon-button" ng-click="cancel()">
-                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            <div style="margin-right:80px; margin-left:10px;  ">
+                <div>
+                    <span class="md-display-3">Idea description and title</span>
+                </div>
+
+            </div>
+            <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
+                <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
             </md-button>
         </md-toolbar>
 
@@ -13,8 +17,12 @@
             <div class="md-dialog-content">
                 <md-input-container class="md-block" flex style="margin-top:25px;">
                     <label>Title</label>
-                    <input name="title" ng-model="title" />
+                    <input name="title" ng-model="title" type="text" md-maxlength="50" reqired/>
+                    <div ng-messages="descriptionForm.title.$error" ng-show="descriptionForm.title.$dirty">
+                        <div ng-message="md-maxlength">That's too long!</div>
+                    </div>
                 </md-input-container>
+
                 <div>Status of the idea: {{ideaDayLeft}} / {{ideaLifeTime}} days</div>
 
                 <div>
