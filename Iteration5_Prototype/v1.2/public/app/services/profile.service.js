@@ -40,6 +40,19 @@
                 });
         };
 
+        var updateUser = function (currentUser, user) {
+            var data = {
+                    currentUser: currentUser,
+                    user: user
+                }
+
+            return $http.post('/api/userData/updateUser', data)
+                .success(function (data) {
+                    console.log(data)
+                    return data;
+                });
+        };
+
         var unfollowUser = function (followedPersonId, user) {
             var data = {
                     followedPersonId: followedPersonId,
@@ -58,7 +71,8 @@
             loadAllUsers: loadAllUsers,
             getUser: getUser,
             followUser: followUser,
-            unfollowUser: unfollowUser
+            unfollowUser: unfollowUser, 
+            updateUser: updateUser
         };
     }
 

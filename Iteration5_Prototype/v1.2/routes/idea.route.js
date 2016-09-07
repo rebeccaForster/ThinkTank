@@ -287,11 +287,11 @@ router.get('/getAllIdeasSorted/date', function (req, res, next) {
 	})
 });
 
-router.get('/searchIdeas/:term', function (req, res, next) { 
+router.post('/searchIdeas/', function (req, res, next) { 
 
-	
+	var searchTags = req.body.term;
 
-	console.log("getAllIdeas Sorting Date");
+	console.log("search for Tags triggerd");
 		Idea.aggregate([
 			{
 			   $lookup:
@@ -301,9 +301,7 @@ router.get('/searchIdeas/:term', function (req, res, next) {
 			       foreignField: "_id",
 			       as: "author"
 			     }}, 
-			      { $match: { tags : { $in: req.params.term }} } , function(err, ideas) {
-	// Idea.find([{}], function(err, ideas) {
-
+			      { $match: { tags : { $in: searchTags }} } , function(err, ideas) {
 
 		if (err) {
 			console.log(err);

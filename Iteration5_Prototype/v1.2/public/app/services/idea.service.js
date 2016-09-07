@@ -29,15 +29,6 @@
             });
         };
 
-        var searchIdeas = function (term) {
-            var a = "/api/ideaData/searchIdeas/";
-            return $http.get(a.concat(term)).then(function (response) {
-                var idea = response.data;
-                console.log(idea);
-                return idea;
-            });
-        };
-
         var updateIdea = function (idea, user) {
             var data = {
                 idea: idea,
@@ -68,7 +59,17 @@
                 });
         };
 
+        var searchIdeas = function (tags) {
+            var data = {
+                tags: tags //array with tag names
+            }
 
+            return $http.post('/api/ideaData/searchIdeas', data)
+                .success(function (data) {
+                    console.log(data)
+                    return data;
+                });
+        };
 
         var followIdea = function (ideaId, user) {
             var data = {
@@ -131,7 +132,8 @@
             getIdea: getIdea,
             likeIdea: likeIdea,
             followIdea: followIdea,
-            unFollowIdea: unFollowIdea
+            unFollowIdea: unFollowIdea, 
+            searchIdeas: searchIdeas
 
         };
     }
