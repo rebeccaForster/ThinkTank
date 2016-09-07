@@ -425,7 +425,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             likeIdeaStatus: false,
             newInputStatus: false,
             troubleStatus: false,
-            other: false
+            otherreaction: false
         };
 
     }
@@ -524,7 +524,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         likeIdeaStatus: false,
         newInputStatus: false,
         troubleStatus: false,
-        other: false
+        otherreaction: false
     };
 
     $scope.newInputText = '';
@@ -557,8 +557,8 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         }
     };
     $scope.setOtherComment = function () {
-        $scope.saveComment.other = !$scope.saveComment.other;
-        if ($scope.saveComment.other) {
+        $scope.saveComment.otherreaction = !$scope.saveComment.otherreaction;
+        if ($scope.saveComment.otherreaction) {
             $scope.otherText = 'Something else.';
         } else {
             $scope.otherText = '';

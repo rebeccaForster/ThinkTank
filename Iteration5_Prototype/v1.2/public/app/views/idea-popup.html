@@ -149,13 +149,13 @@
                             <br>
                             <div class="md-subhead">see trouble</div>
                         </div>
-                        <div layout="column" flex layout-align="center center" ng-class="{'item-select' : saveComment.other}" ng-click="setOtherComment();">
+                        <div layout="column" flex layout-align="center center" ng-class="{'item-select' : saveComment.otherreaction}" ng-click="setOtherComment();">
                             <ng-md-icon icon="more_horiz" size="40"></ng-md-icon>
                             <br>
                             <div class="md-subhead">other comments</div>
                         </div>
                     </div>
-                    <div ng-show="saveComment.other || saveComment.troubleStatus || saveComment.newInputStatus || saveComment.likeIdeaStatus">
+                    <div ng-show="saveComment.otherreaction || saveComment.troubleStatus || saveComment.newInputStatus || saveComment.likeIdeaStatus">
                         <md-input-container class="md-block margin-top-25">
                             <label>{{newInputText}} {{likeIdeaText}} {{troubleText}} {{otherText}}</label>
                             <textarea name="commentArea" type="text" ng-model="saveComment.text" md-autofocus required></textarea>
@@ -194,7 +194,7 @@
                                         <ng-md-icon ng-show="message.likeIdeaStatus" icon="thumb_up" class="icon-gray"></ng-md-icon>
                                         <ng-md-icon ng-show="message.newInputStatus" icon="touch_app" class="icon-gray" class="messages-icon"></ng-md-icon>
                                         <ng-md-icon ng-show="message.troubleStatus" icon="flash_on" class="icon-gray"></ng-md-icon>
-                                        <ng-md-icon ng-show="message.other" icon="more_horiz" class="icon-gray"></ng-md-icon>
+                                        <ng-md-icon ng-show="message.otherreaction" icon="more_horiz" class="icon-gray"></ng-md-icon>
                                     </div>
                                     <div class="md-subhead">{{message.text}}
                                     </div>

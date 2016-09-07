@@ -56,7 +56,7 @@
 
         var writeComment = function (ideaId, comment, user) {
             var data = {
-                ideaId, ideaId, //String
+                ideaId: ideaId, //String
                 comment: comment, //object (text, reaction, optional: title, scribble )
                     user: user //currentUser object
             }
