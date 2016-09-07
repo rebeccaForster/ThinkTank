@@ -29,6 +29,15 @@
             });
         };
 
+        var searchIdeas = function (term) {
+            var a = "/api/ideaData/searchIdeas/";
+            return $http.get(a.concat(term)).then(function (response) {
+                var idea = response.data;
+                console.log(idea);
+                return idea;
+            });
+        };
+
         var updateIdea = function (idea, user) {
             var data = {
                 idea: idea,
