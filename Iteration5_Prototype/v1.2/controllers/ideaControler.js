@@ -217,6 +217,7 @@ module.exports.updateIdea = function(req, res) {
 					"scribble": idea.scribble,
 					"tags": idea.tags,
 					"milestones": idea.milestones,
+					"privacyType": idea.privacyType,
 					"contributors": idea.contributors,
 					"lastchanged": Date.now()
 				}, function(err, room) {
