@@ -15,7 +15,7 @@ module.exports.updateUser = function(req, res) {
 	console.log(req.body.currentUser);
 	console.log(req.body.user);
 
-  if(!req.body.user.id || !req.body.currentUser) {
+  if(!req.body.user || !req.body.currentUser) {
     console.log("user was not updated because of incomplete data");
     sendJSONresponse(res, 400, {
       "message": "user and idea required"
