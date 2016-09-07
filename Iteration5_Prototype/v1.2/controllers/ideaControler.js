@@ -184,11 +184,11 @@ module.exports.updateIdea = function(req, res) {
 				} 
 				
 				// TODO: Disabled untill form passes objectIDs of users
-				// if(req.body.idea.contributors) {
-				// 	idea.contributors = req.body.idea.contributors;
-				// } else {
-				// 	idea.contributors = [];
-				// }
+				if(req.body.idea.contributors) {
+					idea.contributors = req.body.idea.contributors;
+				} else {
+					idea.contributors = [];
+				}
 
 				if(req.body.idea.milestones) {
 					idea.milestones = req.body.idea.milestones;
