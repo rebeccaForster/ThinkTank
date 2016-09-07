@@ -501,21 +501,12 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 console.log('ergebnis der idea object von deer gesuchten ide', res);
                 $scope.title = res.title;
                 $scope.desciption = res.description;
-                if (res.contributorsId == null) {
-                    $scope.contributorsId = [];
-                    $scope.contributors = [];
-                } else {
-                    $scope.contributorsId = res.contributorsId;
-                    var i = 0;
-                    while ($scope.contributorsId.length) {
-                        profileService
-                            .getUser(id)
-                            .then(function (res) {
+                var i = 0;
+                while (i < res.contributors.length) {
+                    $scope.contributors.push(res.contributors[i].name);
+                    $scope.contributorsId.push(res.contributors[i]._id);
 
-                                $scope.contributors[i] = res.name;
-                            });
-                        i++;
-                    }
+                    i++;
                 }
 
 
