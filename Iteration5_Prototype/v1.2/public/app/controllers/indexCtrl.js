@@ -67,6 +67,68 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
   ];
 
+    
+
+        $scope.reactionCountLikeIdea = function () {
+            var count = 0;
+
+            var i = 0;
+            while (i < $scope.getIdeaInfo.comments.length) {
+                if ($scope.getIdeaInfo.comments[i].likeIdeaStatus) {
+                    count++;
+
+                }
+                i++;
+            }
+            return count;
+        }
+        
+        
+         $scope.reactionCountNewInput = function () {
+            var count = 0;
+
+            var i = 0;
+            while (i < $scope.getIdeaInfo.comments.length) {
+                if ($scope.getIdeaInfo.comments[i].newInputStatus) {
+                    count++;
+
+                }
+                i++;
+            }
+            return count;
+        }
+         
+         
+          $scope.reactionCountSeeTrouble = function () {
+            var count = 0;
+
+            var i = 0;
+            while (i < $scope.getIdeaInfo.comments.length) {
+                if ($scope.getIdeaInfo.comments[i].troubleStatus) {
+                    count++;
+
+                }
+                i++;
+            }
+            return count;
+        }
+          
+           $scope.reactionCountOtherReaction = function () {
+            var count = 0;
+
+            var i = 0;
+            while (i < $scope.getIdeaInfo.comments.length) {
+                if ($scope.getIdeaInfo.comments[i].otherreaction) {
+                    count++;
+
+                }
+                i++;
+            }
+            return count;
+        }
+        
+        
+    
 
     $scope.navbarShort = function () {
         return ($scope.menu[0].path == $state.current.name) || !$mdMedia('gt-md');

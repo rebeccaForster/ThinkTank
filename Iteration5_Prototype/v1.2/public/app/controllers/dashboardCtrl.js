@@ -46,8 +46,9 @@ angular
 
 
 
-
-
+        
+        
+        
 
 
 
@@ -94,8 +95,8 @@ function IdeaPopupController($scope, $mdDialog) {
 
     };
     $scope.goWhiteboard = function (id) {
-       $scope.openWhiteboard(id);
-                $mdDialog.hide();
+        $scope.openWhiteboard(id);
+        $mdDialog.hide();
 
 
     }
@@ -121,11 +122,11 @@ function ProfilePopupController($scope, $mdDialog) {
 
 
 function HashtagPopupController($scope, $mdDialog, indexData) {
-        indexData
-            .getAllTags()
-            .then(function (res) {
-                $scope.hashtags = res;
-            });
+    indexData
+        .getAllTags()
+        .then(function (res) {
+            $scope.hashtags = res;
+        });
     $scope.hide = function () {
         $mdDialog.hide();
     };
