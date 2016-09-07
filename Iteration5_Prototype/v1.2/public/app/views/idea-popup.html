@@ -182,8 +182,8 @@
                                     <!-- ToDO: header mittig machen den namen und zu bild-->
                                     <div layout="row" layout-align="start end">
 
-                                        <img ng-src={{message.author.profileImg}} class="md-avatar" alt="{{message.author.name}}" ng-click="showProfile(message.author.author._id, $event)">
-                                        <div class="md-headline">{{message.author.firstname}} {{message.author.name}},
+                                        <img ng-src={{commentAuthor[$index].profileImg}} class="md-avatar" alt="{{commentAuthor[$index].name}}" ng-click="showProfile(commentAuthor[$index]._id, $event)">
+                                        <div class="md-headline">{{commentAuthor[$index].firstname}} {{commentAuthor[$index].name}},
                                         </div>
                                         <div class="md-subhead">{{message.created}}</div>
                                         <div flex></div>

@@ -466,14 +466,28 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             });
 
     };
+
+    $scope.commentAuthor = [];
     $scope.getIdea = function (id) {
         ideaService
             .getIdea(id)
             .then(function (res) {
 
-                $scope.getIdeaInfo = res;
-            });
-    };
+                    $scope.getIdeaInfo = res;
+                    var i = 0;
+                    while (i < $scope.getIdeaInfo.comments.length) {
+
+                        profileService
+                            .getUser($scope.getIdeaInfo.comments[i].author)
+                            .then(function (res) {
+
+                                $scope.commentAuthor.push(res);
+                            });
+                        i++;
+                    }
+                    });
+            
+    }
 
     /*
         function: calculate the days which are left after the idea was created
