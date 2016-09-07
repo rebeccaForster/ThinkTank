@@ -427,7 +427,10 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             troubleStatus: false,
             otherreaction: false
         };
-
+        $scope.newInputText = '';
+        $scope.likeIdeaText = '';
+        $scope.troubleText = '';
+        $scope.otherText = '';
     }
 
     $scope.showIdea = function (id, ev) {

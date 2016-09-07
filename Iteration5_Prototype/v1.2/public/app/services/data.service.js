@@ -5,23 +5,19 @@
         .service('dataService', DataService);
 
 
-    function DataService($http, authentication, $q) {
+    function DataService($http, authentication) {
 
-        var tags = [];
-        var milestones = [];
 
         var getAllTags = function () {
-            $http.get("/api/data/getAllHashtags").then(function (response) {
-                tags = response.data;
+            return $http.get("/api/data/getAllHashtags").then(function (response) {
+                return response.data;
             });
-            return $q.when(tags);
         };
 
         var loadAllMilestones = function () {
-            $http.get("/api/data/getAllMilestones").then(function (response) {
-                milestones = response.data;
+            return $http.get("/api/data/getAllMilestones").then(function (response) {
+                return response.data;
             });
-            return $q.when(milestones);
         }
         return {
             getAllTags: getAllTags,
