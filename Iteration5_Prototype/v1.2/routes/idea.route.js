@@ -179,6 +179,23 @@ router.get('/getIdea/:id', function (req, res, next) {
 										res.json(err);
 									} else {
 										comments = commentsList;
+
+										var comments = new Array;
+
+										commentsList.forEach(function(comment) {
+											comments.push({
+												"_id": comment._id,
+												"created": dateFormat(comment.created, "dd/mm/yyyy hh:MM"), 
+												"likeIdeaStatus": comment.likeIdeaStatus, 
+												"newInputStatus": comment.newInputStatus, 
+												"troubleStatus": comment.troubleStatus, 
+												"otherreaction": comment.otherreaction, 
+												"title": comment.title, 
+												"text": comment.text, 
+												"user": comment.user, 
+												"idea": comment.idea
+											});
+										});
 									
 										res.status(200);
 										console.log(idea.scribble);

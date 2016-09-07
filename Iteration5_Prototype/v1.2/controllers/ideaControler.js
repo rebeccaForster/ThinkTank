@@ -298,6 +298,38 @@ module.exports.followIdea = function(req, res) {
 	});
 };
 
+module.exports.unFollowIdea = function(req, res) {
+	//we need: ideaId, userId
+
+	if(!req.body.user._id || !req.body.ideaId) {
+	    console.log("was not saved because of incomplete data");
+	    sendJSONresponse(res, 400, {
+	      "message": "user and ideaId required"
+	    });
+	    return;
+	  }
+
+	  Users.update({ _id: req.body.user._id },
+		   { $pull: { followedideas: req.body.ideaId } }, function(err, room) {
+
+		if (err) {
+			console.log("error: ");
+			console.log(err);
+			res.json({
+			  id : err
+			});
+		} else {
+			console.log("unfollowed: ");
+
+			res.status(200);
+			res.json({
+			  id : room._id
+			});
+		}
+		
+	});
+};
+
 module.exports.likeIdea = function(req, res) {
 	//we need: ideaId, userId
 
@@ -308,8 +340,6 @@ module.exports.likeIdea = function(req, res) {
 	    });
 	    return;
 	  }
-
-
 
 	  Idea.update({ _id: req.body.ideaId },
 		   { $push: { likes: req.body.user._id } }, function(err, room) {
@@ -323,40 +353,6 @@ module.exports.likeIdea = function(req, res) {
 		} else {
 			console.log("liked: ");
 			console.log(room._id);
-
-			res.status(200);
-			res.json({
-			  id : room._id
-			});
-		}
-		
-	});
-};
-
-module.exports.unFollowIdea = function(req, res) {
-	//we need: ideaId, userId
-
-	if(!req.body.user._id || !req.body.ideaId) {
-	    console.log("was not saved because of incomplete data");
-	    sendJSONresponse(res, 400, {
-	      "message": "user and ideaId required"
-	    });
-	    return;
-	  }
-
-
-
-	  Users.update({ _id: req.body.user._id },
-		   { $pull: { followedideas: req.body.ideaId } }, function(err, room) {
-
-		if (err) {
-			console.log("error: ");
-			console.log(err);
-			res.json({
-			  id : err
-			});
-		} else {
-			console.log("unfollowed: ");
 
 			res.status(200);
 			res.json({
