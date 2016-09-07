@@ -128,7 +128,7 @@ router.get('/getUser/:id', function (req, res, next) {
 												"tags": cont.tags,
 												"milestones": cont.milestones,
 												"likes": cont.likes,
-												"contributors": contributors,
+												"contributors": cont.contributors,
 												"lastchanged": dateFormat(cont.lastchanged, "dd/mm/yyyy"),
 												"created": dateFormat(cont.created, "dd/mm/yyyy")
 											});
