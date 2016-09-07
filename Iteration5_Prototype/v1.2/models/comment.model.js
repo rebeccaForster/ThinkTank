@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var CommentSchema = new mongoose.Schema({
 	created: { type: Date, default: Date.now }, 
-	ikeIdeaStatus: Boolean,
+	likeIdeaStatus: Boolean,
   	newInputStatus: Boolean,
   	troubleStatus: Boolean,
   	otherreaction: Boolean,
