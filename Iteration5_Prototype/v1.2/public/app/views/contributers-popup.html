@@ -5,7 +5,7 @@
             <div>
                 <md-button class="md-raised md-accent" style="font-size:24px; margin-bottom:5px;" ng-hide="author=='' || author.email==''">{{author.name}} - author
                 </md-button>
-                <md-button class="md-raised md-accent" ng-repeat="contr in contributors" ng-click="setSelectedContributors(contr.name, contr._id, true);" style="font-size:24px; margin-bottom:5px;">{{contr}}
+                <md-button class="md-raised md-accent" ng-repeat="contr in contributors" ng-click="setSelectedContributors(contr, contributorsId[$index], true);" style="font-size:24px; margin-bottom:5px;">{{contr}}
                     <ng-md-icon icon="close"></ng-md-icon>
                 </md-button>
             </div>
@@ -23,7 +23,7 @@
 
                 <div layout="column">
                     <div layout="row" ng-repeat="contr in contributorsList | orderBy:'name'" class="item">
-                        <md-button data-ng-class="{'md-accent' : statusContributorsSelected(contr.name)}" ng-click="setSelectedContributors( contr.name, contr._id, statusContributorsSelected( contr.name))">{{contr.firstname}} {{contr.name}}</md-button>
+                        <md-button data-ng-class="{'md-accent' : statusContributorsSelected(contr.name)}" ng-disabled="contr._id == author._id" ng-click="setSelectedContributors( contr.name, contr._id, statusContributorsSelected( contr.name))">{{contr.firstname}} {{contr.name}}</md-button>
                     </div>
                 </div>
                 <div flex></div>

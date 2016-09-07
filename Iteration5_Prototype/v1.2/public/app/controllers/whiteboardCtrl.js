@@ -1,5 +1,5 @@
 'use strict';
-app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService, $stateParams, $rootScope, profileService) {
+app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, indexData, $window, ideaService, $stateParams, $rootScope, profileService, $mdToast) {
     $scope.saveScribble = function (ev) {
 
         if ($scope.ideaId == -1) {
@@ -98,7 +98,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.milestoneList = [];
     $scope.ideaLifeTime = 30; //Angabe in Tagen, der Server speichert automatisch 30 falls nichts angegeben ist
     $scope.ideaDayLeft = 0;
-
+    $scope.lastchanged = '';
     indexData
         .loadAllMilestones()
         .then(function (res) {
@@ -488,7 +488,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             $scope.clearHistory();
             var now = new Date();
             $scope.title = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + ' ' + now.getHours() + ':' + now.getMinutes();
-
+            $scope.author = $scope.user;
         } else {
             loadIdea($scope.ideaId);
         }
@@ -501,13 +501,33 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 console.log('ergebnis der idea object von deer gesuchten ide', res);
                 $scope.title = res.title;
                 $scope.desciption = res.description;
-                $scope.contributors = res.contributorsId;
+                if (res.contributorsId == null) {
+                    $scope.contributorsId = [];
+                    $scope.contributors = [];
+                } else {
+                    $scope.contributorsId = res.contributorsId;
+                    var i = 0;
+                    while ($scope.contributorsId.length) {
+                        profileService
+                            .getUser(id)
+                            .then(function (res) {
+
+                                $scope.contributors[i] = res.name;
+                            });
+                        i++;
+                    }
+                }
+
+
                 $scope.selectedHashtags = res.tags;
                 $scope.ideaLifeTime = res.livetime;
                 $scope.selectedPrivacyType = $scope.privacyTypesList[res.privacyType];
                 $scope.milestones = res.milestones;
                 $scope.reloadImage("app/" + res.scribble);
                 $scope.ideaDayLeft = $scope.calculateIdeaLeftDays(res.created);
+                $scope.author = res.author;
+                $scope.lastchanged = res.lastchanged;
+
             });
     }
     $scope.updateIdea = function () {
@@ -524,6 +544,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         var user = authentication.currentUser();
         var idea = {
             _id: $scope.ideaId,
+
             title: $scope.title,
             description: $scope.desciption,
             contributors: $scope.contributorsId,
@@ -538,6 +559,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             .updateIdea(idea, user)
             .success(function (retData) {
                 loadIdea($scope.ideaId);
+                $mdToast.show($mdToast.simple().textContent('Save idea: ' + $scope.lastchanged).hideDelay(4000));
+
             });
 
     }
@@ -546,7 +569,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     //Save New Idea serverside 
     $scope.saveNewIdea = function () {
         var user = authentication.currentUser();
-         var i = 0;
+        var i = 0;
         var indexPrivacy = 0;
         while (i < $scope.privacyTypesList.length) {
             if ($scope.selectedPrivacyType == $scope.privacyTypesList[i]) {
@@ -575,6 +598,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
                 $scope.ideaId = res;
 
+                loadIdea($scope.ideaId);
 
             });
 

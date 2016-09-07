@@ -1,31 +1,34 @@
 <md-dialog aria-label="Whiteboard Description Popup" class="popup-hashtag-size">
     <form name="descriptionForm">
-        <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding >
+        <md-toolbar class="md-tall md-primary md-hue-2" layout="row" layout-padding>
+
             <h2>Idea description and title</h2>
-
             <span flex></span>
-            <md-button class="md-icon-button" style="width:64px; height:64px;">
-                <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
             </md-button>
-
         </md-toolbar>
-        <md-dialog-content class="content" layout-padding>
-            <md-input-container class="md-block" flex style="margin-top:25px;">
-                <label>Title</label>
-                <input name="title" ng-model="title" />
-            </md-input-container>
-            <div>Status of the idea: {{ideaDayLeft}} / {{ideaLifeTime}} days</div>
-            <md-input-container class="md-block" flex>
-                <label>Description</label>
-                <textarea name="description" ng-model="desciption" </textarea>
 
-            </md-input-container>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-input-container class="md-block" flex style="margin-top:25px;">
+                    <label>Title</label>
+                    <input name="title" ng-model="title" />
+                </md-input-container>
+                <div>Status of the idea: {{ideaDayLeft}} / {{ideaLifeTime}} days</div>
 
+                <div>
+                    <md-input-container class="md-block margin-top-25">
+                        <label>Description</label>
+                        <textarea name="description" type="text" ng-model="desciption" placeholder="Here can you add your desciption of the idea." </textarea>
+                    </md-input-container>
+                </div>
+
+            </div>
         </md-dialog-content>
 
-         <md-dialog-actions layout="row">
-
-            <span flex></span>
+        <md-dialog-actions layout="row">
+            <div felx></div>
             <md-button class=" md-raised md-primary" ng-click="cancel();">Okay</md-button>
         </md-dialog-actions>
     </form>
