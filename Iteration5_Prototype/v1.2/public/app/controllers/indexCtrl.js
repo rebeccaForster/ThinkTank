@@ -564,7 +564,6 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     $scope.changeSortingType = function (index) {
         $scope.sortingType = index;
-        $scope.updateDashboard();
 
     }
 
@@ -590,11 +589,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
     }
 
-    $scope.updateDashboard = function () {
-        // ToDo: es wurden neue Tags hinzugefügt bzw. entfernt und hier müsstest du mithilfe der Tags & des auswählten Sorting die Liste erneuern
-        // $scope.sortingType gibt den Namen der Sortierung zurück
-        // $scope.selectedHashtags  gibt alle Tags IDs an, nach denen man suchen soll
-    }
+   
     $scope.saveComment = {
         author: -1,
         text: '',

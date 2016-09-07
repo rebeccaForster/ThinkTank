@@ -1,7 +1,7 @@
 'use strict';
 app.controller('ProfileCtrl', function ($scope, indexData, $mdDialog, authentication, profileService, ideaService) {
 
-
+$scope.getProfileInfo = $scope.user;
     function setHashtags(tags) {
         var i = 0;
         if (tags != null) {
