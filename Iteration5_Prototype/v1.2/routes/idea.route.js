@@ -293,17 +293,17 @@ router.post('/searchIdeas/', function (req, res, next) {
 	var searchTags = req.body.tags;
 
 	console.log("search for Tags triggerd");
-		// Idea.aggregate([
-		// 	{ $match: { "tags" : { $in: searchTags }} } ,
-		// 	{
-		// 	   $lookup:
-		// 	     {
-		// 	       from: "users",
-		// 	       localField: "author",
-		// 	       foreignField: "_id",
-		// 	       as: "author"
-		// 	     }}, function(err, ideas) {
-	Idea.find({ tags : { $in: searchTags }}, function(err, ideas) {
+		Idea.aggregate([
+			{ $match: { "tags" : { $in: searchTags }} } ,
+			{
+			   $lookup:
+			     {
+			       from: "users",
+			       localField: "author",
+			       foreignField: "_id",
+			       as: "author"
+			     }}], function(err, ideas) {
+	// Idea.find([{ tags : { $in: searchTags }}], function(err, ideas) {
 	// Idea.find({}, function(err, ideas) {
 
 		if (err) {
@@ -319,32 +319,32 @@ router.post('/searchIdeas/', function (req, res, next) {
 								"description": idea.description,
 								"abstract": idea.abstract,
 								"title": idea.title,
-								// "author": {
-								// 	"_id": idea.author[0]._id,
-								// 	"profileImg": idea.author[0].profileImg,
-								// 	"url": idea.author[0].url,
-								// 	"title": idea.author[0].title,
-								// 	"firstname": idea.author[0].firstname,
-								// 	"email": idea.author[0].email,
-								// 	"name": idea.author[0].name,
-								// 	"contacs": idea.author[0].contacs,
-								// 	"followedpersons": idea.author[0].followedpersons,
-								// 	"followedideas": idea.author[0].followedideas,
-								// 	"created": dateFormat(idea.author[0].created, "dd/mm/yyyy HH:MM")
-								// },
 								"author": {
-									"_id": "57cee2a7ded7832d5845549d",
-									"profileImg": "asönfls.png",
-									"url": "nothing",
-									"title": "Dr. Prof",
-									"firstname": "Nono",
-									"email": "no@body.com",
-									"name": "Body",
-									"contacs": "[]",
-									"followedpersons": "[]",
-									"followedideas": "[]",
-									"created": "07/09/2016"
+									"_id": idea.author[0]._id,
+									"profileImg": idea.author[0].profileImg,
+									"url": idea.author[0].url,
+									"title": idea.author[0].title,
+									"firstname": idea.author[0].firstname,
+									"email": idea.author[0].email,
+									"name": idea.author[0].name,
+									"contacs": idea.author[0].contacs,
+									"followedpersons": idea.author[0].followedpersons,
+									"followedideas": idea.author[0].followedideas,
+									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy HH:MM")
 								},
+								// "author": {
+								// 	"_id": "57cee2a7ded7832d5845549d",
+								// 	"profileImg": "asönfls.png",
+								// 	"url": "nothing",
+								// 	"title": "Dr. Prof",
+								// 	"firstname": "Nono",
+								// 	"email": "no@body.com",
+								// 	"name": "Body",
+								// 	"contacs": "[]",
+								// 	"followedpersons": "[]",
+								// 	"followedideas": "[]",
+								// 	"created": "07/09/2016"
+								// },
 								"img": idea.img,
 								"scribbles": idea.scribbles,
 								"tags": idea.tags,
