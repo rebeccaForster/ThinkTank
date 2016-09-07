@@ -55,6 +55,7 @@ router.get('/getAllIeas', function (req, res, next) {
 								"tags": idea.tags,
 								"milestones": idea.milestones,
 								"likes": idea.likes,
+								"privacyType": idea.privacyType,
 								"contributors": idea.contributors,
 								"lastchanged": dateFormat(idea.lastchanged, "MM:hh dd/mm/yyyy"),
 								"created": dateFormat(idea.created, "dd/mm/yyyy")
