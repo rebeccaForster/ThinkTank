@@ -55,8 +55,9 @@ router.get('/getAllIeas', function (req, res, next) {
 								"tags": idea.tags,
 								"milestones": idea.milestones,
 								"likes": idea.likes,
+								"privacyType": idea.privacyType,
 								"contributors": idea.contributors,
-								"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy"),
+								"lastchanged": dateFormat(idea.lastchanged, "MM:hh dd/mm/yyyy"),
 								"created": dateFormat(idea.created, "dd/mm/yyyy")
 							});
 				});
@@ -195,7 +196,7 @@ router.get('/getIdea/:id', function (req, res, next) {
 													"contributors": contributors,
 													"comments": comments,
 													"privacyType": idea.privacyType,
-													"lastchanged": dateFormat(idea.lastchanged, "dd/mm/yyyy"),
+													"lastchanged": dateFormat(idea.lastchanged, "MM:hh dd/mm/yyyy"),
 													"created": dateFormat(idea.created, "dd/mm/yyyy")
 												});
 									}
@@ -209,16 +210,128 @@ router.get('/getIdea/:id', function (req, res, next) {
 
 });
 
-router.get('/getAllIdeasSorted/:sorting', function (req, res, next) {
+//not tested 
+router.get('/getAllIdeasSorted/date', function (req, res, next) { 
     
-    var options = {
-	    "sort": req.params.sorting
-	}
-	var ideas = Idea.find( {}, options);
+	console.log("getAllIdeas Sorting Date");
+		Idea.aggregate({
+		   $lookup:
+		     {
+		       from: "users",
+		       localField: "author",
+		       foreignField: "_id",
+		       as: "author"
+		     }}, 
+		      { $sort : { created : 1} } , 
+		      function(err, ideas) {
+	// Idea.find([{}], function(err, ideas) {
 
-	res.status(200);
-	res.json(ideas);
+
+		if (err) {
+			console.log(err);
+			res.status(400);
+			res.json(err);
+		} else {
+			var ideasList = new Array;
+
+			ideas.forEach(function(idea) {
+				ideasList.push({"_id": idea._id,
+								"livetime": idea.livetime,
+								"description": idea.description,
+								"abstract": idea.abstract,
+								"title": idea.title,
+								"author": {
+									"_id": idea.author[0]._id,
+									"profileImg": idea.author[0].profileImg,
+									"url": idea.author[0].url,
+									"title": idea.author[0].title,
+									"firstname": idea.author[0].firstname,
+									"email": idea.author[0].email,
+									"name": idea.author[0].name,
+									"contacs": idea.author[0].contacs,
+									"followedpersons": idea.author[0].followedpersons,
+									"followedideas": idea.author[0].followedideas,
+									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy")
+								},
+								"img": idea.img,
+								"scribbles": idea.scribbles,
+								"tags": idea.tags,
+								"milestones": idea.milestones,
+								"likes": idea.likes,
+								"contributors": idea.contributors,
+								"lastchanged": dateFormat(idea.lastchanged, "MM:hh dd/mm/yyyy"),
+								"created": dateFormat(idea.created, "dd/mm/yyyy")
+							});
+				});
+
+			res.status(200);
+			res.json(ideasList);
+		}
+	})
 });
+
+router.get('/searchIdeas/:term', function (req, res, next) { 
+
+	
+
+	console.log("getAllIdeas Sorting Date");
+		Idea.aggregate([
+			{
+			   $lookup:
+			     {
+			       from: "users",
+			       localField: "author",
+			       foreignField: "_id",
+			       as: "author"
+			     }}, 
+			      { $match: { tags : { $in: req.params.term }} } , function(err, ideas) {
+	// Idea.find([{}], function(err, ideas) {
+
+
+		if (err) {
+			console.log(err);
+			res.status(400);
+			res.json(err);
+		} else {
+			var ideasList = new Array;
+
+			ideas.forEach(function(idea) {
+				ideasList.push({"_id": idea._id,
+								"livetime": idea.livetime,
+								"description": idea.description,
+								"abstract": idea.abstract,
+								"title": idea.title,
+								"author": {
+									"_id": idea.author[0]._id,
+									"profileImg": idea.author[0].profileImg,
+									"url": idea.author[0].url,
+									"title": idea.author[0].title,
+									"firstname": idea.author[0].firstname,
+									"email": idea.author[0].email,
+									"name": idea.author[0].name,
+									"contacs": idea.author[0].contacs,
+									"followedpersons": idea.author[0].followedpersons,
+									"followedideas": idea.author[0].followedideas,
+									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy")
+								},
+								"img": idea.img,
+								"scribbles": idea.scribbles,
+								"tags": idea.tags,
+								"milestones": idea.milestones,
+								"likes": idea.likes,
+								"contributors": idea.contributors,
+								"lastchanged": dateFormat(idea.lastchanged, "MM:hh dd/mm/yyyy"),
+								"created": dateFormat(idea.created, "dd/mm/yyyy")
+							});
+				});
+
+			res.status(200);
+			res.json(ideasList);
+		}
+	}]) 
+
+});
+
 
 
 router.post('/saveNewIdea', ideaControler.saveNewIdea);

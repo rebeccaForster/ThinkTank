@@ -184,11 +184,11 @@ module.exports.updateIdea = function(req, res) {
 				} 
 				
 				// TODO: Disabled untill form passes objectIDs of users
-				// if(req.body.idea.contributors) {
-				// 	idea.contributors = req.body.idea.contributors;
-				// } else {
-				// 	idea.contributors = [];
-				// }
+				if(req.body.idea.contributors) {
+					idea.contributors = req.body.idea.contributors;
+				} else {
+					idea.contributors = [];
+				}
 
 				if(req.body.idea.milestones) {
 					idea.milestones = req.body.idea.milestones;
@@ -217,6 +217,7 @@ module.exports.updateIdea = function(req, res) {
 					"scribble": idea.scribble,
 					"tags": idea.tags,
 					"milestones": idea.milestones,
+					"privacyType": idea.privacyType,
 					"contributors": idea.contributors,
 					"lastchanged": Date.now()
 				}, function(err, room) {
@@ -266,7 +267,7 @@ module.exports.updateIdea = function(req, res) {
 module.exports.followIdea = function(req, res) {
 	//we need: ideaId, userId
 
-	if(!req.body.user.id || !req.body.ideaId) {
+	if(!req.body.user._id || !req.body.ideaId) {
 	    console.log("was not saved because of incomplete data");
 	    sendJSONresponse(res, 400, {
 	      "message": "user and ideaId required"
@@ -276,7 +277,7 @@ module.exports.followIdea = function(req, res) {
 
 
 
-	  Users.update({ _id: req.body.user.id },
+	  Users.update({ _id: req.body.user._id },
 		   { $push: { followedideas: req.body.ideaId } }, function(err, room) {
 
 		if (err) {
@@ -286,8 +287,7 @@ module.exports.followIdea = function(req, res) {
 			  id : err
 			});
 		} else {
-			console.log("followed: ");
-			console.log(room._id);
+			console.log("followed");
 
 			res.status(200);
 			res.json({
@@ -301,7 +301,7 @@ module.exports.followIdea = function(req, res) {
 module.exports.likeIdea = function(req, res) {
 	//we need: ideaId, userId
 
-		if(!req.body.user.id || !req.body.ideaId) {
+		if(!req.body.user._id || !req.body.ideaId) {
 	    console.log("was not saved because of incomplete data");
 	    sendJSONresponse(res, 400, {
 	      "message": "user and ideaId required"
@@ -312,7 +312,7 @@ module.exports.likeIdea = function(req, res) {
 
 
 	  Idea.update({ _id: req.body.ideaId },
-		   { $push: { likes: req.body.user.id } }, function(err, room) {
+		   { $push: { likes: req.body.user._id } }, function(err, room) {
 
 		if (err) {
 			console.log("error: ");
@@ -336,7 +336,7 @@ module.exports.likeIdea = function(req, res) {
 module.exports.unFollowIdea = function(req, res) {
 	//we need: ideaId, userId
 
-	if(!req.body.user.id || !req.body.ideaId) {
+	if(!req.body.user._id || !req.body.ideaId) {
 	    console.log("was not saved because of incomplete data");
 	    sendJSONresponse(res, 400, {
 	      "message": "user and ideaId required"
@@ -346,7 +346,7 @@ module.exports.unFollowIdea = function(req, res) {
 
 
 
-	  Users.update({ _id: req.body.user.id },
+	  Users.update({ _id: req.body.user._id },
 		   { $pull: { followedideas: req.body.ideaId } }, function(err, room) {
 
 		if (err) {
@@ -356,8 +356,7 @@ module.exports.unFollowIdea = function(req, res) {
 			  id : err
 			});
 		} else {
-			console.log("followed: ");
-			console.log(room._id);
+			console.log("unfollowed: ");
 
 			res.status(200);
 			res.json({
@@ -371,7 +370,7 @@ module.exports.unFollowIdea = function(req, res) {
 module.exports.dislikeIdea = function(req, res) {
 	//we need: ideaId, userId
 
-		if(!req.body.user.id || !req.body.ideaId) {
+		if(!req.body.user._id || !req.body.ideaId) {
 	    console.log("was not saved because of incomplete data");
 	    sendJSONresponse(res, 400, {
 	      "message": "user and ideaId required"
@@ -382,7 +381,7 @@ module.exports.dislikeIdea = function(req, res) {
 
 
 	  Idea.update({ _id: req.body.ideaId },
-		   { $pull: { likes: req.body.user.id } }, function(err, room) {
+		   { $pull: { likes: req.body.user._id } }, function(err, room) {
 
 		if (err) {
 			console.log("error: ");
