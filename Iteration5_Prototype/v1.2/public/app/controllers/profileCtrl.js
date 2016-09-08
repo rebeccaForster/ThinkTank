@@ -34,6 +34,21 @@ $scope.getProfileInfo = $scope.user;
                     updateProfileData();
                 });
     }
+      $scope.addNewHastag = function () {
+
+        var dummyNewHashtag = {
+            name: $scope.addHashtag,
+            priority: 0 // 0 ist default wert, wenn er neu initalisiert wird
+        }
+        $scope.hashtags.push(dummyNewHashtag);
+
+        $scope.setSelectedHashtags($scope.addHashtag, false);
+        $scope.addHashtag = '';
+
+        $scope.hashtagForm.$setPristine();
+        $scope.hashtagForm.$setUntouched();
+
+    }
 
     $scope.updateDescription = function (ev) {
         $mdDialog.show({

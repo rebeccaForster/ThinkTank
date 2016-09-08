@@ -1,7 +1,7 @@
 'use strict';
 // navigationCtrl.$inject = ['$location','authentication'];
 
-app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, profileService, ideaService, $mdDialog, $location, $mdMedia) {
+app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, profileService, ideaService, $mdDialog, $location, $mdMedia,dashService) {
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
     };
@@ -160,7 +160,11 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             $scope.getSignInUser(user.id);
         } else {
             $scope.menu = $scope.menuNonAuth;
-            $scope.user = '';
+            $scope.user = {
+                name: 'TUM',
+                firstname: 'lfe',
+                profileImg: 'app/img/lfe.jpg'
+            };
         }
 
 
@@ -175,7 +179,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             });
     }
     $scope.getFollowPerson = function (followPersonId) {
-        if ($scope.user) {
+        if (!$scope.isLoggedIn && ( $scope.user.followedpersons != null)) {
 
             var i = 0;
             while (i < $scope.user.followedpersons.length) {
@@ -222,7 +226,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     }
 
     $scope.getFollowIdea = function (followIdeaId) {
-        if ($scope.user) {
+        if (!$scope.isLoggedIn  && ( $scope.user.followedideas != null)) {
             var i = 0;
             while (i < $scope.user.followedideas.length) {
                 if ($scope.user.followedideas[i]._id == followIdeaId) {
@@ -267,7 +271,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         }
     }
     $scope.isUserContributor = function (ideaId) {
-        if ($scope.user) {
+        if (!$scope.isLoggedIn  && ( $scope.user.ownIdeas != null)) {
 
             var i = 0;
             while (i < $scope.user.ownIdeas.length) {
@@ -307,6 +311,60 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
 
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    angular.element(document).ready(function(){
+    angular.element(window).on('touchmove',function(e){e.preventDefault();});
+});
+    
+    
+    
+    
+     $scope.ideaList = [];
+
+        // loads all ideas from the server and save it in a variable.
+        // this variable will be loaded in the html  
+
+        $scope.updateIdeaList = function() {
+            dashService
+                .loadAllIdeas()
+                .then(function (res) {
+                    $scope.ideaList = res;
+                    console.log('idaelist', $scope.ideaList);
+
+                });
+        }
+        $scope.updateIdeaList();
+        $scope.updateDashboard = function () {
+            // ToDo: es wurden neue Tags hinzugefügt bzw. entfernt und hier müsstest du mithilfe der Tags & des auswählten Sorting die Liste erneuern
+            // $scope.sortingType gibt den Namen der Sortierung zurück
+            // $scope.selectedHashtags  gibt alle Tags IDs an, nach denen man suchen soll
+            ideaService
+                .searchIdeas($scope.selectedHashtags)
+                .success(function (data) {
+                if(data.length != 0)
+                {
+                                                $scope.ideaList = data;
+
+                    console.log('idaelist', $scope.ideaList);
+                }
+                else{
+                   $scope.updateIdeaList();
+                }
+            });
+        }
+    
+    
+    
+    
+    
+    
     $scope.logout = function () {
         authentication.logout();
         $scope.setSignInStatus();
@@ -473,20 +531,20 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             .getIdea(id)
             .then(function (res) {
 
-                    $scope.getIdeaInfo = res;
-                    var i = 0;
-                    while (i < $scope.getIdeaInfo.comments.length) {
+                $scope.getIdeaInfo = res;
+                var i = 0;
+                while (i < $scope.getIdeaInfo.comments.length) {
 
-                        profileService
-                            .getUser($scope.getIdeaInfo.comments[i].author)
-                            .then(function (res) {
+                    profileService
+                        .getUser($scope.getIdeaInfo.comments[i].author)
+                        .then(function (res) {
 
-                                $scope.commentAuthor.push(res);
-                            });
-                        i++;
-                    }
-                    });
-            
+                            $scope.commentAuthor.push(res);
+                        });
+                    i++;
+                }
+            });
+
     }
 
     /*

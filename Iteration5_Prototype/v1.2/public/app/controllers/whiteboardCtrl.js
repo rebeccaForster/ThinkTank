@@ -11,6 +11,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             }
         } else {
             $scope.updateIdea();
+
         }
 
     };
@@ -66,7 +67,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.contributors = [];
     $scope.contributorsId = [];
     $scope.contributorsList = [];
-    
+
 
     $scope.setSelectedContributors = function (name, id, status) {
         if (!status) {
@@ -93,7 +94,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.ideaLifeTime = 30; //Angabe in Tagen, der Server speichert automatisch 30 falls nichts angegeben ist
     $scope.ideaDayLeft = 0;
     $scope.lastchanged = '';
-    
+
     //     .loadAllMilestones()
     //     .then(function (res) {
     //         $scope.milestoneList = res;
@@ -125,11 +126,12 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.webStorage = 'session';
     $scope.drawingMode = 'draw';
     $scope.drawColor = '#222';
-    $scope.lineWidth = 4;
+    $scope.lineWidth = 2;
     $scope.backgroundColor = '#EEE';
+    var isEraser = false;
     // todo anpassen der höhe an die größen der einzelnen verwendeten Klassen
     $scope.canvasWidth = $window.innerWidth - 90 - 100;
-    $scope.canvasHeight = $window.innerHeight - 90 - 74;
+    $scope.canvasHeight = $window.innerHeight - 100 - 74;
     $scope.setDrawingMode = function (mode) {
         $scope.drawingboardRemote.setDrawingMode(mode);
     }
@@ -215,6 +217,12 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 {
                     icon: 'my-icon-pen',
                     click: function () {
+                        if (isEraser) {
+                            $scope.setDrawColor('black');
+                            $scope.setLineWidth(2);
+                            isEraser = false;
+                        }
+                        
                         $scope.setDrawingMode('draw');
                     }
                 },
@@ -226,7 +234,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                         {
                             icon: 'my-icon-strichstärke-duenn',
                             click: function () {
-                                $scope.setLineWidth(4);
+                                $scope.setLineWidth(2);
                             }
                                     }, {
                             icon: 'my-icon-strichstärke-mittel',
@@ -280,11 +288,17 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                             click: function () {
                                 $scope.setDrawColor('white');
                             }
-                                                        }
-                                                            ]
+                                    },
+                        {
+                            icon: 'circle-icon green',
+                            click: function () {
+                                $scope.setDrawColor('green');
+                            }
+                                        }
+                                        ]
 
 
-                                                    },
+                                },
                 {
                     icon: 'my-icon-fill',
 
@@ -293,13 +307,15 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                     }
 
 
-                                                    },
+                                },
                 {
                     icon: 'my-icon-eraser',
                     click: function () {
+                        $scope.setLineWidth(50);
                         $scope.setDrawingMode('eraser');
+                        isEraser = true;
                     }
-                },
+                                },
 
 
                 {
@@ -308,7 +324,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                         console.log('Function keyboard_voice');
                     },
                     disabled: true
-                            },
+                                },
                 {
                     icon: 'my-icon-video',
                     click: function () {
@@ -345,7 +361,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.setLineWidth = function (size) {
         $scope.drawingboardRemote.setLineWidth(size);
     }
-    
+
     $scope.addHashtag = '';
     $scope.addNewHastag = function () {
 
@@ -363,7 +379,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
     }
     $scope.addHashtags = function (ev) {
-       
+
         $mdDialog.show({
                 controller: HashtagPopupController,
                 templateUrl: 'app/views/hashtag-popup.html',
@@ -395,7 +411,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.$watch('title', function (newVal, oldVal) {
         if (newVal == '') {
             var now = new Date();
-            $scope.title = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + ' ' + now.getHours() + ':' + now.getMinutes();
+            $scope.titlePlaceholder = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + ' ' + now.getHours() + ':' + now.getMinutes();
         }
     });
 
@@ -469,7 +485,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
 
     $scope.ideaId = $stateParams.ideaId;
-
+    $scope.title = '';
     angular.element(document).ready(function () {
         //Todo diese Funktion muss alle Privacy, desciption, milesotnes, hashtags, contirbutors, whiteboard image Daten laden, 
         //Sie wird aufgerufen, wenn man auf dem Popup Idea aufs whiteboard klickt 
@@ -480,7 +496,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             $scope.clear();
             $scope.clearHistory();
             var now = new Date();
-            $scope.title = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + ' ' + now.getHours() + ':' + now.getMinutes();
+
+            $scope.titlePlaceholder = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + ' ' + now.getHours() + ':' + now.getMinutes();
             $scope.author = $scope.user;
         } else {
             loadIdea($scope.ideaId);
@@ -501,8 +518,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
                     i++;
                 }
-                while(i < res.tags.length){
-                    if( !$scope.hashtagSelected(res.tags[i])){
+                while (i < res.tags.length) {
+                    if (!$scope.hashtagSelected(res.tags[i])) {
                         $scope.setSelectedHashtags(res.tags[i], false);
                     }
                     i++;
@@ -517,6 +534,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 $scope.lastchanged = res.lastchanged;
 
             });
+        $scope.getSignInUser($scope.user._id);
+
     }
     $scope.updateIdea = function () {
         var i = 0;
@@ -530,10 +549,14 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         console.log("update idea");
 
         var user = authentication.currentUser();
+        if ($scope.title = '') {
+            $scope.title = $scope.titlePlaceholder;
+        }
         var idea = {
             _id: $scope.ideaId,
 
             title: $scope.title,
+
             description: $scope.desciption,
             contributors: $scope.contributorsId,
             milestones: $scope.milestones,
@@ -548,7 +571,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             .success(function (retData) {
                 loadIdea($scope.ideaId);
                 $mdToast.show($mdToast.simple().textContent('Save idea: ' + $scope.lastchanged).hideDelay(4000));
-
             });
 
     }
@@ -657,8 +679,8 @@ function DescriptionPopupController($scope, $mdDialog) {
 }
 
 
-function ContrPopupController($scope, $mdDialog,profileService) {
-profileService
+function ContrPopupController($scope, $mdDialog, profileService) {
+    profileService
         .loadAllUsers()
         .then(function (res) {
 
@@ -674,7 +696,7 @@ profileService
 }
 
 function MilestonesPopupController($scope, $mdDialog, dataService) {
-dataService
+    dataService
         .loadAllMilestones()
         .then(function (res) {
             $scope.milestoneList = res;

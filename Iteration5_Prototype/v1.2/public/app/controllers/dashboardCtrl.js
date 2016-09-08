@@ -4,35 +4,9 @@ angular
     // the controller is used on the dashboard and profile site the reason ist that the functionaity is the same only the font design is differnt
     .controller('DashboardCtrl', function ($scope, dashService, indexData, $location, $mdDialog, $mdMedia, $timeout, ideaService) {
 
-        $scope.ideaList = [];
+       
 
-        // loads all ideas from the server and save it in a variable.
-        // this variable will be loaded in the html  
-
-        function updateIdeaList() {
-            dashService
-                .loadAllIdeas()
-                .then(function (res) {
-                    console.log(res);
-                    $scope.ideaList = res;
-                });
-        }
-        updateIdeaList();
-        $scope.updateDashboard = function () {
-            // ToDo: es wurden neue Tags hinzugefügt bzw. entfernt und hier müsstest du mithilfe der Tags & des auswählten Sorting die Liste erneuern
-            // $scope.sortingType gibt den Namen der Sortierung zurück
-            // $scope.selectedHashtags  gibt alle Tags IDs an, nach denen man suchen soll
-            ideaService 
-                .searchIdeas($scope.selectedHashtags)
-                .success(function (data) {
-                    updateIdeaList();
-
-
-                });
-
-
-        }
-
+        
 
 
         /* function: open an dialog with all hashtags and selected hashtags
@@ -61,25 +35,6 @@ angular
         // number of columns of the dashboard site for md-cards
         $scope.maxColumn = 3;
 
-
-
-
-
-
-
-
-
-        $scope.addSearchTag = function (indexIdea, IndexTag, ev) {
-            $mdDialog.show(
-                $mdDialog.alert()
-                .clickOutsideToClose(true)
-                .title('Add Hashtag')
-                .textContent('Index Idea: ' + indexIdea + '  Index Tag: ' + IndexTag)
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Got it!')
-                .targetEvent(ev)
-            );
-        }
 
 
 
