@@ -28,10 +28,10 @@
                 </round-progress>
             </div>
         </div>
-        <div layout="row" class="margin-top-15" style="margin-bottom:135px;" >
+        <div layout="row" class="margin-top-15 margin-right-20" style="margin-bottom:135px;" >
             <div flex></div>
-            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-if="getFollowPerson(getProfileInfo._id)" ng-hide="(user._id == getProfileInfo._id)" ng-click="setFollowPerson(getProfileInfo._id,true)">unfollow person</md-button>
-            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-if="!getFollowPerson(getProfileInfo._id);" ng-hide="user._id == getProfileInfo._id" ng-click="setFollowPerson(getProfileInfo._id,false)">follow person</md-button>
+            <md-button class="md-accent  font-weight-bold font-size-34" ng-if="getFollowPerson(getProfileInfo._id)" ng-hide="(user._id == getProfileInfo._id)" ng-click="setFollowPerson(getProfileInfo._id,true)">unfollow person</md-button>
+            <md-button class="md-accent font-weight-bold font-size-34" ng-if="!getFollowPerson(getProfileInfo._id);" ng-hide="user._id == getProfileInfo._id" ng-click="setFollowPerson(getProfileInfo._id,false)">follow person</md-button>
         </div>
 
         <md-dialog-content layout="row" ng-include="'app/views/profile-content.html'" class="padding-right-40 padding-left-40 padding-bottom-40">

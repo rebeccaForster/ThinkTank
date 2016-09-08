@@ -6,10 +6,10 @@
                     <span class="md-headline">Milestones:</span>
 
                     <md-button class="md-raised md-accent" ng-repeat="milestone in milestones" style="font-size:24px; margin-bottom:5px;">
-                        <md-checkbox ng-checked="milestone.percentage" ng-click="changeMilestoneStatus($index)" class="md-primary" aria-label="milestone.name">
+                        <md-checkbox  style="margin-bottom:0px !important; margin-right:5px !important;"ng-checked="milestone.percentage" ng-click="changeMilestoneStatus($index)" class="md-primary" aria-label="milestone.name">
                             {{milestone.name}}
                         </md-checkbox>
-                        <ng-md-icon icon="close" ng-click="setSelectedMilestones(milestones.name, true, milestones.extratime, milestones.icon);"></ng-md-icon>
+                        <ng-md-icon icon="close" size="30" ng-click="setSelectedMilestones(milestones.name, true, milestones.extratime, milestones.icon);" ></ng-md-icon>
                     </md-button>
             </div>
             <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
@@ -23,7 +23,7 @@
                 </div>
                 <div layout="column" flex>
                     <div layout="row">
-                        <md-input-container class="md-block " flex>
+                        <md-input-container class="md-block  margin-top-25" flex>
                             <label>Is your milestone not in the list? Here can you add a new milestone!</label>
                             <input name="newMilestone" ng-model="addMilestone" validate-new-milestone required />
 

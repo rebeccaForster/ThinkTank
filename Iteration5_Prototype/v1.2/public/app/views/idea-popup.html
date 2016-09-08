@@ -43,17 +43,17 @@
                 </round-progress>
             </div>
         </div>
-        <div layout="row" class="margin-top-15" style="margin-bottom:135px;">
+        <div layout="row" class="margin-top-15 margin-right-20" style="margin-bottom:135px;">
             <div flex></div>
-            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-if="getFollowIdea(getIdeaInfo._id)" ng-hide="isUserContributor(getIdeaInfo._id) " ng-click="setFollowIdea(getIdeaInfo._id,true)">unfollow idea</md-button>
-            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-if="!isUserContributor(getIdeaInfo._id)" ng-hide="getFollowIdea(getIdeaInfo._id)" ng-click="setFollowIdea(getIdeaInfo._id,false)">Follow idea</md-button>
-            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-show="isUserContributor(getIdeaInfo._id)" ng-click="goWhiteboard(getIdeaInfo._id)">Edit idea</md-button>
+            <md-button class="md-accent  font-weight-bold font-size-34" ng-if="getFollowIdea(getIdeaInfo._id)" ng-hide="isUserContributor(getIdeaInfo._id) " ng-click="setFollowIdea(getIdeaInfo._id,true)">unfollow idea</md-button>
+            <md-button class="md-accent  font-weight-bold font-size-34" ng-if="!isUserContributor(getIdeaInfo._id)" ng-hide="getFollowIdea(getIdeaInfo._id)" ng-click="setFollowIdea(getIdeaInfo._id,false)">Follow idea</md-button>
+            <md-button class="md-accent  font-weight-bold font-size-34" ng-show="isUserContributor(getIdeaInfo._id)" ng-click="goWhiteboard(getIdeaInfo._id)">Edit idea</md-button>
 
         </div>
 
         <md-dialog-content layout="row" class="padding-right-40 padding-left-40 padding-bottom-40">
             <!-- todo divider -->
-            <div flex=50 layout="column" class="padding-left-40">
+            <div flex=50 layout="column" class="padding-left-40 padding-right-20">
 
                 <div>
                     <div class="idea-block">
@@ -121,7 +121,7 @@
                     </div>
                 </div>
             </div>
-            <div flex=50 layout="column" class="padding-right-40">
+            <div flex=50 layout="column" class="padding-right-40 padding-left-20">
                 <div class="idea-block">
                     <div class="margin-bottom-15">
                         <div class="md-headline " style="font-weight:bold;">
@@ -176,14 +176,15 @@
                     </div>
                     <md-content class="background-color-white">
                         <md-list style=" max-height:400px;overflow-y:visible">
-                            <md-list-item ng-repeat="message in getIdeaInfo.comments | orderBy:'created':true" style="margin-bottom:15px; heiht:auto;">
+                            <md-list-item ng-repeat="message in getIdeaInfo.comments " style="margin-bottom:15px; heiht:auto;">
+                                <!--<md-list-item ng-repeat="message in getIdeaInfo.comments | orderBy:'created':true" style="margin-bottom:15px; heiht:auto;"> -->
 
                                 <div class="md-list-item-text margin-bottom-15 width-100-prozent">
                                     <!-- ToDO: header mittig machen den namen und zu bild-->
                                     <div layout="row" layout-align="start end">
 
-                                        <img ng-src={{commentAuthor[$index].profileImg}} class="md-avatar" alt="{{commentAuthor[$index].name}}" ng-click="showProfile(commentAuthor[$index]._id, $event)">
-                                        <div class="md-headline">{{commentAuthor[$index].firstname}} {{commentAuthor[$index].name}},
+                                        <img ng-src={{commentAuthor[$index].profileImg}} class="md-avatar" alt="{{commentAuthor[($index)].name}}" ng-click="showProfile(commentAuthor[($index)]._id, $event)">
+                                        <div class="md-headline">{{commentAuthor[($index)].firstname}} {{commentAuthor[($index)].name}},
                                         </div>
                                         <div class="md-subhead">{{message.created}}</div>
                                         <div flex></div>

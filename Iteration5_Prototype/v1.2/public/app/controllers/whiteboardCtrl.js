@@ -240,12 +240,12 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                                     }, {
                             icon: 'my-icon-strichstärke-mittel',
                             click: function () {
-                                $scope.setLineWidth(6);
+                                $scope.setLineWidth(10);
                             }
                                     }, {
                             icon: 'my-icon-strichstärke-dick',
                             click: function () {
-                                $scope.setLineWidth(10);
+                                $scope.setLineWidth(15);
                             }
                                     }
                                 ]
@@ -256,38 +256,19 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
                     menus: [
                         {
-                            icon: 'circle-icon red',
+                            icon: 'circle-icon white',
                             click: function () {
-                                $scope.setDrawColor('red');
+                                $scope.setDrawColor('white');
                             }
-                                    }, {
+                                        },{
                             icon: 'circle-icon black',
                             click: function () {
                                 $scope.setDrawColor('black');
                             }
-                                    },
-                        {
+                                    }, {
                             icon: 'circle-icon blue',
                             click: function () {
                                 $scope.setDrawColor('blue');
-                            }
-                                            },
-                        {
-                            icon: 'circle-icon orange',
-                            click: function () {
-                                $scope.setDrawColor('orange');
-                            }
-                                                },
-                        {
-                            icon: 'circle-icon yellow',
-                            click: function () {
-                                $scope.setDrawColor('yellow');
-                            }
-                                                    },
-                        {
-                            icon: 'circle-icon white',
-                            click: function () {
-                                $scope.setDrawColor('white');
                             }
                                     },
                         {
@@ -295,7 +276,25 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                             click: function () {
                                 $scope.setDrawColor('green');
                             }
-                                        }
+                                            },
+                        {
+                            icon: 'circle-icon yellow  ',
+                            click: function () {
+                                $scope.setDrawColor('yellow');
+                            }
+                                                },
+                        {
+                            icon: 'circle-icon orange',
+                            click: function () {
+                                $scope.setDrawColor('orange');
+                            }
+                                                    },
+                        {
+                            icon: 'circle-icon red',
+                            click: function () {
+                                $scope.setDrawColor('red');
+                            }
+                                    }
                                         ]
 
 
