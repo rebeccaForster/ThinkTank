@@ -216,3 +216,40 @@ module.exports.unFollowUser = function(req, res) {
 		
 	});
 };
+
+
+module.exports.getUserV2 = function(req, res) {
+
+
+	console.log("getUser V2 triggerd");
+	if (!req.params.id || typeof req.params.id != typeof "String" ) {
+		res.status(400);
+		res.json("id not valid");
+	    sendJSONresponse(res, 400, {
+	      "message": "id not valid"
+	    });
+	    return;
+	}
+
+
+	var ideasList = new Array;
+
+	User.findOne({ _id: req.params.id }).then(function(ideas){
+		ideasList = ideas;
+	}).then(function(ideas){
+		res.status(200);
+		res.json(ideasList);
+	});
+
+	DBModel.get('posts').then(function (posts) {
+	    return Promise.all(
+	        posts.map(function (post) {
+	            return DBModel.get('authorID', post).
+	        })
+	    )
+	}).then(function (alle posts mit author) {
+	    
+	}).then(function (data) {
+	    res.send(data);
+	})
+};
