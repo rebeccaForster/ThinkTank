@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 // navigationCtrl.$inject = ['$location','authentication'];
 
 app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, profileService, ideaService, $mdDialog, $location, $mdMedia,dashService) {
@@ -149,7 +149,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     }
     $scope.menu = $scope.menuNonAuth;
 
-    $scope.isLoggedIn = !authentication.isLoggedIn();
+    $scope.isLoggedIn = !authentication.isLoggefdIn();
     $scope.user = '';
 
     $scope.setSignInStatus = function () {
@@ -319,9 +319,6 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     
     
     
-    angular.element(document).ready(function(){
-    angular.element(window).on('touchmove',function(e){e.preventDefault();});
-});
     
     
     
