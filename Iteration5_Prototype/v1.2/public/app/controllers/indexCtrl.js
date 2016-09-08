@@ -330,7 +330,6 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             .loadAllIdeas()
             .then(function (res) {
                 $scope.ideaList = res;
-                console.log('idaelist', $scope.ideaList);
 
             });
     }
@@ -345,7 +344,6 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
                 if (data.length != 0) {
                     $scope.ideaList = data;
 
-                    console.log('idaelist', $scope.ideaList);
                 } else {
                     $scope.updateIdeaList();
                 }
