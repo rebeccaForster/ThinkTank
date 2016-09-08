@@ -7,7 +7,7 @@
 
             <div layout-padding style="position: absolute; top: 0px; left:0px; width:100%;">
                 <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; left:5px; top:5px; ">
-                    <ng-md-icon icon="arrow_back" aria-label="back" size="64" ng-show="funqueue.length" ng-click="back()"></ng-md-icon>
+                    <ng-md-icon icon="arrow_back" aria-label="back" size="50" ng-show="funqueue.length" ng-click="back()"></ng-md-icon>
                 </md-button>
                 <div style="margin-right:80px; margin-left:80px; ">
                     <div>
@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
-                    <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
+                    <ng-md-icon icon="close" size="50" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
                 </md-button>
 
             </div>
@@ -45,7 +45,7 @@
         </div>
         <div layout="row" class="margin-top-15" style="margin-bottom:135px;">
             <div flex></div>
-            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-if="getFollowIdea(getIdeaInfo._id)" ng-hide="isUserContributor(getIdeaInfo._id) " ng-click="setFollowIdea(getIdeaInfo._id,true)">Follow not idea</md-button>
+            <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-if="getFollowIdea(getIdeaInfo._id)" ng-hide="isUserContributor(getIdeaInfo._id) " ng-click="setFollowIdea(getIdeaInfo._id,true)">unfollow idea</md-button>
             <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-if="!isUserContributor(getIdeaInfo._id)" ng-hide="getFollowIdea(getIdeaInfo._id)" ng-click="setFollowIdea(getIdeaInfo._id,false)">Follow idea</md-button>
             <md-button class="md-accent margin-right-20 font-weight-bold font-size-34" ng-show="isUserContributor(getIdeaInfo._id)" ng-click="goWhiteboard(getIdeaInfo._id)">Edit idea</md-button>
 

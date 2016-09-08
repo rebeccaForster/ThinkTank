@@ -4,13 +4,13 @@
 
 
             <div style="margin-right:80px; margin-left:10px;  ">
-                <span class="md-display-3">Tags:</span>
+                <span class="md-headline">Tags:</span>
                 <md-button class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setSelectedHashtags(selectedHashtag, true);" style="font-size:24px; margin-bottom:5px;">#{{selectedHashtag}}
                     <ng-md-icon icon="close"></ng-md-icon>
                 </md-button>
             </div>
             <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
-                <ng-md-icon icon="close" size="64" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
+                <ng-md-icon icon="close" size="40" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
             </md-button>
         </md-toolbar>
         <md-dialog-content class="content">
@@ -20,7 +20,7 @@
                 </div>
                 <div layout="column" flex>
                     <div ng-show="isWhiteboard() || isProfile()" layout="row">
-                        <md-input-container class="md-block" flex>
+                        <md-input-container class="md-block  margin-top-25"  flex>
                             <label>Is your hashtag not in the list? Here can you add a new hashtag!</label>
                             <input name="newHashtag" ng-model="addHashtag" validate-new-hastag required />
 
