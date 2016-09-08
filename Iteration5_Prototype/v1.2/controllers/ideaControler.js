@@ -45,7 +45,8 @@ module.exports.saveNewIdea = function(req, res) {
   }
 
   	if(req.body.idea.img) {
-  		idea.img = scribblePath;
+    idea.img = req.body.idea.img;
+
 	} else {
 	  idea.img = "";
 	}

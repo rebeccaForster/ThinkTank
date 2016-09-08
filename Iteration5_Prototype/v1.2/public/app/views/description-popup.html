@@ -17,7 +17,7 @@
             <div class="md-dialog-content">
                 <md-input-container class="md-block" flex style="margin-top:25px;">
                     <label>Title</label>
-                    <input name="title" ng-model="title" type="text" md-maxlength="50" placeholder='{{titlePlaceholder}}'/>
+                    <input name="title" ng-model="title" type="text" md-maxlength="50" placeholder='{{titlePlaceholder}}' />
                     <div ng-messages="descriptionForm.title.$error" ng-show="descriptionForm.title.$dirty">
                         <div ng-message="md-maxlength">That's too long!</div>
                     </div>
@@ -26,6 +26,10 @@
                 <div>Status of the idea: {{ideaDayLeft}} / {{ideaLifeTime}} days</div>
 
                 <div>
+                    <md-input-container class="md-block">
+                        <label>Path to your Main Picture</label>
+                        <input name="img" ng-model="img" />
+                    </md-input-container>
                     <md-input-container class="md-block margin-top-25">
                         <label>Description</label>
                         <textarea name="description" type="text" ng-model="desciption" placeholder="Here can you add your desciption of the idea." </textarea>
@@ -35,6 +39,6 @@
             </div>
         </md-dialog-content>
 
-       
+
     </form>
 </md-dialog>
