@@ -25,13 +25,9 @@ angular
             ideaService
                 .searchIdeas($scope.selectedHashtags)
                 .success(function (data) {
-                    dashService
-                        .loadAllIdeas()
-                        .then(function (res) {
-                            console.log(res);
-                            $scope.ideaList = res;
-                        });
-
+                
+                   $scope.ideaList = data;
+                    
                 });
 
 
