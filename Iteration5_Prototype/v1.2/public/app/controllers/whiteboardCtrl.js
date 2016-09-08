@@ -11,6 +11,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             }
         } else {
             $scope.updateIdea();
+            
         }
 
     };
@@ -517,6 +518,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 $scope.lastchanged = res.lastchanged;
 
             });
+                        $scope.getSignInUser($scope.user._id);
+
     }
     $scope.updateIdea = function () {
         var i = 0;
@@ -548,7 +551,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             .success(function (retData) {
                 loadIdea($scope.ideaId);
                 $mdToast.show($mdToast.simple().textContent('Save idea: ' + $scope.lastchanged).hideDelay(4000));
-
             });
 
     }
