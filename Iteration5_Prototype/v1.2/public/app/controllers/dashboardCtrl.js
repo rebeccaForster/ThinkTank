@@ -6,7 +6,7 @@ angular
 
        
 
-        
+         $scope.updateIdeaList();
 
 
         /* function: open an dialog with all hashtags and selected hashtags

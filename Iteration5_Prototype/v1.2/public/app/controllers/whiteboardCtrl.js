@@ -549,7 +549,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         console.log("update idea");
 
         var user = authentication.currentUser();
-        if ($scope.title = '') {
+        if ($scope.title == '') {
             $scope.title = $scope.titlePlaceholder;
         }
         var idea = {
@@ -588,7 +588,9 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             i++;
         }
         console.log("update idea");
-
+if ($scope.title == '') {
+            $scope.title = $scope.titlePlaceholder;
+        }
         var user = authentication.currentUser();
         var idea = {
             _id: $scope.ideaId,
