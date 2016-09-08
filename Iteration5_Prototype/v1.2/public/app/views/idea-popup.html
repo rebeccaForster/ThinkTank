@@ -2,7 +2,7 @@
     <form name="ideaForm">
 
         <md-toolbar class="toolbar-settings   md-primary md-hue-2">
-            
+
             <img class="header-picture toolbar-settings " src={{getIdeaInfo.img}} />
 
             <div layout-padding style="position: absolute; top: 0px; left:0px; width:100%;">
@@ -148,7 +148,7 @@
                         <div layout="column" flex layout-align="center center" ng-class="{'item-select' : saveComment.otherreaction}" ng-click="setOtherComment();">
                             <div style="margin-left:23px;">{{reactionCountOtherReaction()}}</div>
                             <ng-md-icon icon="more_horiz" size="40"></ng-md-icon>
-                            <div class="md-subhead">other comments</div>
+                            <div class="md-subhead">other input</div>
                         </div>
                     </div>
                     <div ng-show="saveComment.otherreaction || saveComment.troubleStatus || saveComment.newInputStatus || saveComment.likeIdeaStatus">
@@ -176,15 +176,13 @@
                     </div>
                     <md-content class="background-color-white">
                         <md-list style=" max-height:400px;overflow-y:visible">
-                            <md-list-item ng-repeat="message in getIdeaInfo.comments " style="margin-bottom:15px; heiht:auto;">
-                                <!--<md-list-item ng-repeat="message in getIdeaInfo.comments | orderBy:'created':true" style="margin-bottom:15px; heiht:auto;"> -->
+                            <md-list-item ng-repeat="message in getIdeaInfo.comments | orderBy:'created':true"  style="margin-bottom:15px; heiht:auto;">
 
-                                <div class="md-list-item-text margin-bottom-15 width-100-prozent">
+                                <div class="md-list-item-text margin-bottom-15 width-100-prozent" >
                                     <!-- ToDO: header mittig machen den namen und zu bild-->
                                     <div layout="row" layout-align="start end">
-
-                                        <img ng-src={{commentAuthor[$index].profileImg}} class="md-avatar" alt="{{commentAuthor[($index)].name}}" ng-click="showProfile(commentAuthor[($index)]._id, $event)">
-                                        <div class="md-headline">{{commentAuthor[($index)].firstname}} {{commentAuthor[($index)].name}},
+                                        <img ng-src={{commentAuthor[getIdeaInfo.comments.indexOf(message)].profileImg}} class="md-avatar" alt="{{commentAuthor[getIdeaInfo.comments.indexOf(message)].name}}" ng-click="showProfile(commentAuthor[getIdeaInfo.comments.indexOf(message)]._id, $event)">
+                                        <div class="md-headline">{{commentAuthor[getIdeaInfo.comments.indexOf(message)].firstname}} {{commentAuthor[getIdeaInfo.comments.indexOf(message)].name}},
                                         </div>
                                         <div class="md-subhead">{{message.created}}</div>
                                         <div flex></div>

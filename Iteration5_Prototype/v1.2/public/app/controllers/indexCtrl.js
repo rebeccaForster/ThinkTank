@@ -1,7 +1,7 @@
 'use strict';
 // navigationCtrl.$inject = ['$location','authentication'];
 
-app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, profileService, ideaService, $mdDialog, $location, $mdMedia,dashService) {
+app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, profileService, ideaService, $mdDialog, $location, $mdMedia, dashService) {
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
     };
@@ -179,7 +179,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             });
     }
     $scope.getFollowPerson = function (followPersonId) {
-        if (!$scope.isLoggedIn && ( $scope.user.followedpersons != null)) {
+        if (!$scope.isLoggedIn && ($scope.user.followedpersons != null)) {
 
             var i = 0;
             while (i < $scope.user.followedpersons.length) {
@@ -226,7 +226,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     }
 
     $scope.getFollowIdea = function (followIdeaId) {
-        if (!$scope.isLoggedIn  && ( $scope.user.followedideas != null)) {
+        if (!$scope.isLoggedIn && ($scope.user.followedideas != null)) {
             var i = 0;
             while (i < $scope.user.followedideas.length) {
                 if ($scope.user.followedideas[i]._id == followIdeaId) {
@@ -271,7 +271,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         }
     }
     $scope.isUserContributor = function (ideaId) {
-        if (!$scope.isLoggedIn  && ( $scope.user.ownIdeas != null)) {
+        if (!$scope.isLoggedIn && ($scope.user.ownIdeas != null)) {
 
             var i = 0;
             while (i < $scope.user.ownIdeas.length) {
@@ -298,7 +298,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             $scope.sorting = $scope.sortingDashboardProfile;
             $scope.sortingType = $scope.sorting[0];
 
-        } else if ($scope.menuAuth[4].path == path) {
+        } else if ($scope.menuAuth[4].path == path || $scope.menuAuth[3].path == path) {
             $scope.sorting = $scope.sortingContactsProfile;
             $scope.sortingType = $scope.sorting[0];
 
@@ -311,57 +311,52 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
 
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-     $scope.ideaList = [];
 
-        // loads all ideas from the server and save it in a variable.
-        // this variable will be loaded in the html  
 
-        $scope.updateIdeaList = function() {
-            dashService
-                .loadAllIdeas()
-                .then(function (res) {
-                    $scope.ideaList = res;
-                    console.log('idaelist', $scope.ideaList);
 
-                });
-        }
-        $scope.updateIdeaList();
-        $scope.updateDashboard = function () {
-            // ToDo: es wurden neue Tags hinzugefügt bzw. entfernt und hier müsstest du mithilfe der Tags & des auswählten Sorting die Liste erneuern
-            // $scope.sortingType gibt den Namen der Sortierung zurück
-            // $scope.selectedHashtags  gibt alle Tags IDs an, nach denen man suchen soll
-            ideaService
-                .searchIdeas($scope.selectedHashtags)
-                .success(function (data) {
-                if(data.length != 0)
-                {
-                                                $scope.ideaList = data;
+
+
+
+
+
+
+    $scope.ideaList = [];
+
+    // loads all ideas from the server and save it in a variable.
+    // this variable will be loaded in the html  
+
+    $scope.updateIdeaList = function () {
+        dashService
+            .loadAllIdeas()
+            .then(function (res) {
+                $scope.ideaList = res;
+                console.log('idaelist', $scope.ideaList);
+
+            });
+    }
+    $scope.updateIdeaList();
+    $scope.updateDashboard = function () {
+        // ToDo: es wurden neue Tags hinzugefügt bzw. entfernt und hier müsstest du mithilfe der Tags & des auswählten Sorting die Liste erneuern
+        // $scope.sortingType gibt den Namen der Sortierung zurück
+        // $scope.selectedHashtags  gibt alle Tags IDs an, nach denen man suchen soll
+        ideaService
+            .searchIdeas($scope.selectedHashtags)
+            .success(function (data) {
+                if (data.length != 0) {
+                    $scope.ideaList = data;
 
                     console.log('idaelist', $scope.ideaList);
-                }
-                else{
-                   $scope.updateIdeaList();
+                } else {
+                    $scope.updateIdeaList();
                 }
             });
-        }
-    
-    
-    
-    
-    
-    
+    }
+
+
+
+
+
+
     $scope.logout = function () {
         authentication.logout();
         $scope.setSignInStatus();
@@ -535,8 +530,13 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
                     profileService
                         .getUser($scope.getIdeaInfo.comments[i].author)
                         .then(function (res) {
-
-                            $scope.commentAuthor.push(res);
+                        var i= 0;
+                            while (i < $scope.getIdeaInfo.comments.length) {
+                                if ($scope.getIdeaInfo.comments[i].author == res._id) {
+                                    $scope.commentAuthor[i] = res;
+                                }
+                                i++;
+                            }
                         });
                     i++;
                 }

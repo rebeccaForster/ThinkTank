@@ -7,7 +7,32 @@
             </div>
         </div>
     </md-toolbar>
+ <md-toolbar>
+        <div class="md-toolbar-tools toolbar-settings-bottom" layout='row'>
 
+            <div style="margin-right:20px !important; margin-left:20px !important; " flex layout='row'>
+                <div style="border-bottom: 2px solid white;" ng-click="searchHashtag($event) " flex>
+                    <div layout="row">
+                        <div flex>
+                           
+                        </div>
+                        <md-button aria-label="Search">
+                            <ng-md-icon icon="search" size="64" class="icon-white"></ng-md-icon>
+                    </div>
+                    </md-button>
+                </div>
+
+
+                <div flex=5></div>
+                <md-input-container>
+                    <md-select ng-model="sortingType" aria-label="sorting" ng-change="changeSortingType(sortingType)">
+                        <md-option ng-value="t" data-ng-repeat="t in sorting">{{ t }}</md-option>
+                    </md-select>
+
+                </md-input-container>
+            </div>
+        </div>
+    </md-toolbar>
  </header>
 <md-button class="md-fab md-fab-bottom-right fab-style" style="position:fixed; min-height:128px !important;  min-width:128px !important;" aria-label="Email">
     <ng-md-icon icon="email" size="34"></ng-md-icon>

@@ -223,7 +223,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                             $scope.setLineWidth(2);
                             isEraser = false;
                         }
-                        
+
                         $scope.setDrawingMode('draw');
                     }
                 },
@@ -260,7 +260,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                             click: function () {
                                 $scope.setDrawColor('white');
                             }
-                                        },{
+                                        }, {
                             icon: 'circle-icon black',
                             click: function () {
                                 $scope.setDrawColor('black');
@@ -500,18 +500,18 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             $scope.titlePlaceholder = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + ' ' + now.getHours() + ':' + now.getMinutes();
             $scope.author = $scope.user;
         } else {
-            loadIdea($scope.ideaId);
+            loadIdea($scope.ideaId, 'Idea is loaded:');
         }
     });
 
-    function loadIdea(id) {
+    function loadIdea(id, info) {
         ideaService
             .getIdea(id)
             .then(function (res) {
                 console.log('ergebnis der idea object von deer gesuchten ide', res);
                 $scope.title = res.title;
                 $scope.desciption = res.description;
-            $scope.img = res.img;
+                $scope.img = res.img;
                 var i = 0;
                 while (i < res.contributors.length) {
                     $scope.contributors.push(res.contributors[i].name);
@@ -533,6 +533,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 $scope.ideaDayLeft = $scope.calculateIdeaLeftDays(res.created);
                 $scope.author = res.author;
                 $scope.lastchanged = res.lastchanged;
+                $mdToast.show($mdToast.simple().textContent(info + $scope.lastchanged).hideDelay(4000));
 
             });
         $scope.getSignInUser($scope.user._id);
@@ -571,8 +572,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         ideaService
             .updateIdea(idea, user)
             .success(function (retData) {
-                loadIdea($scope.ideaId);
-                $mdToast.show($mdToast.simple().textContent('Save idea: ' + $scope.lastchanged).hideDelay(4000));
+                loadIdea($scope.ideaId, 'Save idea: ');
             });
 
     }
@@ -590,7 +590,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             i++;
         }
         console.log("update idea");
-if ($scope.title == '') {
+        if ($scope.title == '') {
             $scope.title = $scope.titlePlaceholder;
         }
         var user = authentication.currentUser();
@@ -613,7 +613,7 @@ if ($scope.title == '') {
 
                 $scope.ideaId = res;
 
-                loadIdea($scope.ideaId);
+                loadIdea($scope.ideaId, 'Created new idea: ');
 
             });
 
