@@ -35,7 +35,7 @@ module.exports.register = function(req, res) {
   if (req.body.tags) {
     user.tags = req.body.tags;
   } else {
-    user.tags = new Array;
+    user.tags = [];
   }
 
   if (req.body.profileImg) {

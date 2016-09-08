@@ -332,19 +332,6 @@ router.post('/searchIdeas/', function (req, res, next) {
 									"followedideas": idea.author[0].followedideas,
 									"created": dateFormat(idea.author[0].created, "dd/mm/yyyy HH:MM")
 								},
-								// "author": {
-								// 	"_id": "57cee2a7ded7832d5845549d",
-								// 	"profileImg": "asönfls.png",
-								// 	"url": "nothing",
-								// 	"title": "Dr. Prof",
-								// 	"firstname": "Nono",
-								// 	"email": "no@body.com",
-								// 	"name": "Body",
-								// 	"contacs": "[]",
-								// 	"followedpersons": "[]",
-								// 	"followedideas": "[]",
-								// 	"created": "07/09/2016"
-								// },
 								"img": idea.img,
 								"scribbles": idea.scribbles,
 								"tags": idea.tags,

@@ -22,12 +22,12 @@ angular
             // ToDo: es wurden neue Tags hinzugefügt bzw. entfernt und hier müsstest du mithilfe der Tags & des auswählten Sorting die Liste erneuern
             // $scope.sortingType gibt den Namen der Sortierung zurück
             // $scope.selectedHashtags  gibt alle Tags IDs an, nach denen man suchen soll
-            ideaService 
+            ideaService
                 .searchIdeas($scope.selectedHashtags)
                 .success(function (data) {
-                    updateIdeaList();
-
-
+                
+                   $scope.ideaList = data;
+                    
                 });
 
 
@@ -61,25 +61,6 @@ angular
         // number of columns of the dashboard site for md-cards
         $scope.maxColumn = 3;
 
-
-
-
-
-
-
-
-
-        $scope.addSearchTag = function (indexIdea, IndexTag, ev) {
-            $mdDialog.show(
-                $mdDialog.alert()
-                .clickOutsideToClose(true)
-                .title('Add Hashtag')
-                .textContent('Index Idea: ' + indexIdea + '  Index Tag: ' + IndexTag)
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Got it!')
-                .targetEvent(ev)
-            );
-        }
 
 
 

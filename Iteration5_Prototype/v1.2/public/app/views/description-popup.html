@@ -17,7 +17,7 @@
             <div class="md-dialog-content">
                 <md-input-container class="md-block" flex style="margin-top:25px;">
                     <label>Title</label>
-                    <input name="title" ng-model="title" type="text" md-maxlength="50" reqired/>
+                    <input name="title" ng-model="title" type="text" md-maxlength="50" placeholder='titlePlaceholder'/>
                     <div ng-messages="descriptionForm.title.$error" ng-show="descriptionForm.title.$dirty">
                         <div ng-message="md-maxlength">That's too long!</div>
                     </div>
@@ -35,9 +35,6 @@
             </div>
         </md-dialog-content>
 
-        <md-dialog-actions layout="row">
-            <div felx></div>
-            <md-button class=" md-raised md-primary" ng-click="cancel();">Okay</md-button>
-        </md-dialog-actions>
+       
     </form>
 </md-dialog>

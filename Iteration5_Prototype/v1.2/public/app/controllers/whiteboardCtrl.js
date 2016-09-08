@@ -11,6 +11,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             }
         } else {
             $scope.updateIdea();
+            
         }
 
     };
@@ -395,7 +396,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.$watch('title', function (newVal, oldVal) {
         if (newVal == '') {
             var now = new Date();
-            $scope.title = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + ' ' + now.getHours() + ':' + now.getMinutes();
+            $scope.titlePlaceholder = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + ' ' + now.getHours() + ':' + now.getMinutes();
         }
     });
 
@@ -469,7 +470,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
 
     $scope.ideaId = $stateParams.ideaId;
-
+    $scope.title = '';
     angular.element(document).ready(function () {
         //Todo diese Funktion muss alle Privacy, desciption, milesotnes, hashtags, contirbutors, whiteboard image Daten laden, 
         //Sie wird aufgerufen, wenn man auf dem Popup Idea aufs whiteboard klickt 
@@ -480,7 +481,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             $scope.clear();
             $scope.clearHistory();
             var now = new Date();
-            $scope.title = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + ' ' + now.getHours() + ':' + now.getMinutes();
+            
+            $scope.titlePlaceholder = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + ' ' + now.getHours() + ':' + now.getMinutes();
             $scope.author = $scope.user;
         } else {
             loadIdea($scope.ideaId);
@@ -517,6 +519,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 $scope.lastchanged = res.lastchanged;
 
             });
+                        $scope.getSignInUser($scope.user._id);
+
     }
     $scope.updateIdea = function () {
         var i = 0;
@@ -530,10 +534,15 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         console.log("update idea");
 
         var user = authentication.currentUser();
+        if( $scope.title = '')
+            {
+                $scope.title = $scope.titlePlaceholder;
+            }
         var idea = {
             _id: $scope.ideaId,
-
+        
             title: $scope.title,
+                
             description: $scope.desciption,
             contributors: $scope.contributorsId,
             milestones: $scope.milestones,
@@ -548,7 +557,6 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             .success(function (retData) {
                 loadIdea($scope.ideaId);
                 $mdToast.show($mdToast.simple().textContent('Save idea: ' + $scope.lastchanged).hideDelay(4000));
-
             });
 
     }

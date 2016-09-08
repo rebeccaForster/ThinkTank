@@ -150,11 +150,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     $scope.menu = $scope.menuNonAuth;
 
     $scope.isLoggedIn = !authentication.isLoggedIn();
-    $scope.user = {
-        name: 'TUM',
-        firstname: 'lfe',
-        profileImg: 'app/img/lfe.jpg'
-    };
+    $scope.user = '';
 
     $scope.setSignInStatus = function () {
         $scope.isLoggedIn = !authentication.isLoggedIn();
