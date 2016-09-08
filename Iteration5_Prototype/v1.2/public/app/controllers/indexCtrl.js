@@ -1,7 +1,7 @@
 'use strict';
 // navigationCtrl.$inject = ['$location','authentication'];
 
-app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, profileService, ideaService, $mdDialog, $location, $mdMedia) {
+app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, profileService, ideaService, $mdDialog, $location, $mdMedia,dashService) {
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
     };
@@ -311,6 +311,58 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
 
 
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     $scope.ideaList = [];
+
+        // loads all ideas from the server and save it in a variable.
+        // this variable will be loaded in the html  
+
+        $scope.updateIdeaList = function() {
+            dashService
+                .loadAllIdeas()
+                .then(function (res) {
+                    $scope.ideaList = res;
+                    console.log('idaelist', $scope.ideaList);
+
+                });
+        }
+        $scope.updateIdeaList();
+        $scope.updateDashboard = function () {
+            // ToDo: es wurden neue Tags hinzugefügt bzw. entfernt und hier müsstest du mithilfe der Tags & des auswählten Sorting die Liste erneuern
+            // $scope.sortingType gibt den Namen der Sortierung zurück
+            // $scope.selectedHashtags  gibt alle Tags IDs an, nach denen man suchen soll
+            ideaService
+                .searchIdeas($scope.selectedHashtags)
+                .success(function (data) {
+                if(data.length != 0)
+                {
+                                                $scope.ideaList = data;
+
+                    console.log('idaelist', $scope.ideaList);
+                }
+                else{
+                   $scope.updateIdeaList();
+                }
+            });
+        }
+    
+    
+    
+    
+    
+    
     $scope.logout = function () {
         authentication.logout();
         $scope.setSignInStatus();

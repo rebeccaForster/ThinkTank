@@ -17,7 +17,7 @@
             <div class="md-dialog-content">
                 <md-input-container class="md-block">
                     <label>Title</label>
-                    <input name="title" ng-model="title" type="text" md-maxlength="50" placeholder='titlePlaceholder' />
+                    <input name="title" ng-model="title" type="text" md-maxlength="50" placeholder='{{titlePlaceholder}}' />
                     <div ng-messages="saveForm.title.$error" ng-show="saveForm.title.$dirty">
                         <div ng-message="md-maxlength">That's too long!</div>
                     </div>
