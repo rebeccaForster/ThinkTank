@@ -319,7 +319,9 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     
     
     
-    
+    angular.element(document).ready(function(){
+    angular.element(window).on('touchmove',function(e){e.preventDefault();});
+});
     
     
     
