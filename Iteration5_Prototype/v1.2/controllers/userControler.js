@@ -125,8 +125,23 @@ module.exports.updateUser = function(req, res) {
 
 module.exports.followUser = function(req, res) {
 	//we need: userId, follower=currenUser
+
+	var userID;
+
+	if(req.body.user._id) {
+		userID = req.body.user._id;
+	} else if (req.body.user.id) {
+		userID = req.body.user.id;
+	} else {
+		console.log("was not saved because of incomplete data");
+	    sendJSONresponse(res, 400, {
+	      "message": "user and follower required"
+	    });
+	    return;
+	}
+
 	console.log(req.body);
-	if(!req.body.user._id || !req.body.followedPersonId) {
+	if(!userID || !req.body.followedPersonId) {
 	    console.log("was not saved because of incomplete data");
 	    sendJSONresponse(res, 400, {
 	      "message": "user and follower required"
@@ -134,7 +149,7 @@ module.exports.followUser = function(req, res) {
 	    return;
 	  }
 
-	  Person.update({ _id: req.body.user._id },
+	  User.update({ _id: userID },
 		   { $push: { followedpersons: req.body.followedPersonId } }, function(err, room) {
 
 		if (err) {
@@ -158,7 +173,22 @@ module.exports.followUser = function(req, res) {
 
 module.exports.unFollowUser = function(req, res) {
 	//we need: userId, follower=currenUser
-	if(!req.body.user._id || !req.body.followedPersonId) {
+	var userID;
+
+	if(req.body.user._id) {
+		userID = req.body.user._id;
+	} else if (req.body.user.id) {
+		userID = req.body.user.id;
+	} else {
+		console.log("was not saved because of incomplete data");
+	    sendJSONresponse(res, 400, {
+	      "message": "user and follower required"
+	    });
+	    return;
+	}
+
+	console.log(req.body);
+	if(!userID || !req.body.followedPersonId) {
 	    console.log("was not saved because of incomplete data");
 	    sendJSONresponse(res, 400, {
 	      "message": "user and follower required"
@@ -166,7 +196,7 @@ module.exports.unFollowUser = function(req, res) {
 	    return;
 	  }
 
-	  Person.update({ _id: req.body.user._id },
+	  User.update({ _id: userID },
 		   { $pull: { followedpersons: req.body.followedPersonId } }, function(err, room) {
 
 		if (err) {

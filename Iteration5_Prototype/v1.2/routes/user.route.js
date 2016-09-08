@@ -67,6 +67,7 @@ router.get('/getUser/:id', function (req, res, next) {
 				"name" : 1,
 				__v : 1,
 				"contacs" : 1,
+				"tags" : 1,
 				"followedpersons" : 1,
 				"followedideas" : 1,
 				"created" : 1
@@ -256,6 +257,8 @@ router.get('/getUser/:id', function (req, res, next) {
 												"created": dateFormat(ownIdea.created, "dd/mm/yyyy HH:MM") });
 									});
 
+									console.log("Tags: ");
+									console.log(user.tags),
 									res.status(200);
 									res.json({"_id": user._id,
 												"profileImg": user.profileImg,
