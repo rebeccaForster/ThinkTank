@@ -88,6 +88,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
     }
     $scope.author = '';
+    $scope.img = '';
     $scope.desciption = "";
     $scope.milestones = [];
     $scope.milestoneList = [];
@@ -511,6 +512,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 console.log('ergebnis der idea object von deer gesuchten ide', res);
                 $scope.title = res.title;
                 $scope.desciption = res.description;
+            $scope.img = res.img;
                 var i = 0;
                 while (i < res.contributors.length) {
                     $scope.contributors.push(res.contributors[i].name);
@@ -558,6 +560,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             title: $scope.title,
 
             description: $scope.desciption,
+            img: $scope.img,
             contributors: $scope.contributorsId,
             milestones: $scope.milestones,
             tags: $scope.selectedHashtags,
@@ -596,6 +599,7 @@ if ($scope.title == '') {
             _id: $scope.ideaId,
             title: $scope.title,
             description: $scope.desciption,
+            img: $scope.img,
             contributors: $scope.contributorsId,
             milestones: $scope.milestones,
             tags: $scope.selectedHashtags,

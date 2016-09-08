@@ -2,9 +2,9 @@
     <form name="ideaForm">
 
         <md-toolbar class="toolbar-settings   md-primary md-hue-2">
-            <!--
-            <img class="header-picture toolbar-settings " src={{setImgPath(getIdeaInfo.img)}} />
--->
+            
+            <img class="header-picture toolbar-settings " src={{getIdeaInfo.img}} />
+
             <div layout-padding style="position: absolute; top: 0px; left:0px; width:100%;">
                 <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; left:5px; top:5px; ">
                     <ng-md-icon icon="arrow_back" aria-label="back" size="64" ng-show="funqueue.length" ng-click="back()"></ng-md-icon>

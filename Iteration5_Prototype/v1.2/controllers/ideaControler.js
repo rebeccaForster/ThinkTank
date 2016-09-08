@@ -33,7 +33,6 @@ module.exports.saveNewIdea = function(req, res) {
   	var scribblePath = a.concat(now , ".png");
   	var scribbleSavePath = b.concat(a, now, ".png");
   	idea.scribble = scribblePath;
-  	idea.img = scribblePath;
 
 	// strip off the data: url prefix to get just the base64-encoded bytes
 	var data = req.body.idea.scribble.replace(/^data:image\/\w+;base64,/, "");
@@ -43,8 +42,14 @@ module.exports.saveNewIdea = function(req, res) {
 
   } else {
   	idea.scribble = "";
-  	idea.img = "";
   }
+
+  	if(req.body.idea.img) {
+    idea.img = req.body.idea.img;
+
+	} else {
+	  idea.img = "";
+	}
 
  	idea.author = req.body.user.id;
 	idea.created = Date.now();
@@ -182,6 +187,10 @@ module.exports.updateIdea = function(req, res) {
 				if(req.body.idea.description) {
 					idea.description = req.body.idea.description;
 				} 
+
+			  	if(req.body.idea.img) {
+			  		idea.img = scribblePath;
+				}
 				
 				// TODO: Disabled untill form passes objectIDs of users
 				if(req.body.idea.contributors) {
