@@ -150,7 +150,11 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     $scope.menu = $scope.menuNonAuth;
 
     $scope.isLoggedIn = !authentication.isLoggedIn();
-    $scope.user = '';
+    $scope.user = {
+        name: 'TUM',
+        firstname: 'lfe',
+        profileImg: 'app/img/lfe.jpg'
+    };
 
     $scope.setSignInStatus = function () {
         $scope.isLoggedIn = !authentication.isLoggedIn();
@@ -160,7 +164,11 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             $scope.getSignInUser(user.id);
         } else {
             $scope.menu = $scope.menuNonAuth;
-            $scope.user = '';
+            $scope.user = {
+                name: 'TUM',
+                firstname: 'lfe',
+                profileImg: 'app/img/lfe.jpg'
+            };
         }
 
 
@@ -175,7 +183,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             });
     }
     $scope.getFollowPerson = function (followPersonId) {
-        if ($scope.user) {
+        if (!$scope.isLoggedIn && ( $scope.user.followedpersons != null)) {
 
             var i = 0;
             while (i < $scope.user.followedpersons.length) {
@@ -222,7 +230,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
     }
 
     $scope.getFollowIdea = function (followIdeaId) {
-        if ($scope.user) {
+        if (!$scope.isLoggedIn  && ( $scope.user.followedideas != null)) {
             var i = 0;
             while (i < $scope.user.followedideas.length) {
                 if ($scope.user.followedideas[i]._id == followIdeaId) {
@@ -267,7 +275,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         }
     }
     $scope.isUserContributor = function (ideaId) {
-        if ($scope.user) {
+        if (!$scope.isLoggedIn  && ( $scope.user.ownIdeas != null)) {
 
             var i = 0;
             while (i < $scope.user.ownIdeas.length) {
@@ -473,20 +481,20 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
             .getIdea(id)
             .then(function (res) {
 
-                    $scope.getIdeaInfo = res;
-                    var i = 0;
-                    while (i < $scope.getIdeaInfo.comments.length) {
+                $scope.getIdeaInfo = res;
+                var i = 0;
+                while (i < $scope.getIdeaInfo.comments.length) {
 
-                        profileService
-                            .getUser($scope.getIdeaInfo.comments[i].author)
-                            .then(function (res) {
+                    profileService
+                        .getUser($scope.getIdeaInfo.comments[i].author)
+                        .then(function (res) {
 
-                                $scope.commentAuthor.push(res);
-                            });
-                        i++;
-                    }
-                    });
-            
+                            $scope.commentAuthor.push(res);
+                        });
+                    i++;
+                }
+            });
+
     }
 
     /*
