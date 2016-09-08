@@ -241,15 +241,15 @@ module.exports.getUserV2 = function(req, res) {
 		res.json(ideasList);
 	});
 
-	DBModel.get('posts').then(function (posts) {
-	    return Promise.all(
-	        posts.map(function (post) {
-	            return DBModel.get('authorID', post).
-	        })
-	    )
-	}).then(function (alle posts mit author) {
+	// DBModel.get('posts').then(function (posts) {
+	//     return Promise.all(
+	//         posts.map(function (post) {
+	//             return DBModel.get('authorID', post).
+	//         })
+	//     )
+	// }).then(function (alle posts mit author) {
 	    
-	}).then(function (data) {
-	    res.send(data);
-	})
+	// }).then(function (data) {
+	//     res.send(data);
+	// })
 };
