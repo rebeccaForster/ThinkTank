@@ -2,6 +2,15 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+*{
+    touch-action: none;
+}
+
+#playzone{
+    touch-action: chained;
+}
+
+
 md-sidenav {
     fill: #737373;
 }
