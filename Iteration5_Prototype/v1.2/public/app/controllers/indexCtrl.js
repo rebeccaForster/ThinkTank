@@ -374,7 +374,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         return (path == $state.current.name);
     };
 
-    $scope.sortingDashboardProfile = ["Latest Ideas", "Most popular", "Friedhof", "Himmel"];
+    $scope.sortingDashboardProfile = ["Latest Ideas", "Most popular", "Hall Of Fame"];
     $scope.sortingContactsProfile = ["Firstname", "Name"];
     $scope.sortingMessages = ["Date up", "Date down", "Name up", "Name down"];
     $scope.sorting = $scope.sortingDashboardProfile;
