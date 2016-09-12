@@ -11,6 +11,33 @@ md-sidenav ng-md-icon {
     top: 5px;
 }
 
+.darkClass
+{
+    background-color: white;
+    filter:alpha(opacity=50); /* IE */
+    opacity: 0.5; /* Safari, Opera */
+    -moz-opacity:0.50; /* FireFox */
+    z-index: 60;
+    height: 100%;
+    width: 100%;
+    background-repeat:no-repeat;
+    background-position:center;
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    pointer-events: none;
+}
+.circularClass{
+    
+    width: 100%;
+position: absolute;
+top: 50%;
+ 
+-webkit-transform: translateY(-50%);
+-ms-transform: translateY(-50%);
+transform: translateY(-50%);
+    z-index: 70;
+}
 .fab-style {
     position: fixed;
     margin: 20px !important;

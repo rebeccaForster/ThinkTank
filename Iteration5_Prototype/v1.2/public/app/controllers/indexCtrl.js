@@ -1,7 +1,7 @@
 'use strict';
 // navigationCtrl.$inject = ['$location','authentication'];
 
-app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, profileService, ideaService, $mdDialog, $location, $mdMedia, dashService) {
+app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state, authentication, profileService, ideaService, $mdDialog, $location, $mdMedia, dashService, dataService) {
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
     };
@@ -290,7 +290,7 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         //todo ändern der sorting daten in abhängigkeit vom wechsel als Event --> wie ich es beim whiteboard eigtl vorhatte
         if ($state.current.name != path) {
             // clear hashtag, if a new item in the menu is clicked
-            $scope.selectedHashtags = [];
+            $scope.clearSelectedHashtags();
             // clear all hashtags if the path is changed via the menu
             $scope.funqueue = [];
         }
@@ -363,11 +363,15 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         }
 
     }
+    $scope.isLoadLayout = false;
+    $scope.setLoadLayout = function(status){
+        $scope.isLoadLayout = status;
+    }
     $scope.getMenuStatus = function (path) {
         return (path == $state.current.name);
     };
 
-    $scope.sortingDashboardProfile = ["Latest Ideas", "Most popular", "Hall Of Fame"];
+    $scope.sortingDashboardProfile = ["Latest", "Most Popular", "Hall Of Fame", "Almost Expired", "Expired"];
     $scope.sortingContactsProfile = ["Firstname", "Name"];
     $scope.sortingMessages = ["Date up", "Date down", "Name up", "Name down"];
     $scope.sorting = $scope.sortingDashboardProfile;
@@ -639,7 +643,10 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         $scope.sortingType = index;
 
     }
-
+    $scope.clearSelectedHashtags = function(){
+        
+        $scope.selectedHashtags = [];
+    }
     $scope.hashtagSelected = function (name) {
 
         for (var i in $scope.selectedHashtags) {
@@ -649,7 +656,19 @@ app.controller('IndexCtrl', function ($scope, $mdBottomSheet, $mdSidenav, $state
         }
         return false;
     }
+    $scope.addItemToHashtagList = function(name){
+        
+                $scope.hashtags.push(name);
 
+    }
+    $scope.loadHashtagList = function(){
+        
+         dataService
+        .getAllTags()
+        .then(function (res) {
+            $scope.hashtags = res;
+        });
+    }
     $scope.selectedHashtags = [];
     $scope.setSelectedHashtags = function (name, status) {
         if (!status) {

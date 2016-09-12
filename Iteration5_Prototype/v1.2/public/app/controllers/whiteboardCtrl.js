@@ -369,7 +369,7 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             name: $scope.addHashtag,
             priority: 0 // 0 ist default wert, wenn er neu initalisiert wird
         }
-        $scope.hashtags.push(dummyNewHashtag);
+        $scope.addItemToHashtagList(dummyNewHashtag);
 
         $scope.setSelectedHashtags($scope.addHashtag, false);
         $scope.addHashtag = '';
@@ -487,12 +487,14 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
     $scope.ideaId = $stateParams.ideaId;
     $scope.title = '';
     angular.element(document).ready(function () {
-        //Todo diese Funktion muss alle Privacy, desciption, milesotnes, hashtags, contirbutors, whiteboard image Daten laden, 
-        //Sie wird aufgerufen, wenn man auf dem Popup Idea aufs whiteboard klickt 
-        // wenn man contributor ist bzw. die Idee bearbeiten möchte, ist edit true
-        // Wie man die Funktion genau aufruft, weiß ich noch nicht, darüber muss ich mir noch gedanken machen
+         $scope.loadHashtagList();
+
+        loadMilsteones();
+        loadContributors();
         console.log('state whiteboard');
         if ($scope.ideaId == -1) {
+                     $scope.setLoadLayout(false);
+
             $scope.clear();
             $scope.clearHistory();
             var now = new Date();
@@ -500,6 +502,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             $scope.titlePlaceholder = now.getFullYear() + '_' + now.getDate() + '_' + now.getDay() + ' ' + now.getHours() + ':' + now.getMinutes();
             $scope.author = $scope.user;
         } else {
+                     $scope.setLoadLayout(true);
+
             loadIdea($scope.ideaId, 'Idea is loaded:');
         }
     });
@@ -508,17 +512,24 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
         ideaService
             .getIdea(id)
             .then(function (res) {
+             $scope.loadHashtagList();
+
+            loadMilsteones();
+            loadContributors();
                 console.log('ergebnis der idea object von deer gesuchten ide', res);
                 $scope.title = res.title;
                 $scope.desciption = res.description;
                 $scope.img = res.img;
                 var i = 0;
+             $scope.contributors = [];
+    $scope.contributorsId = []; 
                 while (i < res.contributors.length) {
                     $scope.contributors.push(res.contributors[i].name);
                     $scope.contributorsId.push(res.contributors[i]._id);
 
                     i++;
                 }
+            $scope.clearSelectedHashtags();
                 while (i < res.tags.length) {
                     if (!$scope.hashtagSelected(res.tags[i])) {
                         $scope.setSelectedHashtags(res.tags[i], false);
@@ -533,6 +544,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
                 $scope.ideaDayLeft = $scope.calculateIdeaLeftDays(res.created);
                 $scope.author = res.author;
                 $scope.lastchanged = res.lastchanged;
+                     $scope.setLoadLayout(false);
+
                 $mdToast.show($mdToast.simple().textContent(info + $scope.lastchanged).hideDelay(4000));
 
             });
@@ -540,6 +553,8 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
 
     }
     $scope.updateIdea = function () {
+                 $scope.setLoadLayout(true);
+
         var i = 0;
         var indexPrivacy = 0;
         while (i < $scope.privacyTypesList.length) {
@@ -576,10 +591,28 @@ app.controller('WhiteboardCtrl', function ($scope, authentication, $mdDialog, in
             });
 
     }
+    function loadMilsteones(){
+        
+        dataService
+        .loadAllMilestones()
+        .then(function (res) {
+            $scope.milestoneList = res;
+        });
+    }
+    function loadContributors(){
+        
+         profileService
+        .loadAllUsers()
+        .then(function (res) {
 
-
+            $scope.contributorsList = res;
+        });
+        
+    }
     //Save New Idea serverside 
     $scope.saveNewIdea = function () {
+                 $scope.setLoadLayout(true);
+
         var user = authentication.currentUser();
         var i = 0;
         var indexPrivacy = 0;
@@ -685,12 +718,7 @@ function DescriptionPopupController($scope, $mdDialog) {
 
 
 function ContrPopupController($scope, $mdDialog, profileService) {
-    profileService
-        .loadAllUsers()
-        .then(function (res) {
-
-            $scope.contributorsList = res;
-        });
+   
     $scope.hide = function () {
         $mdDialog.hide();
     };
@@ -701,11 +729,7 @@ function ContrPopupController($scope, $mdDialog, profileService) {
 }
 
 function MilestonesPopupController($scope, $mdDialog, dataService) {
-    dataService
-        .loadAllMilestones()
-        .then(function (res) {
-            $scope.milestoneList = res;
-        });
+    
     $scope.hide = function () {
         $mdDialog.hide();
     };

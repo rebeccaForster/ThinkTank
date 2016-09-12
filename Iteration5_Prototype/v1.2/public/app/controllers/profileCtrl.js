@@ -13,6 +13,8 @@ $scope.getProfileInfo = $scope.user;
             }
         }
     }
+     $scope.loadHashtagList();
+
     setHashtags($scope.user.tags);
     // number of columns of the profile site for md-cards
     $scope.maxProfileColumn = 2;
@@ -40,7 +42,7 @@ $scope.getProfileInfo = $scope.user;
             name: $scope.addHashtag,
             priority: 0 // 0 ist default wert, wenn er neu initalisiert wird
         }
-        $scope.hashtags.push(dummyNewHashtag);
+        $scope.addItemToHashtagList(dummyNewHashtag);
 
         $scope.setSelectedHashtags($scope.addHashtag, false);
         $scope.addHashtag = '';
@@ -91,6 +93,8 @@ $scope.getProfileInfo = $scope.user;
             .updateUser(authentication.currentUser(), $scope.user)
             .success(function (data) {
                 $scope.getSignInUser($scope.user._id);
+             $scope.loadHashtagList();
+
             });
 
     }

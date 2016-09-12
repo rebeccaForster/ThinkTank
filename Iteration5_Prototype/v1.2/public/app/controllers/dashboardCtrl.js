@@ -8,7 +8,7 @@ angular
 
          $scope.updateIdeaList();
 
-
+ $scope.loadHashtagList();
         /* function: open an dialog with all hashtags and selected hashtags
                         via the dialog can hashtags be added or cleared to the searchbar
                         after the dialog is closed the dashboard must be updated with
@@ -93,11 +93,7 @@ function ProfilePopupController($scope, $mdDialog) {
 
 
 function HashtagPopupController($scope, $mdDialog, dataService) {
-    dataService
-        .getAllTags()
-        .then(function (res) {
-            $scope.hashtags = res;
-        });
+   
     $scope.hide = function () {
         $mdDialog.hide();
     };
