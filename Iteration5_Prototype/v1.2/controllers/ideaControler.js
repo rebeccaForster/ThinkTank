@@ -150,7 +150,8 @@ module.exports.updateIdea = function (req, res) {
             res.json(err);
         } else {
 
-            if (ideaRes.author != req.body.user.id) {
+			if (ideaRes.author != req.body.user.id && ideaRes.contributors.indexOf(req.body.user.id) < 0) {
+				console.log("permission denied");
                 res.status(403);
                 res.json("permission denied");
             } else {
