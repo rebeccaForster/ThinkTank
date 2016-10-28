@@ -1,30 +1,44 @@
+<!-- contains the conext of the sign up pop-up and the pop-up to change the user data in the profile page  -->
+
+<!-- title of the user  -->
 <md-input-container class="md-block">
     <label>Title</label>
     <input name="Title" ng-model="credentials.title" md-autofocus/>
 </md-input-container>
+
+<!-- firstname of user  -->
 <md-input-container class="md-block">
     <label>Firstname</label>
     <input name="Firstname" ng-model="credentials.firstname" required />
 </md-input-container>
+
+<!-- name of user  -->
 <md-input-container class="md-block">
     <label>Name</label>
     <input name="Name" ng-model="credentials.name" required />
 </md-input-container>
+
+<!-- email of user  -->
 <md-input-container class="md-block">
     <label>Email</label>
     <input name="Email" ng-model="credentials.email" required />
 </md-input-container>
+
+<!-- link to a website of th euser e.g. lfe page  -->
 <md-input-container class="md-block">
     <label>Link to your Homegage</label>
     <input name="url" ng-model="credentials.url" />
 </md-input-container>
+
+<!-- profile picture  -->
+<!-- todo: function to upload a picter from the pc to the server  -->
 <md-input-container class="md-block">
     <label>Profile Picture</label>
     <input name="profileImg" ng-model="credentials.profileImg" />
 </md-input-container>
 
+<!--  password if the user is not of profile page-->
 <md-input-container class="md-block" ng-hide="isProfile()">
     <label>Password</label>
     <input type="password" name="password" ng-model="credentials.password" required />
 </md-input-container>
-</div>

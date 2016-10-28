@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no" />
-    
+
     <title>Academic Think Application</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" type='text/css'>
 
     <!-- Local Styles-->
     <link href="site.css" rel="stylesheet" />
-    <link href="app/styles/dashboard-profile.css" rel="stylesheet" />
+    <link href="app/styles/dashboard.css" rel="stylesheet" />
+    <link href="app/styles/profile.css" rel="stylesheet" />
     <link href="app/styles/idea-profile-popup.css" rel="stylesheet" />
     <link href="app/styles/hashtag-popup.css" rel="stylesheet" />
     <link href="app/styles/whiteboard.css" rel="stylesheet" />
@@ -25,52 +26,74 @@
 
 </head>
 
+<!--  include index controller  as main controller over all pages -->
+
 <body ng-app="App" layout="row" ng-controller="IndexCtrl" ng-cloak ng-class="{'darkClass':isLoadLayout}">
-             <div layout="row" class="circularClass" layout-sm="column" layout-align="space-around"  ng-show="isLoadLayout" >
-      <md-progress-circular   md-diameter="70" md-mode="indeterminate"></md-progress-circular>
+    <!-- load circle for e.g. whiteboard during saveing and opening process -->
+    <div layout="row" class="circularClass" layout-sm="column" layout-align="space-around" ng-show="isLoadLayout">
+        <md-progress-circular md-diameter="70" md-mode="indeterminate"></md-progress-circular>
     </div>
+    <!-- add sidenav for the menu sturcutre. the sidenav is divided into two parts header and main part  -->
     <md-sidenav layout="column" ng-class="{'nav-width-short': navbarShort()}" class="md-sidenav-left md-whiteframe-24dp" md-component-id="left" md-is-locked-open="$mdMedia('(min-width: 0px)')">
+        <!-- header: includes a circle image of the sign in user or a default image and the name of the instut if 
+                        a user is sign in the image and name of the sign in user stands instead of the instut or something else-->
         <md-toolbar class="toolbar-settings md-primary md-hue-2">
+            <!-- if the profle page is open this should not be visible because it is in header of the page  -->
             <div ng-hide="isProfile()" style="text-align:center">
                 <div style="margin-top:30px;"></div>
-
+                <!-- add image  -->
                 <img ng-src={{user.profileImg}} class="md-avatar" id="nav-img-profile" alt="{{user.firstname}} {{user.name}}">
                 <div style="margin-top:30px;"></div>
+                <!-- add name  -->
                 <span ng-hide="navbarShort()" class="md-headline" style="front-weight=bold;">{{user.firstname}} {{user.name}}</span>
             </div>
         </md-toolbar>
+
+        <!-- main part: list of the menu strucutre and sign in /out  -->
         <md-list class="margin-15">
+            <!--  repeat the selected menu strucutre independency of the sign in or sign out status -->
             <md-item ng-repeat="item in menu" ng-click="go(item.path);" id="nav-item{{$index}}">
                 <md-item-content ng-class="{'item-select' : getMenuStatus(item.path) }" layout="row" layout-align="start center">
-
+                    <!-- add icon  -->
                     <div class="inset">
                         <ng-md-icon icon="{{item.icon}}" size="34"></ng-md-icon>
                     </div>
-                    <div ng-hide="navbarShort()" class="inset md-headline margin-top-15 font-weight-bold" >{{item.title}}
+                    <!-- add desciption which is always visible except a short navigation bar is needed as in the whiteboard  -->
+                    <div ng-hide="navbarShort()" class="inset md-headline margin-top-15 font-weight-bold">{{item.title}}
                     </div>
                 </md-item-content>
             </md-item>
         </md-list>
+        <!-- add space between the menu strucutre and sign in /out and the result is, that sign in/out is on the bottom of the page  -->
         <div flex></div>
+
+        <!--  sign in  -->
         <div layout="row" layout-align="start center" ng-show="isLoggedIn" ng-click="showLoginBox(false, false, false, $event)" class="margin-15">
             <div class="inset">
+                <!-- sign in icon  -->
                 <ng-md-icon icon="login" size="34"></ng-md-icon>
             </div>
+            <!-- sign in text  -->
             <div ng-hide="navbarShort()" class="inset md-headline" style="font-weight:bold;">
                 Sign In
             </div>
         </div>
 
-        <div layout="row" layout-align="start center" ng-hide="isLoggedIn" ng-click="logout()"  class="margin-15">
+        <!-- sign out  -->
+        <div layout="row" layout-align="start center" ng-hide="isLoggedIn" ng-click="logout()" class="margin-15">
             <div class="inset">
+                <!-- sign out icon  -->
                 <ng-md-icon icon="logout" size="34"></ng-md-icon>
             </div>
+            <!-- sign out text  -->
             <div ng-hide="navbarShort()" class="inset md-headline" style="font-weight:bold;">
                 Sign Out
             </div>
         </div>
     </md-sidenav>
 
+
+    <!-- fill the content indepentency of the selected path of the different pages in index.js  -->
     <div layout="column" layout-fill ui-view="">
 
 
@@ -117,13 +140,13 @@
     <script src="app/controllers/messagesCtrl.js"></script>
     <script src="app/controllers/settingsCtrl.js"></script>
     <script src="app/controllers/whiteboardCtrl.js"></script>
+    <script src="app/controllers/popupCtrls.js"></script>
     <!-- load directives -->
     <script src="app/directive/hashtagPopupDirective.js"></script>
     <script src="app/directive/milestonePopupDirective.js"></script>
 
 
-    <!-- Load custom filters -->
-    <!-- Load custom directives -->
+
 </body>
 
 

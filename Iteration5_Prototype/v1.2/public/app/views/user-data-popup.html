@@ -1,27 +1,32 @@
+<!--  pop-up which can be open from th eprofile page of a sign in user to change the own data -->
 <md-dialog id="register-dialog" aria-label="Login" ng-cloak class="popup-hashtag-size">
     <form name="registerForm" ng-submit="register()">
 
-        <md-toolbar class="md-tall md-primary md-hue-2"  layout-padding>
-            
+        <!--  header/toolbar -->
+        <md-toolbar class="md-tall md-primary md-hue-2" layout-padding>
+            <!-- title  -->
             <div style="margin-right:80px; margin-left:10px;  ">
                 <div>
                     <span class="md-headline">Profile Data</span>
                 </div>
 
             </div>
+
+            <!-- close button  -->
             <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
                 <ng-md-icon icon="close" size="40" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
             </md-button>
-            
-            
-            
+
         </md-toolbar>
+
+        <!-- content  -->
         <md-dialog-content>
-            <div class="md-dialog-content"  ng-include="'app/views/user-data-content.html'">
-              
+            <!-- include user-data-content which all infromation about the user -->
+            <div class="md-dialog-content" ng-include="'app/views/user-data-content.html'">
+
             </div>
         </md-dialog-content>
 
-        
+
     </form>
 </md-dialog>

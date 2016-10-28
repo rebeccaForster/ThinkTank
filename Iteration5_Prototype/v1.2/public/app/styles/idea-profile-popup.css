@@ -1,7 +1,12 @@
+/* class of the circle progess bar */
+
 .header-progress {
     position: absolute;
     z-index: 70;
 }
+
+
+/* container class which includes th ecircle progess bar and the text inside the circle progess bar*/
 
 .container {
     position: absolute;
@@ -9,6 +14,11 @@
     margin-left: -100px;
     left: 50%;
 }
+
+
+/* class which includes the text which should inside the progess bar
+   futhermore, the form of the class is a circle to get the backgorund inside th eprogressbar white
+*/
 
 .header-background-circle {
     z-index: 60;
@@ -21,22 +31,36 @@
     border: 0px solid black;
     border-radius: 92px;
     margin-left: 8px;
-    margin-top:4px;
+    margin-top: 4px;
 }
 
+
+/* class which implement a picture in the toolbar */
+
 .header-picture {
-     position: relative;
+    position: relative;
     left: 0;
     top: 0;
     width: 100%;
     height: 223px !important;
     opacity: 0.5;
-   position: 50% 50%;
+    position: 50% 50%;
 }
-.idea-block{
-    margin-bottom: 40px;
 
+
+/*
+class which includes a title and a text of th eidea pop-up and set the bottom margin to the next idea-block
+*/
+
+.idea-block {
+    margin-bottom: 40px;
 }
+
+
+/*
+size and position of the idea an dprofile pop-up
+*/
+
 .popup-size {
     max-width: 100%;
     max-height: auto;
@@ -49,20 +73,27 @@
     border-radius: 0;
 }
 
+
+/*
+    set position of the reaction icon in th eidea pop-up
+*/
+
 .messages-icon {
     float: right;
 }
+
+
+/*
+set the format of the whiteboard image in the idea pop-up
+*/
 
 .content-image {
     max-width: 100%;
     height: auto;
 }
 
-.content-tags {
-    display: inline-block;
-    margin-left: 10px;
-    margin-top: 0px;
-}
+
+/* set the contributor card format of the idea pop-up*/
 
 .content-contributors {
     display: inline-block;

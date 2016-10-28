@@ -1,39 +1,54 @@
+<!-- profile/user pop-up with all basic information  -->
 <md-dialog aria-label="Profile Popup" class="popup-size">
     <form>
+
+        <!-- header/toolbar  -->
         <md-toolbar class="toolbar-settings  md-primary md-hue-2">
-            <div  layout-padding>
-                             
-                 <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; left:5px; top:5px; ">
-                    <ng-md-icon icon="arrow_back" aria-label="back" size="50" ng-show="funqueue.length" ng-click="back()"></ng-md-icon>
+            <div layout-padding>
+
+                <!--  back button: only visible if the user opens this pop-up from another pop-up   -->
+                <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; left:5px; top:5px; ">
+                    <ng-md-icon icon="arrow_back" aria-label="back" size="50" ng-show="backFuncPopup.length" ng-click="back()"></ng-md-icon>
                 </md-button>
+
+                <!-- add name and firstname of the user im haeder and an url link to the side with more information fo the user  -->
                 <div style="margin-right:80px; margin-left:80px; ">
-                     <div>
+                    <div>
                         <span class="md-display-2">{{getProfileInfo.firstname}} {{getProfileInfo.name}}</span>
                     </div>
                     <div>
                         <span class="md-display-1"><a href={{user.url}} style="color:black !important;">{{getProfileInfo.url}}</a></span>
                     </div>
                 </div>
+
+                <!-- close button for the pop-up  -->
                 <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
                     <ng-md-icon icon="close" size="50" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
                 </md-button>
             </div>
 
         </md-toolbar>
+
+        <!--  container which contains a picture of the user -->
         <div class="container">
+            <!-- load image of the user  -->
             <img ng-src={{getProfileInfo.profileImg}} class="md-avatar header-background-circle" alt="{{getProfileInfo.name}}">
+            <!-- set a default 100% white progessbar around the image  -->
             <div class="header-progress">
                 <round-progress max="100" current="100" color="#fafafa" bgcolor="#fafafa" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
 
                 </round-progress>
             </div>
         </div>
-        <div layout="row" class="margin-top-15 margin-right-20" style="margin-bottom:135px;" >
+
+        <!-- add under the header/toolbar a button to follow or unfollow a person in dependency if the user is sign in and follow the person or not  -->
+        <div layout="row" class="margin-top-15 margin-right-20" style="margin-bottom:135px;">
             <div flex></div>
             <md-button class="md-accent  font-weight-bold font-size-34" ng-if="getFollowPerson(getProfileInfo._id)" ng-hide="(user._id == getProfileInfo._id)" ng-click="setFollowPerson(getProfileInfo._id,true)">unfollow person</md-button>
             <md-button class="md-accent font-weight-bold font-size-34" ng-if="!getFollowPerson(getProfileInfo._id);" ng-hide="user._id == getProfileInfo._id" ng-click="setFollowPerson(getProfileInfo._id,false)">follow person</md-button>
         </div>
 
+        <!-- load the default content of the profile page into the page  -->
         <md-dialog-content layout="row" ng-include="'app/views/profile-content.html'" class="padding-right-40 padding-left-40 padding-bottom-40">
 
 

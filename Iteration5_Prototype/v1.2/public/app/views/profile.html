@@ -1,7 +1,11 @@
+<!-- 
+ toolbar of the profile page 
+-->
 <header>
-
+    <!-- 
+            infromation of name, firstname and url link of the sign in user
+    -->
     <md-toolbar class="toolbar-settings md-primary md-hue-2" layout-padding>
-
         <div>
             <div>
                 <span class="md-display-2">{{user.firstname}} {{user.name}}</span>
@@ -11,10 +15,8 @@
             </div>
         </div>
 
-
-
-        </div>
     </md-toolbar>
+    <!--  on the buttom and in center of the toolbar is the profile picture of the sign in user as circle  -->
     <div class="container">
         <img ng-src={{user.profileImg}} class="md-avatar header-background-circle" alt="{{user.name}}">
         <div class="header-progress">
@@ -26,27 +28,32 @@
 
 </header>
 
+<!--  content of hte profile page  -->
 <div class="margin-top-15" style="margin-bottom:135px;"></div>
 <main class="" layout="row" flex>
     <md-content flex>
+        <!--  add profile controller  -->
         <div ng-controller="ProfileCtrl" ng-cloak="">
-           <div style="top:370px; right:5px; position:fixed; width:90px; heigt:100%;">
+            <!--  add two butons to change the profile information and add/change hashtags  -->
+            <div style="top:370px; right:5px; position:fixed; width:90px; heigt:100%;">
                 <div layout="column" layout-padding>
                     <div flex=38></div>
-                   
+                    <!-- button to open the hashtag pop-up to add/change hashtags to the sign in user   -->
                     <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" ng-click="updateDescription($event);" aria-label="Descirption">
                         <ng-md-icon icon="description" class="icon-white" size="34"></ng-md-icon>
                     </md-button>
                     <div flex=8></div>
 
-
+                    <!--  button to open a pop-up with the same infromation as in the sign up pop-up  -->
                     <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" ng-click="addHashtags($event);" aria-label="Hashtags">#</md-button>
                     <div flex=38></div>
 
                 </div>
             </div>
+
+            <!--  add profile-content.html which contains the main page of hte profile page which is the same is at the profile pop-up  -->
             <md-content class="md-padding" layout="row" layout-wrap="" layout-align="start start" layout-xs="column" ng-include="'app/views/profile-content.html'" style="margin-right: 90px;">
-                
+
             </md-content>
         </div>
     </md-content>

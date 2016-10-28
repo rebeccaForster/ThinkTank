@@ -1,27 +1,35 @@
+<!--  pop-up to save the idea the first time  -->
 <md-dialog aria-label="Save Whiteboard Popup" ng-cloak style="max-width: 90%;width: 500px;">
     <form name="saveForm">
 
-        <md-toolbar class="md-tall md-primary md-hue-2"layout-padding>
-            
-                <div style="margin-right:80px; margin-left:80px; ">
-                     <div>
-                        <span class="md-headline">Save Idea</span>
-                    </div>
-                    
+        <!-- toolbar/header of the pop-up   -->
+        <md-toolbar class="md-tall md-primary md-hue-2" layout-padding>
+            <!--  title  -->
+            <div style="margin-right:80px; margin-left:80px; ">
+                <div>
+                    <span class="md-headline">Save Idea</span>
                 </div>
-                <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
-                    <ng-md-icon icon="close" size="40" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
-                </md-button>
+
+            </div>
+            <!--  close button of the pop-up  -->
+            <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
+                <ng-md-icon icon="close" size="40" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
+            </md-button>
         </md-toolbar>
+
+        <!--  content  -->
         <md-dialog-content>
             <div class="md-dialog-content">
                 <md-input-container class="md-block">
+                    <!--  add title of the idea -> default title with data and hour of the save day  -->
                     <label>Title</label>
                     <input name="title" ng-model="title" type="text" md-maxlength="50" placeholder='{{titlePlaceholder}}' />
                     <div ng-messages="saveForm.title.$error" ng-show="saveForm.title.$dirty">
                         <div ng-message="md-maxlength">That's too long!</div>
                     </div>
                 </md-input-container>
+
+                <!--  add a life time of the idea  -->
                 <md-input-container class="md-block">
                     <label>Life Time of the Idea in Days</label>
                     <input type="number" name="lifetime" ng-model="ideaLifeTime" min="30" max="180" />
@@ -37,14 +45,19 @@
                             180 days is the minimum of the idea life time.
 
                         </div>
+                    </div>
                 </md-input-container>
-                </div>
+            </div>
         </md-dialog-content>
 
+        <!--  action  -->
         <md-dialog-actions layout="row">
+            <!--  cancel ubtton to stop the save process  -->
             <md-button class="md-raised" ng-click="cancel()">Cancel</md-button>
 
             <span flex></span>
+
+            <!--  save the idea button which call a function to verify all infromation  -->
             <md-button type="submit" class=" md-raised md-primary" ng-click="save()">Save</md-button>
         </md-dialog-actions>
     </form>

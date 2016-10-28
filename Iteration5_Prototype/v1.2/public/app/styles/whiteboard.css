@@ -1,6 +1,15 @@
+/*
+    class of the pie menu for tools in the whiteboard page
+*/
+
 #circle-menu1 {
     bottom: 10px;
 }
+
+
+/*
+    set the icon and button style of the desciption, hashtag crontributors, and milesotne in the profile and whiteboard page
+*/
 
 .icon-whiteboard-small {
     height: 68px !important;
@@ -8,6 +17,11 @@
     font-size: 34px!important;
     color: white !important;
 }
+
+
+/*
+    set the size and button style of the tools button
+*/
 
 .icon-whiteboard-large {
     height: 85px !important;
@@ -17,14 +31,29 @@
     border-radius: 50%!important;
 }
 
+
+/*
+    set the style of the active tools button
+*/
+
 .btn-tools-active {
     background-color: #00bcd4 !important;
 }
+
+
+/*
+    set the style of the icons inside the tools pie menu
+*/
 
 .circle-icon {
     display: inline-block !important;
     border-radius: 50%;
 }
+
+
+/*
+    set colors of the tools pie menu
+*/
 
 .red {
     background: red;
@@ -45,6 +74,7 @@
 .white {
     background: white;
 }
+
 .green {
     background: green;
 }
@@ -54,9 +84,13 @@
 }
 
 #circle-menu1 {
-   
     z-index: 20;
 }
+
+
+/*
+    set icons of the tools pie menu
+*/
 
 .my-icon-fill {
     background: url("../img/icon/ic_format_color_fill_white_24px.svg");
@@ -81,29 +115,27 @@
 .my-icon-pen {
     background: url("../img/icon/ic_create_white_24px.svg");
 }
+
 .my-icon-color {
     background: url("../img/icon/ic_palette_white_24px.svg");
 }
+
 .my-icon-eraser {
     background: url("../img/icon/eraser2.png");
 }
 
-.my-icon-attach{
+.my-icon-attach {
     background: url("../img/icon/ic_attach_file_white_24px.svg");
-
 }
 
-.my-icon-voice{
+.my-icon-voice {
     background: url("../img/icon/ic_mic_white_24px.svg");
-
 }
 
-
-.my-icon-text{
+.my-icon-text {
     background: url("../img/icon/ic_text_format_white_24px.svg");
-
 }
-.my-icon-video{
-    background: url("../img/icon/ic_videocam_white_24px.svg");
 
+.my-icon-video {
+    background: url("../img/icon/ic_videocam_white_24px.svg");
 }

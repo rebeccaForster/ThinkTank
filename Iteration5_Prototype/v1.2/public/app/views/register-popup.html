@@ -1,27 +1,36 @@
+<!--  sign up content for the pop-up  -->
 <md-dialog id="register-dialog" aria-label="Login" ng-cloak class="popup-hashtag-size">
     <form name="registerForm" ng-submit="register()">
 
-        <md-toolbar class="md-tall md-primary md-hue-2"  layout-padding>
-                        
+        <!--  header toolbar of the sign up  -->
+        <md-toolbar class="md-tall md-primary md-hue-2" layout-padding>
+
             <div style="margin-right:80px; margin-left:10px;  ">
+                <!--  title  -->
                 <div>
                     <span class="md-headline">Sign Up</span>
                 </div>
 
             </div>
+            <!--  close button for th epop-up  -->
             <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
                 <ng-md-icon icon="close" size="40" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
             </md-button>
         </md-toolbar>
+
+        <!--  content  -->
         <md-dialog-content>
-            <div class="md-dialog-content"  ng-include="'app/views/user-data-content.html'">
-               
+            <!--  add the content informatoin via the user-data-content.html  -->
+            <div class="md-dialog-content" ng-include="'app/views/user-data-content.html'">
+
             </div>
         </md-dialog-content>
 
+        <!--  action area  -->
         <md-dialog-actions layout="row">
             <span flex></span>
-            <md-button type="submit" ng-disabled="registerForm.$invalid" class="md-raised md-primary" >Sign Up</md-button>
+            <!--  sign up button is only visible if the registerForm is no invalid  -->
+            <md-button type="submit" ng-disabled="registerForm.$invalid" class="md-raised md-primary">Sign Up</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>

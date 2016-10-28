@@ -1,4 +1,9 @@
+/* layout of the milestone pop-up
+    how many columns the milesotnes are listed,
+    but only work on chrome
+*/
+
 .masonry-layout-milestone {
-  column-count: 2;
-  column-gap: 0;
+    column-count: 2;
+    column-gap: 0;
 }

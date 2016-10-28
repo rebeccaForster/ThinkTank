@@ -1,39 +1,52 @@
+<!-- Dialog of hte contributors pop-up  -->
 <md-dialog aria-label="Milestone Popup" class="popup-hashtag-size">
     <form name="milestoneForm">
+        <!-- header/toolbar of the pop-up  -->
         <md-toolbar class="md-tall md-primary md-hue-2" layout-padding>
-
             <div style="margin-right:80px; margin-left:10px;  ">
+                <!-- title  -->
                 <span class="md-headline">Contributors:</span>
+                <!-- name of author of the idea  - always visible -->
                 <md-button class="md-raised md-accent" style="font-size:24px; margin-bottom:5px;" ng-hide="author=='' || author.email==''">{{author.name}} - author
                 </md-button>
+                <!-- names of the contributors independency of the scope contributors which is a list of all contributors 
+                     with a click of the button the setSelectedContribuors function is called  -->
                 <md-button class="md-raised md-accent" ng-repeat="contr in contributors" ng-click="setSelectedContributors(contr, contributorsId[$index], true);" style="font-size:24px; margin-bottom:5px;">{{contr}}
                     <ng-md-icon icon="close"></ng-md-icon>
                 </md-button>
             </div>
+            <!-- close button of the pop-up  -->
             <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
                 <ng-md-icon icon="close" size="40" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
             </md-button>
-
-
-
         </md-toolbar>
+
+        <!-- content of the dialog  -->
         <md-dialog-content class="content">
             <div layout="row">
+                <!-- include abc list of the left side  -->
+                <!--  todo: the list is only front-end implemnted. The functionallity that when a letter is clicked is not implmented, that the pop-up go to the clicked letter -->
                 <div class="background-color-white" ng-include="'app/views/abc-list.html'">
-
                 </div>
 
+                <!-- listed all contributors ordered by the name. If a contributor is selected in the list, the user is highlted
+                        the author of the list is disabled because it's a fix user which could not be changed-->
                 <div layout="column">
                     <div layout="row" ng-repeat="contr in contributorsList | orderBy:'name'" class="item">
                         <md-button data-ng-class="{'md-accent' : statusContributorsSelected(contr.name)}" ng-disabled="contr._id == author._id" ng-click="setSelectedContributors( contr.name, contr._id, statusContributorsSelected( contr.name))">{{contr.firstname}} {{contr.name}}</md-button>
                     </div>
                 </div>
+
+                <!-- that space between the conent and th elist -> so that the abc list is on the right side -->
                 <div flex></div>
+
+                <!-- include abc list of the right side  -->
+                <!--  todo: the list is only front-end implemnted. The functionallity that when a letter is clicked is not implmented, that the pop-up go to the clicked letter -->
+
                 <div class="background-color-white" ng-include="'app/views/abc-list.html'">
 
                 </div>
             </div>
         </md-dialog-content>
-        
     </form>
 </md-dialog>

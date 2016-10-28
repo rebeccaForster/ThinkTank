@@ -1,7 +1,14 @@
 'use strict';
+/* controller which handles all functionality of the profile html screen*/
 app.controller('ProfileCtrl', function ($scope, indexData, $mdDialog, authentication, profileService, ideaService) {
+    // set default user of the profile page
+    $scope.getProfileInfo = $scope.user;
 
-$scope.getProfileInfo = $scope.user;
+    /*
+       function: set hashtags in the hashtag pop-up, which are selected in teh user profile
+       input: tags: name of the hashtags
+       output:-
+       */
     function setHashtags(tags) {
         var i = 0;
         if (tags != null) {
@@ -13,11 +20,18 @@ $scope.getProfileInfo = $scope.user;
             }
         }
     }
-     $scope.loadHashtagList();
 
+    //load hashtag list
+    $scope.loadHashtagList();
+
+    //set hashtags of the user, when the page is loads
     setHashtags($scope.user.tags);
-    // number of columns of the profile site for md-cards
-    $scope.maxProfileColumn = 2;
+
+    /*
+          function: open hashtag pop-up
+          input: ev : $event
+          output:-
+          */
     $scope.addHashtags = function (ev) {
 
         $scope.addHashtag = '';
@@ -33,10 +47,17 @@ $scope.getProfileInfo = $scope.user;
             })
             .then(function () {},
                 function () {
+                    //after closing the pop-up save the new profile data
                     updateProfileData();
                 });
     }
-      $scope.addNewHastag = function () {
+
+    /*
+        function: add new hahstag to the hashtag list
+        input: -
+        output:-
+        */
+    $scope.addNewHastag = function () {
 
         var dummyNewHashtag = {
             name: $scope.addHashtag,
@@ -47,11 +68,17 @@ $scope.getProfileInfo = $scope.user;
         $scope.setSelectedHashtags($scope.addHashtag, false);
         $scope.addHashtag = '';
 
+        //reset the text area
         $scope.hashtagForm.$setPristine();
         $scope.hashtagForm.$setUntouched();
 
     }
 
+    /*
+      function: open the descirption of the user pop-up
+      input: ev: $event
+      output:-
+      */
     $scope.updateDescription = function (ev) {
         $mdDialog.show({
                 controller: UpdateProfilePopupController,
@@ -65,6 +92,7 @@ $scope.getProfileInfo = $scope.user;
             })
             .then(function () {},
                 function () {
+                    //after closing the pop-up save the new profile data
                     updateProfileData();
                 });
     }
@@ -78,6 +106,13 @@ $scope.getProfileInfo = $scope.user;
         profileImg: $scope.user.profileImg
     };
 
+    /*
+     function: update the profile data and sent the new data to the server,
+                 if the server request succesfull, get the actual signed in user
+                 and update the data 
+     input: -
+     output:-
+     */
     function updateProfileData() {
 
         $scope.user.tags = $scope.selectedHashtags;
@@ -93,21 +128,9 @@ $scope.getProfileInfo = $scope.user;
             .updateUser(authentication.currentUser(), $scope.user)
             .success(function (data) {
                 $scope.getSignInUser($scope.user._id);
-             $scope.loadHashtagList();
+                $scope.loadHashtagList();
 
             });
 
     }
 });
-
-
-function UpdateProfilePopupController($scope, $mdDialog) {
-
-    $scope.hide = function () {
-        $mdDialog.hide();
-    };
-    $scope.cancel = function () {
-        $mdDialog.cancel();
-    };
-
-}

@@ -1,26 +1,37 @@
+<!-- dialog for the hashtag pop-up  -->
 <md-dialog aria-label="Search Hashtag Popup" class="popup-hashtag-size">
     <form name="hashtagForm">
+
+        <!-- toolbar/header of the pop-up  -->
         <md-toolbar class="md-tall md-primary md-hue-2" ng-style="hashtagToolbarStyle" layout-padding>
-
-
+            <!-- Title with selected hashtags  -->
             <div style="margin-right:80px; margin-left:10px;  ">
+                <!--  title -->
                 <span class="md-headline">Tags:</span>
-                <md-button class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setSelectedHashtags(selectedHashtag, true);" style="font-size:24px; margin-bottom:5px;">#{{selectedHashtag}}  
+                <!-- show the selected hashtags as button  -->
+                <md-button class="md-raised md-accent" ng-repeat="selectedHashtag in selectedHashtags" ng-click="setSelectedHashtags(selectedHashtag, true);" style="font-size:24px; margin-bottom:5px;">#{{selectedHashtag}}
                     <ng-md-icon icon="close"></ng-md-icon>
                 </md-button>
             </div>
+            <!--  close button for the pop-up -->
             <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
                 <ng-md-icon icon="close" size="40" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
             </md-button>
         </md-toolbar>
+
+        <!-- content of the pop-up  -->
         <md-dialog-content class="content">
             <div layout="row">
+                <!-- include abc list of the left side  -->
+                <!--  todo: the list is only front-end implemnted. The functionallity that when a letter is clicked is not implmented, that the pop-up go to the clicked letter -->
                 <div class="background-color-white" ng-include="'app/views/abc-list.html'">
 
                 </div>
+
                 <div layout="column" flex>
+                    <!-- here a input field plus button to add a new hashtags is visible. Only a new hashtag cna on the porofile page or whiteboard be added -->
                     <div ng-show="isWhiteboard() || isProfile()" layout="row">
-                        <md-input-container class="md-block  margin-top-25"  flex>
+                        <md-input-container class="md-block  margin-top-25" flex>
                             <label>Is your hashtag not in the list? Here can you add a new hashtag!</label>
                             <input name="newHashtag" ng-model="addHashtag" validate-new-hastag required />
 
@@ -33,18 +44,22 @@
                         </md-input-container>
                         <md-button ng-disabled="hashtagForm.newHashtag.$invalid" class=" md-raised md-primary" ng-click="addNewHastag()">+</md-button>
                     </div>
+
+
+                    <!-- listed all hashtag  ordered by the name. and have so much columns as in the masonry-layout class described. If a hashtags is selected in the list, the hashtags is highlted
+                        -->
                     <div class="masonry-layout">
                         <div layout="row" ng-repeat="hashtag in hashtags | orderBy:'name'" class="item">
                             <md-button data-ng-class="{'md-accent' : hashtagSelected(hashtag.name)}" ng-click="setSelectedHashtags(hashtag.name, hashtagSelected(hashtag.name))" ng-style="getHashtagStyle(hashtag.priority)">#{{ hashtag.name }}</md-button>
                         </div>
                     </div>
                 </div>
-                <div class="background-color-white" ng-include="'app/views/abc-list.html'">
 
+                <!-- include abc list of the right side  -->
+                <!--  todo: the list is only front-end implemnted. The functionallity that when a letter is clicked is not implmented, that the pop-up go to the clicked letter -->
+                <div class="background-color-white" ng-include="'app/views/abc-list.html'">
                 </div>
             </div>
-
         </md-dialog-content>
-       
     </form>
 </md-dialog>

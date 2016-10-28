@@ -1,12 +1,22 @@
+/* layout of the hashtag pop-up
+    how many columns the milesotnes are listed,
+    but only work on chrome
+*/
+
 .masonry-layout {
-  column-count: 3;
-  column-gap: 0;
+    column-count: 3;
+    column-gap: 0;
 }
-.item { /* Masonry bricks or child elements */
+
+.item {
+    /* Masonry bricks or child elements */
     display: inline-block;
     margin: 10px;
     width: 100%;
 }
+
+
+/*pop-up size of the position an size of the hashtag pop-up*/
 
 .popup-hashtag-size {
     max-width: 100%;

@@ -1,5 +1,8 @@
 'use strict';
-
+/* directive which verify the entered new milestone, if the milestone is in the list or not
+    independency the validator return a true or fals. 
+    if it returns true the new entered milestone is new and can be added
+    if it return false the milestone exist */
 app.directive('validateNewMilestone', function (dataService) {
     return {
         restrict: "A",

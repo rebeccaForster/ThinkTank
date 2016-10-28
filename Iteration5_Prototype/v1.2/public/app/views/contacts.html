@@ -1,4 +1,10 @@
+<!-- 
+ toolbar of the contact page divided in two parts
+-->
 <header>
+    <!-- 
+    first part is the title of the academic think tank which is of all pages
+    -->
     <md-toolbar class="md-primary md-hue-1 ">
         <div class="md-toolbar-tools toolbar-settings-top" layout='row'>
             <div class="md-headline" style="margin-right:20px !important; margin-left:20px !important; ">
@@ -6,55 +12,87 @@
             </div>
         </div>
     </md-toolbar>
+    <!-- 
+    second part is a serach bar and a drop down list to sort/filter after this catagory
+    -->
     <md-toolbar>
         <div class="md-toolbar-tools toolbar-settings-bottom" layout='row'>
-
             <div style="margin-right:20px !important; margin-left:20px !important; " flex layout='row'>
+                <!-- Search bar with a search icon. 
+                    ToDo: at the moment this is only front-end implmented whitout other functionality
+                -->
                 <div style="border-bottom: 2px solid white;" ng-click="searchHashtag($event) " flex>
                     <div layout="row">
                         <div flex>
-                           
+
                         </div>
                         <md-button aria-label="Search">
                             <ng-md-icon icon="search" size="64" class="icon-white"></ng-md-icon>
+                        </md-button>
                     </div>
-                    </md-button>
+
+                    <!-- the flex=5 is there to get space between the search bar and the sorting -->
+                    <div flex=5></div>
+
+                    <!-- add the sorting functionlity of the conact list. 
+                        ToDo: add the sorting functionality to the server and get the list sorted back
+                    -->
+                    <md-input-container>
+                        <md-select ng-model="sortingType" aria-label="sorting" ng-change="changeSortingType(sortingType)">
+                            <md-option ng-value="t" data-ng-repeat="t in sorting">{{ t }}</md-option>
+                        </md-select>
+
+                    </md-input-container>
                 </div>
-
-
-                <div flex=5></div>
-                <md-input-container>
-                    <md-select ng-model="sortingType" aria-label="sorting" ng-change="changeSortingType(sortingType)">
-                        <md-option ng-value="t" data-ng-repeat="t in sorting">{{ t }}</md-option>
-                    </md-select>
-
-                </md-input-container>
             </div>
         </div>
     </md-toolbar>
 </header>
 
+<!-- 
+    main page of the conact page
+-->
 <main class="" layout="row" flex>
     <md-content flex>
+        <!-- 
+                add the contoller
+        -->
         <div ng-controller="ContactsCtrl" ng-cloak="">
             <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" layout-xs="column">
                 <div flex layout="column">
-
+                    <!-- 
+                        the page conaints of a list of the contacts
+                    -->
                     <md-list>
+                        <!-- add list items from the scope variable getAllUserList and sort the list after the strucutre 
+                                variable name of the getAllUserList-->
                         <md-list-item ng-repeat="user in getAllUserList  | orderBy:'name'" style="margin-bottom:15px; heiht:auto;">
-
+                            <!-- add div which contains the user information -->
                             <div class="md-list-item-text margin-bottom-15 width-100-prozent">
                                 <!-- ToDO: header mittig machen den namen und zu bild-->
                                 <div layout="row">
-
+                                    <!-- set the image of the user as circle  -->
                                     <img ng-src={{user.profileImg}} class="md-avatar" alt="{{user.name}}" ng-click="showProfile(user._id, $event)">
+                                    <!--  set firstname and last name of the user -->
                                     <div class="md-headline">{{user.firstname}} {{user.name}}
                                     </div>
+
+                                    <!-- 
+                                        set space between the names and the icons
+                                        the result is profile picture and names are on the left side 
+                                        and the icons are on the right side
+                                    -->
                                     <div flex></div>
+
+                                    <!-- add message, voice and video icon  -->
+                                    <!-- ToDo: icons only frond-ent implmented without functinlitty to send a message,
+                                            video or voice call to an user  -->
                                     <ng-md-icon icon="message" size="34" flex=5></ng-md-icon>
                                     <ng-md-icon icon="keyboard_voice" size="34" flex=5></ng-md-icon>
                                     <ng-md-icon icon="videocam" size="34" flex=5></ng-md-icon>
                                 </div>
+
+                                <!-- add divider between the list but not after the last item  -->
                                 <md-divider ng-if="!$last"></md-divider>
                             </div>
                         </md-list-item>
@@ -62,7 +100,6 @@
                 </div>
             </md-content>
         </div>
-
     </md-content>
     </div>
     </md-content>

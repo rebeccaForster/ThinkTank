@@ -1,3 +1,4 @@
+<!-- header/toolbar of the whiteboard with the name of the project  -->
 <header>
     <md-toolbar class="md-primary md-hue-1 ">
         <div class="md-toolbar-tools toolbar-settings-top" layout='row'>
@@ -9,79 +10,99 @@
     </md-toolbar>
 </header>
 
+<!--  main content -->
 <main class="" layout="row" flex id="whiteboard-main">
 
     <md-content noFlex>
+        <!-- add whiteboard controller  -->
         <div ng-controller="WhiteboardCtrl" ng-cloak="">
-            
-            <div style="top:74px; right:5px; position:fixed; width:90px; heigt:100%;"  ng-show="ideaId == -1 || isUserContributor(ideaId) || user._id == author._id">
+
+            <!-- add buttons to change or add inforamtion of the whiteboard  -->
+            <div style="top:74px; right:5px; position:fixed; width:90px; heigt:100%;" ng-show="ideaId == -1 || isUserContributor(ideaId) || user._id == author._id">
                 <div layout="column" layout-padding>
                     <div flex=38></div>
+                    <!-- button to open an contributor pop-up  to add or delete contributors -->
                     <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" ng-click="addContributors($event);" aria-label="Contributors">
                         <ng-md-icon icon="person_add" class="icon-white" size="34"></ng-md-icon>
                     </md-button>
                     <div flex=8></div>
 
+                    <!--  button to open desciption pop-up to change title, desciption, image and see the life time of the idea-->
                     <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" ng-click="addDescription($event);" aria-label="Descirption">
                         <ng-md-icon icon="description" class="icon-white" size="34"></ng-md-icon>
                     </md-button>
                     <div flex=8></div>
 
+                    <!--  button to open a milestone pop-up to add or delete milestones or check the checkbox button that a milestone is finished -->
                     <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" ng-click="addMilestones($event);" aria-label="Milestones">
                         <ng-md-icon icon="add_location" class="icon-white" size="34"></ng-md-icon>
                     </md-button>
                     <div flex=8></div>
 
+                    <!--  button to opne a hashtag pop-up to add or delete hashtags -->
                     <md-button class="md-icon-button icon-background-gray icon-whiteboard-small" ng-click="addHashtags($event);" aria-label="Hashtags">#</md-button>
                     <div flex=38></div>
 
                 </div>
             </div>
 
+
+            <!-- add the drawing board  -->
             <div layout-wrap="" layout-align="center start" ng-style="setCanvasStyle()" flex>
-
-
-
                 <ng-drawingboard remote="drawingboardRemote" drawingMode="drawingMode" eraseColor="backgroundColor" drawColor="drawColor" lineWidth="lineWidth" webStorage="webStorage" backgroundColor="backgroundColor" canvasWidth="canvasWidth" canvasHeight="canvasHeight"></ng-drawingboard>
-
             </div>
 
+            <!-- buttons or tools for the whiteboard  -->
+            <div layout="row" style="bottom:0px; left:100px; position:fixed; width:100%;" padding-layout>
 
-            <div layout="row" style="bottom:0px; left:100px; position:fixed; width:100%;" padding-layout  >
-
+                <!-- button is visible if the whiteboard is open via an idea pop-up and go back to the pop-up  -->
                 <div style="bottom:0px; left:100px; position:fixed;">
-                    <md-button aria-label="lock" ng-show="funqueue.length" ng-click="goBackIdeaPopUp(ideaId)">
+                    <md-button aria-label="lock" ng-show="backFuncPopup.length" ng-click="goBackIdeaPopUp(ideaId)">
                         Go back to idea
                     </md-button>
-
-
                 </div>
 
+                <!-- container for whiteboard buttons  -->
                 <div style="bottom:0px; left:40%; position:fixed;" ng-show="ideaId == -1 || isUserContributor(ideaId) || user._id == author._id">
+                    <!-- button for undo scribble on drawingboard  -->
                     <md-button class="md-icon-button icon-whiteboard-small" aria-label="undo" ng-click="undo()">
                         <ng-md-icon icon="undo" class="icon-gray" size="34" ng-click="undo()"></ng-md-icon>
                     </md-button>
+
+                    <!-- button for redo scribble on drawingboard -->
                     <md-button class="md-icon-button icon-whiteboard-small" aria-label="redo" ng-click="redo()">
                         <ng-md-icon icon="redo" class="icon-gray" size="34" ng-click="redo()"></ng-md-icon>
                     </md-button>
+
+                    <!-- Tools button to open a pie menu with different tools  -->
                     <md-button ng-class="{'btn-tools-active':isToolsOpen}" class="icon-background-gray icon-whiteboard-large" id="btn-tools-menu" ng-click="openTools()">
                         Tools
                     </md-button>
+
+                    <!-- delete button to delete the scribble on the drawingboard and the history  -->
                     <md-button class="md-icon-button icon-whiteboard-small" aria-label="delete" ng-click="clear();clearHistory();">
                         <ng-md-icon icon="delete" class="icon-gray" size="34" ng-click="clear()"></ng-md-icon>
                     </md-button>
+
+                    <!-- save button to the the whiteboard scribble  -->
                     <md-button class="md-icon-button  icon-whiteboard-small" ng-click="saveScribble($event)" aria-label="save">
                         <ng-md-icon icon="save" class="icon-gray" size="34"></ng-md-icon>
                     </md-button>
                 </div>
+
+                <!-- pie menu which open if the tools button is clicked and closed if the tools button is clicked a next time  -->
                 <div id="circle-menu1" class="cn-menu1"></div>
 
 
             </div>
-            <div style="bottom:0px; right:10px; position:fixed;"  ng-show="ideaId == -1 || isUserContributor(ideaId) || user._id == author._id">
+
+            <!-- drop down men u to select the privacy status of the idea  -->
+            <div style="bottom:0px; right:10px; position:fixed;" ng-show="ideaId == -1 || isUserContributor(ideaId) || user._id == author._id">
+                <!-- icon for the privacy status  -->
                 <md-button class="md-icon-button  icon-whiteboard-small" aria-label="lock">
                     <ng-md-icon icon="lock" class="icon-gray" size="34"></ng-md-icon>
                 </md-button>
+                <!-- drop down menu für the privacy status of the idea  -->
                 <md-input-container>
                     <md-select ng-model="selectedPrivacyType" aria-label="privacyTypesList" ng-change="changePrivacy(selectedPrivacyType)" style="margin-bottom: 20px; width:100%;">
                         <md-option ng-value="t" data-ng-repeat="t in privacyTypesList">{{ t }}</md-option>

@@ -1,43 +1,62 @@
+/* add font style of the page */
+
 body {
     font-family: 'Roboto', sans-serif;
 }
 
+
+/* add fill color of the icon inside the navbar  */
+
 md-sidenav {
     fill: #737373;
 }
+
+
+/* set position of the icons inside the navbar */
 
 md-sidenav ng-md-icon {
     position: relative;
     top: 5px;
 }
 
-.darkClass
-{
+
+/* background class for the load function */
+
+.darkClass {
     background-color: white;
-    filter:alpha(opacity=50); /* IE */
-    opacity: 0.5; /* Safari, Opera */
-    -moz-opacity:0.50; /* FireFox */
+    filter: alpha(opacity=50);
+    /* IE */
+    opacity: 0.5;
+    /* Safari, Opera */
+    -moz-opacity: 0.50;
+    /* FireFox */
     z-index: 60;
     height: 100%;
     width: 100%;
-    background-repeat:no-repeat;
-    background-position:center;
-    position:absolute;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
     top: 0px;
     left: 0px;
     pointer-events: none;
 }
-.circularClass{
-    
+
+
+/* load icon position, and so on*/
+
+.circularClass {
     width: 100%;
-position: absolute;
-top: 50%;
- 
--webkit-transform: translateY(-50%);
--ms-transform: translateY(-50%);
-transform: translateY(-50%);
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
     z-index: 70;
 }
+
+
+/* add style of the fab buttons */
+
 .fab-style {
     position: fixed;
     margin: 20px !important;
@@ -48,23 +67,38 @@ transform: translateY(-50%);
     box-shadow: 1px 15px 23px 0px rgba(46, 74, 117, 1) !important;
 }
 
+
+/* add style for the navbar if an item is selected for icons and text */
+
 .item-select {
     color: #00bcd4;
     fill: #00bcd4 !important;
 }
 
+
+/* add style */
+
 md-input-container {
     padding: 0 !important
 }
+
+
+/* set background and margin for all md-cards */
 
 md-card {
     background-color: white;
     margin-bottom: 30px !important;
 }
 
+
+/* add width of the short navbar e.g. whiteboard is open */
+
 .nav-width-short {
     width: 100px !important;
 }
+
+
+/* add style for the header navbar for the image */
 
 #nav-img-profile {
     width: 72px;
@@ -73,6 +107,9 @@ md-card {
     border-radius: 36px;
     margin-left: 12px;
 }
+
+
+/* create different style class's */
 
 .margin-bottom-15 {
     margin-bottom: 15px;
@@ -164,18 +201,31 @@ md-card {
     background-color: #737373 !important;
 }
 
+
+/* set hight of the toolbar of the header of the navbar  */
+
 .toolbar-settings {
     min-height: 223px !important;
 }
+
+
+/* hashtag add font size and weight  */
 
 .hashtag-style {
     font-size: 20px !important;
     font-weight: bold !important;
 }
 
+
+/* toolbar height of the page where academic think tank */
+
 .toolbar-settings-top {
     min-height: 74px !important;
 }
+
+
+/* toolbar height unter the top toolbar of an page e.g. search bar. 
+    when the top and bottom toolbar height is added than the height of th e toolbar-settings is the result*/
 
 .toolbar-settings-bottom {
     min-height: 149px !important;

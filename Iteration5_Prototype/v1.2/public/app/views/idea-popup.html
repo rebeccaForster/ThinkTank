@@ -1,14 +1,22 @@
+<!-- content of the idea pop-up  -->
 <md-dialog aria-label="Idea Popup" class="popup-size">
     <form name="ideaForm">
 
+        <!-- header/toolbar  -->
         <md-toolbar class="toolbar-settings   md-primary md-hue-2">
 
+            <!-- load an image in the background of the header if an image is available in the idea  -->
             <img class="header-picture toolbar-settings " src={{getIdeaInfo.img}} />
 
+            <!--  content of the header/toolbar  -->
             <div layout-padding style="position: absolute; top: 0px; left:0px; width:100%;">
+
+                <!-- back button is only visible if the pop-up is open from another pop-up to give the user the oppertunity to go back  -->
                 <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; left:5px; top:5px; ">
-                    <ng-md-icon icon="arrow_back" aria-label="back" size="50" ng-show="funqueue.length" ng-click="back()"></ng-md-icon>
+                    <ng-md-icon icon="arrow_back" aria-label="back" size="50" ng-show="backFuncPopup.length" ng-click="back()"></ng-md-icon>
                 </md-button>
+
+                <!-- add title and creation date of the idea  -->
                 <div style="margin-right:80px; margin-left:80px; ">
                     <div>
                         <span class="md-display-2" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical; ">{{getIdeaInfo.title}}</span>
@@ -17,6 +25,8 @@
                         <span class="md-display-1">Date:{{getIdeaInfo.created}}</span>
                     </div>
                 </div>
+
+                <!-- close button to close the pop-up  -->
                 <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
                     <ng-md-icon icon="close" size="50" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
                 </md-button>
@@ -25,7 +35,10 @@
 
         </md-toolbar>
 
+        <!-- container with the progresscircle of the maximal life time of an idea and left timed  -->
         <div class="container">
+
+            <!-- inside the circle the left days and maximal life should stand in the middle  -->
             <div class="header-background-circle md-display-1" layout="column">
                 <div flex></div>
                 <div>{{calculateIdeaLeftDays(getIdeaInfo.created)}}d</div>
@@ -33,35 +46,49 @@
                 <div>{{getIdeaInfo.livetime}}d</div>
                 <div flex></div>
             </div>
+
+            <!-- add circle progressaber  -->
             <div class="header-progress">
+                <!-- circle progess with 100% outside the real circle to get an white space between the procress bar and the header/title and content  -->
                 <round-progress max="100" current="100" color="#fafafa" bgcolor="#fafafa" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="false" duration="800" animation="easeOutCubic" offset="0" animation-delay="0" on-render="showPreciseCurrent">
-                    <!-- current muss noch berechnet werden-->
+                    <!-- progess cicle of the left time and the maximal life time-->
                     <round-progress max="getIdeaInfo.livetime" current="calculateIdeaLeftDays(getIdeaInfo.created)" color="#45ccce" bgcolor="gainsboro" radius="100" semi="false" rounded="false" stroke="15" clockwise="true" responsive="true" duration="800" animation="easeOutCubic" offset="inherit" animation-delay="0" on-render="showPreciseCurrent">
-
-
                     </round-progress>
                 </round-progress>
             </div>
         </div>
+
+        <!--  add button under the header/toolbar to follow/unfollow an idea or edit an idea in dependency of the sign in/out and user state -->
         <div layout="row" class="margin-top-15 margin-right-20" style="margin-bottom:135px;">
             <div flex></div>
+            <!--  user is sign in and follow the idea -->
             <md-button class="md-accent  font-weight-bold font-size-34" ng-if="getFollowIdea(getIdeaInfo._id)" ng-hide="isUserContributor(getIdeaInfo._id) " ng-click="setFollowIdea(getIdeaInfo._id,true)">unfollow idea</md-button>
+
+            <!-- user is sign in or not sign in and want to follow the idea  -->
             <md-button class="md-accent  font-weight-bold font-size-34" ng-if="!isUserContributor(getIdeaInfo._id)" ng-hide="getFollowIdea(getIdeaInfo._id)" ng-click="setFollowIdea(getIdeaInfo._id,false)">Follow idea</md-button>
+
+            <!-- user is sign in and author/contributor of the idea  -->
             <md-button class="md-accent  font-weight-bold font-size-34" ng-show="isUserContributor(getIdeaInfo._id)" ng-click="goWhiteboard(getIdeaInfo._id)">Edit idea</md-button>
 
         </div>
 
-        <md-dialog-content layout="row" class="padding-right-40 padding-left-40 padding-bottom-40">
-            <!-- todo divider -->
-            <div flex=50 layout="column" class="padding-left-40 padding-right-20" style=" border-right: 1px solid lightgrey; height:100%">
 
+        <!--  content of the pop-up -->
+        <md-dialog-content layout="row" class="padding-right-40 padding-left-40 padding-bottom-40">
+            <!-- the conent is divdided into two colomns. the left column contains the infromation of the idea
+                    the right column contains the comments of the idea and a comment can be written-->
+            <div flex=50 layout="column" class="padding-left-40 padding-right-20" style=" border-right: 1px solid lightgrey; height:100%">
                 <div>
+                    <!-- first block of the idea contains the contributors and the author of an idea as card view. 
+                            the cards are clickable and open th eprofile pop-up with the specific information-->
                     <div class="idea-block">
+                        <!-- icon with title  -->
                         <div class="md-headline margin-bottom-15 font-weight-bold">
                             <ng-md-icon icon="person" size="18"></ng-md-icon>
                             Contributors
                         </div>
                         <div>
+                            <!-- contains the author card  -->
                             <md-card class="content-contributors" ng-click="showProfile(getIdeaInfo.author._id, $event)">
                                 <md-card-header>
                                     <md-card-avatar>
@@ -73,6 +100,8 @@
                                     </md-card-header-text>
                                 </md-card-header>
                             </md-card>
+
+                            <!-- incldues all contributor cards  -->
                             <md-card class="content-contributors" ng-repeat="contributor in getIdeaInfo.contributors" class="content-contributors" ng-click="showProfile(contributor._id, $event)">
                                 <md-card-header>
                                     <md-card-avatar>
@@ -85,18 +114,34 @@
                                 </md-card-header>
                             </md-card>
                         </div>
+
+                        <!-- button to get contributor of the idea  -->
+                        <!--  todo: add functionallity, send a request to the author/contributor so that the user can get contributor
+                                    question is, should the user send why he wants to contribute or can he/she select a milestone where he wand to help?-->
                         <md-button class="md-accent" style="font-weight:bold; font-size:24px;">I want to contribute</md-button>
                     </div>
+
+
+
+                    <!-- second block: scribble from the whiteboard  -->
                     <div class="idea-block">
+                        <!--  icon with title -->
                         <div class="md-headline margin-bottom-15 font-weight-bold">
                             <ng-md-icon icon="brush" size="18"></ng-md-icon>
                             Whiteboard Scribble
                         </div>
+
+                        <!-- load image and if the user clicks on the image go the the whiteboard and load the idea  -->
                         <div ng-click="goWhiteboard(getIdeaInfo._id)">
                             <img src={{setImgPath(getIdeaInfo.scribble)}} class="content-image">
                         </div>
                     </div>
+
+
+
+                    <!-- third idea block: description of the idea  -->
                     <div class="idea-block">
+                        <!--  icon with title -->
                         <div class="md-headline margin-bottom-15 font-weight-bold">
                             <ng-md-icon icon="description" size="18"></ng-md-icon>
                             Description
@@ -104,31 +149,52 @@
                         <div class="md-headline">{{getIdeaInfo.description}}</div>
                     </div>
 
+
+                    <!--  fourth idea block: milestone with a icon if the milestone is fullfilled -->
                     <div class="idea-block">
+                        <!--  icon with title -->
                         <div class="md-headline margin-bottom-15 font-weight-bold">
                             <ng-md-icon icon="add_location" size="18"></ng-md-icon>
                             Milestones
                         </div>
+                        <!--  milestones  -->
                         <p class="hashtag-style background-color-white" ng-repeat="milestone in getIdeaInfo.milestones" style="margin:0px 10px 0px 10px; display:inline-block">
                             {{milestone.name}}
                             <ng-md-icon icon="done" size="18" style="fill:green;" ng-show="milestone.percentage"></ng-md-icon>
                         </p>
 
                     </div>
+
+
+                    <!--  fifth idea block: hashtags -->
                     <div class="idea-block">
+                        <!--  icon with title -->
                         <div class="md-headline margin-bottom-15 font-weight-bold"># Hashtags</div>
+                        <!-- show all idea hashtags  -->
                         <p class="hashtag-style" ng-repeat="tag in getIdeaInfo.tags" style="margin:0px 10px 0px 10px;display:inline-block">#{{tag | uppercase}}</p>
                     </div>
                 </div>
             </div>
+
+
+
+            <!--  second and right column -->
             <div flex=50 layout="column" class="padding-right-40 padding-left-20" style=" border-left: 1px solid lightgrey; height:100%">
+
+
+
+                <!--  first idea block: react on an idea -->
                 <div class="idea-block">
+                    <!-- add title plus icon  -->
                     <div class="margin-bottom-15">
                         <div class="md-headline " style="font-weight:bold;">
                             <ng-md-icon icon="comment" size="18"></ng-md-icon>
                             React on Idea</div>
                         <div class="md-subhead text-gray">Choose one and more icons and a comment field will open.</div>
                     </div>
+
+
+                    <!-- add icons for reaction and text under the icon for better understanding  -->
                     <div layout="row">
                         <div layout="column" flex layout-align="center center" ng-class="{'item-select' : saveComment.likeIdeaStatus}" ng-click="setLikeIdeaStatus();">
                             <div style="margin-left:23px;">{{reactionCountLikeIdea()}}</div>
@@ -151,48 +217,92 @@
                             <div class="md-subhead">other input</div>
                         </div>
                     </div>
+
+
+                    <!-- show input text to comment idea if an reaction button/icon is clicked  -->
                     <div ng-show="saveComment.otherreaction || saveComment.troubleStatus || saveComment.newInputStatus || saveComment.likeIdeaStatus">
+                        <!-- input area for the comment  -->
                         <md-input-container class="md-block margin-top-25">
+                            <!-- lavel text in dependency of the selected reaction icon/buttons  -->
                             <label>{{newInputText}} {{likeIdeaText}} {{troubleText}} {{otherText}}</label>
+
+
+                            <!-- input textarea for the user -->
                             <textarea name="commentArea" type="text" ng-model="saveComment.text" md-autofocus required></textarea>
+
+                            <!-- error message if the user has no text entered  -->
                             <div ng-messages="ideaForm.commentArea.$error" ng-show="ideaForm.commentArea.$dirty">
                                 <div ng-message="required">You have to input a comment!</div>
                             </div>
 
+                            <!-- send button but is only active if the user have entered some text  -->
                             <md-button ng-disabled="ideaForm.commentArea.$invalid" class="md-accent messages-icon" ng-click="sendComment(getIdeaInfo._id)" style="font-weight:bold; font-size:24px;">Send</md-button>
+
+                            <!-- voice button to record a voice message   -->
+                            <!-- todo: is not implemented  -->
                             <md-button ng-disabled="true" class="md-icon-button messages-icon" aria-label="Record Audio">
                                 <ng-md-icon icon="keyboard_voice" class="icon-gray" size="24"></ng-md-icon>
                             </md-button>
+
+                            <!-- video button to record a video message  -->
+                            <!--  todo: is not implmented  -->
                             <md-button ng-disabled="true" class="md-icon-button messages-icon" aria-label="Record Video">
                                 <ng-md-icon icon="videocam" class="icon-gray" size="24"></ng-md-icon>
                             </md-button>
                         </md-input-container>
                     </div>
                 </div>
+
+
+
+
+                <!-- second idea block: see all comments from the suer  -->
                 <div class="idea-block">
+                    <!-- icon plus title  -->
                     <div class="md-headline margin-bottom-15" style="font-weight:bold;">
                         <ng-md-icon icon="forum" size="18"></ng-md-icon>
                         Reactions from Users
                     </div>
-                    <md-content class="background-color-white">
-                        <md-list style=" max-height:400px;overflow-y:visible">
-                            <md-list-item ng-repeat="message in getIdeaInfo.comments | orderBy:'created':true"  style="margin-bottom:15px; heiht:auto;">
 
-                                <div class="md-list-item-text margin-bottom-15 width-100-prozent" >
+                    <!-- comments  -->
+                    <md-content class="background-color-white">
+                        <!-- add list du visualize the comments  -->
+                        <md-list style=" max-height:400px;overflow-y:visible">
+
+                            <!-- add a list item for each comment from the scope getIdeaInfo.comments which is ordered by created
+                                    the result of the order is, that the newest comment comes first-->
+                            <md-list-item ng-repeat="message in getIdeaInfo.comments | orderBy:'created':true" style="margin-bottom:15px; heiht:auto;">
+
+                                <!-- add comment plus author -->
+                                <div class="md-list-item-text margin-bottom-15 width-100-prozent">
                                     <!-- ToDO: header mittig machen den namen und zu bild-->
                                     <div layout="row" layout-align="start end">
+
+
+                                        <!-- add author icon which is clickable to open the profile pop-up of the author of the ocmment  -->
+                                        <!--  todo: at the momment the author is calculated via the id and this is not the best sultion because it needs time and a lot of request from the server, send idea stucture should send the author strucutre directly -->
                                         <img ng-src={{commentAuthor[getIdeaInfo.comments.indexOf(message)].profileImg}} class="md-avatar" alt="{{commentAuthor[getIdeaInfo.comments.indexOf(message)].name}}" ng-click="showProfile(commentAuthor[getIdeaInfo.comments.indexOf(message)]._id, $event)">
+
+                                        <!-- add name of th author  -->
                                         <div class="md-headline">{{commentAuthor[getIdeaInfo.comments.indexOf(message)].firstname}} {{commentAuthor[getIdeaInfo.comments.indexOf(message)].name}},
                                         </div>
+
+                                        <!-- add date of the comment  -->
                                         <div class="md-subhead">{{message.created}}</div>
                                         <div flex></div>
+
+                                        <!-- add the specific reaction icons of the comment  -->
                                         <ng-md-icon ng-show="message.likeIdeaStatus" icon="thumb_up" class="icon-gray"></ng-md-icon>
                                         <ng-md-icon ng-show="message.newInputStatus" icon="touch_app" class="icon-gray" class="messages-icon"></ng-md-icon>
                                         <ng-md-icon ng-show="message.troubleStatus" icon="flash_on" class="icon-gray"></ng-md-icon>
                                         <ng-md-icon ng-show="message.otherreaction" icon="more_horiz" class="icon-gray"></ng-md-icon>
                                     </div>
+
+                                    <!-- show comment text  -->
                                     <div class="md-subhead">{{message.text}}
                                     </div>
+
+                                    <!--  add divider between the comment, except from the last comment -->
                                     <md-divider ng-if="!$last"></md-divider>
                                 </div>
                             </md-list-item>
@@ -200,8 +310,6 @@
                     </md-content>
                 </div>
             </div>
-
         </md-dialog-content>
-
     </form>
 </md-dialog>

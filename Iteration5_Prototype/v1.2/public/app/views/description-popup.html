@@ -1,20 +1,25 @@
+<!-- descriptiton pop-up which contains the title, descirption and maximum days of the life cycle of an idea  -->
 <md-dialog aria-label="Whiteboard Description Popup" class="popup-hashtag-size">
     <form name="descriptionForm">
+        <!-- header/toolbar of the pop-p  -->
         <md-toolbar class="md-tall md-primary md-hue-2" layout-padding>
-
             <div style="margin-right:80px; margin-left:10px;  ">
+                <!-- title of the pop-up  -->
                 <div>
                     <span class="md-headline">Title and Description</span>
                 </div>
-
             </div>
+            <!-- close button to close the pop-up  -->
             <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
                 <ng-md-icon icon="close" size="40" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
             </md-button>
         </md-toolbar>
 
+        <!-- content of the pop-up  -->
         <md-dialog-content>
             <div class="md-dialog-content">
+
+                <!-- in this input text the title can be changed.  -->
                 <md-input-container class="md-block" flex style="margin-top:25px;">
                     <label>Title</label>
                     <input name="title" ng-model="title" type="text" md-maxlength="50" placeholder='{{titlePlaceholder}}' />
@@ -23,13 +28,20 @@
                     </div>
                 </md-input-container>
 
+                <!-- the left days of the idea and the life time of an idea is visible but can be changed  -->
                 <div>Status of the idea: {{ideaDayLeft}} / {{ideaLifeTime}} days</div>
- <md-input-container class="md-block">
-                        <label>Add a Idea Picture</label>
-                        <input name="img" ng-model="img" />
-                    </md-input-container>
+
+                <!--  a image can be add
+                todo: upload function of an image of the PC to the server
+                -->
+                <md-input-container class="md-block">
+                    <label>Add a Idea Picture</label>
+                    <input name="img" ng-model="img" />
+                </md-input-container>
+
+
+                <!--  add/change descirption  -->
                 <div>
-                   
                     <md-input-container class="md-block margin-top-25">
                         <label>Description</label>
                         <textarea name="description" type="text" ng-model="desciption" placeholder="Here can you add your desciption of the idea." </textarea>
@@ -38,7 +50,5 @@
 
             </div>
         </md-dialog-content>
-
-
     </form>
 </md-dialog>

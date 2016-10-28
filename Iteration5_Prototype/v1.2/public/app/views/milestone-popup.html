@@ -1,27 +1,42 @@
+<!-- dialog for the milestone pop-up  -->
 <md-dialog aria-label="Milestone Popup" class="popup-hashtag-size">
     <form name="milestoneForm">
-        <md-toolbar class="md-tall md-primary md-hue-2" layout-padding>
-          
-            <div style="margin-right:80px; margin-left:10px; ">
-                    <span class="md-headline">Milestones:</span>
 
-                    <md-button class="md-raised md-accent" ng-repeat="milestone in milestones" style="font-size:24px; margin-bottom:5px;">
-                        <md-checkbox  style="margin-bottom:0px !important; margin-right:5px !important;"ng-checked="milestone.percentage" ng-click="changeMilestoneStatus($index)" class="md-primary" aria-label="milestone.name">
-                            {{milestone.name}}
-                        </md-checkbox>
-                        <ng-md-icon icon="close" size="30" ng-click="setSelectedMilestones(milestones.name, true, milestones.extratime, milestones.icon);" ></ng-md-icon>
-                    </md-button>
+        <!-- toolbar/header of the pop-up  -->
+        <md-toolbar class="md-tall md-primary md-hue-2" layout-padding>
+
+            <!-- Title with selected hashtags  -->
+            <div style="margin-right:80px; margin-left:10px; ">
+                <!--  title -->
+                <span class="md-headline">Milestones:</span>
+                <!-- show the selected milestones as checkbox and set the checkbox selected if the milestone is fullfilled  -->
+                <md-button class="md-raised md-accent" ng-repeat="milestone in milestones" style="font-size:24px; margin-bottom:5px;">
+                    <md-checkbox style="margin-bottom:0px !important; margin-right:5px !important;" ng-checked="milestone.percentage" ng-click="changeMilestoneStatus($index)" class="md-primary" aria-label="milestone.name">
+                        {{milestone.name}}
+                    </md-checkbox>
+                    <ng-md-icon icon="close" size="30" ng-click="setSelectedMilestones(milestones.name, true, milestones.extratime, milestones.icon);"></ng-md-icon>
+                </md-button>
             </div>
+
+            <!--  close button for the pop-up -->
             <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
                 <ng-md-icon icon="close" size="40" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
             </md-button>
         </md-toolbar>
+
+        <!-- content of the pop-up  -->
         <md-dialog-content class="content">
             <div layout="row">
+
+                <!-- include abc list of the left side  -->
+                <!--  todo: the list is only front-end implemnted. The functionallity that when a letter is clicked is not implmented, that the pop-up go to the clicked letter -->
                 <div class="background-color-white" ng-include="'app/views/abc-list.html'">
 
                 </div>
+
+
                 <div layout="column" flex>
+                    <!-- here a input field plus button to add a new milestone -->
                     <div layout="row">
                         <md-input-container class="md-block  margin-top-25" flex>
                             <label>Is your milestone not in the list? Here can you add a new milestone!</label>
@@ -36,17 +51,23 @@
                         </md-input-container>
                         <md-button ng-disabled="milestoneForm.newMilestone.$invalid" class=" md-raised md-primary" ng-click="addNewMilestone()">+</md-button>
                     </div>
+
+                    <!-- listed all milestones  ordered by the name. and have so much columns as in the masonry-layout-milestone class described. If a hashtags is selected in the list, the milestones is highlted
+                        -->
                     <div class="masonry-layout-milestone">
                         <div layout="row" ng-repeat="item in milestoneList | orderBy:'name'" class="item">
                             <md-button data-ng-class="{'md-accent' : statusMilestoneSelected(item.name)}" ng-click="setSelectedMilestones( item.name, statusMilestoneSelected( item.name), item.extratime, item.icon)">{{item.name}}</md-button>
                         </div>
                     </div>
                 </div>
+
+                <!-- include abc list of the right side  -->
+                <!--  todo: the list is only front-end implemnted. The functionallity that when a letter is clicked is not implmented, that the pop-up go to the clicked letter -->
                 <div class="background-color-white" ng-include="'app/views/abc-list.html'">
 
                 </div>
             </div>
         </md-dialog-content>
-     
+
     </form>
 </md-dialog>

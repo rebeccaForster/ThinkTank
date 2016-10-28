@@ -1,41 +1,61 @@
+<!-- content of the sign in pop-up  -->
 <md-dialog id="login-dialog" aria-label="Login" ng-cloak style="max-width: 90%;width: 500px;">
     <form name="loginForm" ng-submit="login()">
+
+        <!--  toolbar/header of the pop-up  -->
         <md-toolbar class="md-tall md-primary md-hue-2" layout-padding>
-                    
-            
-             <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; left:5px; top:5px; ">
-                    <ng-md-icon icon="arrow_back" aria-label="back" size="40" ng-show="funqueue.length" ng-click="back()"></ng-md-icon>
-                </md-button>
-                <div style="margin-right:80px; margin-left:80px; ">
-                     <div>
-                        <span class="md-headline">Sign In</span>
-                    </div>
-                   
+
+            <!--  back button only visible if it's open from another pop-up  -->
+            <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; left:5px; top:5px; ">
+                <ng-md-icon icon="arrow_back" aria-label="back" size="40" ng-show="backFuncPopup.length" ng-click="back()"></ng-md-icon>
+            </md-button>
+
+            <!--  add title  -->
+            <div style="margin-right:80px; margin-left:80px; ">
+                <div>
+                    <span class="md-headline">Sign In</span>
                 </div>
-                <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
-                    <ng-md-icon icon="close" size="40" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
-                </md-button>
+
+            </div>
+
+            <!--  button to close the pop-up  -->
+            <md-button class="md-icon-button" style="width:64px; height:64px; position:fixed; right:5px; top:5px; ">
+                <ng-md-icon icon="close" size="40" aria-label="Close dialog" ng-click="cancel()"></ng-md-icon>
+            </md-button>
         </md-toolbar>
 
+        <!--  main content  -->
         <md-dialog-content>
+
+            <!--  todo: add verify password and email address; is really a mail adress or has the password the specific information as numbers, letter ...  -->
+            <!-- content of the sign in pop-up   -->
             <div class="md-dialog-content">
+                <!--  email input container  -->
                 <md-input-container class="md-block">
                     <label>Email</label>
                     <input name="Email" ng-model="credentials.email" md-autofocus required />
                 </md-input-container>
+                <!--  password container   -->
                 <md-input-container class="md-block">
                     <label>Password</label>
                     <input type="password" name="password" ng-model="credentials.password" required />
                 </md-input-container>
             </div>
+
         </md-dialog-content>
 
+        <!--  action as buttons  -->
         <md-dialog-actions layout="row">
+            <!--  sign up button to open an register pop-up  -->
             <md-button class="md-raised" ng-click="showRegisterBox($event)">Sign up</md-button>
             <span flex></span>
 
+            <!--  link to reset password
+                    todo: not implmented -->
             <a href="" class=" md-primary">Forgot Password?</a>
             <span flex></span>
+            
+            <!--  sign in button, but the sign in button is only clickable if the form (email and Passoword) is correct entered and send no validation infromation  -->
             <md-button type="submit" ng-disabled="loginForm.$invalid" class=" md-raised md-primary">Sign in</md-button>
         </md-dialog-actions>
     </form>

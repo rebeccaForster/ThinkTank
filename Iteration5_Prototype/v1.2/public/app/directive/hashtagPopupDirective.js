@@ -1,5 +1,8 @@
 'use strict';
-
+/* directive which verify the entered new hashtag, if the hashtag is in the list or not
+    independency the validator return a true or fals. 
+    if it returns true the new entered hashtag is new and can be added
+    if it return false the hashtag exist */
 app.directive('validateNewHastag', function (dataService) {
     return {
         restrict: "A",

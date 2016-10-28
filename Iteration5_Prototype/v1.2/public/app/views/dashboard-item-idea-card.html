@@ -1,12 +1,17 @@
+<!-- contains the content of an idea card  -->
+
+<!--  header of the idea card with title, author name and author picture -->
 <md-card-header>
     <md-card-avatar ng-click="showProfile(idea.author._id, $event);$event.stopPropagation();">
         <img class="md-user-avatar" src={{idea.author.profileImg}} alt=" {{idea.author.firstname}} {{idea.author.name}}" />
     </md-card-avatar>
+    <!-- include title and author name  -->
     <md-card-header-text>
+        <!-- title of idea  -->
         <div>
             <span class="md-headline font-weight-bold" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;">{{idea.title}}</span>
-
         </div>
+        <!-- author name  -->
         <div>
             <span class="md-title">Author: {{idea.author.firstname}} {{idea.author.name}}</span>
         </div>
@@ -14,14 +19,24 @@
 
 </md-card-header>
 
+<!-- include short overview of the idea  -->
 <md-card-content>
+    <!-- show the image of the ideaa if an image is available  -->
     <img src={{idea.img}} ng-show="{{idea.img.length}} > 0" class="md-card-image" alt="user avatar" style="width:100%;height:auto;margin-bottom:10px;">
+    <!-- show the first three rows of the description  -->
     <div class="md-title" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;">{{idea.description}}</div>
 </md-card-content>
+
+<!-- show the hashtags of the idea and highlight a hashtag if it selected in the search bar.
+    furthermore the hashtag is clickable to add or delete it from the searchbar-->
 <md-card-content>
     <md-button ng-repeat="tag in idea.tags" class="hashtag-style" data-ng-class="{'md-accent' : hashtagSelected(tag)}" ng-click="setSelectedHashtags(tag, hashtagSelected(tag));updateDashboard(); ;$event.stopPropagation();" ng-show="isDashbaord">#{{tag | uppercase}}</md-button>
     <md-button ng-repeat="tag in idea.tags" class="hashtag-style" ng-hide="isDashbaord">#{{tag | uppercase}}</md-button>
 </md-card-content>
+
+<!-- if the user is sign in and is contributor or author of an idea, the edit icon should be visible to go directly to
+    the whiteboar and edit the idea.
+    in all other cases the icon and the functionallity is no visible-->
 <md-card-actions layout="row" layout-align="end center" ng-if="isUserContributor(idea._id)">
     <md-button class="md-icon-button" aria-label="Edit" ng-click="openWhiteboard(idea._id);$event.stopPropagation();">
         <ng-md-icon icon="edit" size="32"></ng-md-icon>

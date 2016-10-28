@@ -1,29 +1,42 @@
+<!-- todo: this is an example how the page can look like but the page is not fully thought over
+        the whole functionllity must be think over and design and must be implemented-->
+<!-- 
+ toolbar of the messages & request page divided in two parts
+-->
 <header>
-
+    <!-- 
+    first part is the title of the academic think tank which is of all pages
+    -->
     <md-toolbar class="md-primary md-hue-1 ">
-        <div class="md-toolbar-tools toolbar-settings-top"  layout='row'>
+        <div class="md-toolbar-tools toolbar-settings-top" layout='row'>
             <div class="md-headline" style="margin-right:20px !important; margin-left:20px !important; ">
                 Academic Think Tank
             </div>
         </div>
     </md-toolbar>
- <md-toolbar>
+    <!-- 
+    second part is a serach bar and a drop down list to sort/filter after this catagory
+    -->
+    <md-toolbar>
         <div class="md-toolbar-tools toolbar-settings-bottom" layout='row'>
 
+            <!-- only the serach bar is implemented in the front-end design but without any functionallity
+                todo: add the functionallity to this page-->
             <div style="margin-right:20px !important; margin-left:20px !important; " flex layout='row'>
                 <div style="border-bottom: 2px solid white;" ng-click="searchHashtag($event) " flex>
                     <div layout="row">
-                        <div flex>
-                           
-                        </div>
+                        <div flex></div>
+
                         <md-button aria-label="Search">
                             <ng-md-icon icon="search" size="64" class="icon-white"></ng-md-icon>
+                        </md-button>
                     </div>
-                    </md-button>
                 </div>
 
-
+                <!--  fix space between search bar and sorting -->
                 <div flex=5></div>
+
+                <!--  sorting functionallity. is implemented as front-end design without any functionallity -->
                 <md-input-container>
                     <md-select ng-model="sortingType" aria-label="sorting" ng-change="changeSortingType(sortingType)">
                         <md-option ng-value="t" data-ng-repeat="t in sorting">{{ t }}</md-option>
@@ -33,10 +46,16 @@
             </div>
         </div>
     </md-toolbar>
- </header>
+</header>
+
+<!-- floating action button to write a new message  -->
 <md-button class="md-fab md-fab-bottom-right fab-style" style="position:fixed; min-height:128px !important;  min-width:128px !important;" aria-label="Email">
     <ng-md-icon icon="email" size="34"></ng-md-icon>
 </md-button>
+
+
+<!-- main content  -->
+<!-- attention: todo: this is an example how the page can look like but there is no functinoallity behind the page  -->
 <main class="" layout="row" flex>
     <md-content flex>
         <div ng-controller="MessagesCtrl" ng-cloak="">
