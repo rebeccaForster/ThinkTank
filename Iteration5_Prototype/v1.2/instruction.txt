@@ -1,0 +1,16 @@
+1. installiere:
+brackets
+chrome
+nodejs
+mongodb
+
+
+2. Setze einen Ordner "attrDB" unter c auf 
+3. ziehe das Projekt von github
+3. gehe über nodejs Konsole in diesen Ordnerpfad von github in den Ordner v1.2 und gebe "npm install nodemon -g" in die Konsole ein
+4. über die "start.bat" (wenn ein vista server installiert wurde dann start_vista_server.bat" startet der server und die Datenbank
+	Wichtig: schaue dass du Internet hast und die mongodb auch verbunden ist
+5. gehe auf chrome und starte unter localhost:3000 den Porotypen
+
+Info: Wenn man mit einem Touchdisplay in Chrome arbeitet, hat er eine Swipe Funktion für die History. Diese kann über die im Bild "Chrome_Swipe_Deactiv.png" angegeben Informationen ausgeschaltet werden.
+	Gerade beim Whiteboard macht es Sinn diese Funktion auszuschalten
